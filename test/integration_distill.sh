@@ -5,10 +5,37 @@ tmp_dir="$(mktemp -d)"
 tmp_override="${tmp_dir}/distill-override.yml"
 tmp_site="${tmp_dir}/site"
 
+created_distill_post=""
 cleanup() {
   rm -rf "${tmp_dir}"
+  [ -n "${created_distill_post}" ] && rm -f "${created_distill_post}"
 }
 trap cleanup EXIT
+
+if [ ! -f "_posts/2018-12-22-distill.md" ]; then
+  created_distill_post="_posts/2018-12-22-distill.md"
+  cat >"${created_distill_post}" <<'YAML'
+---
+layout: distill
+title: a distill-style blog post
+date: 2021-05-22
+giscus_comments: true
+mermaid:
+  enabled: true
+tikzjax: true
+authors:
+  - name: Albert Einstein
+---
+Distill test post.
+<script type="text/tikz">
+\begin{document}
+  \begin{tikzpicture}
+      \draw (0,0) circle (1cm);
+  \end{tikzpicture}
+\end{document}
+</script>
+YAML
+fi
 
 cat >"${tmp_override}" <<'YAML'
 giscus:

@@ -1,0 +1,4 @@
+---
+permalink: /assets/json/visibility.json
+---
+{{ site.data.visibility | jsonify }}

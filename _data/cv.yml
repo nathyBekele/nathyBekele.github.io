@@ -1,189 +1,340 @@
 cv:
-  name: Albert Einstein
-  label: Scientist
-  email: einstein@example.com
-  location: Princeton, NJ
+  name: Natnael Bekele Haile
+  label: Fullstack Software Engineer & AI Systems Developer
+  email: natnaelbekele142@gmail.com
+  location: Addis Ababa, Ethiopia
   image: ""
-  summary: A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time
+  summary: >
+    Fullstack (backend-heavy) software engineer with extensive experience in building scalable investment management platforms, AI-driven analytics, and LLM fine-tuning/RLHF pipelines. Competitive programming coach with a proven record of mentoring 500+ engineers, with 80+ landing roles at Google, Amazon, Bloomberg, and top tech companies.
+    <style>
+      /* Clean and spacious full-width layout for Projects (without timeline column) */
+      a#projects + .card .list-group-item {
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+        border-bottom: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
+      }
+      a#projects + .card .list-group-item:first-child {
+        padding-top: 0.5rem;
+      }
+      a#projects + .card .list-group-item:last-child {
+        border-bottom: none;
+      }
+      a#projects + .card .list-group-item h6.title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0.35rem;
+        color: var(--global-text-color);
+      }
+      a#projects + .card .list-group-item h6.title a {
+        color: var(--global-theme-color) !important;
+        text-decoration: none;
+        transition: opacity 0.15s ease;
+      }
+      a#projects + .card .list-group-item h6.title a:hover {
+        opacity: 0.85;
+        text-decoration: underline;
+      }
+      a#projects + .card .list-group-item p {
+        font-size: 0.93rem;
+        line-height: 1.55;
+        margin-bottom: 0.35rem;
+        color: var(--global-text-color);
+      }
+      .cv-project-links {
+        display: flex !important;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 0.5rem;
+        margin-bottom: 0.55rem;
+        width: 100%;
+      }
+      .cv-action-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 3px 11px;
+        border-radius: 6px;
+        border: 1px solid var(--global-divider-color, #dee2e6);
+        background-color: var(--global-code-bg-color, #f1f3f5);
+        color: var(--global-text-color) !important;
+        text-decoration: none !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        transition: all 0.2s ease;
+      }
+      .cv-action-btn:hover {
+        background-color: var(--global-theme-color) !important;
+        border-color: var(--global-theme-color) !important;
+        color: #ffffff !important;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+      }
+      .cv-action-btn:hover i {
+        color: #ffffff !important;
+      }
+      a#projects + .card .list-group-item ul.items {
+        padding-left: 1.25rem;
+        margin-top: 0.35rem;
+        margin-bottom: 0;
+      }
+      a#projects + .card .list-group-item ul.items li {
+        font-size: 0.88rem;
+        line-height: 1.55;
+        margin-bottom: 0.25rem;
+        color: var(--global-text-color);
+      }
+    </style>
+    <script id="cv-visibility-script">(function(){function applyCvVisibility(cfg){if(!cfg)return;if(typeof cfg!=='object')return;var cvConfig=cfg.cv;if(!cvConfig)return;var hiddenSections=cvConfig.hidden_sections;if(hiddenSections){hiddenSections.forEach(function(sec){var slug=sec.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');var anchor=document.getElementById(slug);if(anchor){anchor.style.setProperty('display','none','important');var card=anchor.nextElementSibling;if(card){if(card.classList.contains('card')){card.style.setProperty('display','none','important');}}}var cards=document.querySelectorAll('.cv .card, .card');cards.forEach(function(c){var titleEl=c.querySelector('h3.card-title');if(titleEl){if(titleEl.textContent.trim().toLowerCase()===sec.toLowerCase()){c.style.setProperty('display','none','important');var prev=c.previousElementSibling;if(prev){if(prev.classList.contains('anchor')){prev.style.setProperty('display','none','important');}}}}});var tocLinks=document.querySelectorAll('#toc-sidebar a[href=\"#'+slug+'\"]');tocLinks.forEach(function(link){var li=link.closest('li');if(!li)li=link;li.style.setProperty('display','none','important');});});}var hiddenExp=cvConfig.hidden_experience;if(hiddenExp){if(hiddenExp.length!==0){var expAnchor=document.getElementById('experience');var expCard=null;if(expAnchor)expCard=expAnchor.nextElementSibling;if(expCard){var expItems=expCard.querySelectorAll('.list-group-item');expItems.forEach(function(item){var text=item.textContent;if(!text)text='';hiddenExp.forEach(function(expKey){if(text.indexOf(expKey)!==-1){item.style.setProperty('display','none','important');}});});}}}var hiddenProj=cvConfig.hidden_projects;if(hiddenProj){if(hiddenProj.length!==0){var projAnchor=document.getElementById('projects');var projCard=null;if(projAnchor)projCard=projAnchor.nextElementSibling;if(projCard){var projItems=projCard.querySelectorAll('.list-group-item');projItems.forEach(function(item){var titleEl=item.querySelector('h6.title');var titleText='';if(titleEl)titleText=titleEl.textContent.trim();hiddenProj.forEach(function(projKey){if(titleText.toLowerCase().indexOf(projKey.toLowerCase())!==-1){item.style.setProperty('display','none','important');}});});}}}var hiddenRef=cvConfig.hidden_references;if(hiddenRef){if(hiddenRef.length!==0){var refAnchor=document.getElementById('references');var refCard=null;if(refAnchor)refCard=refAnchor.nextElementSibling;if(refCard){var refItems=refCard.querySelectorAll('.list-group-item');refItems.forEach(function(item){var nameEl=item.querySelector('strong');var nameText='';if(nameEl)nameText=nameEl.textContent.trim();hiddenRef.forEach(function(refKey){if(nameText.toLowerCase().indexOf(refKey.toLowerCase())!==-1){item.style.setProperty('display','none','important');}});});}}}}function initCvVisibility(){var applied=false;try{var localStr=localStorage.getItem('nathy_visibility_config');if(localStr){var localCfg=JSON.parse(localStr);if(localCfg){if(localCfg.cv){applyCvVisibility(localCfg);applied=true;}}}}catch(e){}fetch('/al-folio/assets/json/visibility.json').then(function(res){if(res.ok)return res.json();return null;}).then(function(data){if(!applied){if(data){applyCvVisibility(data);}}}).catch(function(err){});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initCvVisibility);}else{initCvVisibility();}window.addEventListener('load',initCvVisibility);})();</script>
 
   social_networks:
-    - network: X
-      username: AlbertEinstein
     - network: GitHub
-      username: example
+      username: nathyBekele
     - network: LinkedIn
-      username: example
+      username: natnael-bekele
+    - network: LeetCode
+      username: natnael_b_haile
+    - network: Medium
+      username: natnaelbekele142
 
   address:
-    street: 2712 Broadway St
-    city: San Francisco
-    region: California
-    postalCode: CA 94115
-    countryCode: US
+    street: 4kilo
+    city: Addis Ababa
+    countryCode: ET
 
   sections:
     Education:
-      - institution: University of Zurich
-        location: Zurich, Switzerland
-        url: https://www.uzh.ch/
-        area: Physics
-        studyType: PhD
-        start_date: 1900
-        end_date: 1905
-        score: ""
-        courses: "Theory of Relativity"
+      - institution: Addis Ababa University
+        location: Addis Ababa, Ethiopia
+        area: Electrical & Computer Engineering (Computer Stream)
+        studyType: Bachelor of Science (B.Sc.)
+        start_date: 2018
+        end_date: 2023
+        courses:
+          - Data Structures & Algorithms
+          - Operating Systems
+          - Object-Oriented Programming
+          - Distributed Systems
+          - Database Systems
         highlights:
-          - Description 1.
-          - Description 2.
-
-      - institution: Eidgenössische Technische Hochschule
-        location: Zurich, Switzerland
-        area: Physics
-        studyType: Federal teaching diploma
-        start_date: 1896
-        end_date: 1900
-        highlights:
-          - Description 1.
-          - Description 2.
+          - "Final year project: mBERT-based Hate Speech Classification for Amharic Language"
 
     Experience:
-      - company: Institute for Advanced Study, Princeton University
-        position: Professor of Theoretical Physics
-        location: Princeton University, NJ
-        start_date: 1933
-        end_date: 1955
-        summary: Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.
+      - company: Vula
+        position: Fullstack Developer (Remote)
+        location: London, UK
+        start_date: 2024-10-01
+        end_date: Present
+        summary: Engineering end-to-end investment management and portfolio tracking platforms.
         highlights:
-          - Relativity
-          - Description 2.
+          - Architected an end-to-end investment management platform featuring automated pre-investment tracking to streamline due diligence and initial vetting processes.
+          - Implemented AI-driven analytics for post-investment tracking, providing real-time visibility into asset performance and financial outcomes for international portfolios.
 
-      - company: California Institute of Technology
-        position: Visiting Professor
-        location: Pasadena, California, US
-        start_date: 1933
-        end_date: 1933
+      - company: Turing
+        position: Python Developer (Remote)
+        location: California, USA
+        start_date: 2023-09-01
+        end_date: 2024-10-01
+        summary: Trained and benchmarked state-of-the-art Large Language Models.
         highlights:
-          - Description 1.
-          - Description 2.
+          - Designed and validated multi-domain tasks (Networking, Python, Data Science) to train LLMs via supervised fine-tuning (SFT) and RLHF methodologies.
+          - Created robust unit testing frameworks to evaluate model-generated code against ideal solutions, ensuring high-fidelity output.
 
-      - company: Kaiser Wilhelm Institute for Physics
-        position: Director
-        location: Berlin, Germany
-        start_date: 1917
-        end_date: 1933
-
-      - company: Karl-Ferdinand University
-        position: Professor of Theoretical Physics
-        location: Prague, Czechoslovakia
-        start_date: 1911
-        end_date: 1917
-
-      - company: University of Zurich
-        position: Associate Professor of Theoretical Physics
-        location: Zurich, Switzerland
-        start_date: 1909
-        end_date: 1911
-
-    Volunteer:
-      - company: People's Climate March
-        position: Lead Organizer
-        location: Zurich, Switzerland
-        start_date: 2014-04-01
-        end_date: 2015-07-01
-        summary: Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.
+      - company: Africa to Silicon Valley (A2SV, Backed by Google)
+        position: Competitive Programming Coach
+        location: Addis Ababa, Ethiopia
+        start_date: 2021-10-01
+        end_date: 2023-09-01
+        summary: Directed competitive programming squads and coached top engineering students across Ethiopia.
         highlights:
-          - "Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march."
-          - "Men of the year 2014 by Time magazine"
-
-    Awards:
-      - title: Nobel Prize in Physics
-        authors:
-          - "Royal Swedish Academy of Sciences"
-        date: 1921-11-01
-        awarder: Royal Swedish Academy of Sciences
-        url: https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/
-        summary: The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'
-
-      - title: Max Planck Medal
-        authors:
-          - "German Physical Society"
-        date: 2029
-        awarder: German Physical Society
-        summary: Awarded for outstanding scientific achievement
-
-    Publications:
-      - title: Zur Elektrodynamik bewegter Körper
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1905-06-30
-        url: https://en.wikisource.org/wiki/Translation:On_the_Electrodynamics_of_Moving_Bodies
-        summary: It concerned an interpretation of the Michelson–Morley experiment and the properties of light and time. Special relativity incorporates the principle that the speed of light is the same for all inertial observers regardless of the state of motion of the source.
-
-      - title: Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1905-03-18
-        url: https://de.wikisource.org/wiki/Über_einen_die_Erzeugung_und_Verwandlung_des_Lichtes_betreffenden_heuristischen_Gesichtspunkt
-        summary: In the second paper, he applied the quantum theory to light to explain the photoelectric effect. In particular, he used the idea of light quanta (photons) to explain experimental results, but stressed the importance of the experimental results. The importance of his work on the photoelectric effect earned him the Nobel Prize in Physics in 1921.
-
-      - title: Die Grundlage der allgemeinen Relativitätstheorie
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1916-03-20
-        url: https://de.wikisource.org/wiki/Die_Grundlage_der_allgemeinen_Relativitätstheorie
-        summary: The publication of the theory of general relativity made him internationally famous. He was professor of physics at the universities of Zurich (1909–1911) and Prague (1911–1912), before he returned to ETH Zurich (1912–1914).
+          - Led an education squad (consisting of 6 heads of education), teaching 500+ students over two cohorts from AAU (2 classes in 2023, 4 classes in 2024), ASTU (1 class in 2023, 4 classes in 2024) & AASTU (2 classes in 2024).
+          - Contributed to 80+ students securing internships and new grad offers from top tech companies, including Google, Amazon, Bloomberg, and more.
 
     Skills:
-      - name: Physics
-        level: Master
-        icon: fa-solid fa-hashtag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
+      - name: Programming Languages
+        level: Advanced
+        icon: fa-solid fa-code
+        keywords: "Python, TypeScript, Go, Ruby, C++"
 
-    Languages:
-      - name: German
-        summary: "Native speaker"
+      - name: Frameworks & Libraries
+        level: Advanced
+        icon: fa-solid fa-layer-group
+        keywords: "React, Next.js, Express, Django, Flask, FastAPI, Pandas, Node.js, TensorFlow, PyTorch"
 
-      - name: English
-        summary: "Fluent"
+      - name: Databases & DevOps
+        level: Advanced
+        icon: fa-solid fa-database
+        keywords: "GCP, AWS Services, Docker, MongoDB, PostgreSQL, NoSQL, MySQL, Heroku"
 
-    Interests:
-      - name: Physics
-        icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
+    Awards:
+      - title: Top 100 Students - National University Entrance Exam
+        date: 2018
+        awarder: National Educational Assessment and Examinations Agency (NEAEA), Ethiopia
+        summary: Ranked among the top 100 students nationwide in the 2018 GC Ethiopian University Entrance Examination.
 
-    Certificates:
-      - name: Machine Learning
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-location-dot
+      - title: Passed SWE Technical Interviews
+        date: 2022
+        awarder: Google & Square
+        summary: Successfully passed 2022 software engineering internship technical interview loops with both Google and Square.
 
-      - name: Quantum Computing
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-tag
-
-      - name: Quantum Information
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-envelope
+    Volunteer:
+      - company: AddisCoder '23 (Founded by Prof. Jelani Nelson)
+        position: Teaching Assistant
+        location: Addis Ababa, Ethiopia
+        date: 2023
+        summary: Mentored high school students in intensive algorithms and Python programming organized by Prof. Jelani Nelson (UC Berkeley / Harvard).
 
     Projects:
-      - name: Quantum Computing
-        summary: Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.
+      - name: The Geometry of Dormant Defection (Latent Sleeper Agent Linear Probes)
+        url: https://github.com/nathyBekele/geometry-of-dormant-defection
+        summary: >
+          Mechanistic interpretability research and 28-layer probing replication suite investigating layer-wise linear probe dynamics for detecting latent sleeper agents and dormant backdoors in large language models.
+          <span class="cv-project-links">
+            <a href="https://github.com/nathyBekele/geometry-of-dormant-defection" target="_blank" class="cv-action-btn"><i class="fa-brands fa-github"></i> GitHub Code</a>
+            <a href="https://medium.com/@natnaelbekele142/your-open-source-ai-model-might-be-a-sleeper-agent-9ca693663091" target="_blank" class="cv-action-btn"><i class="fa-brands fa-medium"></i> Research Article</a>
+            <a href="https://github.com/nathyBekele/geometry-of-dormant-defection" target="_blank" class="cv-action-btn"><i class="fa-solid fa-graduation-cap"></i> arXiv Paper</a>
+          </span>
         highlights:
-          - Quantum Teleportation
-          - Quantum Cryptography
-        start_date: 2018-01-01
-        end_date: 2018-01-01
+          - "**Layer-Wise Activation Probing**: Designed and evaluated linear probes across all 28 transformer layers of Qwen2.5-Coder-1.5B-Instruct to trace where deceptive policies linearly separate from aligned representations."
+          - "**Mid-Layer Concentration Discovery**: Discovered that peak linear separability concentrates in mid-layer representations, formulating trigger-agnostic defensive monitors that catch backdoors without inspecting outputs."
+          - "**Tech Stack**: Python, PyTorch, Hugging Face Transformers, Linear Probes, Mechanistic Interpretability, Qwen2.5-Coder."
+
+      - name: Amharic Hate Speech Detection
+        url: https://huggingface.co/NathyB/Hate-Speech-Detection-in-Amharic-Language-mBERT
+        summary: >
+          Deep learning NLP research developed as B.Sc. Capstone at Addis Ababa University, utilizing fine-tuned multilingual BERT (mBERT) to detect online hate speech and abusive language in low-resource Ethiopic NLP.
+          <span class="cv-project-links">
+            <a href="https://huggingface.co/NathyB/Hate-Speech-Detection-in-Amharic-Language-mBERT" target="_blank" class="cv-action-btn"><i class="fa-solid fa-cube"></i> Hugging Face Model</a>
+            <a href="https://github.com/nathyBekele/hate-speech-detection-in-amharic-language" target="_blank" class="cv-action-btn"><i class="fa-brands fa-github"></i> GitHub Code</a>
+            <a href="https://github.com/nathyBekele/hate-speech-detection-in-amharic-language/blob/main/mBERT/Hate_Speech_Detection_in_Amharic_Language%5BmBERT%5D.ipynb" target="_blank" class="cv-action-btn"><i class="fa-solid fa-book-open"></i> Jupyter Notebook</a>
+          </span>
+        highlights:
+          - "**Research & Model Weights**: Fine-tuned multilingual BERT (mBERT) representations capturing Amharic morphology; published trained weights and tokenizers on Hugging Face Model Hub."
+          - "**Evaluation Pipeline**: Established robust evaluation benchmarks for classifying hate, offensive, and neutral content on low-resource social discourse datasets."
+          - "**Tech Stack**: Python, PyTorch, Hugging Face Transformers, Datasets, mBERT, Jupyter/Colab."
+
+      - name: AfroChat
+        url: https://afrochat.app/
+        summary: >
+          AI-powered multi-model enterprise chat platform bringing cutting-edge LLMs together with custom workspace solutions, streaming architectures, and multi-tenant security.
+          <span class="cv-project-links">
+            <a href="https://afrochat.app/" target="_blank" class="cv-action-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live App</a>
+          </span>
+        highlights:
+          - "**Distributed Backend**: Engineered real-time streaming chat completions and workspace orchestration using WebSockets, Redis pub/sub, and RabbitMQ message queues."
+          - "**Production Cloud Infra**: Containerized services with Docker and Kubernetes, backed by MongoDB clusters and AWS S3/SES for assets and automated transactional mail."
+          - "**Tech Stack**: Express, Node.js, MongoDB, OpenAI API, AWS S3/SES, Redis, WebSockets, Docker, Kubernetes, RabbitMQ."
+
+      - name: Adot
+        url: https://adot.life/
+        summary: >
+          Comprehensive maternal healthcare platform supporting pregnant women through personalized tracking, expert doctor consultations, and predictive AI health monitoring (consulted by MIT alumnus Adis Ojeda).
+          <span class="cv-project-links">
+            <a href="https://adot.life/" target="_blank" class="cv-action-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Platform</a>
+          </span>
+        highlights:
+          - "**Fullstack & Mobile Ecosystem**: Architected web client and companion mobile interface delivering clinical appointment booking and personalized trimester milestone tracking."
+          - "**Predictive Health Modeling**: Implemented predictive analytics for prenatal risk factors with secure cloud storage, HIPAA-conscious design, and real-time alerts."
+          - "**Tech Stack**: Next.js, Node.js, MongoDB, Flutter, Django, TypeScript, Tailwind CSS, GCP, Firebase, Docker."
+
+      - name: Cursor Spend Tracker
+        url: https://cursor-spend-tracker.vercel.app/
+        summary: >
+          Telemetry and cost analytics SaaS platform tracking Claude token spend and BYOK charges with automated Vercel cron background data synchronization.
+          <span class="cv-project-links">
+            <a href="https://cursor-spend-tracker.vercel.app/" target="_blank" class="cv-action-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live App</a>
+            <a href="https://github.com/nathyBekele/cursor-spend-tracker" target="_blank" class="cv-action-btn"><i class="fa-brands fa-github"></i> GitHub Code</a>
+          </span>
+        highlights:
+          - "**Telemetry & Cost Modeling**: Automated cost breakdown across Claude models (Sonnet, Opus, Haiku), cached input token ratios, and live burn-rate analytics."
+          - "**Serverless Architecture**: Built with Next.js 16 App Router, Prisma ORM, Neon Serverless Postgres, and automated Vercel Cron jobs."
+          - "**Tech Stack**: Next.js 16, TypeScript, Tailwind CSS, Prisma, Neon Postgres, Recharts, Vercel."
+
+      - name: promptKit
+        url: https://github.com/nathyBekele/promptKit
+        summary: >
+          Automated prompt engineering, synthetic test-case generation, and LLM evaluation benchmarking toolkit for generative AI applications.
+          <span class="cv-project-links">
+            <a href="https://github.com/nathyBekele/promptKit" target="_blank" class="cv-action-btn"><i class="fa-brands fa-github"></i> GitHub Code</a>
+          </span>
+        highlights:
+          - "**Systematic Benchmarking**: Generates diverse edge-case test distributions and benchmarks prompt candidate performance using automated LLM-as-a-judge scoring."
+          - "**Interactive Dashboard**: Streamlit-based interactive exploration suite for comparing model outputs, latency, and token efficiency."
+          - "**Tech Stack**: Python, Streamlit, OpenAI API, Prompt Tuning, LLM Evaluation."
+
+      - name: VitalAI
+        url: https://github.com/nathyBekele/VitalAI
+        summary: >
+          Django-based predictive healthcare REST API delivering personalized health insights and anomaly alerts from Apple Health telemetry data.
+          <span class="cv-project-links">
+            <a href="https://github.com/nathyBekele/VitalAI" target="_blank" class="cv-action-btn"><i class="fa-brands fa-github"></i> GitHub Code</a>
+          </span>
+        highlights:
+          - "**Biometric Ingestion Pipeline**: Ingests, parses, and normalizes Apple HealthKit metrics (resting heart rate, active energy, sleep cycles) into standardized timeseries."
+          - "**Predictive Health Modeling**: Machine learning algorithms identifying health metric anomalies and providing actionable lifestyle recommendations."
+          - "**Tech Stack**: Python, Django REST Framework, Docker, Apple HealthKit API, NumPy, Pandas."
+
+      - name: Redash Chatbot Add-on
+        url: https://github.com/nathyBekele/redash-chatbot-add-on
+        summary: >
+          Conversational Business Intelligence extension for Redash, enabling natural language questions, automated SQL query generation, and live chart visualization.
+          <span class="cv-project-links">
+            <a href="https://github.com/nathyBekele/redash-chatbot-add-on" target="_blank" class="cv-action-btn"><i class="fa-brands fa-github"></i> GitHub Code</a>
+          </span>
+        highlights:
+          - "**Text-to-SQL Engine**: Translates complex plain-text analytical questions into validated SQL queries against underlying data warehouses."
+          - "**Redash Integration**: Integrates directly with Redash API to execute generated queries and render interactive visualizations dynamically."
+          - "**Tech Stack**: Python, LangChain, Redash API, LLM text-to-SQL, PostgreSQL."
+
+      - name: RateEat
+        url: https://rateeat.app/
+        summary: >
+          Community food discovery and restaurant review platform featuring personalized recommendations, interactive menu browsing, and verified user ratings.
+          <span class="cv-project-links">
+            <a href="https://rateeat.app/" target="_blank" class="cv-action-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live App</a>
+          </span>
+        highlights:
+          - "**Recommendation Engine**: Implemented smart collaborative filtering for dish discovery tailored to user taste preferences and dietary habits."
+          - "**Fullstack Application**: Responsive Next.js/React frontend with Tailwind CSS and an Express/MongoDB backend with Firebase real-time notifications."
+          - "**Tech Stack**: React, Next.js, Tailwind CSS, Node.js, Express, MongoDB, Redux, Firebase."
+
+    Preprints:
+      - bullet: >
+          <div class="row">
+            <div class="col-xs-2 col-sm-2 col-md-2 text-center">
+              <table class="table-cv">
+                <tbody>
+                  <tr>
+                    <td>
+                      <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px">2026</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 mt-2 mt-md-0">
+              <h6 class="title font-weight-bold ml-1 ml-md-4">
+                <a href="https://github.com/nathyBekele/geometry-of-dormant-defection">The Geometry of Dormant Defection: Layer-Wise Dynamics and Defensive Design of Linear Probes for Latent Sleeper Agents</a>
+              </h6>
+              <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem">
+                <em>arXiv preprint</em>
+              </h6>
+              <p class="ml-1 ml-md-4">Empirical investigation into the layer-wise dynamics of linear probes across four distinct backdoor archetypes, demonstrating that peak linear separability concentrates in mid-layer representations.</p>
+            </div>
+          </div>
 
     References:
-      - name: Professor John Doe
-        icon: fa-solid fa-laptop
-        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
-
-      - name: Professor Jane Smith
-        icon: fa-solid fa-thumbtack
-        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
+      - name: Alex Goff
+        reference: Co-founder and CTO of Vula.
+      - name: Nic Rawhani
+        reference: Co-founder and CEO of Vula.
+      - name: Prof. Jelani Nelson
+        reference: Professor and Department Chair, EECS at UC Berkeley; Founder of AddisCoder.
+      - name: Adis Ojeda
+        reference: MIT Alumni; Founder & CEO of Theseus Group; Consulted Adot.
+      - name: Dr. Fitsum Andarge
+        reference: Associate Professor and Dean of ECSE at Addis Ababa University; Former Academic Professor.
+      - name: Emre Varol
+        reference: CEO of A2SV (Africa to Silicon Valley).

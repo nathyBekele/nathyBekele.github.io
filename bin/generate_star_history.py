@@ -45,7 +45,7 @@ THEMES = {
         "text": "#000000",
         "muted": "#828282",
         "grid": "rgba(0,0,0,0.10)",
-        "accent": "#b509ac",
+        "accent": "#2f80ed",
         "fill_from": "rgba(181,9,172,0.28)",
         "fill_to": "rgba(181,9,172,0.02)",
     },

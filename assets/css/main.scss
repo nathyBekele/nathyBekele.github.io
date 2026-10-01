@@ -1,0 +1,56 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+/* Built-in Sass modules you’ll likely use across partials */
+@use "sass:math";
+@use "sass:string";
+
+/* Configure your design tokens BEFORE loading any of your partials. */
+@use "variables" with (
+  $max-content-width: {{ site.max_width | default:  "930px" }},
+  $purple-color: #2f80ed,
+  $cyan-color: #58a6ff
+);
+
+/* Your project partials */
+@use "themes";
+@use "layout";
+
+// Core styles organized by usage
+@use "typography";
+@use "navbar";
+@use "footer";
+@use "blog";
+@use "publications";
+@use "components";
+@use "utilities";
+
+// Other specialized styles
+@use "tabs";
+@use "teachings";
+@use "typograms";
+
+:root {
+  --global-theme-color: #2f80ed;
+  --global-hover-color: #1a6ed8;
+}
+
+html[data-theme="dark"] {
+  --global-theme-color: #58a6ff;
+  --global-hover-color: #79b8ff;
+}
+
+{% if site.data.visibility %}
+  {% if site.data.visibility.cv.hidden_sections %}
+    {% for sec in site.data.visibility.cv.hidden_sections %}
+      a#{{ sec | slugify }},
+      a#{{ sec | slugify }} + .card,
+      #toc-sidebar a[href="#{{ sec | slugify }}"],
+      #toc-sidebar li:has(a[href="#{{ sec | slugify }}"]) {
+        display: none !important;
+      }
+    {% endfor %}
+  {% endif %}
+{% endif %}

@@ -43,8 +43,10 @@ while true; do
     inotifywait -q -e modify,move,create,delete $CONFIG_FILE
     if [ $? -eq 0 ]; then
         echo "Change detected to $CONFIG_FILE, restarting Jekyll"
-        jekyll_pid=$(pgrep -f jekyll)
-        kill -KILL $jekyll_pid
+        jekyll_pid=$(pgrep -f jekyll || true)
+        if [ -n "$jekyll_pid" ]; then
+            kill -KILL $jekyll_pid 2>/dev/null || true
+        fi
         start_jekyll
     fi
 done

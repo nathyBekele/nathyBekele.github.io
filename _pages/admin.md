@@ -5417,6 +5417,7 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
           <div class="admin-form-group" style="margin-bottom: 8px;">
             <label class="cv-micro-label">Description / Summary (Markdown / HTML links allowed)</label>
             <textarea class="admin-textarea" rows="2" placeholder="Summary paragraph describing the project..." oninput="onCvItemFieldChange('projects', ${idx}, 'summary', this.value)">${escapeHtml(pj.summary || '')}</textarea>
+
           </div>
 
           ${renderRichBulletList('projects', idx, pj.highlights)}
@@ -5454,203 +5455,204 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
         refContainer.appendChild(div);
       });
     }
-  }
 
-  // --- CV Form Change Handlers ---
-  function onCvFieldChange(field, val) {
-    if (field === 'label') pendingCvData.label = val;
-    else if (field === 'summaryText') pendingCvData.summaryText = val;
-    saveLocalPreview();
-    updateUI();
-  }
+}
 
-  function onCvItemFieldChange(section, idx, field, val) {
-    if (!pendingCvData[section] || !pendingCvData[section][idx]) return;
-    pendingCvData[section][idx][field] = val;
-    saveLocalPreview();
-    updateUI();
-  }
+// --- CV Form Change Handlers ---
+function onCvFieldChange(field, val) {
+if (field === 'label') pendingCvData.label = val;
+else if (field === 'summaryText') pendingCvData.summaryText = val;
+saveLocalPreview();
+updateUI();
+}
 
-  function onCvSkillsKeywordsChange(idx, val) {
-    if (!pendingCvData.skills || !pendingCvData.skills[idx]) return;
-    pendingCvData.skills[idx].keywords = val;
-    saveLocalPreview();
-    updateUI();
-  }
+function onCvItemFieldChange(section, idx, field, val) {
+if (!pendingCvData[section] || !pendingCvData[section][idx]) return;
+pendingCvData[section][idx][field] = val;
+saveLocalPreview();
+updateUI();
+}
 
-  // --- Add & Remove Handlers for All CV Sections ---
-  function addCvExperience() {
-    if (!pendingCvData.experience) pendingCvData.experience = [];
-    pendingCvData.experience.unshift({
-      company: 'New Company',
-      position: 'Role / Title',
-      location: 'Remote',
-      start_date: '2024-10',
-      end_date: 'Present',
-      startDate: '2024-10',
-      endDate: 'Present',
-      summary: 'Engineering high-impact solutions.',
-      highlights: ['Key accomplishment or feature engineered.']
-    });
-    renderCvEditor(pendingCvData);
-    saveLocalPreview();
-    updateUI();
-  }
+function onCvSkillsKeywordsChange(idx, val) {
+if (!pendingCvData.skills || !pendingCvData.skills[idx]) return;
+pendingCvData.skills[idx].keywords = val;
+saveLocalPreview();
+updateUI();
+}
 
-  function removeCvExperience(idx) {
-    if (!pendingCvData.experience) return;
-    if (confirm(`Are you sure you want to remove role "${pendingCvData.experience[idx]?.position || ''}" at "${pendingCvData.experience[idx]?.company || ''}"?`)) {
-      pendingCvData.experience.splice(idx, 1);
-      renderCvEditor(pendingCvData);
-      saveLocalPreview();
-      updateUI();
-    }
-  }
+// --- Add & Remove Handlers for All CV Sections ---
+function addCvExperience() {
+if (!pendingCvData.experience) pendingCvData.experience = [];
+pendingCvData.experience.unshift({
+company: 'New Company',
+position: 'Role / Title',
+location: 'Remote',
+start_date: '2024-10',
+end_date: 'Present',
+startDate: '2024-10',
+endDate: 'Present',
+summary: 'Engineering high-impact solutions.',
+highlights: ['Key accomplishment or feature engineered.']
+});
+renderCvEditor(pendingCvData);
+saveLocalPreview();
+updateUI();
+}
 
-  function addCvEducation() {
-    if (!pendingCvData.education) pendingCvData.education = [];
-    pendingCvData.education.unshift({
-      institution: 'University / Institution',
-      studyType: 'Degree (e.g. B.Sc.)',
-      area: 'Field of Study',
-      location: 'City, Country',
-      start_date: '2020',
-      end_date: '2024',
-      startDate: '2020',
-      endDate: '2024',
-      highlights: ['Honors, thesis, or coursework']
-    });
-    renderCvEditor(pendingCvData);
-    saveLocalPreview();
-    updateUI();
-  }
+function removeCvExperience(idx) {
+if (!pendingCvData.experience) return;
+if (confirm(`Are you sure you want to remove role "${pendingCvData.experience[idx]?.position || ''}" at "${pendingCvData.experience[idx]?.company || ''}"?`)) {
+pendingCvData.experience.splice(idx, 1);
+renderCvEditor(pendingCvData);
+saveLocalPreview();
+updateUI();
+}
+}
 
-  function removeCvEducation(idx) {
-    if (!pendingCvData.education) return;
-    if (confirm(`Are you sure you want to remove education item "${pendingCvData.education[idx]?.institution || ''}"?`)) {
-      pendingCvData.education.splice(idx, 1);
-      renderCvEditor(pendingCvData);
-      saveLocalPreview();
-      updateUI();
-    }
-  }
+function addCvEducation() {
+if (!pendingCvData.education) pendingCvData.education = [];
+pendingCvData.education.unshift({
+institution: 'University / Institution',
+studyType: 'Degree (e.g. B.Sc.)',
+area: 'Field of Study',
+location: 'City, Country',
+start_date: '2020',
+end_date: '2024',
+startDate: '2020',
+endDate: '2024',
+highlights: ['Honors, thesis, or coursework']
+});
+renderCvEditor(pendingCvData);
+saveLocalPreview();
+updateUI();
+}
 
-  function addCvSkill() {
-    if (!pendingCvData.skills) pendingCvData.skills = [];
-    pendingCvData.skills.push({
-      name: 'New Skill Category',
-      level: 'Advanced',
-      icon: 'fa-solid fa-layer-group',
-      keywords: 'Tool1, Tool2, Tool3'
-    });
-    renderCvEditor(pendingCvData);
-    saveLocalPreview();
-    updateUI();
-  }
+function removeCvEducation(idx) {
+if (!pendingCvData.education) return;
+if (confirm(`Are you sure you want to remove education item "${pendingCvData.education[idx]?.institution || ''}"?`)) {
+pendingCvData.education.splice(idx, 1);
+renderCvEditor(pendingCvData);
+saveLocalPreview();
+updateUI();
+}
+}
 
-  function removeCvSkill(idx) {
-    if (!pendingCvData.skills) return;
-    if (confirm(`Are you sure you want to remove skill category "${pendingCvData.skills[idx]?.name || ''}"?`)) {
-      pendingCvData.skills.splice(idx, 1);
-      renderCvEditor(pendingCvData);
-      saveLocalPreview();
-      updateUI();
-    }
-  }
+function addCvSkill() {
+if (!pendingCvData.skills) pendingCvData.skills = [];
+pendingCvData.skills.push({
+name: 'New Skill Category',
+level: 'Advanced',
+icon: 'fa-solid fa-layer-group',
+keywords: 'Tool1, Tool2, Tool3'
+});
+renderCvEditor(pendingCvData);
+saveLocalPreview();
+updateUI();
+}
 
-  function addCvAward() {
-    if (!pendingCvData.awards) pendingCvData.awards = [];
-    pendingCvData.awards.unshift({
-      title: 'New Award / Honor',
-      awarder: 'Issuing Organization',
-      date: '2024',
-      summary: 'Description of the honor or accomplishment.'
-    });
-    renderCvEditor(pendingCvData);
-    saveLocalPreview();
-    updateUI();
-  }
+function removeCvSkill(idx) {
+if (!pendingCvData.skills) return;
+if (confirm(`Are you sure you want to remove skill category "${pendingCvData.skills[idx]?.name || ''}"?`)) {
+pendingCvData.skills.splice(idx, 1);
+renderCvEditor(pendingCvData);
+saveLocalPreview();
+updateUI();
+}
+}
 
-  function removeCvAward(idx) {
-    if (!pendingCvData.awards) return;
-    if (confirm(`Are you sure you want to remove award "${pendingCvData.awards[idx]?.title || ''}"?`)) {
-      pendingCvData.awards.splice(idx, 1);
-      renderCvEditor(pendingCvData);
-      saveLocalPreview();
-      updateUI();
-    }
-  }
+function addCvAward() {
+if (!pendingCvData.awards) pendingCvData.awards = [];
+pendingCvData.awards.unshift({
+title: 'New Award / Honor',
+awarder: 'Issuing Organization',
+date: '2024',
+summary: 'Description of the honor or accomplishment.'
+});
+renderCvEditor(pendingCvData);
+saveLocalPreview();
+updateUI();
+}
 
-  function addCvProject() {
-    if (!pendingCvData.projects) pendingCvData.projects = [];
-    pendingCvData.projects.unshift({
-      name: 'New Project',
-      url: 'https://github.com/nathyBekele/...',
-      summary: 'Overview of the project architecture and results.',
-      highlights: ['Key engineering challenge solved.']
-    });
-    renderCvEditor(pendingCvData);
-    saveLocalPreview();
-    updateUI();
-  }
+function removeCvAward(idx) {
+if (!pendingCvData.awards) return;
+if (confirm(`Are you sure you want to remove award "${pendingCvData.awards[idx]?.title || ''}"?`)) {
+pendingCvData.awards.splice(idx, 1);
+renderCvEditor(pendingCvData);
+saveLocalPreview();
+updateUI();
+}
+}
 
-  function removeCvProject(idx) {
-    if (!pendingCvData.projects) return;
-    if (confirm(`Are you sure you want to remove project "${pendingCvData.projects[idx]?.name || ''}"?`)) {
-      pendingCvData.projects.splice(idx, 1);
-      renderCvEditor(pendingCvData);
-      saveLocalPreview();
-      updateUI();
-    }
-  }
+function addCvProject() {
+if (!pendingCvData.projects) pendingCvData.projects = [];
+pendingCvData.projects.unshift({
+name: 'New Project',
+url: 'https://github.com/nathyBekele/...',
+summary: 'Overview of the project architecture and results.',
+highlights: ['Key engineering challenge solved.']
+});
+renderCvEditor(pendingCvData);
+saveLocalPreview();
+updateUI();
+}
 
-  function addCvReference() {
-    if (!pendingCvData.references) pendingCvData.references = [];
-    pendingCvData.references.push({
-      name: 'New Reference',
-      reference: 'Title & Organization / Contact info'
-    });
-    renderCvEditor(pendingCvData);
-    saveLocalPreview();
-    updateUI();
-  }
+function removeCvProject(idx) {
+if (!pendingCvData.projects) return;
+if (confirm(`Are you sure you want to remove project "${pendingCvData.projects[idx]?.name || ''}"?`)) {
+pendingCvData.projects.splice(idx, 1);
+renderCvEditor(pendingCvData);
+saveLocalPreview();
+updateUI();
+}
+}
 
-  function addReferenceItem() {
-    addCvReference();
-  }
+function addCvReference() {
+if (!pendingCvData.references) pendingCvData.references = [];
+pendingCvData.references.push({
+name: 'New Reference',
+reference: 'Title & Organization / Contact info'
+});
+renderCvEditor(pendingCvData);
+saveLocalPreview();
+updateUI();
+}
 
-  function removeCvReference(idx) {
-    if (!pendingCvData.references) return;
-    if (confirm(`Are you sure you want to remove reference "${pendingCvData.references[idx]?.name || ''}"?`)) {
-      pendingCvData.references.splice(idx, 1);
-      renderCvEditor(pendingCvData);
-      saveLocalPreview();
-      updateUI();
-    }
-  }
+function addReferenceItem() {
+addCvReference();
+}
 
-  // ==========================================
-  // YAML & MARKDOWN CODE GENERATION & PARSING
-  // ==========================================
-  function formatYamlString(str) {
-    if (!str) return '""';
-    if (str.includes('\n') || str.includes(': ') || str.includes('#') || str.includes('"') || str.includes("'")) {
-      return JSON.stringify(str);
-    }
-    return `"${str}"`;
-  }
+function removeCvReference(idx) {
+if (!pendingCvData.references) return;
+if (confirm(`Are you sure you want to remove reference "${pendingCvData.references[idx]?.name || ''}"?`)) {
+pendingCvData.references.splice(idx, 1);
+renderCvEditor(pendingCvData);
+saveLocalPreview();
+updateUI();
+}
+}
 
-  function parseCvYaml(rawYaml) {
-    const data = {
-      label: "",
-      summaryText: "",
-      education: [],
-      experience: [],
-      skills: [],
-      awards: [],
-      projects: [],
-      references: []
-    };
+// ==========================================
+// YAML & MARKDOWN CODE GENERATION & PARSING
+// ==========================================
+function formatYamlString(str) {
+if (!str) return '""';
+if (str.includes('\n') || str.includes(': ') || str.includes('#') || str.includes('"') || str.includes("'")) {
+return JSON.stringify(str);
+}
+return `"${str}"`;
+}
+
+function parseCvYaml(rawYaml) {
+const data = {
+label: "",
+summaryText: "",
+education: [],
+experience: [],
+skills: [],
+awards: [],
+projects: [],
+references: []
+};
 
     const labelMatch = rawYaml.match(/^(\s*)label:\s*(.*)$/m);
     if (labelMatch) {
@@ -5892,10 +5894,11 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
     }
 
     return data;
-  }
 
-  function updateCvYaml(rawYaml, cvData) {
-    let result = rawYaml;
+}
+
+function updateCvYaml(rawYaml, cvData) {
+let result = rawYaml;
 
     // 1. Update label
     result = result.replace(/^([ ]{2})label:\s*.*$/m, `$1label: ${formatYamlString(cvData.label)}`);
@@ -6034,21 +6037,22 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
     }
 
     return result;
-  }
 
-  function formatMoreInfoYaml(moreInfo) {
-    if (!moreInfo) return '  more_info: >\n';
-    const lines = moreInfo.trim().split('\n').map(l => l.trim()).filter(Boolean);
-    let out = '  more_info: >\n';
-    lines.forEach(l => {
-      out += `    ${l}\n`;
-    });
-    return out;
-  }
+}
 
-  function updateAboutContent(rawAbout, aboutData) {
-    const parts = rawAbout.split(/^---\s*[\r\n]+/m);
-    if (parts.length < 3) return rawAbout;
+function formatMoreInfoYaml(moreInfo) {
+if (!moreInfo) return ' more_info: >\n';
+const lines = moreInfo.trim().split('\n').map(l => l.trim()).filter(Boolean);
+let out = ' more_info: >\n';
+lines.forEach(l => {
+out += `    ${l}\n`;
+});
+return out;
+}
+
+function updateAboutContent(rawAbout, aboutData) {
+const parts = rawAbout.split(/^---\s*[\r\n]+/m);
+if (parts.length < 3) return rawAbout;
 
     let fm = parts[1];
 
@@ -6088,24 +6092,25 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
 
     const bioContent = (aboutData.bio || '').trim();
     return `---${fm.replace(/\n+$/, '')}\n---\n\n${bioContent}\n`;
-  }
 
-  function updateCvPdfInCvMd(rawCvMd, newPdf) {
-    if (/^cv_pdf:\s*.*$/m.test(rawCvMd)) {
-      return rawCvMd.replace(/^cv_pdf:\s*.*$/m, `cv_pdf: ${newPdf}`);
-    } else {
-      return rawCvMd.replace(/^(---\s*[\r\n]+)/, `$1cv_pdf: ${newPdf}\n`);
-    }
-  }
+}
 
-  function updateCvPdfInSocials(rawSocials, newPdf) {
-    return rawSocials.replace(/^cv_pdf:\s*([^#\r\n]+)(.*)$/m, `cv_pdf: ${newPdf} $2`);
-  }
+function updateCvPdfInCvMd(rawCvMd, newPdf) {
+if (/^cv_pdf:\s*._$/m.test(rawCvMd)) {
+return rawCvMd.replace(/^cv_pdf:\s_._$/m, `cv_pdf: ${newPdf}`);
+} else {
+return rawCvMd.replace(/^(---\s_[\r\n]+)/, `$1cv_pdf: ${newPdf}\n`);
+}
+}
 
-  function showStatus(el, msg, type = 'info', isHtml = false) {
-    el.className = `status-box status-${type}`;
-    if (isHtml) el.innerHTML = msg;
-    else el.textContent = msg;
-    el.style.display = 'block';
-  }
+function updateCvPdfInSocials(rawSocials, newPdf) {
+return rawSocials.replace(/^cv_pdf:\s*([^#\r\n]+)(.*)$/m, `cv_pdf: ${newPdf} $2`);
+}
+
+function showStatus(el, msg, type = 'info', isHtml = false) {
+el.className = `status-box status-${type}`;
+if (isHtml) el.innerHTML = msg;
+else el.textContent = msg;
+el.style.display = 'block';
+}
 </script>

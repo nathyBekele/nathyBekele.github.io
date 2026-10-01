@@ -10,7 +10,7 @@ redirect: https://medium.com/@natnaelbekele142/precision-rag-prompt-tuning-for-b
 external_source: medium.com
 ---
 
-*This article was originally published on [Medium](https://medium.com/@natnaelbekele142/precision-rag-prompt-tuning-for-building-enterprise-grade-rag-systems-af00d92740d4).*
+_This article was originally published on [Medium](https://medium.com/@natnaelbekele142/precision-rag-prompt-tuning-for-building-enterprise-grade-rag-systems-af00d92740d4)._
 
 Addressing retrieval failure modes, hallucination rates, and prompt optimization techniques when building enterprise-grade RAG systems with Weaviate.
 

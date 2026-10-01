@@ -8,230 +8,333 @@ robots: noindex, nofollow
 ---
 
 <style>
+  /* Clean Jekyll layout header duplication */
+  .post-header {
+    display: none !important;
+  }
+
   .admin-container {
-    max-width: 960px;
+    max-width: 920px;
     margin: 0 auto;
+    padding-bottom: 70px;
   }
+
+  /* Noble Card Styling */
   .admin-card {
-    border: 1px solid var(--global-divider-color, #e0e0e0);
-    border-radius: 12px;
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
+    border-radius: 10px;
     background: var(--global-card-bg-color, #ffffff);
-    padding: 24px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
     transition: all 0.2s ease;
   }
-  .admin-header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-  .admin-title {
-    font-size: 1.35rem;
-    font-weight: 700;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .admin-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    gap: 6px;
-  }
-  .badge-success {
-    background: rgba(40, 167, 69, 0.12);
-    color: #28a745;
-    border: 1px solid rgba(40, 167, 69, 0.3);
-  }
-  .badge-warning {
-    background: rgba(255, 193, 7, 0.15);
-    color: #d39e00;
-    border: 1px solid rgba(255, 193, 7, 0.3);
-  }
-  .badge-muted {
-    background: rgba(108, 117, 125, 0.12);
-    color: #6c757d;
-    border: 1px solid rgba(108, 117, 125, 0.25);
-  }
 
-  /* Filter navigation bar inside admin */
-  .admin-nav-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 24px;
-    border-bottom: 1px solid var(--global-divider-color, #eee);
-    padding-bottom: 12px;
-  }
-  .admin-nav-btn {
-    padding: 7px 14px;
-    border-radius: 20px;
-    border: 1px solid var(--global-divider-color, #ddd);
-    background: var(--global-card-bg-color, #fff);
-    color: var(--global-text-color, #444);
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .admin-nav-btn:hover {
-    background: var(--global-hover-color, #2f80ed);
-    color: #ffffff;
-    border-color: var(--global-hover-color, #2f80ed);
-  }
-  .admin-nav-btn.active {
-    background: var(--global-theme-color, #2f80ed);
-    color: #ffffff;
-    border-color: var(--global-theme-color, #2f80ed);
-    box-shadow: 0 2px 8px rgba(47, 128, 237, 0.3);
-  }
-
-  /* Section header banner */
-  .section-banner {
+  /* Admin Header Bar */
+  .admin-header-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
-    margin-bottom: 14px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--global-divider-color, #eee);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
   }
-  .section-banner h4 {
-    margin: 0;
-    font-size: 1.15rem;
+  .admin-brand-title {
+    font-size: 1.35rem;
     font-weight: 700;
+    margin: 0 0 2px 0;
     display: flex;
     align-items: center;
     gap: 8px;
+    letter-spacing: -0.3px;
+  }
+  .admin-brand-subtitle {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--global-text-color-light, #666);
+    line-height: 1.3;
+  }
+
+  .admin-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .admin-title {
+    font-size: 1.02rem;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Badges */
+  .admin-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 14px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    gap: 5px;
+    line-height: 1.2;
+  }
+  .badge-primary {
+    background: rgba(47, 128, 237, 0.12);
+    color: var(--global-theme-color, #2f80ed);
+    border: 1px solid rgba(47, 128, 237, 0.25);
+  }
+  .badge-success {
+    background: rgba(40, 167, 69, 0.12);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.28);
+  }
+  .badge-warning {
+    background: rgba(255, 193, 7, 0.15);
+    color: #b78103;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+  }
+  .badge-muted {
+    background: rgba(108, 117, 125, 0.1);
+    color: var(--global-text-color-light, #6c757d);
+    border: 1px solid rgba(108, 117, 125, 0.2);
+  }
+
+  /* Redundant per-item badges are hidden for a clean modern look */
+  .switch-container .admin-badge,
+  .sub-item-container .admin-badge {
+    display: none !important;
+  }
+
+  /* Compact Single-Row Filter Navigation Tabs */
+  .admin-nav-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 6px;
+    margin-bottom: 14px;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .admin-nav-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .admin-nav-btn {
+    padding: 5px 11px;
+    border-radius: 20px;
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.12));
+    background: var(--global-card-bg-color, #ffffff);
+    color: var(--global-text-color, #444);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    line-height: 1.2;
+  }
+  .admin-nav-btn i {
+    font-size: 0.74rem;
+  }
+  .admin-nav-btn .tab-count {
+    font-size: 0.72rem;
+    opacity: 0.8;
+    font-weight: 500;
+  }
+  .admin-nav-btn:hover {
+    background: var(--global-hover-color, #2f80ed);
+    border-color: var(--global-hover-color, #2f80ed);
+  }
+  .admin-nav-btn.active {
+    background: var(--global-theme-color, #2f80ed);
+    border-color: var(--global-theme-color, #2f80ed);
+    box-shadow: 0 2px 6px rgba(47, 128, 237, 0.35);
+  }
+
+  /* Section Header Banner */
+  .section-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
+  }
+  .section-banner h4 {
+    margin: 0;
+    font-size: 0.98rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .section-banner p {
+    margin: 2px 0 0 0;
+    font-size: 0.75rem;
+    color: var(--global-text-color-light, #666);
+    line-height: 1.3;
   }
   .section-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
   }
   .btn-mini {
     padding: 3px 8px;
-    font-size: 0.74rem;
-    font-weight: 600;
-    border-radius: 6px;
-    border: 1px solid var(--global-divider-color, #ccc);
-    background: var(--global-card-bg-color, #fff);
-    color: var(--global-text-color, #555);
+    font-size: 0.72rem;
+    font-weight: 500;
+    border-radius: 5px;
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.15));
+    background: var(--global-card-bg-color, #ffffff);
+    color: var(--global-text-color-light, #555);
     cursor: pointer;
     transition: all 0.15s ease;
+    line-height: 1.2;
   }
-  .btn-mini:hover {
-    background: var(--global-theme-color, #2f80ed);
-    color: #fff;
-    border-color: var(--global-theme-color, #2f80ed);
+  .btn-mini:hover,
+  .btn-mini:active {
+    background: var(--global-theme-color, #2f80ed) !important;
+    border-color: var(--global-theme-color, #2f80ed) !important;
   }
 
-  /* Switch Toggle styling */
+  /* Compact Item Rows (Switch Containers) */
   .switch-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--global-divider-color, #eee);
-    background: var(--global-bg-color, #fafafa);
-    margin-bottom: 10px;
-    transition: all 0.18s ease;
+    padding: 7px 12px;
+    border-radius: 7px;
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.07));
+    background: var(--global-card-bg-color, #ffffff);
+    margin-bottom: 5px;
+    transition: all 0.15s ease;
+    min-height: 42px;
   }
   .switch-container:hover {
     border-color: var(--global-theme-color, #2f80ed);
-    background: var(--global-card-bg-color, #ffffff);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+  }
+  .switch-container.is-hidden {
+    opacity: 0.55;
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.02));
   }
   .switch-info {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 10px;
     flex-grow: 1;
     min-width: 0;
   }
   .switch-icon {
-    font-size: 1.25rem;
-    width: 32px;
-    text-align: center;
+    font-size: 0.85rem;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: rgba(47, 128, 237, 0.08);
     color: var(--global-theme-color, #2f80ed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
   }
   .switch-details {
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .switch-details h5 {
-    margin: 0 0 3px 0;
-    font-size: 0.98rem;
+    margin: 0;
+    font-size: 0.86rem;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.25;
   }
   .switch-details p {
-    margin: 0;
-    font-size: 0.82rem;
-    color: var(--global-text-color-light, #666);
-    line-height: 1.35;
+    margin: 1px 0 0 0;
+    font-size: 0.74rem;
+    color: var(--global-text-color-light, #777);
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .switch-meta {
-    font-size: 0.72rem;
+    font-size: 0.69rem;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    margin-top: 2px;
+    gap: 5px;
+    margin-top: 1px;
     color: var(--global-text-color-light, #888);
   }
+  .item-tag {
+    font-size: 0.68rem;
+    font-family: var(--font-family-monospace, monospace);
+    background: rgba(128, 128, 128, 0.12);
+    padding: 1px 5px;
+    border-radius: 4px;
+    opacity: 0.8;
+    margin-left: 5px;
+    font-weight: normal;
+  }
 
-  /* Sub-item Indented Tree Hierarchy (for CV sub-items) */
+  /* Sub-item Indented Tree Hierarchy (CV Sub-items) */
   .sub-item-group {
-    margin-left: 28px;
-    margin-top: -4px;
-    margin-bottom: 14px;
-    padding-left: 14px;
-    border-left: 2px dashed var(--global-theme-color, #2f80ed);
+    margin-left: 22px;
+    margin-top: -2px;
+    margin-bottom: 8px;
+    padding-left: 12px;
+    border-left: 2px solid rgba(47, 128, 237, 0.3);
   }
   .sub-item-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 14px;
+    padding: 5px 10px;
     border-radius: 6px;
-    border: 1px solid var(--global-divider-color, #eee);
-    background: var(--global-bg-color, #fafafa);
-    margin-bottom: 6px;
-    font-size: 0.88rem;
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.06));
+    background: var(--global-card-bg-color, #ffffff);
+    margin-bottom: 4px;
+    font-size: 0.79rem;
     transition: all 0.15s ease;
+    min-height: 34px;
   }
   .sub-item-container:hover {
-    background: var(--global-card-bg-color, #ffffff);
     border-color: var(--global-theme-color, #2f80ed);
   }
+  .sub-item-container.is-hidden {
+    opacity: 0.55;
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.02));
+  }
 
-  /* Pure CSS Toggle Switch */
+  /* Sleek Apple-style Toggle Switch */
   .toggle-switch {
     position: relative;
     display: inline-block;
-    width: 48px;
-    height: 26px;
+    width: 36px;
+    height: 20px;
     flex-shrink: 0;
   }
   .toggle-switch input {
     opacity: 0;
     width: 0;
     height: 0;
+    position: absolute;
+    margin: 0;
   }
   .toggle-slider {
     position: absolute;
@@ -240,152 +343,201 @@ robots: noindex, nofollow
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
-    transition: .25s ease;
-    border-radius: 26px;
+    background-color: var(--global-divider-color, #d1d5db);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
   }
   .toggle-slider:before {
     position: absolute;
     content: "";
-    height: 20px;
-    width: 20px;
+    height: 14px;
+    width: 14px;
     left: 3px;
     bottom: 3px;
-    background-color: white;
-    transition: .25s ease;
+    background-color: #ffffff;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 50%;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
   }
   input:checked + .toggle-slider {
     background-color: var(--global-theme-color, #2f80ed);
   }
-  input:focus + .toggle-slider {
-    box-shadow: 0 0 1px var(--global-theme-color, #2f80ed);
+  input:focus-visible + .toggle-slider {
+    box-shadow: 0 0 0 2px rgba(47, 128, 237, 0.35);
   }
   input:checked + .toggle-slider:before {
-    transform: translateX(22px);
+    transform: translateX(16px);
   }
 
-  /* Compact switch for sub-items */
+  /* Compact sub-item switch */
   .toggle-switch-sm {
-    width: 40px;
-    height: 22px;
+    width: 30px;
+    height: 16px;
+  }
+  .toggle-switch-sm .toggle-slider {
+    border-radius: 16px;
   }
   .toggle-switch-sm .toggle-slider:before {
-    height: 16px;
-    width: 16px;
-    left: 3px;
-    bottom: 3px;
+    height: 12px;
+    width: 12px;
+    left: 2px;
+    bottom: 2px;
   }
   .toggle-switch-sm input:checked + .toggle-slider:before {
-    transform: translateX(18px);
+    transform: translateX(14px);
   }
 
-  /* Admin Buttons */
+  /* Buttons Styling */
   .admin-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    font-size: 0.92rem;
+    gap: 6px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
     font-weight: 600;
-    border-radius: 8px;
+    border-radius: 6px;
     border: none;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
+    line-height: 1.2;
   }
   .btn-primary-custom {
     background: var(--global-theme-color, #2f80ed);
     color: #ffffff !important;
   }
   .btn-primary-custom:hover:not(:disabled) {
-    background: var(--global-hover-color, #1a6ed8);
-    box-shadow: 0 4px 12px rgba(47, 128, 237, 0.35);
+    background: var(--global-hover-color, #1a6ed8) !important;
+    box-shadow: 0 2px 8px rgba(47, 128, 237, 0.35);
   }
   .btn-outline-custom {
     background: transparent;
-    color: var(--global-text-color, #333) !important;
-    border: 1px solid var(--global-divider-color, #ccc);
+    color: var(--global-text-color, #333);
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.2));
   }
   .btn-outline-custom:hover:not(:disabled) {
-    background: var(--global-hover-color, rgba(47, 128, 237, 0.08));
-    border-color: var(--global-theme-color, #2f80ed);
-    color: var(--global-theme-color, #2f80ed) !important;
+    background: var(--global-theme-color, #2f80ed) !important;
+    border-color: var(--global-theme-color, #2f80ed) !important;
   }
   .btn-danger-custom {
     background: rgba(220, 53, 69, 0.1);
-    color: #dc3545 !important;
-    border: 1px solid rgba(220, 53, 69, 0.3);
+    color: #dc3545;
+    border: 1px solid rgba(220, 53, 69, 0.25);
   }
   .btn-danger-custom:hover:not(:disabled) {
-    background: #dc3545;
-    color: #ffffff !important;
+    background: #dc3545 !important;
+    border-color: #dc3545 !important;
   }
   .admin-btn:disabled {
     opacity: 0.55;
     cursor: not-allowed;
   }
 
-  /* Search & Filter bar */
+  /* REQUIREMENT 3: ALL TEXTS AND ICONS WHITE ON HOVER & ACTIVE ACROSS ALL BUTTONS */
+  .admin-nav-btn:hover,
+  .admin-nav-btn:hover *,
+  .admin-nav-btn:active,
+  .admin-nav-btn:active *,
+  .admin-nav-btn.active,
+  .admin-nav-btn.active *,
+  .btn-mini:hover,
+  .btn-mini:hover *,
+  .btn-mini:active,
+  .btn-mini:active *,
+  .admin-btn:hover:not(:disabled),
+  .admin-btn:hover:not(:disabled) *,
+  .admin-btn:active:not(:disabled),
+  .admin-btn:active:not(:disabled) *,
+  .btn-primary-custom:hover:not(:disabled),
+  .btn-primary-custom:hover:not(:disabled) *,
+  .btn-primary-custom:active:not(:disabled),
+  .btn-primary-custom:active:not(:disabled) *,
+  .btn-outline-custom:hover:not(:disabled),
+  .btn-outline-custom:hover:not(:disabled) *,
+  .btn-outline-custom:active:not(:disabled),
+  .btn-outline-custom:active:not(:disabled) *,
+  .btn-danger-custom:hover:not(:disabled),
+  .btn-danger-custom:hover:not(:disabled) *,
+  .btn-danger-custom:active:not(:disabled),
+  .btn-danger-custom:active:not(:disabled) * {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+  }
+
+  /* Compact Search Box */
   .admin-search-box {
     position: relative;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
   .admin-search-box input {
     width: 100%;
-    padding: 9px 14px 9px 38px;
-    border-radius: 8px;
-    border: 1px solid var(--global-divider-color, #ddd);
-    background: var(--global-bg-color, #fafafa);
+    padding: 6px 12px 6px 32px;
+    border-radius: 7px;
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.12));
+    background: var(--global-card-bg-color, #ffffff);
     color: var(--global-text-color);
-    font-size: 0.88rem;
+    font-size: 0.8rem;
     outline: none;
-    transition: border-color 0.2s;
+    transition: all 0.15s ease;
   }
   .admin-search-box input:focus {
     border-color: var(--global-theme-color, #2f80ed);
-    background: var(--global-card-bg-color, #fff);
+    box-shadow: 0 0 0 2px rgba(47, 128, 237, 0.2);
   }
   .admin-search-box i {
     position: absolute;
-    left: 14px;
+    left: 11px;
     top: 50%;
     transform: translateY(-50%);
-    color: #888;
-    font-size: 0.88rem;
+    color: var(--global-text-color-light, #888);
+    font-size: 0.78rem;
   }
 
-  /* Action Bar sticky at bottom when changes exist */
+  /* Sleek Floating Bottom Action Bar */
   .action-bar-container {
     position: fixed;
-    bottom: 24px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
-    max-width: 960px;
+    max-width: 680px;
     z-index: 1050;
     display: none;
   }
   .action-bar {
     background: var(--global-card-bg-color, #ffffff);
-    border: 2px solid var(--global-theme-color, #2f80ed);
-    border-radius: 12px;
-    padding: 16px 24px;
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.12));
+    border-radius: 28px;
+    padding: 8px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 14px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.22);
+    gap: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(8px);
+  }
+  #pendingSummaryText {
+    font-weight: 700;
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+  #pendingDetailText {
+    font-size: 0.72rem;
+    color: var(--global-text-color-light, #777);
+    line-height: 1.2;
+  }
+  .action-bar .admin-btn {
+    border-radius: 20px;
+    padding: 5px 13px;
+    font-size: 0.78rem;
   }
 
   /* Status message box */
   .status-box {
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin-top: 14px;
-    font-size: 0.88rem;
-    line-height: 1.45;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    line-height: 1.4;
     display: none;
   }
   .status-info {
@@ -404,41 +556,594 @@ robots: noindex, nofollow
     border: 1px solid rgba(220, 53, 69, 0.3);
   }
 
-  /* Keyboard shortcut hint */
   .shortcut-hint {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     color: var(--global-text-color-light, #777);
   }
   kbd {
     background-color: var(--global-code-bg-color, #eee);
     border: 1px solid var(--global-divider-color, #ccc);
     border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.12);
     color: var(--global-text-color);
+    font-size: 0.68rem;
+    padding: 1px 4px;
+  }
+
+  /* Form Groups & Inputs for Content Editors */
+  .admin-form-group {
+    margin-bottom: 12px;
+  }
+  .admin-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--global-text-color);
+    margin-bottom: 4px;
+  }
+  .admin-input,
+  .admin-textarea {
+    width: 100%;
+    padding: 7px 11px;
+    border-radius: 6px;
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.12));
+    background: var(--global-card-bg-color, #ffffff);
+    color: var(--global-text-color);
+    font-size: 0.81rem;
+    outline: none;
+    font-family: inherit;
+    transition: all 0.15s ease;
+    box-sizing: border-box;
+  }
+  .admin-input:focus,
+  .admin-textarea:focus {
+    border-color: var(--global-theme-color, #2f80ed);
+    box-shadow: 0 0 0 2px rgba(47, 128, 237, 0.2);
+  }
+  .admin-textarea {
+    resize: vertical;
+    line-height: 1.45;
+  }
+  .admin-sub-card {
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.02));
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    transition: all 0.15s ease;
+  }
+  .admin-sub-card:hover {
+    border-color: rgba(47, 128, 237, 0.35);
+  }
+  .cv-editor-heading {
+    font-size: 0.86rem;
+    font-weight: 700;
+    margin: 14px 0 8px 0;
+    color: var(--global-text-color);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .cv-editor-heading:first-child {
+    margin-top: 0;
+  }
+  .form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .form-row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 650px) {
+    .form-row-2, .form-row-3 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Rich / In-Place Editor Component */
+  .editor-wrapper {
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.12));
+    border-radius: 8px;
+    background: var(--global-card-bg-color, #ffffff);
+    overflow: hidden;
+    margin-top: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+  .editor-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px 10px;
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.03));
+    border-bottom: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
+  }
+  .toolbar-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .toolbar-btn {
+    padding: 3px 8px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    border-radius: 5px;
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.12));
+    background: var(--global-card-bg-color, #ffffff);
+    color: var(--global-text-color, #444);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    height: 25px;
+    line-height: 1;
+  }
+  .toolbar-btn:hover,
+  .toolbar-btn:hover * {
+    background: var(--global-theme-color, #2f80ed) !important;
+    border-color: var(--global-theme-color, #2f80ed) !important;
+    color: #ffffff !important;
+  }
+  .editor-mode-toggle {
+    display: inline-flex;
+    background: var(--global-card-bg-color, #ffffff);
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.12));
+    border-radius: 6px;
+    padding: 2px;
+    gap: 2px;
+  }
+  .editor-mode-btn {
+    padding: 3px 9px;
     font-size: 0.72rem;
-    padding: 2px 5px;
+    font-weight: 600;
+    border-radius: 4px;
+    border: none;
+    background: transparent;
+    color: var(--global-text-color-light, #666);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .editor-mode-btn.active,
+  .editor-mode-btn.active * {
+    background: var(--global-theme-color, #2f80ed) !important;
+    color: #ffffff !important;
+  }
+  .editor-workspace {
+    position: relative;
+    min-height: 280px;
+  }
+  .editor-textarea-pane {
+    width: 100%;
+    min-height: 320px;
+    padding: 14px 16px;
+    border: none;
+    outline: none;
+    font-family: var(--font-family-monospace, monospace);
+    font-size: 0.85rem;
+    line-height: 1.55;
+    background: transparent;
+    color: var(--global-text-color);
+    resize: vertical;
+    box-sizing: border-box;
+    display: none;
+  }
+  .editor-visual-pane {
+    padding: 16px 18px;
+    min-height: 320px;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--global-text-color);
+    outline: none;
+    overflow-y: auto;
+    box-sizing: border-box;
+    display: block;
+    cursor: text;
+  }
+  .editor-visual-pane:focus {
+    background: rgba(47, 128, 237, 0.015);
+  }
+  .editor-visual-pane h1,
+  .editor-visual-pane h2,
+  .editor-visual-pane h3,
+  .editor-visual-pane h4 {
+    margin-top: 1.15rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: var(--global-text-color);
+  }
+  .editor-visual-pane h3 {
+    font-size: 1.15rem;
+  }
+  .editor-visual-pane p {
+    margin-bottom: 0.85rem;
+  }
+  .editor-visual-pane ul,
+  .editor-visual-pane ol {
+    padding-left: 1.5rem;
+    margin-bottom: 0.85rem;
+  }
+  .editor-visual-pane li {
+    margin-bottom: 0.35rem;
+  }
+  .editor-visual-pane a {
+    color: var(--global-theme-color, #2f80ed);
+    text-decoration: underline;
+  }
+  .editor-visual-pane blockquote {
+    border-left: 3px solid var(--global-theme-color, #2f80ed);
+    padding-left: 12px;
+    margin: 10px 0;
+    color: var(--global-text-color-light);
+    font-style: italic;
+  }
+  .editor-split-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    height: 360px;
+  }
+  .editor-split-container .editor-textarea-pane {
+    display: block !important;
+    height: 100% !important;
+    border-right: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
+    resize: none !important;
+    overflow-y: auto;
+  }
+  .editor-split-container .editor-visual-pane {
+    display: block !important;
+    height: 100% !important;
+    overflow-y: auto;
+  }
+  @media (max-width: 768px) {
+    .editor-split-container {
+      grid-template-columns: 1fr;
+      height: auto;
+    }
+  }
+
+  /* CV In-Place & Exact Layout Editor Styles */
+  .cv-card-item {
+    background: var(--global-card-bg-color, #ffffff);
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.12));
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    transition: all 0.15s ease;
+  }
+  .cv-card-item:hover {
+    border-color: rgba(47, 128, 237, 0.35);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+  .cv-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--global-divider-color, rgba(0, 0, 0, 0.08));
+  }
+  .cv-card-title-preview {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--global-text-color);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .cv-entry-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 768px) {
+    .cv-entry-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .cv-entry-meta-col {
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.02));
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
+    border-radius: 6px;
+    padding: 10px;
+    height: fit-content;
+  }
+  .cv-entry-main-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .cv-micro-label {
+    display: block;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--global-text-color-light, #777);
+    margin-bottom: 3px;
+    font-weight: 600;
+  }
+  .cv-job-title-input {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--global-text-color);
+  }
+  .cv-company-input {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--global-text-color);
+  }
+  .cv-summary-input {
+    font-size: 0.84rem;
+    font-style: italic;
+    color: var(--global-text-color);
+  }
+  .admin-input-sm {
+    padding: 5px 8px;
+    font-size: 0.78rem;
+  }
+  .btn-danger-subtle {
+    background: transparent;
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    color: #dc3545;
+    padding: 2px 7px;
+    font-size: 0.72rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .btn-danger-subtle:hover,
+  .btn-danger-subtle:hover * {
+    background: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: #ffffff !important;
+  }
+
+  /* Rich Bullet Points Editor */
+  .rich-bullet-container {
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.02));
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
+    border-radius: 6px;
+    padding: 8px 10px;
+  }
+  .rich-bullet-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 6px;
+    padding: 4px 6px;
+    border-radius: 4px;
+    background: var(--global-card-bg-color, #ffffff);
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
+    transition: all 0.15s ease;
+  }
+  .rich-bullet-item:hover,
+  .rich-bullet-item:focus-within {
+    border-color: var(--global-theme-color, #2f80ed);
+    box-shadow: 0 1px 3px rgba(47, 128, 237, 0.12);
+  }
+  .rich-bullet-marker {
+    color: var(--global-theme-color, #2f80ed);
+    font-size: 1.1rem;
+    line-height: 1.3;
+    user-select: none;
+    font-weight: bold;
+    padding-left: 2px;
+  }
+  .rich-bullet-content {
+    flex: 1;
+    min-height: 22px;
+    outline: none;
+    font-size: 0.83rem;
+    line-height: 1.5;
+    color: var(--global-text-color);
+  }
+  .rich-bullet-content:empty::before {
+    content: attr(placeholder);
+    color: var(--global-text-color-light);
+    opacity: 0.6;
+  }
+  .rich-bullet-actions {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-shrink: 0;
+  }
+  .btn-bullet-tool {
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    font-size: 0.7rem;
+    border-radius: 3px;
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.15));
+    background: var(--global-card-bg-color, #f8f9fa);
+    color: var(--global-text-color, #555);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: all 0.1s ease;
+  }
+  .btn-bullet-tool:hover,
+  .btn-bullet-tool:hover * {
+    background: var(--global-theme-color, #2f80ed) !important;
+    border-color: var(--global-theme-color, #2f80ed) !important;
+    color: #ffffff !important;
+  }
+  .btn-bullet-del {
+    color: #dc3545;
+    border-color: rgba(220, 53, 69, 0.25);
+  }
+  .btn-bullet-del:hover,
+  .btn-bullet-del:hover * {
+    background: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: #ffffff !important;
+  }
+
+  /* PDF Card & Upload Component */
+  .cv-pdf-management-card {
+    background: var(--global-card-bg-color, #ffffff);
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.12));
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+  }
+  .cv-pdf-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .cv-pdf-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cv-pdf-icon-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: rgba(230, 57, 70, 0.1);
+    color: #e63946;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+  .cv-pdf-dropzone {
+    border: 2px dashed var(--global-divider-color, rgba(0, 0, 0, 0.18));
+    border-radius: 6px;
+    padding: 10px 14px;
+    text-align: center;
+    cursor: pointer;
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.015));
+    transition: all 0.15s ease;
+  }
+  .cv-pdf-dropzone:hover {
+    border-color: var(--global-theme-color, #2f80ed);
+    background: rgba(47, 128, 237, 0.04);
+  }
+
+  /* About Page Photo Showcase & Upload Component */
+  .about-photo-card {
+    background: var(--global-card-bg-color, #ffffff);
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.12));
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .about-photo-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+  @media (max-width: 768px) {
+    .about-photo-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .about-photo-frame {
+    width: 130px;
+    height: 155px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid var(--global-divider-color, rgba(0, 0, 0, 0.12));
+    background: var(--global-bg-color, #f8f9fa);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .about-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .about-photo-dropzone {
+    border: 2px dashed var(--global-divider-color, rgba(0, 0, 0, 0.18));
+    border-radius: 8px;
+    padding: 16px 20px;
+    text-align: center;
+    cursor: pointer;
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.015));
+    transition: all 0.15s ease;
+  }
+  .about-photo-dropzone:hover {
+    border-color: var(--global-theme-color, #2f80ed);
+    background: rgba(47, 128, 237, 0.04);
+  }
+  .about-more-info-card, .about-social-card {
+    background: var(--global-card-bg-color, #ffffff);
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.12));
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .about-more-info-editor {
+    min-height: 60px;
+    padding: 10px 12px;
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.15));
+    border-radius: 6px;
+    background: var(--global-card-bg-color, #ffffff);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--global-text-color);
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  .about-more-info-editor:focus {
+    border-color: var(--global-theme-color, #2f80ed);
+    box-shadow: 0 0 0 2px rgba(47, 128, 237, 0.15);
+  }
+  .about-social-preview-box {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.02));
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
   }
 </style>
 
 <div class="admin-container">
 
   <!-- TOP HEADER -->
-  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap" style="gap: 12px;">
+  <div class="admin-header-bar">
     <div>
-      <h1 class="mb-1" style="font-size: 2rem; font-weight: 800; letter-spacing: -0.5px;">
-        Site Control Center
-      </h1>
-      <p class="text-muted mb-0" style="font-size: 0.95rem;">
-        Master toggle dashboard for pages, blog articles, preprints, projects, repositories, and CV sections.
+      <div class="admin-brand-title">
+        <i class="fa-solid fa-sliders" style="color: var(--global-theme-color, #2f80ed);"></i>
+        <span>Site Control Center</span>
+        <span class="admin-badge badge-primary">Private</span>
+      </div>
+      <p class="admin-brand-subtitle">
+        Manage visibility for navigation pages, blog articles, preprints, projects, repos, and CV entries.
       </p>
     </div>
     <div>
       <span class="shortcut-hint">
         <i class="fa-solid fa-bolt" style="color: var(--global-theme-color);"></i>
-        Direct Shortcut: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>A</kbd>
+        Shortcut: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>
       </span>
     </div>
   </div>
@@ -457,16 +1162,16 @@ robots: noindex, nofollow
 
     <!-- Logged Out View -->
     <div id="loggedOutView">
-      <p style="font-size: 0.9rem; color: var(--global-text-color-light, #666); margin-bottom: 14px;">
-        To push visibility changes live to GitHub Pages, provide your GitHub Personal Access Token (PAT) with <code>repo</code> scope. Your token is stored locally in your browser's <code>localStorage</code> and never sent anywhere else.
+      <p style="font-size: 0.8rem; color: var(--global-text-color-light, #666); margin-bottom: 8px;">
+        To push visibility changes live to GitHub Pages, provide your GitHub Personal Access Token (PAT) with <code>repo</code> scope. Token is saved in your local browser only.
       </p>
 
-      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <input 
-          type="password" 
-          id="patInput" 
-          placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
-          style="flex: 1; min-width: 280px; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--global-divider-color, #ccc); background: var(--global-bg-color, #fff); color: var(--global-text-color); font-family: monospace; font-size: 0.88rem;"
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <input
+          type="password"
+          id="patInput"
+          placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          style="flex: 1; min-width: 240px; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--global-divider-color, #ccc); background: var(--global-card-bg-color, #fff); color: var(--global-text-color); font-family: monospace; font-size: 0.8rem;"
           autocomplete="off"
         >
         <button class="admin-btn btn-primary-custom" id="authBtn" onclick="loginWithGitHub()">
@@ -474,19 +1179,19 @@ robots: noindex, nofollow
         </button>
       </div>
 
-      <div style="margin-top: 10px; font-size: 0.8rem; color: var(--global-text-color-light, #888);">
+      <div style="margin-top: 6px; font-size: 0.74rem; color: var(--global-text-color-light, #888);">
         Need a token? <a href="https://github.com/settings/tokens/new?scopes=repo&description=nathyBekele-site-admin" target="_blank" rel="noopener noreferrer">Generate classic token with 'repo' scope</a>.
       </div>
     </div>
 
     <!-- Logged In View -->
     <div id="loggedInView" style="display: none;">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <img id="userAvatar" src="" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--global-theme-color, #2f80ed);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img id="userAvatar" src="" style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--global-theme-color, #2f80ed);">
           <div>
-            <div style="font-weight: 600;" id="userName">Natnael Bekele</div>
-            <div style="font-size: 0.78rem; color: var(--global-text-color-light, #777);" id="userHandle">@nathyBekele</div>
+            <div style="font-weight: 600; font-size: 0.85rem;" id="userName">Natnael Bekele</div>
+            <div style="font-size: 0.72rem; color: var(--global-text-color-light, #777);" id="userHandle">@nathyBekele</div>
           </div>
         </div>
         <button class="admin-btn btn-danger-custom" onclick="logoutGitHub()">
@@ -496,49 +1201,51 @@ robots: noindex, nofollow
     </div>
 
     <div id="authStatusMsg" class="status-box"></div>
+
   </div>
 
-  <!-- CATEGORY QUICK FILTER BUTTONS -->
+  <!-- COMPACT CATEGORY QUICK FILTER BUTTONS (SINGLE ROW) -->
   <div class="admin-nav-tabs">
     <button class="admin-nav-btn active" onclick="switchCategoryTab('all', this)">
-      <i class="fa-solid fa-layer-group"></i> All Controls
+      <i class="fa-solid fa-layer-group"></i> All
     </button>
     <button class="admin-nav-btn" onclick="switchCategoryTab('nav', this)">
-      <i class="fa-solid fa-compass"></i> Navigation Tabs (<span id="count_nav_stat">5</span>)
+      <i class="fa-solid fa-compass"></i> Navigation <span class="tab-count">(<span id="count_nav_stat">5</span>)</span>
+    </button>
+    <button class="admin-nav-btn" onclick="switchCategoryTab('about', this)">
+      <i class="fa-solid fa-user"></i> About
     </button>
     <button class="admin-nav-btn" onclick="switchCategoryTab('blog', this)">
-      <i class="fa-solid fa-newspaper"></i> Blog Articles (<span id="count_blog_stat">9</span>)
+      <i class="fa-solid fa-newspaper"></i> Blog <span class="tab-count">(<span id="count_blog_stat">9</span>)</span>
     </button>
     <button class="admin-nav-btn" onclick="switchCategoryTab('preprints', this)">
-      <i class="fa-solid fa-graduation-cap"></i> Preprints (<span id="count_preprints_stat">1</span>)
+      <i class="fa-solid fa-graduation-cap"></i> Preprints <span class="tab-count">(<span id="count_preprints_stat">1</span>)</span>
     </button>
     <button class="admin-nav-btn" onclick="switchCategoryTab('projects', this)">
-      <i class="fa-solid fa-diagram-project"></i> Projects (<span id="count_projects_stat">9</span>)
+      <i class="fa-solid fa-diagram-project"></i> Projects <span class="tab-count">(<span id="count_projects_stat">9</span>)</span>
     </button>
     <button class="admin-nav-btn" onclick="switchCategoryTab('repos', this)">
-      <i class="fa-brands fa-github"></i> Repositories (<span id="count_repos_stat">6</span>)
+      <i class="fa-brands fa-github"></i> Repos <span class="tab-count">(<span id="count_repos_stat">6</span>)</span>
     </button>
     <button class="admin-nav-btn" onclick="switchCategoryTab('cv', this)">
-      <i class="fa-solid fa-file-invoice"></i> CV Customizer (<span id="count_cv_stat">7</span>)
+      <i class="fa-solid fa-file-invoice"></i> CV <span class="tab-count">(<span id="count_cv_stat">7</span>)</span>
     </button>
   </div>
 
   <!-- SEARCH BOX -->
   <div class="admin-search-box">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="text" id="adminFilterInput" placeholder="Quick search any page, article, project, repo, or CV entry..." oninput="filterAdminItems()">
+    <input type="text" id="adminFilterInput" placeholder="Quick search pages, articles, projects, repos, or CV..." oninput="filterAdminItems()">
   </div>
 
   <!-- ========================================== -->
-  <!-- 1. NAVIGATION TABS (FULL-PAGE TOGGLES)     -->
+  <!-- 1. NAVIGATION TABS                         -->
   <!-- ========================================== -->
   <div class="admin-card category-card" id="card_nav">
     <div class="section-banner">
       <div>
-        <h4><i class="fa-solid fa-compass" style="color: var(--global-theme-color);"></i> Navigation Tabs (Layer 1)</h4>
-        <p style="margin: 2px 0 0 0; font-size: 0.82rem; color: var(--global-text-color-light, #666);">
-          Toggle entire pages on or off. Toggled-off pages are removed from the top navigation bar.
-        </p>
+        <h4><i class="fa-solid fa-compass" style="color: var(--global-theme-color);"></i> Navigation Pages</h4>
+        <p>Toggle pages visible in the top navigation bar.</p>
       </div>
       <div class="section-actions">
         <span id="stat_nav" class="admin-badge badge-success">5/5 Visible</span>
@@ -552,7 +1259,7 @@ robots: noindex, nofollow
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-newspaper"></i></div>
         <div class="switch-details">
-          <h5>blog <span class="badge badge-light" style="font-size: 0.72rem;">_pages/blog.md</span></h5>
+          <h5>Blog <span class="item-tag">_pages/blog.md</span></h5>
           <p>Technical articles & syndicated Medium publications</p>
         </div>
       </div>
@@ -570,7 +1277,7 @@ robots: noindex, nofollow
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-graduation-cap"></i></div>
         <div class="switch-details">
-          <h5>preprints <span class="badge badge-light" style="font-size: 0.72rem;">_pages/publications.md</span></h5>
+          <h5>Preprints <span class="item-tag">_pages/publications.md</span></h5>
           <p>Academic research papers, sleeper agents interpretability paper, and arXiv preprints</p>
         </div>
       </div>
@@ -588,7 +1295,7 @@ robots: noindex, nofollow
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-diagram-project"></i></div>
         <div class="switch-details">
-          <h5>projects <span class="badge badge-light" style="font-size: 0.72rem;">_pages/projects.md</span></h5>
+          <h5>Projects <span class="item-tag">_pages/projects.md</span></h5>
           <p>Interactive portfolio showcase of engineering, AI systems, and fullstack projects</p>
         </div>
       </div>
@@ -606,7 +1313,7 @@ robots: noindex, nofollow
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-brands fa-github"></i></div>
         <div class="switch-details">
-          <h5>repositories <span class="badge badge-light" style="font-size: 0.72rem;">_pages/repositories.md</span></h5>
+          <h5>Repositories <span class="item-tag">_pages/repositories.md</span></h5>
           <p>Pinned open-source GitHub repositories with star history charts and pinned cards</p>
         </div>
       </div>
@@ -624,7 +1331,7 @@ robots: noindex, nofollow
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-file-invoice"></i></div>
         <div class="switch-details">
-          <h5>CV <span class="badge badge-light" style="font-size: 0.72rem;">_pages/cv.md</span></h5>
+          <h5>Curriculum Vitae <span class="item-tag">_pages/cv.md</span></h5>
           <p>Comprehensive interactive Curriculum Vitae with direct PDF download button</p>
         </div>
       </div>
@@ -636,18 +1343,271 @@ robots: noindex, nofollow
         </label>
       </div>
     </div>
+
   </div>
 
   <!-- ========================================== -->
-  <!-- 2. BLOG ARTICLES (ITEM-LEVEL TOGGLES)      -->
+  <!-- ABOUT PAGE PROFILE & BIO CONTENT           -->
+  <!-- ========================================== -->
+  <div class="admin-card category-card" id="card_about">
+    <div class="section-banner">
+      <div>
+        <h4><i class="fa-solid fa-user" style="color: var(--global-theme-color);"></i> About Page Profile, Bio & Social</h4>
+        <p>Edit your profile headline, upload a new photo from your computer, edit text under photo, and manage bottom social links.</p>
+      </div>
+      <div class="section-actions">
+        <span class="admin-badge badge-primary">_pages/about.md</span>
+      </div>
+    </div>
+
+    <!-- 1. Subtitle / Professional Headline -->
+    <div class="admin-form-group admin-item" data-search="about subtitle headline role engineer developer addis ababa">
+      <label class="admin-label" for="about_subtitle_input">
+        <span><i class="fa-solid fa-heading" style="color: var(--global-theme-color); margin-right: 5px;"></i> Subtitle / Professional Headline</span>
+      </label>
+      <input type="text" class="admin-input" id="about_subtitle_input" oninput="onAboutFieldChange('subtitle', this.value)" placeholder="Fullstack Software Engineer & AI Systems Developer · Addis Ababa, Ethiopia">
+    </div>
+
+    <!-- 2. Profile Photo Showcase & Local File Upload (Requirement 1) -->
+    <div class="about-photo-card admin-item" data-search="about profile image photo natnael.jpg avatar upload">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed var(--global-divider-color, rgba(0, 0, 0, 0.08)); padding-bottom: 8px;">
+        <span class="cv-micro-label" style="margin: 0; font-size: 0.76rem;">
+          <i class="fa-solid fa-image" style="color: var(--global-theme-color); margin-right: 5px;"></i> Profile Photo Showcase & Upload
+        </span>
+        <span id="about_image_badge" class="admin-badge badge-success" style="font-size: 0.72rem;">Active Photo</span>
+      </div>
+
+      <div class="about-photo-grid">
+        <!-- Visual Portrait Frame Display -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+          <div class="about-photo-frame" id="about_img_frame">
+            <img id="about_image_preview" src="{{ '/assets/img/natnael.jpg' | relative_url }}" alt="Profile Photo" onerror="this.style.display='none'; document.getElementById('about_img_fallback').style.display='block';">
+            <i id="about_img_fallback" class="fa-solid fa-user" style="font-size: 2.2rem; color: var(--global-text-color-light); display: none;"></i>
+          </div>
+          <div id="about_image_filename" style="font-size: 0.72rem; color: var(--global-text-color-light); text-align: center; max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            natnael.jpg
+          </div>
+        </div>
+
+        <!-- Upload Component (Drag & Drop / Browse from Computer) -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div class="about-photo-dropzone" onclick="document.getElementById('about_image_file_input').click()" title="Click to choose a new photo from your computer">
+            <input type="file" id="about_image_file_input" accept="image/png,image/jpeg,image/webp,image/jpg" style="display: none;" onchange="handleAboutImageUpload(this.files[0])">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.5rem; color: var(--global-theme-color);"></i>
+              <div style="font-weight: 600; font-size: 0.86rem; color: var(--global-text-color);">
+                Upload a new photo from your local computer
+              </div>
+              <div style="font-size: 0.74rem; color: var(--global-text-color-light);">
+                Drag & drop image here or click to browse (PNG, JPG, WEBP)
+              </div>
+              <button type="button" class="btn-mini" style="margin-top: 4px; pointer-events: none;">
+                <i class="fa-solid fa-folder-open"></i> Browse Computer...
+              </button>
+            </div>
+          </div>
+
+          <!-- Staged Status Notification -->
+          <div id="about_image_staged_status" style="display: none; padding: 8px 12px; border-radius: 6px; background: rgba(47, 128, 237, 0.08); border: 1px solid rgba(47, 128, 237, 0.25); color: var(--global-text-color); font-size: 0.78rem;">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Text Under Profile Photo: Location & Contact Info in Rich Text (Requirement 2) -->
+    <div class="about-more-info-card admin-item" data-search="about location email text under photo addis ababa more info">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+        <div>
+          <label class="admin-label" style="margin: 0;">
+            <span><i class="fa-solid fa-address-card" style="color: var(--global-theme-color); margin-right: 5px;"></i> Text Under Profile Photo (Location & Contact Info)</span>
+          </label>
+          <div style="font-size: 0.72rem; color: var(--global-text-color-light);">
+            Renders directly below your portrait in the right sidebar of the About page
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 4px;">
+          <button type="button" class="btn-mini" id="btn_more_info_mode" onclick="toggleMoreInfoMode()" style="padding: 2px 7px; font-size: 0.72rem;">
+            <i class="fa-brands fa-html5"></i> Edit HTML Source
+          </button>
+        </div>
+      </div>
+
+      <!-- Rich Formatting Toolbar for More Info -->
+      <div class="editor-toolbar" style="margin-bottom: 6px;">
+        <div class="toolbar-btn-group">
+          <button type="button" class="toolbar-btn" onclick="execMoreInfoFormat('bold')" title="Bold"><strong>B</strong></button>
+          <button type="button" class="toolbar-btn" onclick="execMoreInfoFormat('italic')" title="Italic"><em>I</em></button>
+          <span style="display: inline-block; width: 1px; height: 16px; background: var(--global-divider-color); margin: 0 3px;"></span>
+          <button type="button" class="toolbar-btn" onclick="execMoreInfoFormat('link')" title="Insert Link / Website"><i class="fa-solid fa-link"></i> Link</button>
+          <button type="button" class="toolbar-btn" onclick="execMoreInfoFormat('mailto')" title="Insert Email Mailto Link"><i class="fa-solid fa-envelope"></i> Email</button>
+          <button type="button" class="toolbar-btn" onclick="execMoreInfoFormat('location')" title="Insert Location Pin"><i class="fa-solid fa-location-dot"></i> Pin</button>
+          <button type="button" class="toolbar-btn" onclick="execMoreInfoFormat('para')" title="New Line / Paragraph"><i class="fa-solid fa-paragraph"></i></button>
+        </div>
+        <span style="font-size: 0.7rem; color: var(--global-text-color-light);">
+          <i class="fa-solid fa-pen"></i> Rich text enabled
+        </span>
+      </div>
+
+      <!-- In-Place Visual Contenteditable Box -->
+      <div
+        id="about_more_info_visual"
+        class="about-more-info-editor"
+        contenteditable="true"
+        oninput="onAboutMoreInfoInput()"
+        placeholder="Addis Ababa, Ethiopia&#10;natnaelbekele142[at]gmail[dot]com"
+      ></div>
+
+      <!-- Fallback Raw HTML Textarea (toggled via button) -->
+      <textarea
+        id="about_more_info_input"
+        class="admin-textarea"
+        rows="3"
+        style="display: none; margin-top: 6px; font-family: monospace; font-size: 0.8rem;"
+        oninput="onAboutMoreInfoRawInput(this.value)"
+        placeholder="<p>Addis Ababa, Ethiopia</p>&#10;<p><a href=&quot;mailto:...&quot;>email</a></p>"
+      ></textarea>
+    </div>
+
+    <!-- 4. Biography / Bio Content Editor with In-Place & Rich Formatting -->
+    <div class="admin-form-group admin-item" data-search="about bio description content markdown text playground experience vula turing a2sv">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+        <label class="admin-label" style="margin-bottom: 0;">
+          <span><i class="fa-solid fa-file-lines" style="color: var(--global-theme-color); margin-right: 5px;"></i> Biography / Main Content</span>
+        </label>
+        <div class="editor-mode-toggle">
+          <button type="button" class="editor-mode-btn active" id="btn_mode_visual" onclick="setAboutEditorMode('visual')">
+            <i class="fa-solid fa-pen-nib"></i> Visual / In-Place
+          </button>
+          <button type="button" class="editor-mode-btn" id="btn_mode_split" onclick="setAboutEditorMode('split')">
+            <i class="fa-solid fa-table-columns"></i> Split View
+          </button>
+          <button type="button" class="editor-mode-btn" id="btn_mode_markdown" onclick="setAboutEditorMode('markdown')">
+            <i class="fa-brands fa-markdown"></i> Markdown
+          </button>
+        </div>
+      </div>
+
+      <!-- Rich Formatting Toolbar -->
+      <div class="editor-wrapper">
+        <div class="editor-toolbar">
+          <div class="toolbar-btn-group">
+            <button type="button" class="toolbar-btn" onclick="execEditorFormat('bold')" title="Bold (Ctrl+B)"><strong>B</strong></button>
+            <button type="button" class="toolbar-btn" onclick="execEditorFormat('italic')" title="Italic (Ctrl+I)"><em>I</em></button>
+            <button type="button" class="toolbar-btn" onclick="execEditorFormat('h2')" title="Heading 2">H2</button>
+            <button type="button" class="toolbar-btn" onclick="execEditorFormat('h3')" title="Heading 3">H3</button>
+            <span style="display: inline-block; width: 1px; height: 16px; background: var(--global-divider-color); margin: 0 3px;"></span>
+            <button type="button" class="toolbar-btn" onclick="execEditorFormat('link')" title="Insert Link"><i class="fa-solid fa-link"></i></button>
+            <button type="button" class="toolbar-btn" onclick="execEditorFormat('ul')" title="Bullet List"><i class="fa-solid fa-list-ul"></i></button>
+            <button type="button" class="toolbar-btn" onclick="execEditorFormat('ol')" title="Numbered List"><i class="fa-solid fa-list-ol"></i></button>
+            <button type="button" class="toolbar-btn" onclick="execEditorFormat('quote')" title="Quote"><i class="fa-solid fa-quote-left"></i></button>
+            <button type="button" class="toolbar-btn" onclick="execEditorFormat('code')" title="Inline Code"><i class="fa-solid fa-code"></i></button>
+          </div>
+          <span style="font-size: 0.72rem; color: var(--global-text-color-light);" id="editorModeHint">
+            <i class="fa-solid fa-circle-info"></i> Click text directly to edit in-place
+          </span>
+        </div>
+
+        <div class="editor-workspace" id="aboutEditorWorkspace">
+          <!-- In-place Visual Contenteditable Pane -->
+          <div
+            class="editor-visual-pane"
+            id="about_bio_visual"
+            contenteditable="true"
+            oninput="onVisualBioInput()"
+            placeholder="Click here and begin writing your biography..."
+          ></div>
+
+          <!-- Markdown Source Pane -->
+          <textarea
+            class="editor-textarea-pane"
+            id="about_bio_input"
+            rows="12"
+            oninput="onMarkdownBioInput(this.value)"
+            placeholder="Write your about page biography in Markdown..."
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Bottom Social Links & Contact Note (Requirement 3) -->
+    <div class="about-social-card admin-item" data-search="about social links bottom icons email github linkedin contact note reach out">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed var(--global-divider-color, rgba(0, 0, 0, 0.08)); padding-bottom: 8px;">
+        <span class="cv-micro-label" style="margin: 0; font-size: 0.76rem;">
+          <i class="fa-solid fa-share-nodes" style="color: var(--global-theme-color); margin-right: 5px;"></i> Bottom Social Links & Outreach Note
+        </span>
+        <span class="admin-badge badge-info" style="font-size: 0.7rem;">About Page Footer</span>
+      </div>
+
+      <!-- Social Links Toggle Switch -->
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: var(--global-bg-color, rgba(0, 0, 0, 0.02)); border-radius: 6px; margin-bottom: 12px; border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.06));">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <i class="fa-solid fa-icons" style="font-size: 1.1rem; color: var(--global-theme-color);"></i>
+          <div>
+            <div style="font-weight: 600; font-size: 0.85rem; color: var(--global-text-color);">
+              Display Social Media Profile Links
+            </div>
+            <div style="font-size: 0.72rem; color: var(--global-text-color-light);">
+              Includes Email, GitHub, LinkedIn, LeetCode, Medium, and CV icons at the bottom of About
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span id="badge_about_social_icons" class="admin-badge badge-success">Visible</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggle_about_social_icons" onchange="onAboutSocialToggle(this.checked)" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Contact Note Text Editor -->
+      <div class="admin-form-group" style="margin-bottom: 8px;">
+        <label class="admin-label" for="about_contact_note_input">
+          <span><i class="fa-solid fa-message" style="color: var(--global-theme-color); margin-right: 5px;"></i> Contact Note / Message Beneath Social Links</span>
+        </label>
+        <textarea
+          class="admin-textarea"
+          id="about_contact_note_input"
+          rows="2"
+          oninput="onAboutContactNoteChange(this.value)"
+          placeholder="Feel free to reach out directly via email at natnaelbekele142@gmail.com or connect via LinkedIn and GitHub."
+        ></textarea>
+        <div style="font-size: 0.72rem; color: var(--global-text-color-light); margin-top: 3px;">
+          This text appears immediately below the social media icons at the bottom of the page.
+        </div>
+      </div>
+
+      <!-- Live Footer Preview Box -->
+      <div class="about-social-preview-box">
+        <div class="cv-micro-label" style="margin-bottom: 6px;">
+          <i class="fa-solid fa-eye"></i> Live Bottom Preview:
+        </div>
+        <div id="about_social_preview_icons" style="display: flex; gap: 12px; font-size: 1.15rem; color: var(--global-text-color); margin-bottom: 6px; align-items: center;">
+          <i class="fa-solid fa-envelope" title="Email"></i>
+          <i class="fa-brands fa-github" title="GitHub"></i>
+          <i class="fa-brands fa-linkedin" title="LinkedIn"></i>
+          <i class="fa-solid fa-code" title="LeetCode"></i>
+          <i class="fa-solid fa-file-pdf" title="CV"></i>
+          <i class="fa-brands fa-medium" title="Medium"></i>
+        </div>
+        <div id="about_social_preview_note" style="font-size: 0.82rem; color: var(--global-text-color); line-height: 1.45;">
+          Feel free to reach out directly via email at natnaelbekele142@gmail.com or connect via LinkedIn and GitHub.
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. BLOG ARTICLES                           -->
   <!-- ========================================== -->
   <div class="admin-card category-card" id="card_blog">
     <div class="section-banner">
       <div>
-        <h4><i class="fa-solid fa-newspaper" style="color: var(--global-theme-color);"></i> Blog Articles (Layer 2)</h4>
-        <p style="margin: 2px 0 0 0; font-size: 0.82rem; color: var(--global-text-color-light, #666);">
-          Toggle individual blog articles on or off without deleting files. Toggled-off articles are hidden from the blog list.
-        </p>
+        <h4><i class="fa-solid fa-newspaper" style="color: var(--global-theme-color);"></i> Blog Articles</h4>
+        <p>Control article visibility on the blog listing.</p>
       </div>
       <div class="section-actions">
         <span id="stat_blog" class="admin-badge badge-success">9/9 Visible</span>
@@ -855,18 +1815,17 @@ robots: noindex, nofollow
         </div>
       </div>
     </div>
+
   </div>
 
   <!-- ========================================== -->
-  <!-- 3. PREPRINTS (ITEM-LEVEL TOGGLES)          -->
+  <!-- 3. PREPRINTS                               -->
   <!-- ========================================== -->
   <div class="admin-card category-card" id="card_preprints">
     <div class="section-banner">
       <div>
-        <h4><i class="fa-solid fa-graduation-cap" style="color: var(--global-theme-color);"></i> Preprints & Research Papers (Layer 2)</h4>
-        <p style="margin: 2px 0 0 0; font-size: 0.82rem; color: var(--global-text-color-light, #666);">
-          Toggle individual BibTeX entries on or off. Hidden preprints are omitted from the preprints list and home page.
-        </p>
+        <h4><i class="fa-solid fa-graduation-cap" style="color: var(--global-theme-color);"></i> Research Preprints</h4>
+        <p>Control research preprints on /publications/ and home page.</p>
       </div>
       <div class="section-actions">
         <span id="stat_preprints" class="admin-badge badge-success">1/1 Visible</span>
@@ -880,7 +1839,7 @@ robots: noindex, nofollow
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-brain"></i></div>
         <div class="switch-details">
-          <h5>The Geometry of Dormant Defection <span class="badge badge-light" style="font-size: 0.72rem;">bekele2026geometry</span></h5>
+          <h5>The Geometry of Dormant Defection <span class="item-tag">bekele2026geometry</span></h5>
           <p>Layer-Wise Dynamics and Defensive Design of Linear Probes for Latent Sleeper Agents</p>
           <div class="switch-meta">
             <span><i class="fa-regular fa-calendar"></i> 2026</span>
@@ -897,18 +1856,17 @@ robots: noindex, nofollow
         </label>
       </div>
     </div>
+
   </div>
 
   <!-- ========================================== -->
-  <!-- 4. PROJECTS (ITEM-LEVEL TOGGLES)           -->
+  <!-- 4. PROJECTS                                -->
   <!-- ========================================== -->
   <div class="admin-card category-card" id="card_projects">
     <div class="section-banner">
       <div>
-        <h4><i class="fa-solid fa-diagram-project" style="color: var(--global-theme-color);"></i> Portfolio Projects (Layer 2)</h4>
-        <p style="margin: 2px 0 0 0; font-size: 0.82rem; color: var(--global-text-color-light, #666);">
-          Toggle individual portfolio project cards on or off from <code>/projects/</code>.
-        </p>
+        <h4><i class="fa-solid fa-diagram-project" style="color: var(--global-theme-color);"></i> Portfolio Projects</h4>
+        <p>Control project showcase cards on /projects/.</p>
       </div>
       <div class="section-actions">
         <span id="stat_projects" class="admin-badge badge-success">9/9 Visible</span>
@@ -923,7 +1881,7 @@ robots: noindex, nofollow
         <div class="switch-info">
           <div class="switch-icon"><i class="fa-solid fa-atom"></i></div>
           <div class="switch-details">
-            <h5>Latent Sleeper Agent Linear Probing <span class="badge badge-light" style="font-size: 0.72rem;">0_geometry_of_defection</span></h5>
+            <h5>Latent Sleeper Agent Linear Probing <span class="item-tag">0_geometry_of_defection</span></h5>
             <p>Empirical investigation into the geometry of deceptive misalignment and dormant defection in LLMs.</p>
           </div>
         </div>
@@ -941,7 +1899,7 @@ robots: noindex, nofollow
         <div class="switch-info">
           <div class="switch-icon"><i class="fa-solid fa-shield-virus"></i></div>
           <div class="switch-details">
-            <h5>Amharic Hate Speech Detection <span class="badge badge-light" style="font-size: 0.72rem;">8_hate_speech_amharic</span></h5>
+            <h5>Amharic Hate Speech Detection <span class="item-tag">8_hate_speech_amharic</span></h5>
             <p>Fine-tuned transformer models for social media hate speech detection in low-resource Amharic language.</p>
           </div>
         </div>
@@ -959,7 +1917,7 @@ robots: noindex, nofollow
         <div class="switch-info">
           <div class="switch-icon"><i class="fa-solid fa-comments"></i></div>
           <div class="switch-details">
-            <h5>AfroChat <span class="badge badge-light" style="font-size: 0.72rem;">1_afrochat</span></h5>
+            <h5>AfroChat <span class="item-tag">1_afrochat</span></h5>
             <p>AI assistant fine-tuned for high-fidelity reasoning across major African languages with RAG.</p>
           </div>
         </div>
@@ -977,7 +1935,7 @@ robots: noindex, nofollow
         <div class="switch-info">
           <div class="switch-icon"><i class="fa-solid fa-chart-line"></i></div>
           <div class="switch-details">
-            <h5>Adot <span class="badge badge-light" style="font-size: 0.72rem;">2_adot</span></h5>
+            <h5>Adot <span class="item-tag">2_adot</span></h5>
             <p>Algorithmic trading engine with automated backtesting, risk mitigation, and low-latency execution.</p>
           </div>
         </div>
@@ -995,7 +1953,7 @@ robots: noindex, nofollow
         <div class="switch-info">
           <div class="switch-icon"><i class="fa-solid fa-coins"></i></div>
           <div class="switch-details">
-            <h5>Cursor Spend Tracker <span class="badge badge-light" style="font-size: 0.72rem;">9_cursor_spend_tracker</span></h5>
+            <h5>Cursor Spend Tracker <span class="item-tag">9_cursor_spend_tracker</span></h5>
             <p>Developer tooling and cost intelligence extension for monitoring Cursor IDE AI usage.</p>
           </div>
         </div>
@@ -1013,7 +1971,7 @@ robots: noindex, nofollow
         <div class="switch-info">
           <div class="switch-icon"><i class="fa-solid fa-terminal"></i></div>
           <div class="switch-details">
-            <h5>promptKit <span class="badge badge-light" style="font-size: 0.72rem;">5_promptkit</span></h5>
+            <h5>promptKit <span class="item-tag">5_promptkit</span></h5>
             <p>Interactive toolkit for designing, versioning, evaluating, and stress-testing system prompts.</p>
           </div>
         </div>
@@ -1031,7 +1989,7 @@ robots: noindex, nofollow
         <div class="switch-info">
           <div class="switch-icon"><i class="fa-solid fa-heart-pulse"></i></div>
           <div class="switch-details">
-            <h5>VitalAI <span class="badge badge-light" style="font-size: 0.72rem;">6_vitalai</span></h5>
+            <h5>VitalAI <span class="item-tag">6_vitalai</span></h5>
             <p>Intelligent health diagnostics and clinical decision support system.</p>
           </div>
         </div>
@@ -1049,7 +2007,7 @@ robots: noindex, nofollow
         <div class="switch-info">
           <div class="switch-icon"><i class="fa-solid fa-robot"></i></div>
           <div class="switch-details">
-            <h5>Redash Chatbot Add-on <span class="badge badge-light" style="font-size: 0.72rem;">7_redash_chatbot</span></h5>
+            <h5>Redash Chatbot Add-on <span class="item-tag">7_redash_chatbot</span></h5>
             <p>Interactive conversational analytics extension for Redash converting English to SQL.</p>
           </div>
         </div>
@@ -1067,7 +2025,7 @@ robots: noindex, nofollow
         <div class="switch-info">
           <div class="switch-icon"><i class="fa-solid fa-utensils"></i></div>
           <div class="switch-details">
-            <h5>RateEat <span class="badge badge-light" style="font-size: 0.72rem;">3_rateeat</span></h5>
+            <h5>RateEat <span class="item-tag">3_rateeat</span></h5>
             <p>AI-driven dish discovery, dietary filtering, and crowdsourced restaurant reviews platform.</p>
           </div>
         </div>
@@ -1080,18 +2038,17 @@ robots: noindex, nofollow
         </div>
       </div>
     </div>
+
   </div>
 
   <!-- ========================================== -->
-  <!-- 5. SELECTED REPOSITORIES (ITEM-LEVEL)      -->
+  <!-- 5. REPOSITORIES                            -->
   <!-- ========================================== -->
   <div class="admin-card category-card" id="card_repos">
     <div class="section-banner">
       <div>
-        <h4><i class="fa-brands fa-github" style="color: var(--global-theme-color);"></i> Selected Repositories (Layer 2)</h4>
-        <p style="margin: 2px 0 0 0; font-size: 0.82rem; color: var(--global-text-color-light, #666);">
-          Toggle specific pinned repository cards on or off in <code>/repositories/</code>.
-        </p>
+        <h4><i class="fa-brands fa-github" style="color: var(--global-theme-color);"></i> Pinned Repositories</h4>
+        <p>Control repository cards in Selected Repositories.</p>
       </div>
       <div class="section-actions">
         <span id="stat_repos" class="admin-badge badge-success">6/6 Visible</span>
@@ -1209,32 +2166,155 @@ robots: noindex, nofollow
         </div>
       </div>
     </div>
+
   </div>
 
   <!-- ========================================== -->
-  <!-- 6. CV CUSTOMIZER (SECTIONS & SUB-ITEMS)    -->
+  <!-- 6. CURRICULUM VITAE (CV)                   -->
   <!-- ========================================== -->
   <div class="admin-card category-card" id="card_cv">
     <div class="section-banner">
       <div>
-        <h4><i class="fa-solid fa-file-invoice" style="color: var(--global-theme-color);"></i> CV Customizer (Sections & Sub-items)</h4>
-        <p style="margin: 2px 0 0 0; font-size: 0.82rem; color: var(--global-text-color-light, #666);">
-          Toggle entire CV sections (synced with sidebar TOC), or selectively toggle sub-items inside Experience, Projects, and References.
-        </p>
+        <h4><i class="fa-solid fa-file-invoice" style="color: var(--global-theme-color);"></i> Curriculum Vitae</h4>
+        <p>Toggle whole sections (sidebar synced) and individual entries.</p>
       </div>
       <div class="section-actions">
         <span id="stat_cv" class="admin-badge badge-success">7/7 Sections Visible</span>
-        <button class="btn-mini" onclick="setGroupState('cv_sections', true)">Show All Sections</button>
-        <button class="btn-mini" onclick="setGroupState('cv_sections', false)">Hide All Sections</button>
+        <button class="btn-mini" onclick="setGroupState('cv_sections', true)">Show All</button>
+        <button class="btn-mini" onclick="setGroupState('cv_sections', false)">Hide All</button>
       </div>
     </div>
 
+    <!-- CV Sub-Tabs: Content Editor vs Visibility Switches -->
+    <div class="cv-mode-bar" style="display: flex; gap: 8px; margin-bottom: 14px; border-bottom: 1px solid var(--global-divider-color); padding-bottom: 10px;">
+      <button type="button" class="btn-mini active" id="btn_cv_mode_content" onclick="switchCvMode('content')">
+        <i class="fa-solid fa-pen-to-square"></i> Edit Content & PDF
+      </button>
+      <button type="button" class="btn-mini" id="btn_cv_mode_visibility" onclick="switchCvMode('visibility')">
+        <i class="fa-solid fa-eye-slash"></i> Visibility Controls (<span id="stat_cv_mode_count">7/7</span>)
+      </button>
+    </div>
+
+    <!-- 1. CV CONTENT EDITOR PANEL -->
+    <div id="cv_content_editor_panel">
+      <!-- 1. General Info & PDF -->
+      <div class="cv-editor-heading"><i class="fa-solid fa-id-badge" style="color: var(--global-theme-color);"></i> Header, Summary & PDF Document</div>
+      <div class="admin-sub-card admin-item" data-search="cv label title summary pdf resume document">
+        <div class="admin-form-group">
+          <label class="admin-label" for="cv_label_input">Professional Title (cv.label)</label>
+          <input type="text" class="admin-input" id="cv_label_input" oninput="onCvHeaderChange()" placeholder="e.g. Fullstack Software Engineer & AI Systems Developer">
+        </div>
+        <div class="admin-form-group" style="margin-bottom: 12px;">
+          <label class="admin-label" for="cv_summary_input">
+            <span>Professional Summary (cv.summary text)</span>
+            <span style="font-size: 0.7rem; color: var(--global-text-color-light); font-weight: normal;">Embedded style/script tags are preserved</span>
+          </label>
+          <textarea class="admin-textarea" id="cv_summary_input" rows="3" oninput="onCvHeaderChange()" placeholder="Enter your executive summary..."></textarea>
+        </div>
+
+        <!-- Dedicated CV PDF Management Component -->
+        <div class="cv-pdf-management-card">
+          <div class="cv-pdf-top-row">
+            <div class="cv-pdf-info">
+              <div class="cv-pdf-icon-badge">
+                <i class="fa-solid fa-file-pdf"></i>
+              </div>
+              <div>
+                <div style="font-size: 0.86rem; font-weight: 700; color: var(--global-text-color);">
+                  Curriculum Vitae PDF Document
+                </div>
+                <div style="font-size: 0.74rem; color: var(--global-text-color-light); margin-top: 2px;">
+                  Active path: <code id="cv_pdf_display_path">assets/pdf/Natnael_Bekele_Haile_CV.pdf</code>
+                </div>
+              </div>
+            </div>
+            <a id="cv_pdf_view_btn" href="{{ '/assets/pdf/Natnael_Bekele_Haile_CV.pdf' | relative_url }}" target="_blank" class="btn-mini" style="background: var(--global-theme-color); color: #ffffff !important; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Current PDF in New Tab
+            </a>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;">
+            <div class="cv-pdf-dropzone" onclick="document.getElementById('cv_pdf_file_input').click()" title="Click to upload new PDF">
+              <input type="file" id="cv_pdf_file_input" accept=".pdf,application/pdf" style="display: none;" onchange="handleCvPdfUpload(this.files[0])">
+              <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.15rem; color: var(--global-theme-color);"></i>
+                <span style="font-weight: 600; font-size: 0.8rem; color: var(--global-text-color);">Click or drop new PDF here to replace</span>
+                <span style="font-size: 0.72rem; color: var(--global-text-color-light);">(accepts .pdf)</span>
+              </div>
+            </div>
+            <div style="min-width: 220px;">
+              <input type="text" class="admin-input admin-input-sm" id="cv_pdf_input" oninput="onCvPdfPathInput(this.value)" placeholder="assets/pdf/Natnael_Bekele_Haile_CV.pdf" title="Custom PDF path or filename">
+            </div>
+          </div>
+
+          <div id="cv_pdf_staged_status" style="display: none; margin-top: 8px; font-size: 0.76rem; padding: 6px 10px; border-radius: 6px; background: rgba(47, 128, 237, 0.08); border: 1px solid rgba(47, 128, 237, 0.25); color: var(--global-text-color);">
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Work Experience -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 8px 0;">
+        <div class="cv-editor-heading" style="margin: 0;"><i class="fa-solid fa-briefcase" style="color: var(--global-theme-color);"></i> Experience</div>
+        <button type="button" class="btn-mini" onclick="addCvExperience()">
+          <i class="fa-solid fa-plus"></i> Add Role
+        </button>
+      </div>
+      <div id="cv_experience_editor_container"></div>
+
+      <!-- 3. Education -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 8px 0;">
+        <div class="cv-editor-heading" style="margin: 0;"><i class="fa-solid fa-graduation-cap" style="color: var(--global-theme-color);"></i> Education</div>
+        <button type="button" class="btn-mini" onclick="addCvEducation()">
+          <i class="fa-solid fa-plus"></i> Add Education
+        </button>
+      </div>
+      <div id="cv_education_editor_container"></div>
+
+      <!-- 4. Skills (Renamed from Skills & Keywords) -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 8px 0;">
+        <div class="cv-editor-heading" style="margin: 0;"><i class="fa-solid fa-code" style="color: var(--global-theme-color);"></i> Skills</div>
+        <button type="button" class="btn-mini" onclick="addCvSkill()">
+          <i class="fa-solid fa-plus"></i> Add Skill Category
+        </button>
+      </div>
+      <div id="cv_skills_editor_container"></div>
+
+      <!-- 5. Awards -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 8px 0;">
+        <div class="cv-editor-heading" style="margin: 0;"><i class="fa-solid fa-trophy" style="color: var(--global-theme-color);"></i> Awards</div>
+        <button type="button" class="btn-mini" onclick="addCvAward()">
+          <i class="fa-solid fa-plus"></i> Add Award
+        </button>
+      </div>
+      <div id="cv_awards_editor_container"></div>
+
+      <!-- 6. Projects -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 8px 0;">
+        <div class="cv-editor-heading" style="margin: 0;"><i class="fa-solid fa-diagram-project" style="color: var(--global-theme-color);"></i> Projects</div>
+        <button type="button" class="btn-mini" onclick="addCvProject()">
+          <i class="fa-solid fa-plus"></i> Add Project
+        </button>
+      </div>
+      <div id="cv_projects_editor_container"></div>
+
+      <!-- 7. References -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 8px 0;">
+        <div class="cv-editor-heading" style="margin: 0;"><i class="fa-solid fa-users" style="color: var(--global-theme-color);"></i> References</div>
+        <button type="button" class="btn-mini" onclick="addCvReference()">
+          <i class="fa-solid fa-plus"></i> Add Reference
+        </button>
+      </div>
+      <div id="cv_references_editor_container"></div>
+    </div>
+
+    <!-- 2. CV VISIBILITY CONTROLS PANEL -->
+    <div id="cv_visibility_panel" style="display: none;">
     <!-- CV Section 1: Education -->
     <div class="switch-container admin-item" data-search="cv education addis ababa university bsc degree">
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-graduation-cap"></i></div>
         <div class="switch-details">
-          <h5>Education <span class="badge badge-light" style="font-size: 0.72rem;">CV Section</span></h5>
+          <h5>Education</h5>
           <p>Addis Ababa University B.Sc. Electrical & Computer Engineering</p>
         </div>
       </div>
@@ -1252,7 +2332,7 @@ robots: noindex, nofollow
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-briefcase"></i></div>
         <div class="switch-details">
-          <h5>Experience <span class="badge badge-light" style="font-size: 0.72rem;">CV Section (3 roles)</span></h5>
+          <h5>Experience <span class="item-tag">(3 roles)</span></h5>
           <p>Professional engineering roles with granular sub-item toggles below</p>
         </div>
       </div>
@@ -1318,7 +2398,7 @@ robots: noindex, nofollow
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-code"></i></div>
         <div class="switch-details">
-          <h5>Skills <span class="badge badge-light" style="font-size: 0.72rem;">CV Section</span></h5>
+          <h5>Skills</h5>
           <p>Languages, Frameworks, Developer Tools, and Cloud technologies</p>
         </div>
       </div>
@@ -1336,7 +2416,7 @@ robots: noindex, nofollow
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-trophy"></i></div>
         <div class="switch-details">
-          <h5>Awards <span class="badge badge-light" style="font-size: 0.72rem;">CV Section</span></h5>
+          <h5>Awards & Honors</h5>
           <p>Honors, competitive programming achievements, ICPC regional awards</p>
         </div>
       </div>
@@ -1354,7 +2434,7 @@ robots: noindex, nofollow
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-laptop-code"></i></div>
         <div class="switch-details">
-          <h5>Projects <span class="badge badge-light" style="font-size: 0.72rem;">CV Section (9 items)</span></h5>
+          <h5>Projects <span class="item-tag">(9 items)</span></h5>
           <p>Projects listed in CV with individual sub-item toggles below</p>
         </div>
       </div>
@@ -1475,7 +2555,7 @@ robots: noindex, nofollow
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-newspaper"></i></div>
         <div class="switch-details">
-          <h5>Preprints <span class="badge badge-light" style="font-size: 0.72rem;">CV Section</span></h5>
+          <h5>Preprints</h5>
           <p>Academic preprints and publications list in CV</p>
         </div>
       </div>
@@ -1493,7 +2573,7 @@ robots: noindex, nofollow
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-users"></i></div>
         <div class="switch-details">
-          <h5>References <span class="badge badge-light" style="font-size: 0.72rem;">CV Section (6 contacts)</span></h5>
+          <h5>References <span class="item-tag">(6 contacts)</span></h5>
           <p>Toggles references section & Tocbot sidebar link, with individual contact toggles below</p>
         </div>
       </div>
@@ -1593,6 +2673,8 @@ robots: noindex, nofollow
         </div>
       </div>
     </div>
+    </div> <!-- end cv_visibility_panel -->
+
   </div>
 
   <!-- STICKY ACTION BAR -->
@@ -1708,9 +2790,226 @@ robots: noindex, nofollow
     'Emre Varol': 'Emre Varol'
   };
 
+  // File Paths for API
+  const ABOUT_FILE_PATH = '_pages/about.md';
+  const CV_FILE_PATH = '_data/cv.yml';
+  const CV_MD_FILE_PATH = '_pages/cv.md';
+  const SOCIALS_FILE_PATH = '_data/socials.yml';
+  const CONFIG_FILE_PATH = '_config.yml';
+
   // State
   let githubToken = localStorage.getItem('nathy_admin_pat') || '';
   let visibilityFileSha = null;
+  let aboutFileSha = null;
+  let cvFileSha = null;
+  let cvMdFileSha = null;
+  let socialsFileSha = null;
+  let configFileSha = null;
+
+  let aboutRawContent = '';
+  let cvYamlRawContent = '';
+  let cvMdRawContent = '';
+  let socialsRawContent = '';
+  let configRawContent = '';
+
+  const DEFAULT_ABOUT_SUBTITLE = "Fullstack Software Engineer & AI Systems Developer · Addis Ababa, Ethiopia";
+  const DEFAULT_ABOUT_IMAGE = "natnael.jpg";
+  const DEFAULT_ABOUT_MORE_INFO = `<p>Addis Ababa, Ethiopia</p>\n<p><a href="mailto:natnaelbekele142[at]gmail[dot]com">natnaelbekele142[at]gmail[dot]com</a></p>`;
+  const DEFAULT_CONTACT_NOTE = {{ site.contact_note | jsonify | default: '"Feel free to reach out directly via email at natnaelbekele142@gmail.com or connect via LinkedIn and GitHub."' }};
+  const DEFAULT_ABOUT_BIO = `Welcome to my digital playground, where bugs go to cry and features come to thrive!
+
+I am a **Fullstack Software Engineer & AI Systems Developer** with 4+ years of professional experience, a competitive programming enthusiast, and a passionate educator. I specialize in architecting scalable investment management platforms, AI-driven analytics, and LLM fine-tuning/RLHF pipelines.
+
+### What I Do
+
+- **Fullstack Engineering at [Vula](https://www.vula.vc/)**: Architecting an end-to-end investment management platform with automated pre-investment tracking to streamline due diligence, and deploying AI-driven analytics for real-time visibility into portfolio asset performance and financial outcomes across international markets.
+- **LLM Fine-Tuning & Evaluation**: Designed and validated multi-domain tasks (Networking, Python, Data Science) to train state-of-the-art Large Language Models via Supervised Fine-Tuning (SFT) and RLHF methodologies at **[Turing](https://www.turing.com/)**, accompanied by robust evaluation frameworks for model-generated code.
+- **Educating & Mentoring**: As former Competitive Programming Coach and squad lead at **[A2SV](https://a2sv.org/) (Backed by Google)**, I led an education squad that trained 500+ engineers across Ethiopia's top universities (AAU, ASTU, AASTU), directly contributing to 80+ students securing software engineering offers from top tech firms including Google, Amazon, Bloomberg, and more.
+- **Mentorship & Community**: Served as Teaching Assistant for **[AddisCoder '23](https://www.addiscoder.com/)**, an intensive algorithms and Python programming academy for high school students organized by Prof. Jelani Nelson (UC Berkeley).
+
+I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) from **Addis Ababa University**, where my final year research focused on mBERT-based hate speech classification for the Amharic language. I also have an abiding passion for mathematics and physics, which powers how I dissect complex engineering challenges and craft clean, resilient architectures.`;
+
+  const INITIAL_JEKYLL_CV = {{ site.data.cv.cv | jsonify }};
+  const INITIAL_JEKYLL_SOCIALS = {{ site.data.socials | jsonify }};
+
+  function extractSummaryText(fullSummary) {
+    if (!fullSummary) return "";
+    const styleIdx = fullSummary.indexOf('<style');
+    if (styleIdx !== -1) {
+      return fullSummary.substring(0, styleIdx).trim();
+    }
+    return fullSummary.trim();
+  }
+
+  function formatMonthYearDisplay(val) {
+    if (!val) return '';
+    const s = String(val).trim();
+    const m = s.match(/^(\d{4})-(\d{2})(?:-\d{2})?$/);
+    if (m) return `${m[1]}-${m[2]}`;
+    return s;
+  }
+
+  function initCvData(rawCv) {
+    const summaryFull = (rawCv && rawCv.summary) || "";
+    const sections = (rawCv && rawCv.sections) || {};
+    return {
+      label: (rawCv && rawCv.label) || "Fullstack Software Engineer & AI Systems Developer",
+      summaryText: extractSummaryText(summaryFull),
+      education: (sections.Education || []).map(e => {
+        const s = e.start_date || e.startDate || e.date || '';
+        const en = e.end_date || e.endDate || '';
+        return {
+          institution: e.institution || '',
+          location: e.location || '',
+          area: e.area || '',
+          studyType: e.studyType || '',
+          start_date: formatMonthYearDisplay(s),
+          end_date: formatMonthYearDisplay(en),
+          startDate: formatMonthYearDisplay(s),
+          endDate: formatMonthYearDisplay(en),
+          highlights: Array.isArray(e.highlights) ? [...e.highlights] : []
+        };
+      }),
+      experience: (sections.Experience || []).map(e => {
+        const s = e.start_date || e.startDate || e.date || '';
+        const en = e.end_date || e.endDate || '';
+        return {
+          company: e.company || '',
+          position: e.position || '',
+          location: e.location || '',
+          start_date: formatMonthYearDisplay(s),
+          end_date: formatMonthYearDisplay(en),
+          startDate: formatMonthYearDisplay(s),
+          endDate: formatMonthYearDisplay(en),
+          summary: e.summary || '',
+          highlights: Array.isArray(e.highlights) ? [...e.highlights] : []
+        };
+      }),
+      skills: (sections.Skills || []).map(s => {
+        let kw = s.keywords;
+        if (Array.isArray(kw)) kw = kw.join(', ');
+        return {
+          name: s.name || '',
+          level: s.level || 'Advanced',
+          icon: s.icon || 'fa-solid fa-code',
+          keywords: kw || ''
+        };
+      }),
+      awards: (sections.Awards || []).map(a => ({
+        title: a.title || '',
+        date: String(a.date !== undefined ? a.date : ''),
+        awarder: a.awarder || '',
+        summary: a.summary || ''
+      })),
+      projects: (sections.Projects || []).map(p => ({
+        name: p.name || '',
+        url: p.url || '',
+        summary: p.summary || '',
+        highlights: Array.isArray(p.highlights) ? [...p.highlights] : []
+      })),
+      references: (sections.References || []).map(r => ({
+        name: r.name || '',
+        reference: r.reference || ''
+      }))
+    };
+  }
+
+  function sanitizeCvData(cv, fallback) {
+    if (!cv || typeof cv !== 'object') return JSON.parse(JSON.stringify(fallback));
+    return {
+      label: cv.label || fallback.label || '',
+      summaryText: cv.summaryText !== undefined ? cv.summaryText : fallback.summaryText,
+      education: (Array.isArray(cv.education) && cv.education.length > 0 ? cv.education : fallback.education).map((ed, idx) => {
+        const fb = (fallback.education && fallback.education[idx]) || {};
+        const s = ed.start_date || ed.startDate || ed.date || fb.start_date || '';
+        const en = ed.end_date || ed.endDate || fb.end_date || '';
+        return {
+          institution: ed.institution || fb.institution || '',
+          location: ed.location || fb.location || '',
+          area: ed.area || fb.area || '',
+          studyType: ed.studyType || fb.studyType || '',
+          start_date: formatMonthYearDisplay(s),
+          end_date: formatMonthYearDisplay(en),
+          startDate: formatMonthYearDisplay(s),
+          endDate: formatMonthYearDisplay(en),
+          highlights: Array.isArray(ed.highlights) ? [...ed.highlights] : (Array.isArray(fb.highlights) ? [...fb.highlights] : [])
+        };
+      }),
+      experience: (Array.isArray(cv.experience) && cv.experience.length > 0 ? cv.experience : fallback.experience).map((exp, idx) => {
+        const fb = (fallback.experience && fallback.experience[idx]) || {};
+        const s = exp.start_date || exp.startDate || exp.date || fb.start_date || '';
+        const en = exp.end_date || exp.endDate || fb.end_date || '';
+        return {
+          company: exp.company || fb.company || '',
+          position: exp.position || fb.position || '',
+          location: exp.location || fb.location || '',
+          start_date: formatMonthYearDisplay(s),
+          end_date: formatMonthYearDisplay(en),
+          startDate: formatMonthYearDisplay(s),
+          endDate: formatMonthYearDisplay(en),
+          summary: exp.summary || fb.summary || '',
+          highlights: Array.isArray(exp.highlights) ? [...exp.highlights] : (Array.isArray(fb.highlights) ? [...fb.highlights] : [])
+        };
+      }),
+      skills: (Array.isArray(cv.skills) && cv.skills.length > 0 ? cv.skills : fallback.skills).map((sk, idx) => {
+        const fb = (fallback.skills && fallback.skills[idx]) || {};
+        let kw = sk.keywords !== undefined ? sk.keywords : fb.keywords;
+        if (Array.isArray(kw)) kw = kw.join(', ');
+        return {
+          name: sk.name || fb.name || '',
+          level: sk.level || fb.level || 'Advanced',
+          icon: sk.icon || fb.icon || 'fa-solid fa-code',
+          keywords: kw || ''
+        };
+      }),
+      awards: (Array.isArray(cv.awards) && cv.awards.length > 0 ? cv.awards : fallback.awards).map((aw, idx) => {
+        const fb = (fallback.awards && fallback.awards[idx]) || {};
+        return {
+          title: aw.title || fb.title || '',
+          date: String(aw.date !== undefined ? aw.date : (fb.date || '')),
+          awarder: aw.awarder || fb.awarder || '',
+          summary: aw.summary || fb.summary || ''
+        };
+      }),
+      projects: (Array.isArray(cv.projects) && cv.projects.length > 0 ? cv.projects : fallback.projects).map((pj, idx) => {
+        const fb = (fallback.projects && fallback.projects[idx]) || {};
+        return {
+          name: pj.name || fb.name || '',
+          url: pj.url || fb.url || '',
+          summary: pj.summary || fb.summary || '',
+          highlights: Array.isArray(pj.highlights) ? [...pj.highlights] : (Array.isArray(fb.highlights) ? [...fb.highlights] : [])
+        };
+      }),
+      references: (Array.isArray(cv.references) && cv.references.length > 0 ? cv.references : fallback.references).map((rf, idx) => {
+        const fb = (fallback.references && fallback.references[idx]) || {};
+        return {
+          name: rf.name || fb.name || '',
+          reference: rf.reference || fb.reference || ''
+        };
+      })
+    };
+  }
+
+  let liveCvPdf = (INITIAL_JEKYLL_SOCIALS && INITIAL_JEKYLL_SOCIALS.cv_pdf) || "assets/pdf/Natnael_Bekele_Haile_CV.pdf";
+  let pendingCvPdf = liveCvPdf;
+  let pendingCvPdfUploadData = null;
+  let pendingCvPdfBlobUrl = null;
+
+  let liveAboutData = {
+    subtitle: DEFAULT_ABOUT_SUBTITLE,
+    image: DEFAULT_ABOUT_IMAGE,
+    more_info: DEFAULT_ABOUT_MORE_INFO,
+    social: true,
+    hide_social_icons: {{ site.data.visibility.about.hide_social_icons | jsonify | default: 'false' }},
+    contact_note: DEFAULT_CONTACT_NOTE,
+    bio: DEFAULT_ABOUT_BIO
+  };
+  let pendingAboutData = JSON.parse(JSON.stringify(liveAboutData));
+  let pendingAboutImageUploadData = null;
+  let pendingAboutImageBlobUrl = null;
+
+  let liveCvData = initCvData(INITIAL_JEKYLL_CV);
+  let pendingCvData = JSON.parse(JSON.stringify(liveCvData));
 
   // Initial State from Jekyll template
   const initialVisibilityConfig = {
@@ -1718,6 +3017,9 @@ robots: noindex, nofollow
     hidden_preprints: {{ site.data.visibility.hidden_preprints | jsonify | default: '[]' }},
     hidden_projects: {{ site.data.visibility.hidden_projects | jsonify | default: '[]' }},
     hidden_repos: {{ site.data.visibility.hidden_repos | jsonify | default: '[]' }},
+    about: {
+      hide_social_icons: {{ site.data.visibility.about.hide_social_icons | jsonify | default: 'false' }}
+    },
     cv: {
       hidden_sections: {{ site.data.visibility.cv.hidden_sections | jsonify | default: '[]' }},
       hidden_experience: {{ site.data.visibility.cv.hidden_experience | jsonify | default: '[]' }},
@@ -1734,12 +3036,43 @@ robots: noindex, nofollow
       if (Array.isArray(localStore.hidden_preprints)) initialVisibilityConfig.hidden_preprints = localStore.hidden_preprints;
       if (Array.isArray(localStore.hidden_projects)) initialVisibilityConfig.hidden_projects = localStore.hidden_projects;
       if (Array.isArray(localStore.hidden_repos)) initialVisibilityConfig.hidden_repos = localStore.hidden_repos;
+      if (localStore.about && localStore.about.hide_social_icons !== undefined) {
+        initialVisibilityConfig.about = { hide_social_icons: !!localStore.about.hide_social_icons };
+        pendingAboutData.hide_social_icons = !!localStore.about.hide_social_icons;
+      }
       if (localStore.cv) {
         if (Array.isArray(localStore.cv.hidden_sections)) initialVisibilityConfig.cv.hidden_sections = localStore.cv.hidden_sections;
         if (Array.isArray(localStore.cv.hidden_experience)) initialVisibilityConfig.cv.hidden_experience = localStore.cv.hidden_experience;
         if (Array.isArray(localStore.cv.hidden_projects)) initialVisibilityConfig.cv.hidden_projects = localStore.cv.hidden_projects;
         if (Array.isArray(localStore.cv.hidden_references)) initialVisibilityConfig.cv.hidden_references = localStore.cv.hidden_references;
       }
+    }
+
+    const savedAbout = localStorage.getItem('nathy_about_config');
+    if (savedAbout) {
+      const parsedAbout = JSON.parse(savedAbout);
+      if (parsedAbout && typeof parsedAbout === 'object') {
+        if (parsedAbout.subtitle !== undefined) pendingAboutData.subtitle = parsedAbout.subtitle;
+        if (parsedAbout.image !== undefined) pendingAboutData.image = parsedAbout.image;
+        if (parsedAbout.more_info !== undefined) pendingAboutData.more_info = parsedAbout.more_info;
+        if (parsedAbout.social !== undefined) pendingAboutData.social = parsedAbout.social;
+        if (parsedAbout.hide_social_icons !== undefined) pendingAboutData.hide_social_icons = parsedAbout.hide_social_icons;
+        if (parsedAbout.contact_note !== undefined) pendingAboutData.contact_note = parsedAbout.contact_note;
+        if (parsedAbout.bio !== undefined) pendingAboutData.bio = parsedAbout.bio;
+      }
+    }
+
+    const savedCv = localStorage.getItem('nathy_cv_data');
+    if (savedCv) {
+      const parsedCv = JSON.parse(savedCv);
+      if (parsedCv && typeof parsedCv === 'object') {
+        pendingCvData = sanitizeCvData(parsedCv, liveCvData);
+      }
+    }
+
+    const savedPdf = localStorage.getItem('nathy_cv_pdf');
+    if (savedPdf) {
+      pendingCvPdf = savedPdf;
     }
   } catch(e) {}
 
@@ -1755,6 +3088,8 @@ robots: noindex, nofollow
   // ==========================================
   document.addEventListener('DOMContentLoaded', () => {
     syncAllCheckboxesFromPending();
+    syncAboutFormInputs();
+    renderCvEditor(pendingCvData);
     updateUI();
 
     if (githubToken) {
@@ -1890,9 +3225,135 @@ robots: noindex, nofollow
       console.warn('Could not fetch visibility file:', e);
     }
 
+    // 3. Fetch socials.yml from GitHub
+    try {
+      const socResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${SOCIALS_FILE_PATH}`, {
+        headers: {
+          'Authorization': `Bearer ${githubToken}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (socResp.ok) {
+        const socData = await socResp.json();
+        socialsFileSha = socData.sha;
+        socialsRawContent = decodeURIComponent(escape(atob(socData.content.replace(/\s/g, ''))));
+        const pdfMatch = socialsRawContent.match(/^cv_pdf:\s*([^#\r\n]+)/m);
+        if (pdfMatch) {
+          liveCvPdf = pdfMatch[1].trim();
+          if (!localStorage.getItem('nathy_cv_pdf')) {
+            pendingCvPdf = liveCvPdf;
+          }
+        }
+      }
+    } catch(e) {
+      console.warn('Could not fetch socials.yml:', e);
+    }
+
+    // 4. Fetch cv.md from GitHub
+    try {
+      const cvMdResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CV_MD_FILE_PATH}`, {
+        headers: {
+          'Authorization': `Bearer ${githubToken}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (cvMdResp.ok) {
+        const cvMdData = await cvMdResp.json();
+        cvMdFileSha = cvMdData.sha;
+        cvMdRawContent = decodeURIComponent(escape(atob(cvMdData.content.replace(/\s/g, ''))));
+      }
+    } catch(e) {
+      console.warn('Could not fetch cv.md:', e);
+    }
+
+    // 5. Fetch about.md from GitHub
+    try {
+      const aboutResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${ABOUT_FILE_PATH}`, {
+        headers: {
+          'Authorization': `Bearer ${githubToken}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (aboutResp.ok) {
+        const aboutData = await aboutResp.json();
+        aboutFileSha = aboutData.sha;
+        aboutRawContent = decodeURIComponent(escape(atob(aboutData.content.replace(/\s/g, ''))));
+        
+        const subMatch = aboutRawContent.match(/^subtitle:\s*(.*)$/m);
+        const imgMatch = aboutRawContent.match(/profile:[\s\S]*?image:\s*(.*)$/m);
+        const moreInfoMatch = aboutRawContent.match(/profile:[\s\S]*?more_info:\s*(?:>|\|-?)?\s*[\r\n]+([\s\S]*?)(?=^[a-zA-Z0-9_-]+:\s*|\n---\s*|\Z)/m);
+        const socialMatch = aboutRawContent.match(/^social:\s*(true|false)/m);
+        const bodyMatch = aboutRawContent.match(/^---\s*[\r\n]+[\s\S]*?[\r\n]+---\s*[\r\n]+([\s\S]*)$/);
+
+        if (subMatch) liveAboutData.subtitle = subMatch[1].trim();
+        if (imgMatch) liveAboutData.image = imgMatch[1].trim();
+        if (moreInfoMatch) liveAboutData.more_info = moreInfoMatch[1].replace(/^[ ]{2,6}/gm, '').trim();
+        if (socialMatch) liveAboutData.social = (socialMatch[1] === 'true');
+        if (bodyMatch) liveAboutData.bio = bodyMatch[1].trim();
+
+        if (liveVisibility && liveVisibility.about && liveVisibility.about.hide_social_icons !== undefined) {
+          liveAboutData.hide_social_icons = !!liveVisibility.about.hide_social_icons;
+        }
+
+        if (!localStorage.getItem('nathy_about_config')) {
+          pendingAboutData = JSON.parse(JSON.stringify(liveAboutData));
+        }
+      }
+    } catch(e) {
+      console.warn('Could not fetch about.md:', e);
+    }
+
+    // 6. Fetch cv.yml from GitHub
+    try {
+      const cvResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CV_FILE_PATH}`, {
+        headers: {
+          'Authorization': `Bearer ${githubToken}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (cvResp.ok) {
+        const cvData = await cvResp.json();
+        cvFileSha = cvData.sha;
+        cvYamlRawContent = decodeURIComponent(escape(atob(cvData.content.replace(/\s/g, ''))));
+        const parsedCv = parseCvYaml(cvYamlRawContent);
+        liveCvData = parsedCv;
+        if (!localStorage.getItem('nathy_cv_data')) {
+          pendingCvData = JSON.parse(JSON.stringify(liveCvData));
+        }
+      }
+    } catch(e) {
+      console.warn('Could not fetch cv.yml:', e);
+    }
+
+    // 7. Fetch _config.yml from GitHub for contact_note
+    try {
+      const cfgResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CONFIG_FILE_PATH}`, {
+        headers: {
+          'Authorization': `Bearer ${githubToken}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      if (cfgResp.ok) {
+        const cfgData = await cfgResp.json();
+        configFileSha = cfgData.sha;
+        configRawContent = decodeURIComponent(escape(atob(cfgData.content.replace(/\s/g, ''))));
+        const noteMatch = configRawContent.match(/^contact_note:\s*(?:>|\|-?)?\s*[\r\n]+([\s\S]*?)(?=^[a-zA-Z0-9_-]+:\s*)/m);
+        if (noteMatch) {
+          liveAboutData.contact_note = noteMatch[1].replace(/^[ ]{2,4}/gm, '').trim();
+        } else {
+          const singleNote = configRawContent.match(/^contact_note:\s*(.*)$/m);
+          if (singleNote) liveAboutData.contact_note = singleNote[1].trim();
+        }
+      }
+    } catch(e) {
+      console.warn('Could not fetch _config.yml:', e);
+    }
+
     pendingNavState = { ...liveNavState };
     pendingVisibility = JSON.parse(JSON.stringify(liveVisibility));
     syncAllCheckboxesFromPending();
+    syncAboutFormInputs();
+    renderCvEditor(pendingCvData);
     updateUI();
   }
 
@@ -2047,22 +3508,34 @@ robots: noindex, nofollow
   function updateUI() {
     let changeList = [];
 
-    // Helper for badges
-    const setBadge = (elId, isVisible) => {
+    // Helper for badges and row muted state
+    const setBadge = (elId, isVisible, inputId) => {
       const el = document.getElementById(elId);
-      if (!el) return;
-      el.className = isVisible ? 'admin-badge badge-success' : 'admin-badge badge-muted';
-      el.textContent = isVisible ? 'Visible' : 'Hidden';
+      if (el) {
+        el.className = isVisible ? 'admin-badge badge-success' : 'admin-badge badge-muted';
+        el.textContent = isVisible ? 'Visible' : 'Hidden';
+      }
+      if (inputId) {
+        const inputEl = document.getElementById(inputId);
+        const row = inputEl ? inputEl.closest('.switch-container, .sub-item-container') : null;
+        if (row) {
+          if (isVisible) {
+            row.classList.remove('is-hidden');
+          } else {
+            row.classList.add('is-hidden');
+          }
+        }
+      }
     };
 
     // Nav tabs
     let visibleNavCount = 0;
     Object.keys(TABS).forEach(tab => {
       const isVisible = pendingNavState[tab];
-      setBadge(`badge_tab_${tab}`, isVisible);
+      setBadge(`badge_tab_${tab}`, isVisible, `toggle_tab_${tab}`);
       if (isVisible) visibleNavCount++;
       if (pendingNavState[tab] !== liveNavState[tab]) {
-        changeList.push(`${isVisible ? 'Show' : 'Hide'} navigation tab: ${tab}`);
+        changeList.push(`${isVisible ? 'Show' : 'Hide'} navigation: ${tab}`);
       }
     });
     document.getElementById('stat_nav').textContent = `${visibleNavCount}/${Object.keys(TABS).length} Visible`;
@@ -2071,7 +3544,7 @@ robots: noindex, nofollow
     let visibleBlogCount = 0;
     ALL_BLOG_POSTS.forEach(slug => {
       const isVisible = !pendingVisibility.hidden_posts.includes(slug);
-      setBadge(`badge_post_${slug}`, isVisible);
+      setBadge(`badge_post_${slug}`, isVisible, `toggle_post_${slug}`);
       if (isVisible) visibleBlogCount++;
       const wasVisible = !liveVisibility.hidden_posts.includes(slug);
       if (isVisible !== wasVisible) {
@@ -2084,7 +3557,7 @@ robots: noindex, nofollow
     let visiblePreprintsCount = 0;
     ALL_PREPRINTS.forEach(key => {
       const isVisible = !pendingVisibility.hidden_preprints.includes(key);
-      setBadge(`badge_preprint_${key}`, isVisible);
+      setBadge(`badge_preprint_${key}`, isVisible, `toggle_preprint_${key}`);
       if (isVisible) visiblePreprintsCount++;
       const wasVisible = !liveVisibility.hidden_preprints.includes(key);
       if (isVisible !== wasVisible) {
@@ -2097,7 +3570,7 @@ robots: noindex, nofollow
     let visibleProjectsCount = 0;
     ALL_PROJECTS.forEach(slug => {
       const isVisible = !pendingVisibility.hidden_projects.includes(slug);
-      setBadge(`badge_project_${slug}`, isVisible);
+      setBadge(`badge_project_${slug}`, isVisible, `toggle_project_${slug}`);
       if (isVisible) visibleProjectsCount++;
       const wasVisible = !liveVisibility.hidden_projects.includes(slug);
       if (isVisible !== wasVisible) {
@@ -2111,11 +3584,11 @@ robots: noindex, nofollow
     ALL_REPOS.forEach(repo => {
       const isVisible = !pendingVisibility.hidden_repos.includes(repo);
       const shortName = repo.split('/')[1];
-      setBadge(`badge_repo_${shortName}`, isVisible);
+      setBadge(`badge_repo_${shortName}`, isVisible, `toggle_repo_${repo}`);
       if (isVisible) visibleReposCount++;
       const wasVisible = !liveVisibility.hidden_repos.includes(repo);
       if (isVisible !== wasVisible) {
-        changeList.push(`${isVisible ? 'Show' : 'Hide'} repository: ${shortName}`);
+        changeList.push(`${isVisible ? 'Show' : 'Hide'} repo: ${shortName}`);
       }
     });
     document.getElementById('stat_repos').textContent = `${visibleReposCount}/${ALL_REPOS.length} Visible`;
@@ -2124,7 +3597,7 @@ robots: noindex, nofollow
     let visibleCvSectionsCount = 0;
     ALL_CV_SECTIONS.forEach(sec => {
       const isVisible = !pendingVisibility.cv.hidden_sections.includes(sec);
-      setBadge(`badge_cv_section_${sec}`, isVisible);
+      setBadge(`badge_cv_section_${sec}`, isVisible, `toggle_cv_section_${sec}`);
       if (isVisible) visibleCvSectionsCount++;
       const wasVisible = !liveVisibility.cv.hidden_sections.includes(sec);
       if (isVisible !== wasVisible) {
@@ -2136,7 +3609,7 @@ robots: noindex, nofollow
     // CV Sub-items: Experience
     Object.keys(CV_EXP_MAP).forEach(k => {
       const isVisible = !pendingVisibility.cv.hidden_experience.includes(k);
-      setBadge(`badge_cv_exp_${CV_EXP_MAP[k]}`, isVisible);
+      setBadge(`badge_cv_exp_${CV_EXP_MAP[k]}`, isVisible, `toggle_cv_exp_${CV_EXP_MAP[k]}`);
       const wasVisible = !liveVisibility.cv.hidden_experience.includes(k);
       if (isVisible !== wasVisible) {
         changeList.push(`${isVisible ? 'Show' : 'Hide'} CV role: ${k}`);
@@ -2146,7 +3619,7 @@ robots: noindex, nofollow
     // CV Sub-items: Projects
     Object.keys(CV_PROJ_MAP).forEach(k => {
       const isVisible = !pendingVisibility.cv.hidden_projects.includes(k);
-      setBadge(`badge_cv_proj_${CV_PROJ_MAP[k]}`, isVisible);
+      setBadge(`badge_cv_proj_${CV_PROJ_MAP[k]}`, isVisible, `toggle_cv_proj_${CV_PROJ_MAP[k]}`);
       const wasVisible = !liveVisibility.cv.hidden_projects.includes(k);
       if (isVisible !== wasVisible) {
         changeList.push(`${isVisible ? 'Show' : 'Hide'} CV project: ${k}`);
@@ -2156,12 +3629,49 @@ robots: noindex, nofollow
     // CV Sub-items: References
     Object.keys(CV_REF_MAP).forEach(k => {
       const isVisible = !pendingVisibility.cv.hidden_references.includes(k);
-      setBadge(`badge_cv_ref_${k}`, isVisible);
+      setBadge(`badge_cv_ref_${k}`, isVisible, `toggle_cv_ref_${k}`);
       const wasVisible = !liveVisibility.cv.hidden_references.includes(k);
       if (isVisible !== wasVisible) {
-        changeList.push(`${isVisible ? 'Show' : 'Hide'} CV reference: ${k}`);
+        changeList.push(`${isVisible ? 'Show' : 'Hide'} CV ref: ${k}`);
       }
     });
+
+    // About Page changes
+    const aboutChanged = (
+      pendingAboutData.subtitle !== liveAboutData.subtitle ||
+      pendingAboutData.image !== liveAboutData.image ||
+      !!pendingAboutImageUploadData ||
+      (pendingAboutData.more_info || '').trim() !== (liveAboutData.more_info || '').trim() ||
+      pendingAboutData.social !== liveAboutData.social ||
+      pendingAboutData.hide_social_icons !== liveAboutData.hide_social_icons ||
+      (pendingAboutData.contact_note || '').trim() !== (liveAboutData.contact_note || '').trim() ||
+      (pendingAboutData.bio || '').trim() !== (liveAboutData.bio || '').trim()
+    );
+    if (aboutChanged) {
+      if (pendingAboutImageUploadData) {
+        changeList.push(`Upload new profile photo (${pendingAboutImageUploadData.filename})`);
+      } else if (pendingAboutData.hide_social_icons !== liveAboutData.hide_social_icons) {
+        changeList.push(`${pendingAboutData.hide_social_icons ? 'Hide' : 'Show'} About social icons`);
+      } else if ((pendingAboutData.contact_note || '').trim() !== (liveAboutData.contact_note || '').trim()) {
+        changeList.push('Update outreach contact note');
+      } else if ((pendingAboutData.more_info || '').trim() !== (liveAboutData.more_info || '').trim()) {
+        changeList.push('Update text under profile photo');
+      } else {
+        changeList.push('Update About page');
+      }
+    }
+
+    // CV PDF link changes
+    const cvPdfChanged = (pendingCvPdf !== liveCvPdf || !!pendingCvPdfUploadData);
+    if (cvPdfChanged) {
+      changeList.push(pendingCvPdfUploadData ? (`Upload new CV PDF (${pendingCvPdfUploadData.filename})`) : 'Update CV PDF link');
+    }
+
+    // CV Content changes
+    const cvContentChanged = (JSON.stringify(pendingCvData) !== JSON.stringify(liveCvData));
+    if (cvContentChanged) {
+      changeList.push('Update CV content');
+    }
 
     // Action Bar UI
     const barContainer = document.getElementById('actionBarContainer');
@@ -2183,17 +3693,38 @@ robots: noindex, nofollow
       saveBtn.disabled = true;
       resetBtn.disabled = true;
       summaryText.innerHTML = '<i class="fa-solid fa-circle-check" style="color: #28a745;"></i> No pending changes';
-      detailText.textContent = 'All switches match live GitHub state';
+      detailText.textContent = 'All switches and forms match live GitHub state';
     }
   }
 
   function resetToLiveState() {
     pendingNavState = { ...liveNavState };
     pendingVisibility = JSON.parse(JSON.stringify(liveVisibility));
+    pendingAboutData = JSON.parse(JSON.stringify(liveAboutData));
+    pendingCvData = JSON.parse(JSON.stringify(liveCvData));
+    pendingCvPdf = liveCvPdf;
+    pendingCvPdfUploadData = null;
+    if (pendingCvPdfBlobUrl) {
+      URL.revokeObjectURL(pendingCvPdfBlobUrl);
+      pendingCvPdfBlobUrl = null;
+    }
+    pendingAboutImageUploadData = null;
+    if (pendingAboutImageBlobUrl) {
+      URL.revokeObjectURL(pendingAboutImageBlobUrl);
+      pendingAboutImageBlobUrl = null;
+    }
+
+    localStorage.removeItem('nathy_visibility_config');
+    localStorage.removeItem('nathy_about_config');
+    localStorage.removeItem('nathy_cv_data');
+    localStorage.removeItem('nathy_cv_pdf');
+
     syncAllCheckboxesFromPending();
+    syncAboutFormInputs();
+    renderCvEditor(pendingCvData);
     saveLocalPreview();
     updateUI();
-    showStatus(document.getElementById('deployStatusMsg'), 'Reset all toggles to live GitHub state.', 'info');
+    showStatus(document.getElementById('deployStatusMsg'), 'Reset all toggles and form inputs to live GitHub state.', 'info');
   }
 
   // ==========================================
@@ -2215,46 +3746,56 @@ robots: noindex, nofollow
     try {
       const updatedFiles = [];
 
-      // 1. Commit visibility.yml if items or CV changed
-      const visibilityYaml = generateYaml(pendingVisibility);
-      const encodedYaml = btoa(unescape(encodeURIComponent(visibilityYaml)));
+      // 1. Commit visibility.yml if items, CV, or about visibility changed
+      pendingVisibility.about = {
+        hide_social_icons: !!pendingAboutData.hide_social_icons
+      };
+      if (!liveVisibility.about) {
+        liveVisibility.about = { hide_social_icons: !!liveAboutData.hide_social_icons };
+      }
+      const visChanged = JSON.stringify(pendingVisibility) !== JSON.stringify(liveVisibility);
+      if (visChanged) {
+        const visibilityYaml = generateYaml(pendingVisibility);
+        const encodedYaml = btoa(unescape(encodeURIComponent(visibilityYaml)));
 
-      // Fetch fresh sha for visibility.yml
-      const visGetResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${VISIBILITY_FILE_PATH}`, {
-        headers: {
-          'Authorization': `Bearer ${githubToken}`,
-          'Accept': 'application/vnd.github.v3+json'
+        // Fetch fresh sha for visibility.yml
+        const visGetResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${VISIBILITY_FILE_PATH}`, {
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+        let currentVisSha = visibilityFileSha;
+        if (visGetResp.ok) {
+          const visGetData = await visGetResp.json();
+          currentVisSha = visGetData.sha;
         }
-      });
-      let currentVisSha = visibilityFileSha;
-      if (visGetResp.ok) {
-        const visGetData = await visGetResp.json();
-        currentVisSha = visGetData.sha;
-      }
 
-      const visPutResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${VISIBILITY_FILE_PATH}`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${githubToken}`,
-          'Content-Type': 'application/json',
-          'Accept': 'application/vnd.github.v3+json'
-        },
-        body: JSON.stringify({
-          message: 'chore(visibility): update fine-grained item visibility config',
-          content: encodedYaml,
-          sha: currentVisSha,
-          branch: 'main'
-        })
-      });
+        const visPutResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${VISIBILITY_FILE_PATH}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify({
+            message: 'chore(visibility): update fine-grained item visibility config',
+            content: encodedYaml,
+            sha: currentVisSha,
+            branch: 'main'
+          })
+        });
 
-      if (!visPutResp.ok) {
-        const errData = await visPutResp.json();
-        throw new Error(`Failed to commit ${VISIBILITY_FILE_PATH}: ${errData.message || visPutResp.statusText}`);
+        if (!visPutResp.ok) {
+          const errData = await visPutResp.json();
+          throw new Error(`Failed to commit ${VISIBILITY_FILE_PATH}: ${errData.message || visPutResp.statusText}`);
+        }
+        const visPutData = await visPutResp.json();
+        visibilityFileSha = visPutData.content.sha;
+        liveVisibility = JSON.parse(JSON.stringify(pendingVisibility));
+        localStorage.removeItem('nathy_visibility_config');
+        updatedFiles.push(VISIBILITY_FILE_PATH);
       }
-      const visPutData = await visPutResp.json();
-      visibilityFileSha = visPutData.content.sha;
-      liveVisibility = JSON.parse(JSON.stringify(pendingVisibility));
-      updatedFiles.push(VISIBILITY_FILE_PATH);
 
       // 2. Commit any navigation pages that changed
       for (const [key, tab] of Object.entries(TABS)) {
@@ -2304,6 +3845,295 @@ robots: noindex, nofollow
         }
       }
 
+      // 3a. Commit Profile Image if new file uploaded
+      if (pendingAboutImageUploadData && pendingAboutImageUploadData.base64) {
+        let existingImgSha = null;
+        try {
+          const imgGet = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${pendingAboutImageUploadData.path}`, {
+            headers: {
+              'Authorization': `Bearer ${githubToken}`,
+              'Accept': 'application/vnd.github.v3+json'
+            }
+          });
+          if (imgGet.ok) {
+            const imgGetData = await imgGet.json();
+            existingImgSha = imgGetData.sha;
+          }
+        } catch(e) {}
+
+        const imgPutBody = {
+          message: `chore(about): upload new profile image ${pendingAboutImageUploadData.filename}`,
+          content: pendingAboutImageUploadData.base64,
+          branch: 'main'
+        };
+        if (existingImgSha) imgPutBody.sha = existingImgSha;
+
+        const imgPutResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${pendingAboutImageUploadData.path}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(imgPutBody)
+        });
+
+        if (!imgPutResp.ok) {
+          const errData = await imgPutResp.json();
+          throw new Error(`Failed to upload ${pendingAboutImageUploadData.filename}: ${errData.message || imgPutResp.statusText}`);
+        }
+        updatedFiles.push(pendingAboutImageUploadData.path);
+        pendingAboutImageUploadData = null;
+      }
+
+      // 3b. Commit _pages/about.md if changed
+      const aboutChanged = (
+        pendingAboutData.subtitle !== liveAboutData.subtitle ||
+        pendingAboutData.image !== liveAboutData.image ||
+        (pendingAboutData.more_info || '').trim() !== (liveAboutData.more_info || '').trim() ||
+        pendingAboutData.social !== liveAboutData.social ||
+        (pendingAboutData.bio || '').trim() !== (liveAboutData.bio || '').trim()
+      );
+      if (aboutChanged) {
+        const aboutGetResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${ABOUT_FILE_PATH}`, {
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+        if (!aboutGetResp.ok) throw new Error(`Failed to fetch latest ${ABOUT_FILE_PATH}`);
+        const aboutGetData = await aboutGetResp.json();
+        const currentAboutContent = decodeURIComponent(escape(atob(aboutGetData.content.replace(/\s/g, ''))));
+        const updatedAboutContent = updateAboutContent(currentAboutContent, pendingAboutData);
+        const encodedAbout = btoa(unescape(encodeURIComponent(updatedAboutContent)));
+
+        const aboutPutResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${ABOUT_FILE_PATH}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify({
+            message: 'chore(about): update About page profile, details and bio',
+            content: encodedAbout,
+            sha: aboutGetData.sha,
+            branch: 'main'
+          })
+        });
+        if (!aboutPutResp.ok) {
+          const errData = await aboutPutResp.json();
+          throw new Error(`Failed to commit ${ABOUT_FILE_PATH}: ${errData.message || aboutPutResp.statusText}`);
+        }
+        const aboutPutData = await aboutPutResp.json();
+        aboutFileSha = aboutPutData.content.sha;
+        liveAboutData = JSON.parse(JSON.stringify(pendingAboutData));
+        localStorage.removeItem('nathy_about_config');
+        updatedFiles.push(ABOUT_FILE_PATH);
+      }
+
+      // 3c. Commit _config.yml if outreach contact_note changed
+      if ((pendingAboutData.contact_note || '').trim() !== (liveAboutData.contact_note || '').trim()) {
+        const cfgGetResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CONFIG_FILE_PATH}`, {
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+        if (!cfgGetResp.ok) throw new Error(`Failed to fetch latest ${CONFIG_FILE_PATH}`);
+        const cfgGetData = await cfgGetResp.json();
+        const currentCfgContent = decodeURIComponent(escape(atob(cfgGetData.content.replace(/\s/g, ''))));
+        const newNote = (pendingAboutData.contact_note || '').trim();
+        let updatedCfgContent = '';
+        if (/^contact_note:\s*(?:>|\|-?)?\s*[\r\n]+([\s\S]*?)(?=^[a-zA-Z0-9_-]+:\s*)/m.test(currentCfgContent)) {
+          updatedCfgContent = currentCfgContent.replace(/^contact_note:\s*(?:>|\|-?)?\s*[\r\n]+([\s\S]*?)(?=^[a-zA-Z0-9_-]+:\s*)/m, `contact_note: >\n  ${newNote}\n`);
+        } else {
+          updatedCfgContent = currentCfgContent.replace(/^contact_note:\s*.*$/m, `contact_note: >\n  ${newNote}`);
+        }
+        const encodedCfg = btoa(unescape(encodeURIComponent(updatedCfgContent)));
+
+        const cfgPutResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CONFIG_FILE_PATH}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify({
+            message: 'chore(config): update outreach contact note',
+            content: encodedCfg,
+            sha: cfgGetData.sha,
+            branch: 'main'
+          })
+        });
+        if (!cfgPutResp.ok) {
+          const errData = await cfgPutResp.json();
+          throw new Error(`Failed to commit ${CONFIG_FILE_PATH}: ${errData.message || cfgPutResp.statusText}`);
+        }
+        const cfgPutData = await cfgPutResp.json();
+        configFileSha = cfgPutData.content.sha;
+        liveAboutData.contact_note = pendingAboutData.contact_note;
+        updatedFiles.push(CONFIG_FILE_PATH);
+      }
+
+      // 4. Commit CV PDF if new file uploaded or link changed
+      if (pendingCvPdfUploadData && pendingCvPdfUploadData.base64) {
+        let existingPdfSha = null;
+        try {
+          const pdfGet = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${pendingCvPdfUploadData.path}`, {
+            headers: {
+              'Authorization': `Bearer ${githubToken}`,
+              'Accept': 'application/vnd.github.v3+json'
+            }
+          });
+          if (pdfGet.ok) {
+            const pdfGetData = await pdfGet.json();
+            existingPdfSha = pdfGetData.sha;
+          }
+        } catch(e) {}
+
+        const pdfPutBody = {
+          message: `chore(cv): upload new CV PDF document ${pendingCvPdfUploadData.filename}`,
+          content: pendingCvPdfUploadData.base64,
+          branch: 'main'
+        };
+        if (existingPdfSha) pdfPutBody.sha = existingPdfSha;
+
+        const pdfPutResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${pendingCvPdfUploadData.path}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(pdfPutBody)
+        });
+        if (!pdfPutResp.ok) {
+          const errData = await pdfPutResp.json();
+          throw new Error(`Failed to upload ${pendingCvPdfUploadData.path}: ${errData.message || pdfPutResp.statusText}`);
+        }
+        updatedFiles.push(pendingCvPdfUploadData.path);
+        pendingCvPdfUploadData = null;
+      }
+
+      const cvPdfChanged = (pendingCvPdf !== liveCvPdf);
+      if (cvPdfChanged) {
+        // 4a. Update _pages/cv.md
+        const cvMdResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CV_MD_FILE_PATH}`, {
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+        if (cvMdResp.ok) {
+          const cvMdData = await cvMdResp.json();
+          const oldCvMd = decodeURIComponent(escape(atob(cvMdData.content.replace(/\s/g, ''))));
+          const newCvMd = updateCvPdfInCvMd(oldCvMd, pendingCvPdf);
+          const encodedCvMd = btoa(unescape(encodeURIComponent(newCvMd)));
+
+          const cvMdPut = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CV_MD_FILE_PATH}`, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${githubToken}`,
+              'Content-Type': 'application/json',
+              'Accept': 'application/vnd.github.v3+json'
+            },
+            body: JSON.stringify({
+              message: `chore(cv): update CV document link to ${pendingCvPdf}`,
+              content: encodedCvMd,
+              sha: cvMdData.sha,
+              branch: 'main'
+            })
+          });
+          if (!cvMdPut.ok) {
+            const errData = await cvMdPut.json();
+            throw new Error(`Failed to update ${CV_MD_FILE_PATH}: ${errData.message || cvMdPut.statusText}`);
+          }
+          const cvMdPutData = await cvMdPut.json();
+          cvMdFileSha = cvMdPutData.content.sha;
+          updatedFiles.push(CV_MD_FILE_PATH);
+        }
+
+        // 4b. Update _data/socials.yml
+        const socGetResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${SOCIALS_FILE_PATH}`, {
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+        if (socGetResp.ok) {
+          const socGetData = await socGetResp.json();
+          const oldSocials = decodeURIComponent(escape(atob(socGetData.content.replace(/\s/g, ''))));
+          const newSocials = updateCvPdfInSocials(oldSocials, pendingCvPdf);
+          const encodedSocials = btoa(unescape(encodeURIComponent(newSocials)));
+
+          const socPutResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${SOCIALS_FILE_PATH}`, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${githubToken}`,
+              'Content-Type': 'application/json',
+              'Accept': 'application/vnd.github.v3+json'
+            },
+            body: JSON.stringify({
+              message: `chore(socials): update CV PDF download link to ${pendingCvPdf}`,
+              content: encodedSocials,
+              sha: socGetData.sha,
+              branch: 'main'
+            })
+          });
+          if (!socPutResp.ok) {
+            const errData = await socPutResp.json();
+            throw new Error(`Failed to update ${SOCIALS_FILE_PATH}: ${errData.message || socPutResp.statusText}`);
+          }
+          const socPutData = await socPutResp.json();
+          socialsFileSha = socPutData.content.sha;
+          updatedFiles.push(SOCIALS_FILE_PATH);
+        }
+
+        liveCvPdf = pendingCvPdf;
+        localStorage.removeItem('nathy_cv_pdf');
+      }
+
+      // 5. Commit _data/cv.yml if CV content changed
+      const cvContentChanged = (JSON.stringify(pendingCvData) !== JSON.stringify(liveCvData));
+      if (cvContentChanged) {
+        const cvGetResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CV_FILE_PATH}`, {
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+        if (!cvGetResp.ok) throw new Error(`Failed to fetch latest ${CV_FILE_PATH}`);
+        const cvGetData = await cvGetResp.json();
+        const oldCvYaml = decodeURIComponent(escape(atob(cvGetData.content.replace(/\s/g, ''))));
+        const newCvYaml = updateCvYaml(oldCvYaml, pendingCvData);
+        const encodedCv = btoa(unescape(encodeURIComponent(newCvYaml)));
+
+        const cvPutResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CV_FILE_PATH}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify({
+            message: 'chore(cv): update CV content and details',
+            content: encodedCv,
+            sha: cvGetData.sha,
+            branch: 'main'
+          })
+        });
+        if (!cvPutResp.ok) {
+          const errData = await cvPutResp.json();
+          throw new Error(`Failed to commit ${CV_FILE_PATH}: ${errData.message || cvPutResp.statusText}`);
+        }
+        const cvPutData = await cvPutResp.json();
+        cvFileSha = cvPutData.content.sha;
+        liveCvData = JSON.parse(JSON.stringify(pendingCvData));
+        localStorage.removeItem('nathy_cv_data');
+        updatedFiles.push(CV_FILE_PATH);
+      }
+
       saveLocalPreview();
       updateUI();
 
@@ -2332,6 +4162,10 @@ robots: noindex, nofollow
   function saveLocalPreview() {
     try {
       localStorage.setItem('nathy_visibility_config', JSON.stringify(pendingVisibility));
+      localStorage.setItem('nathy_about_config', JSON.stringify(pendingAboutData));
+      localStorage.setItem('nathy_cv_data', JSON.stringify(pendingCvData));
+      localStorage.setItem('nathy_cv_pdf', pendingCvPdf);
+
       // Dynamically update the top navbar on the current page
       const navLinks = document.querySelectorAll('.navbar-nav .nav-item');
       navLinks.forEach(item => {
@@ -2358,6 +4192,7 @@ robots: noindex, nofollow
     if (targetBtn) targetBtn.classList.add('active');
 
     const cards = {
+      about: document.getElementById('card_about'),
       nav: document.getElementById('card_nav'),
       blog: document.getElementById('card_blog'),
       preprints: document.getElementById('card_preprints'),
@@ -2411,6 +4246,9 @@ robots: noindex, nofollow
     writeArray('hidden_projects', config.hidden_projects);
     writeArray('hidden_repos', config.hidden_repos);
 
+    out += `about:\n`;
+    out += `  hide_social_icons: ${config.about && config.about.hide_social_icons ? 'true' : 'false'}\n\n`;
+
     out += `cv:\n`;
     const writeCvArray = (key, arr) => {
       out += `  ${key}:\n`;
@@ -2437,6 +4275,9 @@ robots: noindex, nofollow
       hidden_preprints: [],
       hidden_projects: [],
       hidden_repos: [],
+      about: {
+        hide_social_icons: false
+      },
       cv: {
         hidden_sections: [],
         hidden_experience: [],
@@ -2447,19 +4288,26 @@ robots: noindex, nofollow
 
     let currentSection = null;
     let inCv = false;
+    let inAbout = false;
     let currentCvSub = null;
 
     text.split('\n').forEach(line => {
       const trimmed = line.trim();
       if (!trimmed || trimmed.startsWith('#')) return;
 
-      if (line.startsWith('hidden_posts:')) { currentSection = 'hidden_posts'; inCv = false; return; }
-      if (line.startsWith('hidden_preprints:')) { currentSection = 'hidden_preprints'; inCv = false; return; }
-      if (line.startsWith('hidden_projects:')) { currentSection = 'hidden_projects'; inCv = false; return; }
-      if (line.startsWith('hidden_repos:')) { currentSection = 'hidden_repos'; inCv = false; return; }
-      if (line.startsWith('cv:')) { inCv = true; currentSection = null; return; }
+      if (line.startsWith('hidden_posts:')) { currentSection = 'hidden_posts'; inCv = false; inAbout = false; return; }
+      if (line.startsWith('hidden_preprints:')) { currentSection = 'hidden_preprints'; inCv = false; inAbout = false; return; }
+      if (line.startsWith('hidden_projects:')) { currentSection = 'hidden_projects'; inCv = false; inAbout = false; return; }
+      if (line.startsWith('hidden_repos:')) { currentSection = 'hidden_repos'; inCv = false; inAbout = false; return; }
+      if (line.startsWith('about:')) { inAbout = true; inCv = false; currentSection = null; return; }
+      if (line.startsWith('cv:')) { inCv = true; inAbout = false; currentSection = null; return; }
 
-      if (inCv) {
+      if (inAbout) {
+        if (line.includes('hide_social_icons:')) {
+          res.about.hide_social_icons = line.includes('true');
+          return;
+        }
+      } else if (inCv) {
         if (line.includes('hidden_sections:')) { currentCvSub = 'hidden_sections'; return; }
         if (line.includes('hidden_experience:')) { currentCvSub = 'hidden_experience'; return; }
         if (line.includes('hidden_projects:')) { currentCvSub = 'hidden_projects'; return; }
@@ -2480,6 +4328,1778 @@ robots: noindex, nofollow
     });
 
     return res;
+  }
+
+  // ==========================================
+  // ABOUT & CV FORM HELPERS
+  // ==========================================
+  function markdownToHtml(md) {
+    if (!md) return '';
+    let text = md.replace(/\r\n/g, '\n');
+
+    // Headings
+    text = text.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
+    text = text.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+    text = text.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+    text = text.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+    // Blockquote
+    text = text.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
+
+    // Bold + Italic
+    text = text.replace(/\*\*\*(.*?)\*\*\*/gim, '<strong><em>$1</em></strong>');
+    text = text.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
+    text = text.replace(/\*(.*?)\*/gim, '<em>$1</em>');
+
+    // Code
+    text = text.replace(/`([^`]+)`/gim, '<code>$1</code>');
+
+    // Links: [label](url)
+    text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank">$1</a>');
+
+    // Lists & Paragraphs
+    const lines = text.split('\n');
+    let inUl = false;
+    let inOl = false;
+    let out = [];
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const ulMatch = line.match(/^[\s]*[-*]\s+(.*)/);
+      const olMatch = line.match(/^[\s]*\d+\.\s+(.*)/);
+
+      if (ulMatch) {
+        if (!inUl) {
+          if (inOl) { out.push('</ol>'); inOl = false; }
+          out.push('<ul>');
+          inUl = true;
+        }
+        out.push(`<li>${ulMatch[1]}</li>`);
+      } else if (olMatch) {
+        if (!inOl) {
+          if (inUl) { out.push('</ul>'); inUl = false; }
+          out.push('<ol>');
+          inOl = true;
+        }
+        out.push(`<li>${olMatch[1]}</li>`);
+      } else {
+        if (inUl) { out.push('</ul>'); inUl = false; }
+        if (inOl) { out.push('</ol>'); inOl = false; }
+
+        const trimmed = line.trim();
+        if (!trimmed) {
+          // empty line
+        } else if (trimmed.startsWith('<h') || trimmed.startsWith('<blockquote') || trimmed.startsWith('<ul') || trimmed.startsWith('<ol')) {
+          out.push(trimmed);
+        } else {
+          out.push(`<p>${line}</p>`);
+        }
+      }
+    }
+    if (inUl) out.push('</ul>');
+    if (inOl) out.push('</ol>');
+
+    return out.join('\n');
+  }
+
+  function htmlToMarkdown(element) {
+    if (!element) return '';
+    function parseNode(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        return node.nodeValue;
+      }
+      if (node.nodeType !== Node.ELEMENT_NODE) {
+        return '';
+      }
+      const tag = node.tagName.toLowerCase();
+      let inner = '';
+      node.childNodes.forEach(child => {
+        inner += parseNode(child);
+      });
+
+      switch (tag) {
+        case 'h1': return `\n\n# ${inner.trim()}\n\n`;
+        case 'h2': return `\n\n## ${inner.trim()}\n\n`;
+        case 'h3': return `\n\n### ${inner.trim()}\n\n`;
+        case 'h4': return `\n\n#### ${inner.trim()}\n\n`;
+        case 'p': return `\n\n${inner.trim()}\n\n`;
+        case 'strong':
+        case 'b': return `**${inner}**`;
+        case 'em':
+        case 'i': return `*${inner}*`;
+        case 'a':
+          const href = node.getAttribute('href') || '';
+          return `[${inner.trim()}](${href})`;
+        case 'li': return `- ${inner.trim()}\n`;
+        case 'ul':
+        case 'ol': return `\n${inner}\n`;
+        case 'blockquote': return `\n\n> ${inner.trim()}\n\n`;
+        case 'code': return `\`${inner}\``;
+        case 'br': return '\n';
+        case 'div': return `\n${inner}\n`;
+        default: return inner;
+      }
+    }
+
+    let md = '';
+    element.childNodes.forEach(child => {
+      md += parseNode(child);
+    });
+
+    return md.replace(/\n{3,}/g, '\n\n').trim();
+  }
+
+  let currentAboutEditorMode = 'visual';
+
+  function setAboutEditorMode(mode) {
+    currentAboutEditorMode = mode;
+    const btnVisual = document.getElementById('btn_mode_visual');
+    const btnSplit = document.getElementById('btn_mode_split');
+    const btnMd = document.getElementById('btn_mode_markdown');
+    const workspace = document.getElementById('aboutEditorWorkspace');
+    const visualPane = document.getElementById('about_bio_visual');
+    const mdPane = document.getElementById('about_bio_input');
+    const hint = document.getElementById('editorModeHint');
+
+    [btnVisual, btnSplit, btnMd].forEach(b => b && b.classList.remove('active'));
+
+    if (mode === 'visual') {
+      if (btnVisual) btnVisual.classList.add('active');
+      workspace.className = 'editor-workspace';
+      visualPane.style.display = 'block';
+      mdPane.style.display = 'none';
+      if (hint) hint.innerHTML = '<i class="fa-solid fa-circle-info"></i> Click text directly to edit in-place';
+    } else if (mode === 'split') {
+      if (btnSplit) btnSplit.classList.add('active');
+      workspace.className = 'editor-workspace editor-split-container';
+      visualPane.style.display = 'block';
+      mdPane.style.display = 'block';
+      if (hint) hint.innerHTML = '<i class="fa-solid fa-table-columns"></i> Side-by-side markdown & live preview';
+    } else if (mode === 'markdown') {
+      if (btnMd) btnMd.classList.add('active');
+      workspace.className = 'editor-workspace';
+      visualPane.style.display = 'none';
+      mdPane.style.display = 'block';
+      if (hint) hint.innerHTML = '<i class="fa-brands fa-markdown"></i> Direct Markdown source editor';
+    }
+  }
+
+  function execEditorFormat(cmd) {
+    const visualPane = document.getElementById('about_bio_visual');
+    const mdPane = document.getElementById('about_bio_input');
+
+    if (currentAboutEditorMode === 'visual' || (currentAboutEditorMode === 'split' && document.activeElement === visualPane)) {
+      visualPane.focus();
+      if (cmd === 'bold') document.execCommand('bold', false, null);
+      else if (cmd === 'italic') document.execCommand('italic', false, null);
+      else if (cmd === 'h2') document.execCommand('formatBlock', false, '<h2>');
+      else if (cmd === 'h3') document.execCommand('formatBlock', false, '<h3>');
+      else if (cmd === 'ul') document.execCommand('insertUnorderedList', false, null);
+      else if (cmd === 'ol') document.execCommand('insertOrderedList', false, null);
+      else if (cmd === 'quote') document.execCommand('formatBlock', false, '<blockquote>');
+      else if (cmd === 'code') {
+        const sel = window.getSelection();
+        if (sel.rangeCount > 0) {
+          const range = sel.getRangeAt(0);
+          const codeEl = document.createElement('code');
+          codeEl.textContent = range.toString() || 'code';
+          range.deleteContents();
+          range.insertNode(codeEl);
+        }
+      } else if (cmd === 'link') {
+        const url = prompt('Enter link URL (e.g. https://...):', 'https://');
+        if (url) document.execCommand('createLink', false, url);
+      }
+      onVisualBioInput();
+    } else {
+      mdPane.focus();
+      const start = mdPane.selectionStart;
+      const end = mdPane.selectionEnd;
+      const selText = mdPane.value.substring(start, end);
+      let replacement = '';
+
+      if (cmd === 'bold') replacement = `**${selText || 'bold text'}**`;
+      else if (cmd === 'italic') replacement = `*${selText || 'italic text'}*`;
+      else if (cmd === 'h2') replacement = `\n## ${selText || 'Heading 2'}\n`;
+      else if (cmd === 'h3') replacement = `\n### ${selText || 'Heading 3'}\n`;
+      else if (cmd === 'ul') replacement = `\n- ${selText || 'List item'}\n`;
+      else if (cmd === 'ol') replacement = `\n1. ${selText || 'List item'}\n`;
+      else if (cmd === 'quote') replacement = `\n> ${selText || 'Quote'}\n`;
+      else if (cmd === 'code') replacement = `\`${selText || 'code'}\``;
+      else if (cmd === 'link') {
+        const url = prompt('Enter link URL:', 'https://');
+        if (url) replacement = `[${selText || 'link text'}](${url})`;
+      }
+
+      if (replacement) {
+        mdPane.setRangeText(replacement, start, end, 'end');
+        onMarkdownBioInput(mdPane.value);
+      }
+    }
+  }
+
+  function onVisualBioInput() {
+    const visualPane = document.getElementById('about_bio_visual');
+    const mdPane = document.getElementById('about_bio_input');
+    if (!visualPane) return;
+    const md = htmlToMarkdown(visualPane);
+    if (mdPane) mdPane.value = md;
+    pendingAboutData.bio = md;
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function onMarkdownBioInput(val) {
+    pendingAboutData.bio = val;
+    const visualPane = document.getElementById('about_bio_visual');
+    if (visualPane) visualPane.innerHTML = markdownToHtml(val);
+    saveLocalPreview();
+    updateUI();
+  }
+
+  // Profile Photo Upload & Management
+  function handleAboutImageUpload(file) {
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      alert('Please upload a valid image file (PNG, JPG, JPEG, WEBP).');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      const base64 = dataUrl.split(',')[1];
+      
+      if (pendingAboutImageBlobUrl) {
+        URL.revokeObjectURL(pendingAboutImageBlobUrl);
+      }
+      pendingAboutImageBlobUrl = URL.createObjectURL(file);
+      pendingAboutImageUploadData = {
+        filename: file.name,
+        base64: base64,
+        size: file.size,
+        path: `assets/img/${file.name}`
+      };
+
+      pendingAboutData.image = file.name;
+      pendingAboutData.image_data_url = dataUrl;
+
+      // Update UI
+      const previewImg = document.getElementById('about_image_preview');
+      const fallback = document.getElementById('about_img_fallback');
+      const badge = document.getElementById('about_image_badge');
+      const filenameEl = document.getElementById('about_image_filename');
+      const stagedBox = document.getElementById('about_image_staged_status');
+
+      if (previewImg) {
+        previewImg.src = pendingAboutImageBlobUrl;
+        previewImg.style.display = 'block';
+        if (fallback) fallback.style.display = 'none';
+      }
+      if (filenameEl) filenameEl.textContent = file.name;
+      if (badge) {
+        badge.className = 'admin-badge badge-warning';
+        badge.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Staged for Upload';
+      }
+      if (stagedBox) {
+        const kb = (file.size / 1024).toFixed(1);
+        stagedBox.style.display = 'block';
+        stagedBox.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+            <div>
+              <i class="fa-solid fa-circle-check" style="color: #28a745; margin-right: 4px;"></i>
+              <strong>${file.name}</strong> (${kb} KB) ready to upload.
+            </div>
+            <button type="button" class="btn-mini" onclick="revertAboutImage()" style="padding: 2px 7px; font-size: 0.72rem;">
+              <i class="fa-solid fa-arrow-rotate-left"></i> Revert Photo
+            </button>
+          </div>
+        `;
+      }
+
+      saveLocalPreview();
+      updateUI();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function revertAboutImage() {
+    if (pendingAboutImageBlobUrl) {
+      URL.revokeObjectURL(pendingAboutImageBlobUrl);
+      pendingAboutImageBlobUrl = null;
+    }
+    pendingAboutImageUploadData = null;
+    pendingAboutData.image = liveAboutData.image;
+    delete pendingAboutData.image_data_url;
+
+    syncAboutFormInputs();
+    saveLocalPreview();
+    updateUI();
+  }
+
+  // Text Under Profile Photo (More Info) Handlers
+  function toggleMoreInfoMode() {
+    const visual = document.getElementById('about_more_info_visual');
+    const raw = document.getElementById('about_more_info_input');
+    const btn = document.getElementById('btn_more_info_mode');
+    if (!visual || !raw) return;
+
+    if (raw.style.display === 'none') {
+      raw.value = visual.innerHTML;
+      raw.style.display = 'block';
+      visual.style.display = 'none';
+      if (btn) btn.innerHTML = '<i class="fa-solid fa-pen-nib"></i> Visual Mode';
+    } else {
+      visual.innerHTML = raw.value;
+      visual.style.display = 'block';
+      raw.style.display = 'none';
+      if (btn) btn.innerHTML = '<i class="fa-brands fa-html5"></i> Edit HTML Source';
+    }
+  }
+
+  function execMoreInfoFormat(cmd) {
+    const visual = document.getElementById('about_more_info_visual');
+    if (!visual) return;
+    visual.focus();
+
+    if (cmd === 'bold') {
+      document.execCommand('bold', false, null);
+    } else if (cmd === 'italic') {
+      document.execCommand('italic', false, null);
+    } else if (cmd === 'link') {
+      const url = prompt('Enter website link URL:', 'https://');
+      if (url) document.execCommand('createLink', false, url);
+    } else if (cmd === 'mailto') {
+      const email = prompt('Enter email address:', 'natnaelbekele142[at]gmail[dot]com');
+      if (email) {
+        const clean = email.replace(/\[at\]/g, '@').replace(/\[dot\]/g, '.');
+        document.execCommand('insertHTML', false, `<a href="mailto:${clean}">${email}</a>`);
+      }
+    } else if (cmd === 'location') {
+      document.execCommand('insertHTML', false, '<i class="fa-solid fa-location-dot"></i> ');
+    } else if (cmd === 'para') {
+      document.execCommand('insertParagraph', false, null);
+    }
+    onAboutMoreInfoInput();
+  }
+
+  function onAboutMoreInfoInput() {
+    const visual = document.getElementById('about_more_info_visual');
+    const raw = document.getElementById('about_more_info_input');
+    if (!visual) return;
+    const val = visual.innerHTML;
+    if (raw) raw.value = val;
+    pendingAboutData.more_info = val;
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function onAboutMoreInfoRawInput(val) {
+    const visual = document.getElementById('about_more_info_visual');
+    if (visual) visual.innerHTML = val;
+    pendingAboutData.more_info = val;
+    saveLocalPreview();
+    updateUI();
+  }
+
+  // Bottom Social Links & Contact Note Handlers
+  function onAboutSocialToggle(checked) {
+    pendingAboutData.hide_social_icons = !checked;
+    const badge = document.getElementById('badge_about_social_icons');
+    if (badge) {
+      badge.textContent = checked ? 'Visible' : 'Hidden';
+      badge.className = 'admin-badge ' + (checked ? 'badge-success' : 'badge-warning');
+    }
+    const iconsPreview = document.getElementById('about_social_preview_icons');
+    if (iconsPreview) {
+      iconsPreview.style.opacity = checked ? '1' : '0.25';
+      iconsPreview.title = checked ? 'Icons will be visible' : 'Icons will be hidden';
+    }
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function onAboutContactNoteChange(val) {
+    pendingAboutData.contact_note = val;
+    const previewNote = document.getElementById('about_social_preview_note');
+    if (previewNote) {
+      previewNote.textContent = val || '(No contact message)';
+    }
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function syncAboutFormInputs() {
+    const subInput = document.getElementById('about_subtitle_input');
+    const bioInput = document.getElementById('about_bio_input');
+    const visualPane = document.getElementById('about_bio_visual');
+    const previewImg = document.getElementById('about_image_preview');
+    const fallback = document.getElementById('about_img_fallback');
+    const badge = document.getElementById('about_image_badge');
+    const filenameEl = document.getElementById('about_image_filename');
+    const stagedBox = document.getElementById('about_image_staged_status');
+
+    if (subInput) subInput.value = pendingAboutData.subtitle || '';
+    if (bioInput) bioInput.value = pendingAboutData.bio || '';
+    if (visualPane) visualPane.innerHTML = markdownToHtml(pendingAboutData.bio || '');
+
+    // Profile photo preview
+    if (previewImg) {
+      if (pendingAboutImageBlobUrl) {
+        previewImg.src = pendingAboutImageBlobUrl;
+        previewImg.style.display = 'block';
+        if (fallback) fallback.style.display = 'none';
+        if (badge) {
+          badge.className = 'admin-badge badge-warning';
+          badge.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Staged for Upload';
+        }
+        if (filenameEl) filenameEl.textContent = pendingAboutImageUploadData ? pendingAboutImageUploadData.filename : pendingAboutData.image;
+        if (stagedBox && pendingAboutImageUploadData) {
+          const kb = (pendingAboutImageUploadData.size / 1024).toFixed(1);
+          stagedBox.style.display = 'block';
+          stagedBox.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+              <div>
+                <i class="fa-solid fa-circle-check" style="color: #28a745; margin-right: 4px;"></i>
+                <strong>${pendingAboutImageUploadData.filename}</strong> (${kb} KB) ready to upload.
+              </div>
+              <button type="button" class="btn-mini" onclick="revertAboutImage()" style="padding: 2px 7px; font-size: 0.72rem;">
+                <i class="fa-solid fa-arrow-rotate-left"></i> Revert Photo
+              </button>
+            </div>
+          `;
+        }
+      } else {
+        const imgVal = pendingAboutData.image || 'natnael.jpg';
+        previewImg.src = imgVal.startsWith('/') || imgVal.startsWith('http') ? imgVal : `{{ '/assets/img/' | relative_url }}${imgVal}`;
+        previewImg.style.display = 'block';
+        if (fallback) fallback.style.display = 'none';
+        if (badge) {
+          badge.className = 'admin-badge badge-success';
+          badge.textContent = 'Active Photo';
+        }
+        if (filenameEl) filenameEl.textContent = imgVal;
+        if (stagedBox) stagedBox.style.display = 'none';
+      }
+    }
+
+    // Text under profile photo (more_info)
+    const moreInfoVisual = document.getElementById('about_more_info_visual');
+    const moreInfoRaw = document.getElementById('about_more_info_input');
+    const moreInfoVal = pendingAboutData.more_info || DEFAULT_ABOUT_MORE_INFO;
+    if (moreInfoVisual) moreInfoVisual.innerHTML = moreInfoVal;
+    if (moreInfoRaw) moreInfoRaw.value = moreInfoVal;
+
+    // Bottom Social Links toggle & Contact Note
+    const socialToggle = document.getElementById('toggle_about_social_icons');
+    const socialBadge = document.getElementById('badge_about_social_icons');
+    const contactNoteInput = document.getElementById('about_contact_note_input');
+    const previewIcons = document.getElementById('about_social_preview_icons');
+    const previewNote = document.getElementById('about_social_preview_note');
+
+    const isSocialVisible = !pendingAboutData.hide_social_icons;
+    if (socialToggle) socialToggle.checked = isSocialVisible;
+    if (socialBadge) {
+      socialBadge.textContent = isSocialVisible ? 'Visible' : 'Hidden';
+      socialBadge.className = 'admin-badge ' + (isSocialVisible ? 'badge-success' : 'badge-warning');
+    }
+    if (previewIcons) {
+      previewIcons.style.opacity = isSocialVisible ? '1' : '0.25';
+      previewIcons.title = isSocialVisible ? 'Icons will be visible' : 'Icons will be hidden';
+    }
+
+    const noteVal = pendingAboutData.contact_note !== undefined ? pendingAboutData.contact_note : DEFAULT_CONTACT_NOTE;
+    if (contactNoteInput) contactNoteInput.value = noteVal;
+    if (previewNote) previewNote.textContent = noteVal;
+  }
+
+  function onAboutFieldChange(field, val) {
+    if (field === 'subtitle') pendingAboutData.subtitle = val;
+    else if (field === 'bio') {
+      pendingAboutData.bio = val;
+      const visualPane = document.getElementById('about_bio_visual');
+      if (visualPane) visualPane.innerHTML = markdownToHtml(val);
+    }
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function onCvPdfChange(val) {
+    pendingCvPdf = val.trim();
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function switchCvMode(mode) {
+    const btnContent = document.getElementById('btn_cv_mode_content');
+    const btnVis = document.getElementById('btn_cv_mode_vis');
+    const panelContent = document.getElementById('cv_content_editor_panel');
+    const panelVis = document.getElementById('cv_visibility_panel');
+
+    if (mode === 'content') {
+      if (btnContent) btnContent.classList.add('active');
+      if (btnVis) btnVis.classList.remove('active');
+      if (panelContent) panelContent.style.display = 'block';
+      if (panelVis) panelVis.style.display = 'none';
+    } else {
+      if (btnContent) btnContent.classList.remove('active');
+      if (btnVis) btnVis.classList.add('active');
+      if (panelContent) panelContent.style.display = 'none';
+      if (panelVis) panelVis.style.display = 'block';
+    }
+  }
+
+  function escapeHtml(text) {
+    if (!text) return '';
+    return String(text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function getPdfPreviewUrl() {
+    if (pendingCvPdfBlobUrl) return pendingCvPdfBlobUrl;
+    const base = '{{ site.baseurl }}' || '';
+    const cleanPath = (pendingCvPdf || 'assets/pdf/Natnael_Bekele_Haile_CV.pdf').replace(/^\/+/, '');
+    return `${base}/${cleanPath}`;
+  }
+
+  function handleCvPdfUpload(file) {
+    if (!file) return;
+    if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
+      alert('Please select a valid PDF document (.pdf)');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      const base64 = dataUrl.split(',')[1];
+      const targetPath = 'assets/pdf/' + file.name;
+      pendingCvPdfBlobUrl = URL.createObjectURL(file);
+      pendingCvPdf = targetPath;
+      pendingCvPdfUploadData = {
+        filename: file.name,
+        base64: base64,
+        base64Content: base64,
+        size: file.size,
+        path: targetPath
+      };
+
+      const pathDisplay = document.getElementById('cv_pdf_display_path');
+      if (pathDisplay) pathDisplay.textContent = targetPath;
+      const pdfInput = document.getElementById('cv_pdf_input');
+      if (pdfInput) pdfInput.value = targetPath;
+      const viewBtn = document.getElementById('cv_pdf_view_btn');
+      if (viewBtn) {
+        viewBtn.href = pendingCvPdfBlobUrl;
+        viewBtn.innerHTML = '<i class="fa-solid fa-arrow-up-right-from-square"></i> Preview Selected PDF in New Tab';
+      }
+      const stagedStatus = document.getElementById('cv_pdf_staged_status');
+      if (stagedStatus) {
+        stagedStatus.style.display = 'block';
+        stagedStatus.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+            <div>
+              <i class="fa-solid fa-circle-check" style="color: #28a745; margin-right: 4px;"></i>
+              Staged new PDF: <strong>${escapeHtml(file.name)}</strong> (${(file.size / 1024).toFixed(1)} KB)
+            </div>
+            <span class="admin-badge badge-warning" style="font-size: 0.7rem;">Ready to Deploy</span>
+          </div>
+          <div style="font-size: 0.72rem; color: var(--global-text-color-light); margin-top: 3px;">
+            Target path: <code>${escapeHtml(targetPath)}</code>. Will be committed to GitHub and synced with CV page when you click Save & Deploy.
+          </div>
+        `;
+      }
+
+      saveLocalPreview();
+      updateUI();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function onCvPdfPathInput(val) {
+    pendingCvPdf = val.trim();
+    const pathDisplay = document.getElementById('cv_pdf_display_path');
+    if (pathDisplay) pathDisplay.textContent = pendingCvPdf || 'assets/pdf/Natnael_Bekele_Haile_CV.pdf';
+    const viewBtn = document.getElementById('cv_pdf_view_btn');
+    if (viewBtn) {
+      viewBtn.href = getPdfPreviewUrl();
+    }
+    saveLocalPreview();
+    updateUI();
+  }
+
+  // --- Rich Bullet Points Formatting Helpers ---
+  function inlineMarkdownToHtml(md) {
+    if (!md) return '';
+    let html = escapeHtml(md);
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
+    html = html.replace(/(^|[^\*])\*(?!\*)([^\*]+)\*(?!\*)/g, '$1<em>$2</em>');
+    html = html.replace(/(^|[^_])_(?!_)([^_]+)_(?!_)/g, '$1<em>$2</em>');
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    return html;
+  }
+
+  function inlineHtmlToMarkdown(html) {
+    if (!html) return '';
+    let temp = document.createElement('div');
+    temp.innerHTML = html;
+
+    function walk(node) {
+      if (node.nodeType === Node.TEXT_NODE) return node.nodeValue || '';
+      if (node.nodeType !== Node.ELEMENT_NODE) return '';
+      const tag = node.tagName.toLowerCase();
+      let inner = '';
+      node.childNodes.forEach(child => { inner += walk(child); });
+      if (tag === 'b' || tag === 'strong') return `**${inner}**`;
+      if (tag === 'i' || tag === 'em') return `*${inner}*`;
+      if (tag === 'code') return `\`${inner}\``;
+      if (tag === 'a') {
+        const href = node.getAttribute('href') || '';
+        return `[${inner}](${href})`;
+      }
+      if (tag === 'br') return '\n';
+      if (tag === 'div' || tag === 'p') return inner ? inner + '\n' : '';
+      return inner;
+    }
+
+    return walk(temp).trim();
+  }
+
+  function updateCvBulletData(sec, itemIdx, bulletIdx, htmlContent) {
+    if (!pendingCvData[sec] || !pendingCvData[sec][itemIdx]) return;
+    if (!pendingCvData[sec][itemIdx].highlights) pendingCvData[sec][itemIdx].highlights = [];
+    const md = inlineHtmlToMarkdown(htmlContent);
+    pendingCvData[sec][itemIdx].highlights[bulletIdx] = md;
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function onBulletBlur(el) {
+    const sec = el.getAttribute('data-sec');
+    const itemIdx = parseInt(el.getAttribute('data-item-idx'), 10);
+    const bulletIdx = parseInt(el.getAttribute('data-bullet-idx'), 10);
+    updateCvBulletData(sec, itemIdx, bulletIdx, el.innerHTML);
+  }
+
+  function onBulletKeyDown(event, el) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      const sec = el.getAttribute('data-sec');
+      const itemIdx = parseInt(el.getAttribute('data-item-idx'), 10);
+      const bulletIdx = parseInt(el.getAttribute('data-bullet-idx'), 10);
+      updateCvBulletData(sec, itemIdx, bulletIdx, el.innerHTML);
+      addCvBullet(sec, itemIdx, bulletIdx + 1);
+    }
+  }
+
+  function applyBulletFormat(cmd, sec, itemIdx, bulletIdx) {
+    const el = document.getElementById(`bullet_content_${sec}_${itemIdx}_${bulletIdx}`);
+    if (!el) return;
+    el.focus();
+    if (cmd === 'bold') {
+      document.execCommand('bold', false, null);
+    } else if (cmd === 'italic') {
+      document.execCommand('italic', false, null);
+    } else if (cmd === 'code') {
+      const sel = window.getSelection();
+      if (sel && sel.rangeCount > 0 && !sel.isCollapsed) {
+        const range = sel.getRangeAt(0);
+        const code = document.createElement('code');
+        code.appendChild(range.extractContents());
+        range.insertNode(code);
+      }
+    } else if (cmd === 'link') {
+      const url = prompt('Enter link URL (e.g. https://github.com/...):');
+      if (url) {
+        document.execCommand('createLink', false, url);
+      }
+    }
+    updateCvBulletData(sec, itemIdx, bulletIdx, el.innerHTML);
+  }
+
+  function addCvBullet(sec, itemIdx, insertAt = -1) {
+    if (!pendingCvData[sec] || !pendingCvData[sec][itemIdx]) return;
+    if (!pendingCvData[sec][itemIdx].highlights) pendingCvData[sec][itemIdx].highlights = [];
+    const list = pendingCvData[sec][itemIdx].highlights;
+    if (insertAt >= 0 && insertAt <= list.length) {
+      list.splice(insertAt, 0, 'New highlight or accomplishment');
+    } else {
+      list.push('New highlight or accomplishment');
+    }
+    renderCvEditor(pendingCvData);
+    saveLocalPreview();
+    updateUI();
+
+    const targetIdx = (insertAt >= 0 && insertAt <= list.length) ? insertAt : list.length - 1;
+    setTimeout(() => {
+      const newEl = document.getElementById(`bullet_content_${sec}_${itemIdx}_${targetIdx}`);
+      if (newEl) {
+        newEl.focus();
+        document.execCommand('selectAll', false, null);
+      }
+    }, 60);
+  }
+
+  function removeCvBullet(sec, itemIdx, bulletIdx) {
+    if (!pendingCvData[sec] || !pendingCvData[sec][itemIdx] || !pendingCvData[sec][itemIdx].highlights) return;
+    pendingCvData[sec][itemIdx].highlights.splice(bulletIdx, 1);
+    renderCvEditor(pendingCvData);
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function renderRichBulletList(sec, itemIdx, highlights) {
+    const list = Array.isArray(highlights) ? highlights : [];
+    let bulletsHtml = list.map((b, bIdx) => `
+      <div class="rich-bullet-item" id="bullet_row_${sec}_${itemIdx}_${bIdx}">
+        <div class="rich-bullet-marker"><i class="fa-solid fa-circle" style="font-size: 0.35rem; color: var(--global-theme-color);"></i></div>
+        <div class="rich-bullet-content"
+             id="bullet_content_${sec}_${itemIdx}_${bIdx}"
+             contenteditable="true"
+             data-sec="${sec}"
+             data-item-idx="${itemIdx}"
+             data-bullet-idx="${bIdx}"
+             placeholder="Describe accomplishment or detail..."
+             onblur="onBulletBlur(this)"
+             onkeydown="onBulletKeyDown(event, this)">${inlineMarkdownToHtml(b)}</div>
+        <div class="rich-bullet-actions">
+          <button type="button" class="btn-bullet-tool" title="Bold (Ctrl+B)" onmousedown="event.preventDefault(); applyBulletFormat('bold', '${sec}', ${itemIdx}, ${bIdx})">
+            <i class="fa-solid fa-bold"></i>
+          </button>
+          <button type="button" class="btn-bullet-tool" title="Italic (Ctrl+I)" onmousedown="event.preventDefault(); applyBulletFormat('italic', '${sec}', ${itemIdx}, ${bIdx})">
+            <i class="fa-solid fa-italic"></i>
+          </button>
+          <button type="button" class="btn-bullet-tool" title="Code" onmousedown="event.preventDefault(); applyBulletFormat('code', '${sec}', ${itemIdx}, ${bIdx})">
+            <i class="fa-solid fa-code"></i>
+          </button>
+          <button type="button" class="btn-bullet-tool" title="Link" onmousedown="event.preventDefault(); applyBulletFormat('link', '${sec}', ${itemIdx}, ${bIdx})">
+            <i class="fa-solid fa-link"></i>
+          </button>
+          <button type="button" class="btn-bullet-tool btn-bullet-del" title="Delete bullet" onclick="removeCvBullet('${sec}', ${itemIdx}, ${bIdx})">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </div>
+      </div>
+    `).join('');
+
+    return `
+      <div class="rich-bullet-container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <span class="cv-micro-label" style="margin: 0;"><i class="fa-solid fa-list-ul"></i> Bullet Points / Highlights (Rich Text)</span>
+          <span style="font-size: 0.7rem; color: var(--global-text-color-light);">Press Enter for new bullet</span>
+        </div>
+        ${bulletsHtml || '<div style="font-size: 0.78rem; color: var(--global-text-color-light); font-style: italic; padding: 4px 2px;">No bullet points yet. Click below to add one.</div>'}
+        <button type="button" class="btn-mini" style="margin-top: 6px; padding: 2px 8px; font-size: 0.72rem; border-radius: 4px;" onclick="addCvBullet('${sec}', ${itemIdx})">
+          <i class="fa-solid fa-plus"></i> Add Bullet Point
+        </button>
+      </div>
+    `;
+  }
+
+  function onCvMonthYearChange(section, idx, field, val) {
+    if (!pendingCvData[section] || !pendingCvData[section][idx]) return;
+    const formatted = formatMonthYearDisplay(val);
+    pendingCvData[section][idx][field] = formatted;
+    // Keep aliases synced
+    if (field === 'start_date') pendingCvData[section][idx].startDate = formatted;
+    if (field === 'startDate') pendingCvData[section][idx].start_date = formatted;
+    if (field === 'end_date') pendingCvData[section][idx].endDate = formatted;
+    if (field === 'endDate') pendingCvData[section][idx].end_date = formatted;
+
+    // Update live badge text if element exists
+    const badgeEl = document.getElementById(`${section}_date_badge_${idx}`);
+    if (badgeEl) {
+      const s = pendingCvData[section][idx].start_date || pendingCvData[section][idx].startDate || '';
+      const en = pendingCvData[section][idx].end_date || pendingCvData[section][idx].endDate || '';
+      badgeEl.textContent = (s && en) ? `${s} — ${en}` : (s || en || 'Dates');
+    }
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function renderCvEditor(cvData) {
+    if (!cvData) return;
+
+    // 1. Header inputs
+    const titleInput = document.getElementById('cv_label_input');
+    const summaryInput = document.getElementById('cv_summary_input');
+    const pdfInput = document.getElementById('cv_pdf_input');
+    const pathDisplay = document.getElementById('cv_pdf_display_path');
+    const viewBtn = document.getElementById('cv_pdf_view_btn');
+
+    if (titleInput) titleInput.value = cvData.label || '';
+    if (summaryInput) summaryInput.value = cvData.summaryText || '';
+    if (pdfInput) pdfInput.value = pendingCvPdf || '';
+    if (pathDisplay) pathDisplay.textContent = pendingCvPdf || 'assets/pdf/Natnael_Bekele_Haile_CV.pdf';
+    if (viewBtn) {
+      viewBtn.href = getPdfPreviewUrl();
+      if (pendingCvPdfBlobUrl) {
+        viewBtn.innerHTML = '<i class="fa-solid fa-arrow-up-right-from-square"></i> Preview Selected PDF in New Tab';
+      } else {
+        viewBtn.innerHTML = '<i class="fa-solid fa-arrow-up-right-from-square"></i> Open Current PDF in New Tab';
+      }
+    }
+
+    // 2. Render Work Experience (Exact CV page layout: Title -> Company -> Italic Summary -> Bullets)
+    const expContainer = document.getElementById('cv_experience_editor_container');
+    if (expContainer) {
+      expContainer.innerHTML = '';
+      (cvData.experience || []).forEach((exp, idx) => {
+        const div = document.createElement('div');
+        div.className = 'cv-card-item';
+        const sDate = formatMonthYearDisplay(exp.start_date || exp.startDate || '');
+        const eDate = formatMonthYearDisplay(exp.end_date || exp.endDate || '');
+        const dateRangeDisplay = (sDate && eDate) ? `${sDate} — ${eDate}` : (sDate || eDate || 'Dates');
+
+        div.innerHTML = `
+          <div class="cv-card-header">
+            <div class="cv-card-title-preview">
+              <i class="fa-solid fa-briefcase" style="color: var(--global-theme-color);"></i>
+              <span>${escapeHtml(exp.position || 'Role ' + (idx + 1))}</span>
+              <span style="font-weight: 400; opacity: 0.65;">at</span>
+              <span style="color: var(--global-theme-color);">${escapeHtml(exp.company || 'Company')}</span>
+            </div>
+            <button type="button" class="btn-danger-subtle" onclick="removeCvExperience(${idx})" title="Remove this role">
+              <i class="fa-solid fa-trash-can"></i> Delete
+            </button>
+          </div>
+
+          <div class="cv-entry-grid">
+            <!-- Left Meta Column (Badge, Dates & Location) -->
+            <div class="cv-entry-meta-col">
+              <span class="cv-micro-label">Timeline & Location</span>
+              <div style="margin-bottom: 8px;">
+                <span class="admin-badge badge-warning" id="experience_date_badge_${idx}" style="font-size: 0.72rem; display: block; text-align: center; margin-bottom: 8px; font-weight: 700;">
+                  ${escapeHtml(dateRangeDisplay)}
+                </span>
+              </div>
+              <div class="admin-form-group" style="margin-bottom: 6px;">
+                <label class="cv-micro-label">Start Date (Month/Year)</label>
+                <input type="text" class="admin-input admin-input-sm" placeholder="e.g. 2024-10" value="${escapeHtml(sDate)}" oninput="onCvMonthYearChange('experience', ${idx}, 'start_date', this.value)" />
+              </div>
+              <div class="admin-form-group" style="margin-bottom: 6px;">
+                <label class="cv-micro-label">End Date (Month/Year)</label>
+                <input type="text" class="admin-input admin-input-sm" placeholder="e.g. Present" value="${escapeHtml(eDate)}" oninput="onCvMonthYearChange('experience', ${idx}, 'end_date', this.value)" />
+              </div>
+              <div class="admin-form-group" style="margin-bottom: 0;">
+                <label class="cv-micro-label"><i class="fa-solid fa-location-dot"></i> Location</label>
+                <input type="text" class="admin-input admin-input-sm" placeholder="e.g. London, UK" value="${escapeHtml(exp.location || '')}" oninput="onCvItemFieldChange('experience', ${idx}, 'location', this.value)" />
+              </div>
+            </div>
+
+            <!-- Right Main Column (Title -> Company -> Summary -> Rich Bullets) -->
+            <div class="cv-entry-main-col">
+              <div class="admin-form-group" style="margin-bottom: 4px;">
+                <label class="cv-micro-label">Job Title / Position</label>
+                <input type="text" class="admin-input cv-job-title-input" placeholder="e.g. Fullstack Developer (Remote)" value="${escapeHtml(exp.position || '')}" oninput="onCvItemFieldChange('experience', ${idx}, 'position', this.value)" />
+              </div>
+
+              <div class="admin-form-group" style="margin-bottom: 4px;">
+                <label class="cv-micro-label">Company / Organization</label>
+                <input type="text" class="admin-input cv-company-input" placeholder="e.g. Vula" value="${escapeHtml(exp.company || '')}" oninput="onCvItemFieldChange('experience', ${idx}, 'company', this.value)" />
+              </div>
+
+              <div class="admin-form-group" style="margin-bottom: 8px;">
+                <label class="cv-micro-label">One-Line Summary / Description (Italic on CV)</label>
+                <input type="text" class="admin-input cv-summary-input" placeholder="e.g. Engineering end-to-end investment management and portfolio tracking platforms." value="${escapeHtml(exp.summary || '')}" oninput="onCvItemFieldChange('experience', ${idx}, 'summary', this.value)" />
+              </div>
+
+              ${renderRichBulletList('experience', idx, exp.highlights)}
+            </div>
+          </div>
+        `;
+        expContainer.appendChild(div);
+      });
+    }
+
+    // 3. Render Education (Degree -> Institution -> Area -> Bullets)
+    const eduContainer = document.getElementById('cv_education_editor_container');
+    if (eduContainer) {
+      eduContainer.innerHTML = '';
+      (cvData.education || []).forEach((edu, idx) => {
+        const div = document.createElement('div');
+        div.className = 'cv-card-item';
+        const sDate = formatMonthYearDisplay(edu.start_date || edu.startDate || '');
+        const eDate = formatMonthYearDisplay(edu.end_date || edu.endDate || '');
+        const dateRangeDisplay = (sDate && eDate) ? `${sDate} — ${eDate}` : (sDate || eDate || 'Dates');
+
+        div.innerHTML = `
+          <div class="cv-card-header">
+            <div class="cv-card-title-preview">
+              <i class="fa-solid fa-graduation-cap" style="color: var(--global-theme-color);"></i>
+              <span>${escapeHtml(edu.studyType || 'Degree ' + (idx + 1))}</span>
+              <span style="font-weight: 400; opacity: 0.65;">at</span>
+              <span style="color: var(--global-theme-color);">${escapeHtml(edu.institution || 'University')}</span>
+            </div>
+            <button type="button" class="btn-danger-subtle" onclick="removeCvEducation(${idx})" title="Remove education">
+              <i class="fa-solid fa-trash-can"></i> Delete
+            </button>
+          </div>
+
+          <div class="cv-entry-grid">
+            <div class="cv-entry-meta-col">
+              <span class="cv-micro-label">Timeline & Location</span>
+              <span class="admin-badge badge-warning" id="education_date_badge_${idx}" style="font-size: 0.72rem; display: block; text-align: center; margin-bottom: 8px; font-weight: 700;">
+                ${escapeHtml(dateRangeDisplay)}
+              </span>
+              <div class="admin-form-group" style="margin-bottom: 6px;">
+                <label class="cv-micro-label">Start Year / Date</label>
+                <input type="text" class="admin-input admin-input-sm" placeholder="e.g. 2018" value="${escapeHtml(sDate)}" oninput="onCvMonthYearChange('education', ${idx}, 'start_date', this.value)" />
+              </div>
+              <div class="admin-form-group" style="margin-bottom: 6px;">
+                <label class="cv-micro-label">End Year / Date</label>
+                <input type="text" class="admin-input admin-input-sm" placeholder="e.g. 2023" value="${escapeHtml(eDate)}" oninput="onCvMonthYearChange('education', ${idx}, 'end_date', this.value)" />
+              </div>
+              <div class="admin-form-group" style="margin-bottom: 0;">
+                <label class="cv-micro-label"><i class="fa-solid fa-location-dot"></i> Location</label>
+                <input type="text" class="admin-input admin-input-sm" placeholder="e.g. Addis Ababa, Ethiopia" value="${escapeHtml(edu.location || '')}" oninput="onCvItemFieldChange('education', ${idx}, 'location', this.value)" />
+              </div>
+            </div>
+
+            <div class="cv-entry-main-col">
+              <div class="admin-form-group" style="margin-bottom: 4px;">
+                <label class="cv-micro-label">Degree / Study Type</label>
+                <input type="text" class="admin-input cv-job-title-input" placeholder="e.g. Bachelor of Science (B.Sc.)" value="${escapeHtml(edu.studyType || '')}" oninput="onCvItemFieldChange('education', ${idx}, 'studyType', this.value)" />
+              </div>
+              <div class="admin-form-group" style="margin-bottom: 4px;">
+                <label class="cv-micro-label">Institution / University</label>
+                <input type="text" class="admin-input cv-company-input" placeholder="e.g. Addis Ababa University" value="${escapeHtml(edu.institution || '')}" oninput="onCvItemFieldChange('education', ${idx}, 'institution', this.value)" />
+              </div>
+              <div class="admin-form-group" style="margin-bottom: 8px;">
+                <label class="cv-micro-label">Area / Major / Department</label>
+                <input type="text" class="admin-input" placeholder="e.g. Electrical & Computer Engineering" value="${escapeHtml(edu.area || '')}" oninput="onCvItemFieldChange('education', ${idx}, 'area', this.value)" />
+              </div>
+
+              ${renderRichBulletList('education', idx, edu.highlights)}
+            </div>
+          </div>
+        `;
+        eduContainer.appendChild(div);
+      });
+    }
+
+    // 4. Render Skills (Renamed from Skills & Keywords; Exact CV Layout)
+    const skillsContainer = document.getElementById('cv_skills_editor_container');
+    if (skillsContainer) {
+      skillsContainer.innerHTML = '';
+      (cvData.skills || []).forEach((sk, idx) => {
+        const div = document.createElement('div');
+        div.className = 'cv-card-item';
+        let kwVal = sk.keywords;
+        if (Array.isArray(kwVal)) kwVal = kwVal.join(', ');
+        else if (typeof kwVal !== 'string') kwVal = '';
+
+        div.innerHTML = `
+          <div class="cv-card-header">
+            <div class="cv-card-title-preview">
+              <i class="${escapeHtml(sk.icon || 'fa-solid fa-code')}" style="color: var(--global-theme-color);"></i>
+              <span>${escapeHtml(sk.name || 'Skill Category ' + (idx + 1))}</span>
+              <span class="admin-badge badge-info" style="font-size: 0.68rem;">${escapeHtml(sk.level || 'Advanced')}</span>
+            </div>
+            <button type="button" class="btn-danger-subtle" onclick="removeCvSkill(${idx})" title="Remove skill category">
+              <i class="fa-solid fa-trash-can"></i> Delete
+            </button>
+          </div>
+
+          <div class="form-row-3" style="margin-bottom: 8px;">
+            <div class="admin-form-group" style="margin-bottom: 0;">
+              <label class="cv-micro-label">Category Name</label>
+              <input type="text" class="admin-input cv-job-title-input" placeholder="e.g. Programming Languages" value="${escapeHtml(sk.name || '')}" oninput="onCvItemFieldChange('skills', ${idx}, 'name', this.value)" />
+            </div>
+            <div class="admin-form-group" style="margin-bottom: 0;">
+              <label class="cv-micro-label">Proficiency Level</label>
+              <input type="text" class="admin-input" placeholder="e.g. Advanced" value="${escapeHtml(sk.level || 'Advanced')}" oninput="onCvItemFieldChange('skills', ${idx}, 'level', this.value)" />
+            </div>
+            <div class="admin-form-group" style="margin-bottom: 0;">
+              <label class="cv-micro-label">FontAwesome Icon</label>
+              <input type="text" class="admin-input" placeholder="e.g. fa-solid fa-code" value="${escapeHtml(sk.icon || 'fa-solid fa-code')}" oninput="onCvItemFieldChange('skills', ${idx}, 'icon', this.value)" />
+            </div>
+          </div>
+
+          <div class="admin-form-group" style="margin-bottom: 6px;">
+            <label class="cv-micro-label">Keywords / Technologies (Comma-Separated)</label>
+            <input type="text" class="admin-input" placeholder="e.g. Python, TypeScript, Go, Ruby, C++" value="${escapeHtml(kwVal)}" oninput="onCvSkillsKeywordsChange(${idx}, this.value)" />
+          </div>
+
+          <div style="font-size: 0.8rem; padding: 6px 10px; background: var(--global-bg-color, rgba(0,0,0,0.02)); border: 1px solid var(--global-divider-color, rgba(0,0,0,0.08)); border-radius: 6px; display: flex; align-items: center; gap: 8px;">
+            <span class="cv-micro-label" style="margin: 0;">CV Display:</span>
+            <span><i class="${escapeHtml(sk.icon || 'fa-solid fa-code')}"></i> <strong>${escapeHtml(sk.name || 'Category')} (${escapeHtml(sk.level || 'Advanced')}):</strong> <span style="color: var(--global-text-color-light);">${escapeHtml(kwVal || 'None')}</span></span>
+          </div>
+        `;
+        skillsContainer.appendChild(div);
+      });
+    }
+
+    // 5. Render Honors & Awards (Date badge -> Title -> Awarder -> Summary)
+    const awardsContainer = document.getElementById('cv_awards_editor_container');
+    if (awardsContainer) {
+      awardsContainer.innerHTML = '';
+      (cvData.awards || []).forEach((aw, idx) => {
+        const div = document.createElement('div');
+        div.className = 'cv-card-item';
+        div.innerHTML = `
+          <div class="cv-card-header">
+            <div class="cv-card-title-preview">
+              <i class="fa-solid fa-trophy" style="color: var(--global-theme-color);"></i>
+              <span>${escapeHtml(aw.title || 'Award ' + (idx + 1))}</span>
+              <span class="admin-badge badge-warning" style="font-size: 0.68rem;">${escapeHtml(String(aw.date || ''))}</span>
+            </div>
+            <button type="button" class="btn-danger-subtle" onclick="removeCvAward(${idx})" title="Remove award">
+              <i class="fa-solid fa-trash-can"></i> Delete
+            </button>
+          </div>
+
+          <div class="cv-entry-grid">
+            <div class="cv-entry-meta-col">
+              <span class="cv-micro-label">Award Year / Date</span>
+              <span class="admin-badge badge-warning" style="font-size: 0.72rem; display: block; text-align: center; margin-bottom: 8px; font-weight: 700;">
+                ${escapeHtml(String(aw.date || 'Year'))}
+              </span>
+              <input type="text" class="admin-input admin-input-sm" placeholder="e.g. 2018" value="${escapeHtml(String(aw.date || ''))}" oninput="onCvItemFieldChange('awards', ${idx}, 'date', this.value)" />
+            </div>
+
+            <div class="cv-entry-main-col">
+              <div class="admin-form-group" style="margin-bottom: 4px;">
+                <label class="cv-micro-label">Award Title</label>
+                <input type="text" class="admin-input cv-job-title-input" placeholder="e.g. Top 100 Students - National University Entrance Exam" value="${escapeHtml(aw.title || '')}" oninput="onCvItemFieldChange('awards', ${idx}, 'title', this.value)" />
+              </div>
+              <div class="admin-form-group" style="margin-bottom: 4px;">
+                <label class="cv-micro-label">Awarder / Organization</label>
+                <input type="text" class="admin-input cv-company-input" placeholder="e.g. National Educational Assessment and Examinations Agency (NEAEA), Ethiopia" value="${escapeHtml(aw.awarder || '')}" oninput="onCvItemFieldChange('awards', ${idx}, 'awarder', this.value)" />
+              </div>
+              <div class="admin-form-group" style="margin-bottom: 0;">
+                <label class="cv-micro-label">Summary / Description</label>
+                <input type="text" class="admin-input cv-summary-input" placeholder="e.g. Ranked among the top 100 students nationwide..." value="${escapeHtml(aw.summary || '')}" oninput="onCvItemFieldChange('awards', ${idx}, 'summary', this.value)" />
+              </div>
+            </div>
+          </div>
+        `;
+        awardsContainer.appendChild(div);
+      });
+    }
+
+    // 6. Render Projects & Highlights (Title + Link -> Summary -> Rich Bullets)
+    const projectsContainer = document.getElementById('cv_projects_editor_container');
+    if (projectsContainer) {
+      projectsContainer.innerHTML = '';
+      (cvData.projects || []).forEach((pj, idx) => {
+        const div = document.createElement('div');
+        div.className = 'cv-card-item';
+        div.innerHTML = `
+          <div class="cv-card-header">
+            <div class="cv-card-title-preview">
+              <i class="fa-solid fa-diagram-project" style="color: var(--global-theme-color);"></i>
+              <span>${escapeHtml(pj.name || 'Project ' + (idx + 1))}</span>
+              ${pj.url ? `<a href="${escapeHtml(pj.url)}" target="_blank" style="font-size: 0.72rem; margin-left: 6px; color: var(--global-theme-color);"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : ''}
+            </div>
+            <button type="button" class="btn-danger-subtle" onclick="removeCvProject(${idx})" title="Remove project">
+              <i class="fa-solid fa-trash-can"></i> Delete
+            </button>
+          </div>
+
+          <div class="form-row-2" style="margin-bottom: 6px;">
+            <div class="admin-form-group" style="margin-bottom: 0;">
+              <label class="cv-micro-label">Project Name</label>
+              <input type="text" class="admin-input cv-job-title-input" placeholder="e.g. The Geometry of Dormant Defection" value="${escapeHtml(pj.name || '')}" oninput="onCvItemFieldChange('projects', ${idx}, 'name', this.value)" />
+            </div>
+            <div class="admin-form-group" style="margin-bottom: 0;">
+              <label class="cv-micro-label">Repository / Project URL</label>
+              <input type="text" class="admin-input" placeholder="e.g. https://github.com/nathyBekele/..." value="${escapeHtml(pj.url || '')}" oninput="onCvItemFieldChange('projects', ${idx}, 'url', this.value)" />
+            </div>
+          </div>
+
+          <div class="admin-form-group" style="margin-bottom: 8px;">
+            <label class="cv-micro-label">Description / Summary (Markdown / HTML links allowed)</label>
+            <textarea class="admin-textarea" rows="2" placeholder="Summary paragraph describing the project..." oninput="onCvItemFieldChange('projects', ${idx}, 'summary', this.value)">${escapeHtml(pj.summary || '')}</textarea>
+          </div>
+
+          ${renderRichBulletList('projects', idx, pj.highlights)}
+        `;
+        projectsContainer.appendChild(div);
+      });
+    }
+
+    // 7. Render References (Exact CV Layout: Strong Name -> Reference details)
+    const refContainer = document.getElementById('cv_references_editor_container');
+    if (refContainer) {
+      refContainer.innerHTML = '';
+      (cvData.references || []).forEach((rf, idx) => {
+        const div = document.createElement('div');
+        div.className = 'cv-card-item';
+        div.innerHTML = `
+          <div class="cv-card-header">
+            <div class="cv-card-title-preview">
+              <i class="fa-solid fa-user-check" style="color: var(--global-theme-color);"></i>
+              <strong>${escapeHtml(rf.name || 'Reference ' + (idx + 1))}</strong>
+            </div>
+            <button type="button" class="btn-danger-subtle" onclick="removeCvReference(${idx})" title="Remove reference">
+              <i class="fa-solid fa-trash-can"></i> Delete
+            </button>
+          </div>
+          <div class="admin-form-group" style="margin-bottom: 6px;">
+            <label class="cv-micro-label">Full Name & Title</label>
+            <input type="text" class="admin-input cv-job-title-input" placeholder="e.g. Prof. Jelani Nelson" value="${escapeHtml(rf.name || '')}" oninput="onCvItemFieldChange('references', ${idx}, 'name', this.value)" />
+          </div>
+          <div class="admin-form-group" style="margin-bottom: 0;">
+            <label class="cv-micro-label">Reference Title / Organization / Contact Details</label>
+            <textarea class="admin-textarea" rows="2" placeholder="e.g. Professor and Department Chair, EECS at UC Berkeley; Founder of AddisCoder." oninput="onCvItemFieldChange('references', ${idx}, 'reference', this.value)">${escapeHtml(rf.reference || '')}</textarea>
+          </div>
+        `;
+        refContainer.appendChild(div);
+      });
+    }
+  }
+
+  // --- CV Form Change Handlers ---
+  function onCvFieldChange(field, val) {
+    if (field === 'label') pendingCvData.label = val;
+    else if (field === 'summaryText') pendingCvData.summaryText = val;
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function onCvItemFieldChange(section, idx, field, val) {
+    if (!pendingCvData[section] || !pendingCvData[section][idx]) return;
+    pendingCvData[section][idx][field] = val;
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function onCvSkillsKeywordsChange(idx, val) {
+    if (!pendingCvData.skills || !pendingCvData.skills[idx]) return;
+    pendingCvData.skills[idx].keywords = val;
+    saveLocalPreview();
+    updateUI();
+  }
+
+  // --- Add & Remove Handlers for All CV Sections ---
+  function addCvExperience() {
+    if (!pendingCvData.experience) pendingCvData.experience = [];
+    pendingCvData.experience.unshift({
+      company: 'New Company',
+      position: 'Role / Title',
+      location: 'Remote',
+      start_date: '2024-10',
+      end_date: 'Present',
+      startDate: '2024-10',
+      endDate: 'Present',
+      summary: 'Engineering high-impact solutions.',
+      highlights: ['Key accomplishment or feature engineered.']
+    });
+    renderCvEditor(pendingCvData);
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function removeCvExperience(idx) {
+    if (!pendingCvData.experience) return;
+    if (confirm(`Are you sure you want to remove role "${pendingCvData.experience[idx]?.position || ''}" at "${pendingCvData.experience[idx]?.company || ''}"?`)) {
+      pendingCvData.experience.splice(idx, 1);
+      renderCvEditor(pendingCvData);
+      saveLocalPreview();
+      updateUI();
+    }
+  }
+
+  function addCvEducation() {
+    if (!pendingCvData.education) pendingCvData.education = [];
+    pendingCvData.education.unshift({
+      institution: 'University / Institution',
+      studyType: 'Degree (e.g. B.Sc.)',
+      area: 'Field of Study',
+      location: 'City, Country',
+      start_date: '2020',
+      end_date: '2024',
+      startDate: '2020',
+      endDate: '2024',
+      highlights: ['Honors, thesis, or coursework']
+    });
+    renderCvEditor(pendingCvData);
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function removeCvEducation(idx) {
+    if (!pendingCvData.education) return;
+    if (confirm(`Are you sure you want to remove education item "${pendingCvData.education[idx]?.institution || ''}"?`)) {
+      pendingCvData.education.splice(idx, 1);
+      renderCvEditor(pendingCvData);
+      saveLocalPreview();
+      updateUI();
+    }
+  }
+
+  function addCvSkill() {
+    if (!pendingCvData.skills) pendingCvData.skills = [];
+    pendingCvData.skills.push({
+      name: 'New Skill Category',
+      level: 'Advanced',
+      icon: 'fa-solid fa-layer-group',
+      keywords: 'Tool1, Tool2, Tool3'
+    });
+    renderCvEditor(pendingCvData);
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function removeCvSkill(idx) {
+    if (!pendingCvData.skills) return;
+    if (confirm(`Are you sure you want to remove skill category "${pendingCvData.skills[idx]?.name || ''}"?`)) {
+      pendingCvData.skills.splice(idx, 1);
+      renderCvEditor(pendingCvData);
+      saveLocalPreview();
+      updateUI();
+    }
+  }
+
+  function addCvAward() {
+    if (!pendingCvData.awards) pendingCvData.awards = [];
+    pendingCvData.awards.unshift({
+      title: 'New Award / Honor',
+      awarder: 'Issuing Organization',
+      date: '2024',
+      summary: 'Description of the honor or accomplishment.'
+    });
+    renderCvEditor(pendingCvData);
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function removeCvAward(idx) {
+    if (!pendingCvData.awards) return;
+    if (confirm(`Are you sure you want to remove award "${pendingCvData.awards[idx]?.title || ''}"?`)) {
+      pendingCvData.awards.splice(idx, 1);
+      renderCvEditor(pendingCvData);
+      saveLocalPreview();
+      updateUI();
+    }
+  }
+
+  function addCvProject() {
+    if (!pendingCvData.projects) pendingCvData.projects = [];
+    pendingCvData.projects.unshift({
+      name: 'New Project',
+      url: 'https://github.com/nathyBekele/...',
+      summary: 'Overview of the project architecture and results.',
+      highlights: ['Key engineering challenge solved.']
+    });
+    renderCvEditor(pendingCvData);
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function removeCvProject(idx) {
+    if (!pendingCvData.projects) return;
+    if (confirm(`Are you sure you want to remove project "${pendingCvData.projects[idx]?.name || ''}"?`)) {
+      pendingCvData.projects.splice(idx, 1);
+      renderCvEditor(pendingCvData);
+      saveLocalPreview();
+      updateUI();
+    }
+  }
+
+  function addCvReference() {
+    if (!pendingCvData.references) pendingCvData.references = [];
+    pendingCvData.references.push({
+      name: 'New Reference',
+      reference: 'Title & Organization / Contact info'
+    });
+    renderCvEditor(pendingCvData);
+    saveLocalPreview();
+    updateUI();
+  }
+
+  function addReferenceItem() {
+    addCvReference();
+  }
+
+  function removeCvReference(idx) {
+    if (!pendingCvData.references) return;
+    if (confirm(`Are you sure you want to remove reference "${pendingCvData.references[idx]?.name || ''}"?`)) {
+      pendingCvData.references.splice(idx, 1);
+      renderCvEditor(pendingCvData);
+      saveLocalPreview();
+      updateUI();
+    }
+  }
+
+  // ==========================================
+  // YAML & MARKDOWN CODE GENERATION & PARSING
+  // ==========================================
+  function formatYamlString(str) {
+    if (!str) return '""';
+    if (str.includes('\n') || str.includes(': ') || str.includes('#') || str.includes('"') || str.includes("'")) {
+      return JSON.stringify(str);
+    }
+    return `"${str}"`;
+  }
+
+  function parseCvYaml(rawYaml) {
+    const data = {
+      label: "",
+      summaryText: "",
+      education: [],
+      experience: [],
+      skills: [],
+      awards: [],
+      projects: [],
+      references: []
+    };
+
+    const labelMatch = rawYaml.match(/^(\s*)label:\s*(.*)$/m);
+    if (labelMatch) {
+      let lVal = labelMatch[2].trim();
+      if ((lVal.startsWith('"') && lVal.endsWith('"')) || (lVal.startsWith("'") && lVal.endsWith("'"))) {
+        lVal = lVal.slice(1, -1);
+      }
+      data.label = lVal;
+    }
+
+    const summaryBlockMatch = rawYaml.match(/^(\s*)summary:\s*(?:\|-?|>-[0-9]?)?\s*[\r\n]+([\s\S]*?)(?=^\s*[a-zA-Z0-9_-]+:\s*|\Z)/m);
+    if (summaryBlockMatch) {
+      let fullSummary = summaryBlockMatch[2];
+      fullSummary = fullSummary.replace(/^[ ]{2,6}/gm, '').trim();
+      const styleIdx = fullSummary.indexOf('<style');
+      if (styleIdx !== -1) {
+        data.summaryText = fullSummary.substring(0, styleIdx).trim();
+      } else {
+        data.summaryText = fullSummary.trim();
+      }
+    }
+
+    const sectionsMatch = rawYaml.match(/sections:\s*[\r\n]+([\s\S]*)/);
+    if (!sectionsMatch) return data;
+    const secContent = sectionsMatch[1];
+
+    function extractSectionBlock(secName) {
+      const regex = new RegExp(`^[ ]{2}${secName}:\\s*[\\r\\n]+([\\s\\S]*?)(?=^[ ]{2}[A-Za-z0-9_-]+:\\s*|\\Z)`, 'm');
+      const m = secContent.match(regex);
+      return m ? m[1] : '';
+    }
+
+    // 1. Education
+    const eduBlock = extractSectionBlock('Education');
+    if (eduBlock) {
+      const items = eduBlock.split(/(?:^|\n)[ ]{4}-[ ]+/).filter(Boolean);
+      items.forEach(rawItem => {
+        const instM = rawItem.match(/institution:\s*(.*)$/m);
+        const locM = rawItem.match(/location:\s*(.*)$/m);
+        const areaM = rawItem.match(/area:\s*(.*)$/m);
+        const studyM = rawItem.match(/studyType:\s*(.*)$/m);
+        const startM = rawItem.match(/(?:start_date|startDate):\s*(.*)$/m);
+        const endM = rawItem.match(/(?:end_date|endDate):\s*(.*)$/m);
+        const highlights = [];
+        const hMatch = rawItem.match(/highlights:\s*[\r\n]+([\s\S]*?)(?=^[ ]{6}[a-zA-Z0-9_-]+:|\Z)/m);
+        if (hMatch) {
+          const lines = hMatch[1].split('\n');
+          lines.forEach(l => {
+            const hLine = l.trim();
+            if (hLine.startsWith('-')) {
+              let hVal = hLine.replace(/^-\s*/, '').replace(/^["']|["']$/g, '').trim();
+              if (hVal) highlights.push(hVal);
+            }
+          });
+        }
+        const cleanVal = (m) => m ? m[1].trim().replace(/^["']|["']$/g, '') : '';
+        const sVal = formatMonthYearDisplay(cleanVal(startM));
+        const eVal = formatMonthYearDisplay(cleanVal(endM));
+        data.education.push({
+          institution: cleanVal(instM),
+          location: cleanVal(locM),
+          area: cleanVal(areaM),
+          studyType: cleanVal(studyM),
+          start_date: sVal,
+          end_date: eVal,
+          startDate: sVal,
+          endDate: eVal,
+          highlights
+        });
+      });
+    }
+
+    // 2. Experience
+    const expBlock = extractSectionBlock('Experience');
+    if (expBlock) {
+      const items = expBlock.split(/(?:^|\n)[ ]{4}-[ ]+/).filter(Boolean);
+      items.forEach(rawItem => {
+        const compM = rawItem.match(/company:\s*(.*)$/m);
+        const posM = rawItem.match(/position:\s*(.*)$/m);
+        const locM = rawItem.match(/location:\s*(.*)$/m);
+        const startM = rawItem.match(/(?:start_date|startDate):\s*(.*)$/m);
+        const endM = rawItem.match(/(?:end_date|endDate):\s*(.*)$/m);
+        let sumVal = "";
+        const sumMatch = rawItem.match(/summary:\s*(?:\|-?|>-[0-9]?)?\s*[\r\n]+([\s\S]*?)(?=^[ ]{6}[a-zA-Z0-9_-]+:|\Z)/m);
+        if (sumMatch) {
+          sumVal = sumMatch[1].replace(/^[ ]{8}/gm, '').trim();
+        } else {
+          const singleSumMatch = rawItem.match(/summary:\s*(.*)$/m);
+          if (singleSumMatch) {
+            sumVal = singleSumMatch[1].trim().replace(/^["']|["']$/g, '');
+          }
+        }
+
+        const highlights = [];
+        const hMatch = rawItem.match(/highlights:\s*[\r\n]+([\s\S]*?)(?=^[ ]{6}[a-zA-Z0-9_-]+:|\Z)/m);
+        if (hMatch) {
+          const lines = hMatch[1].split('\n');
+          lines.forEach(l => {
+            const hLine = l.trim();
+            if (hLine.startsWith('-')) {
+              let hVal = hLine.replace(/^-\s*/, '').replace(/^["']|["']$/g, '').trim();
+              if (hVal) highlights.push(hVal);
+            }
+          });
+        }
+        const cleanVal = (m) => m ? m[1].trim().replace(/^["']|["']$/g, '') : '';
+        const sVal = formatMonthYearDisplay(cleanVal(startM));
+        const eVal = formatMonthYearDisplay(cleanVal(endM));
+        data.experience.push({
+          company: cleanVal(compM),
+          position: cleanVal(posM),
+          location: cleanVal(locM),
+          start_date: sVal,
+          end_date: eVal,
+          startDate: sVal,
+          endDate: eVal,
+          summary: sumVal,
+          highlights
+        });
+      });
+    }
+
+    // 3. Skills
+    const skillsBlock = extractSectionBlock('Skills');
+    if (skillsBlock) {
+      const items = skillsBlock.split(/(?:^|\n)[ ]{4}-[ ]+/).filter(Boolean);
+      items.forEach(rawItem => {
+        const nameM = rawItem.match(/name:\s*(.*)$/m);
+        const lvlM = rawItem.match(/level:\s*(.*)$/m);
+        const iconM = rawItem.match(/icon:\s*(.*)$/m);
+        let kwVal = '';
+        const kwMatch = rawItem.match(/keywords:\s*[\r\n]+([\s\S]*?)(?=^[ ]{6}[a-zA-Z0-9_-]+:|\Z)/m);
+        if (kwMatch) {
+          const lines = kwMatch[1].split('\n');
+          const kws = [];
+          lines.forEach(l => {
+            const kLine = l.trim();
+            if (kLine.startsWith('-')) {
+              let kVal = kLine.replace(/^-\s*/, '').replace(/^["']|["']$/g, '').trim();
+              if (kVal) kws.push(kVal);
+            }
+          });
+          kwVal = kws.join(', ');
+        } else {
+          const singleKwMatch = rawItem.match(/keywords:\s*(.*)$/m);
+          if (singleKwMatch) {
+            kwVal = singleKwMatch[1].trim().replace(/^["']|["']$/g, '');
+          }
+        }
+        const cleanVal = (m) => m ? m[1].trim().replace(/^["']|["']$/g, '') : '';
+        data.skills.push({
+          name: cleanVal(nameM),
+          level: cleanVal(lvlM) || 'Advanced',
+          icon: cleanVal(iconM) || 'fa-solid fa-code',
+          keywords: kwVal
+        });
+      });
+    }
+
+    // 4. Awards
+    const awardsBlock = extractSectionBlock('Awards');
+    if (awardsBlock) {
+      const items = awardsBlock.split(/(?:^|\n)[ ]{4}-[ ]+/).filter(Boolean);
+      items.forEach(rawItem => {
+        const titleM = rawItem.match(/title:\s*(.*)$/m);
+        const dateM = rawItem.match(/date:\s*(.*)$/m);
+        const awarderM = rawItem.match(/awarder:\s*(.*)$/m);
+        const summaryM = rawItem.match(/summary:\s*(.*)$/m);
+        const cleanVal = (m) => m ? m[1].trim().replace(/^["']|["']$/g, '') : '';
+        data.awards.push({
+          title: cleanVal(titleM),
+          date: cleanVal(dateM),
+          awarder: cleanVal(awarderM),
+          summary: cleanVal(summaryM)
+        });
+      });
+    }
+
+    // 5. Projects
+    const projectsBlock = extractSectionBlock('Projects');
+    if (projectsBlock) {
+      const items = projectsBlock.split(/(?:^|\n)[ ]{4}-[ ]+/).filter(Boolean);
+      items.forEach(rawItem => {
+        const nameM = rawItem.match(/name:\s*(.*)$/m);
+        const urlM = rawItem.match(/url:\s*(.*)$/m);
+        let sumVal = "";
+        const sumMatch = rawItem.match(/summary:\s*(?:\|-?|>-[0-9]?)?\s*[\r\n]+([\s\S]*?)(?=^[ ]{6}[a-zA-Z0-9_-]+:|\Z)/m);
+        if (sumMatch) {
+          sumVal = sumMatch[1].replace(/^[ ]{8}/gm, '').trim();
+        } else {
+          const singleSumMatch = rawItem.match(/summary:\s*(.*)$/m);
+          if (singleSumMatch) {
+            sumVal = singleSumMatch[1].trim().replace(/^["']|["']$/g, '');
+          }
+        }
+        const highlights = [];
+        const hMatch = rawItem.match(/highlights:\s*[\r\n]+([\s\S]*?)(?=^[ ]{6}[a-zA-Z0-9_-]+:|\Z)/m);
+        if (hMatch) {
+          const lines = hMatch[1].split('\n');
+          lines.forEach(l => {
+            const hLine = l.trim();
+            if (hLine.startsWith('-')) {
+              let hVal = hLine.replace(/^-\s*/, '').replace(/^["']|["']$/g, '').trim();
+              if (hVal) highlights.push(hVal);
+            }
+          });
+        }
+        const cleanVal = (m) => m ? m[1].trim().replace(/^["']|["']$/g, '') : '';
+        data.projects.push({
+          name: cleanVal(nameM),
+          url: cleanVal(urlM),
+          summary: sumVal,
+          highlights
+        });
+      });
+    }
+
+    // 6. References
+    const refBlock = extractSectionBlock('References');
+    if (refBlock) {
+      const items = refBlock.split(/(?:^|\n)[ ]{4}-[ ]+/).filter(Boolean);
+      items.forEach(rawItem => {
+        const nameM = rawItem.match(/name:\s*(.*)$/m);
+        let refVal = "";
+        const refMatch = rawItem.match(/reference:\s*(?:\|-?|>-[0-9]?)?\s*[\r\n]+([\s\S]*?)(?=^[ ]{6}[a-zA-Z0-9_-]+:|\Z)/m);
+        if (refMatch) {
+          refVal = refMatch[1].replace(/^[ ]{8}/gm, '').trim();
+        } else {
+          const singleRefMatch = rawItem.match(/reference:\s*(.*)$/m);
+          if (singleRefMatch) {
+            refVal = singleRefMatch[1].trim().replace(/^["']|["']$/g, '');
+          }
+        }
+        data.references.push({
+          name: nameM ? nameM[1].trim().replace(/^["']|["']$/g, '') : '',
+          reference: refVal
+        });
+      });
+    }
+
+    return data;
+  }
+
+  function updateCvYaml(rawYaml, cvData) {
+    let result = rawYaml;
+
+    // 1. Update label
+    result = result.replace(/^([ ]{2})label:\s*.*$/m, `$1label: ${formatYamlString(cvData.label)}`);
+
+    // 2. Update summary preserving style and script
+    const summaryMatch = result.match(/^([ ]{2})summary:\s*\|-\s*[\r\n]+([\s\S]*?)(?=^[ ]{2}[a-zA-Z0-9_-]+:\s*)/m);
+    if (summaryMatch) {
+      const originalSummaryBlock = summaryMatch[2];
+      const styleIdx = originalSummaryBlock.indexOf('<style');
+      let preservedSuffix = "";
+      if (styleIdx !== -1) {
+        preservedSuffix = "\n\n" + originalSummaryBlock.substring(styleIdx).trim();
+      }
+      const newSummaryText = (cvData.summaryText || "").trim();
+      const combinedSummary = newSummaryText + preservedSuffix;
+      const indentedSummary = combinedSummary.split('\n').map(l => l ? '    ' + l : '').join('\n');
+      result = result.replace(/^([ ]{2})summary:\s*\|-\s*[\r\n]+[\s\S]*?(?=^[ ]{2}[a-zA-Z0-9_-]+:\s*)/m, `$1summary: |-\n${indentedSummary}\n\n`);
+    }
+
+    // Helper for replacing a section in sections:
+    function replaceSection(sectionName, newYamlBlock) {
+      const regex = new RegExp(`(^[ ]{2}${sectionName}:\\s*[\\r\\n]+)([\\s\\S]*?)(?=^[ ]{2}[A-Za-z0-9_-]+:\\s*|\\Z)`, 'm');
+      result = result.replace(regex, `$1${newYamlBlock}`);
+    }
+
+    // 3. Update Education
+    if (Array.isArray(cvData.education)) {
+      let eduOut = '';
+      cvData.education.forEach(edu => {
+        eduOut += `    - institution: ${formatYamlString(edu.institution || '')}\n`;
+        if (edu.location) eduOut += `      location: ${formatYamlString(edu.location)}\n`;
+        eduOut += `      area: ${formatYamlString(edu.area || '')}\n`;
+        eduOut += `      studyType: ${formatYamlString(edu.studyType || '')}\n`;
+        eduOut += `      start_date: ${formatYamlString(edu.start_date || edu.startDate || '')}\n`;
+        eduOut += `      end_date: ${formatYamlString(edu.end_date || edu.endDate || '')}\n`;
+        if (edu.highlights && edu.highlights.length > 0) {
+          eduOut += `      highlights:\n`;
+          edu.highlights.forEach(h => {
+            eduOut += `        - ${formatYamlString(h)}\n`;
+          });
+        }
+      });
+      replaceSection('Education', eduOut);
+    }
+
+    // 4. Update Experience
+    if (Array.isArray(cvData.experience)) {
+      let expOut = '';
+      cvData.experience.forEach(exp => {
+        expOut += `    - company: ${formatYamlString(exp.company || '')}\n`;
+        expOut += `      position: ${formatYamlString(exp.position || '')}\n`;
+        if (exp.location) expOut += `      location: ${formatYamlString(exp.location)}\n`;
+        expOut += `      start_date: ${formatYamlString(exp.start_date || exp.startDate || '')}\n`;
+        expOut += `      end_date: ${formatYamlString(exp.end_date || exp.endDate || '')}\n`;
+        if (exp.summary) expOut += `      summary: ${formatYamlString(exp.summary)}\n`;
+        if (exp.highlights && exp.highlights.length > 0) {
+          expOut += `      highlights:\n`;
+          exp.highlights.forEach(h => {
+            expOut += `        - ${formatYamlString(h)}\n`;
+          });
+        }
+      });
+      replaceSection('Experience', expOut);
+    }
+
+    // 5. Update Skills
+    if (Array.isArray(cvData.skills)) {
+      let skOut = '';
+      cvData.skills.forEach(sk => {
+        skOut += `    - name: ${formatYamlString(sk.name || '')}\n`;
+        if (sk.level) skOut += `      level: ${formatYamlString(sk.level)}\n`;
+        if (sk.icon) skOut += `      icon: ${formatYamlString(sk.icon)}\n`;
+        const kwVal = typeof sk.keywords === 'string' ? sk.keywords : (Array.isArray(sk.keywords) ? sk.keywords.join(', ') : '');
+        skOut += `      keywords: ${formatYamlString(kwVal)}\n`;
+      });
+      replaceSection('Skills', skOut);
+    }
+
+    // 6. Update Awards
+    if (Array.isArray(cvData.awards)) {
+      let awOut = '';
+      cvData.awards.forEach(aw => {
+        awOut += `    - title: ${formatYamlString(aw.title || '')}\n`;
+        awOut += `      date: ${formatYamlString(String(aw.date !== undefined ? aw.date : ''))}\n`;
+        awOut += `      awarder: ${formatYamlString(aw.awarder || '')}\n`;
+        awOut += `      summary: ${formatYamlString(aw.summary || '')}\n`;
+      });
+      replaceSection('Awards', awOut);
+    }
+
+    // 7. Update Projects
+    if (Array.isArray(cvData.projects)) {
+      let pjOut = '';
+      cvData.projects.forEach(pj => {
+        pjOut += `    - name: ${formatYamlString(pj.name || '')}\n`;
+        if (pj.url) {
+          pjOut += `      url: ${formatYamlString(pj.url)}\n`;
+        }
+        if (pj.summary) {
+          const sumLines = (pj.summary || '').trim().split('\n');
+          if (sumLines.length > 1) {
+            pjOut += `      summary: >\n`;
+            sumLines.forEach(l => {
+              pjOut += `        ${l}\n`;
+            });
+          } else {
+            pjOut += `      summary: ${formatYamlString(pj.summary)}\n`;
+          }
+        }
+        if (pj.highlights && pj.highlights.length > 0) {
+          pjOut += `      highlights:\n`;
+          pj.highlights.forEach(h => {
+            pjOut += `        - ${formatYamlString(h)}\n`;
+          });
+        }
+      });
+      replaceSection('Projects', pjOut);
+    }
+
+    // 8. Update References
+    if (Array.isArray(cvData.references)) {
+      let refOut = '';
+      cvData.references.forEach(rf => {
+        refOut += `    - name: ${formatYamlString(rf.name || '')}\n`;
+        const refLines = (rf.reference || '').trim().split('\n');
+        if (refLines.length > 1) {
+          refOut += `      reference: |-\n`;
+          refLines.forEach(l => {
+            refOut += `        ${l}\n`;
+          });
+        } else {
+          refOut += `      reference: ${formatYamlString(rf.reference || '')}\n`;
+        }
+      });
+      replaceSection('References', refOut);
+    }
+
+    return result;
+  }
+
+  function formatMoreInfoYaml(moreInfo) {
+    if (!moreInfo) return '  more_info: >\n';
+    const lines = moreInfo.trim().split('\n').map(l => l.trim()).filter(Boolean);
+    let out = '  more_info: >\n';
+    lines.forEach(l => {
+      out += `    ${l}\n`;
+    });
+    return out;
+  }
+
+  function updateAboutContent(rawAbout, aboutData) {
+    const parts = rawAbout.split(/^---\s*[\r\n]+/m);
+    if (parts.length < 3) return rawAbout;
+
+    let fm = parts[1];
+
+    // 1. Subtitle
+    if (aboutData.subtitle !== undefined) {
+      if (/^subtitle:\s*.*$/m.test(fm)) {
+        fm = fm.replace(/^subtitle:\s*.*$/m, `subtitle: ${aboutData.subtitle || ''}`);
+      } else {
+        fm = `subtitle: ${aboutData.subtitle || ''}\n` + fm;
+      }
+    }
+
+    // 2. Profile Image
+    if (aboutData.image) {
+      fm = fm.replace(/(profile:[\s\S]*?image:\s*)[^\r\n]*/m, `$1${aboutData.image}`);
+    }
+
+    // 3. Profile More Info (text under photo)
+    if (aboutData.more_info !== undefined) {
+      const formattedMoreInfo = formatMoreInfoYaml(aboutData.more_info);
+      if (/^[ ]{2}more_info:\s*(?:>|\|-?)?\s*[\r\n]+([\s\S]*?)(?=^[a-zA-Z0-9_-]+:\s*|\Z)/m.test(fm)) {
+        fm = fm.replace(/^[ ]{2}more_info:\s*(?:>|\|-?)?\s*[\r\n]+([\s\S]*?)(?=^[a-zA-Z0-9_-]+:\s*|\Z)/m, `${formattedMoreInfo.trim()}\n\n`);
+      } else if (/profile:\s*[\r\n]+/m.test(fm)) {
+        fm = fm.replace(/(profile:\s*[\r\n]+)/m, `$1${formattedMoreInfo}`);
+      }
+    }
+
+    // 4. Social Toggle
+    if (aboutData.social !== undefined) {
+      const socialVal = aboutData.social ? 'true' : 'false';
+      if (/^social:\s*(true|false)/m.test(fm)) {
+        fm = fm.replace(/^social:\s*(true|false)/m, `social: ${socialVal}`);
+      } else {
+        fm = fm + `\nsocial: ${socialVal}\n`;
+      }
+    }
+
+    const bioContent = (aboutData.bio || '').trim();
+    return `---${fm.replace(/\n+$/, '')}\n---\n\n${bioContent}\n`;
+  }
+
+  function updateCvPdfInCvMd(rawCvMd, newPdf) {
+    if (/^cv_pdf:\s*.*$/m.test(rawCvMd)) {
+      return rawCvMd.replace(/^cv_pdf:\s*.*$/m, `cv_pdf: ${newPdf}`);
+    } else {
+      return rawCvMd.replace(/^(---\s*[\r\n]+)/, `$1cv_pdf: ${newPdf}\n`);
+    }
+  }
+
+  function updateCvPdfInSocials(rawSocials, newPdf) {
+    return rawSocials.replace(/^cv_pdf:\s*([^#\r\n]+)(.*)$/m, `cv_pdf: ${newPdf} $2`);
   }
 
   function showStatus(el, msg, type = 'info', isHtml = false) {

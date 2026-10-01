@@ -80,59 +80,25 @@
       "studyType": "Bachelor of Science (B.Sc.)",
       "startDate": "2018-01-01",
       "endDate": "2023-01-01",
-      "courses": [
-        "Data Structures & Algorithms",
-        "Operating Systems",
-        "Object-Oriented Programming",
-        "Distributed Systems",
-        "Database Systems"
-      ],
-      "highlights": [
-        "Final year project: mBERT-based Hate Speech Classification for Amharic Language"
-      ]
+      "courses": ["Data Structures & Algorithms", "Operating Systems", "Object-Oriented Programming", "Distributed Systems", "Database Systems"],
+      "highlights": ["Final year project: mBERT-based Hate Speech Classification for Amharic Language"]
     }
   ],
   "skills": [
     {
       "name": "Programming Languages",
       "level": "Advanced",
-      "keywords": [
-        "Python",
-        "TypeScript",
-        "Go",
-        "Ruby",
-        "C++"
-      ]
+      "keywords": ["Python", "TypeScript", "Go", "Ruby", "C++"]
     },
     {
       "name": "Frameworks & Libraries",
       "level": "Advanced",
-      "keywords": [
-        "React",
-        "Next.js",
-        "Express",
-        "Django",
-        "Flask",
-        "FastAPI",
-        "Pandas",
-        "Node.js",
-        "TensorFlow",
-        "PyTorch"
-      ]
+      "keywords": ["React", "Next.js", "Express", "Django", "Flask", "FastAPI", "Pandas", "Node.js", "TensorFlow", "PyTorch"]
     },
     {
       "name": "Databases & DevOps",
       "level": "Advanced",
-      "keywords": [
-        "GCP",
-        "AWS Services",
-        "Docker",
-        "MongoDB",
-        "PostgreSQL",
-        "NoSQL",
-        "MySQL",
-        "Heroku"
-      ]
+      "keywords": ["GCP", "AWS Services", "Docker", "MongoDB", "PostgreSQL", "NoSQL", "MySQL", "Heroku"]
     }
   ],
   "awards": [

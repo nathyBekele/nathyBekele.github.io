@@ -8,10 +8,44 @@
 set -euo pipefail
 
 tmp_dir="$(mktemp -d)"
+created_rtl_post=""
+created_marimo_post=""
 cleanup() {
   rm -rf "${tmp_dir}"
+  [ -n "${created_rtl_post}" ] && rm -f "${created_rtl_post}"
+  [ -n "${created_marimo_post}" ] && rm -f "${created_marimo_post}"
 }
 trap cleanup EXIT
+
+if [ ! -f "_posts/2022-10-15-rtl.md" ]; then
+  created_rtl_post="_posts/2022-10-15-rtl.md"
+  cat >"${created_rtl_post}" <<'YAML'
+---
+layout: post
+title: RTL post
+date: 2022-10-15 10:00:00
+lang: fa
+---
+RTL test post.
+YAML
+fi
+
+if [ ! -f "_posts/2025-04-28-marimo.md" ]; then
+  created_marimo_post="_posts/2025-04-28-marimo.md"
+  cat >"${created_marimo_post}" <<'YAML'
+---
+layout: post
+title: marimo snippets
+date: 2025-04-28 12:00:00
+marimo: true
+---
+<div class="al-marimo-inline">
+```python
+import marimo as mo
+```
+</div>
+YAML
+fi
 
 build() {
   local name="$1"

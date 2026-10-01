@@ -10,10 +10,9 @@ profile:
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>Addis Ababa, Ethiopia</p>
-    <p><a href="mailto:natnaelbekele142@gmail.com">natnaelbekele142@gmail.com</a></p>
-    <p>+251 929 292 151</p>
+    <p><a href="mailto:natnaelbekele142[at]gmail[dot]com">natnaelbekele142[at]gmail[dot]com</a></p>
 
-selected_papers: false # replaced with selected preprints in content
+selected_papers: false
 social: true # includes social icons at the bottom of the page
 
 announcements:
@@ -40,32 +39,64 @@ I am a **Fullstack Software Engineer & AI Systems Developer** with 4+ years of p
 
 I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) from **Addis Ababa University**, where my final year research focused on mBERT-based hate speech classification for the Amharic language. I also have an abiding passion for mathematics and physics, which powers how I dissect complex engineering challenges and craft clean, resilient architectures.
 
-## <a href="{{ '/publications/' | relative_url }}" style="color: inherit">selected preprints</a>
+{% if site.data.visibility.about.hide_social_icons %}
 
-<div class="publications">
-  {% bibliography --group_by none --query @*[selected=true]* %}
-</div>
+<style id="hide-about-social-icons">.social .contact-icons { display: none !important; }</style>
 
-{% if site.data.visibility.hidden_preprints and site.data.visibility.hidden_preprints.size > 0 %}
-<style>
-{% for key in site.data.visibility.hidden_preprints %}
-  ol.bibliography li:has(#{{ key }}) { display: none !important; }
-{% endfor %}
-</style>
 {% endif %}
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  try {
-    const localCfg = JSON.parse(localStorage.getItem('nathy_visibility_config') || '{}');
-    const hiddenPreprints = Array.isArray(localCfg.hidden_preprints) ? localCfg.hidden_preprints : {{ site.data.visibility.hidden_preprints | jsonify | default: '[]' }};
-    hiddenPreprints.forEach(function(key) {
-      const el = document.getElementById(key);
-      if (el) {
-        const li = el.closest('li');
-        if (li) li.style.display = 'none';
+<script id="about-customization-script">
+(function() {
+  function applyAboutCustomization() {
+    try {
+      var aboutStr = localStorage.getItem('nathy_about_config');
+      if (aboutStr) {
+        var data = JSON.parse(aboutStr);
+        if (data) {
+          if (data.subtitle) {
+            var descEl = document.querySelector('.desc');
+            if (descEl) descEl.textContent = data.subtitle;
+          }
+          if (data.more_info) {
+            var moreInfoEl = document.querySelector('.profile .more-info');
+            if (moreInfoEl) moreInfoEl.innerHTML = data.more_info;
+          }
+          if (data.image_data_url) {
+            var imgEl = document.querySelector('.profile img');
+            if (imgEl) {
+              imgEl.src = data.image_data_url;
+              document.querySelectorAll('.profile .responsive-img-srcset').forEach(function(n) { n.remove(); });
+            }
+          }
+          if (data.hide_social_icons !== undefined) {
+            var iconsEl = document.querySelector('.social .contact-icons');
+            if (iconsEl) iconsEl.style.setProperty('display', data.hide_social_icons ? 'none' : '', 'important');
+          }
+          if (data.contact_note !== undefined) {
+            var noteEl = document.querySelector('.social .contact-note');
+            if (noteEl) noteEl.textContent = data.contact_note;
+          }
+          if (data.social === false) {
+            var socEl = document.querySelector('.social');
+            if (socEl) socEl.style.setProperty('display', 'none', 'important');
+          }
+        }
       }
-    });
-  } catch(e) {}
-});
+      var visStr = localStorage.getItem('nathy_visibility_config');
+      if (visStr) {
+        var vData = JSON.parse(visStr);
+        if (vData && vData.about && vData.about.hide_social_icons) {
+          var iconsEl = document.querySelector('.social .contact-icons');
+          if (iconsEl) iconsEl.style.setProperty('display', 'none', 'important');
+        }
+      }
+    } catch(e) {}
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyAboutCustomization);
+  } else {
+    applyAboutCustomization();
+  }
+  window.addEventListener('load', applyAboutCustomization);
+})();
 </script>

@@ -10,7 +10,7 @@ redirect: https://medium.com/@natnaelbekele142/building-dapp-on-ethereum-blochai
 external_source: medium.com
 ---
 
-*This article was originally published on [Medium](https://medium.com/@natnaelbekele142/building-dapp-on-ethereum-blochain-using-flutter-and-react-b4232dee75f7).*
+_This article was originally published on [Medium](https://medium.com/@natnaelbekele142/building-dapp-on-ethereum-blochain-using-flutter-and-react-b4232dee75f7)._
 
 A practical guide to building full-stack decentralized applications spanning Solidity smart contracts, Flutter mobile apps, and React web dashboards.
 

@@ -10,7 +10,7 @@ redirect: https://medium.com/@natnaelbekele142/data-warehousing-the-engine-of-bu
 external_source: medium.com
 ---
 
-*This article was originally published on [Medium](https://medium.com/@natnaelbekele142/data-warehousing-the-engine-of-business-intelligence-2dac8adeb921).*
+_This article was originally published on [Medium](https://medium.com/@natnaelbekele142/data-warehousing-the-engine-of-business-intelligence-2dac8adeb921)._
 
 Designing an end-to-end data warehouse for city traffic sensor data, utilizing PostgreSQL, star schema data modeling, and orchestration with Apache Airflow.
 

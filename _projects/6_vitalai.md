@@ -11,6 +11,7 @@ github: nathyBekele/vitalAI
 **VitalAI** is a healthcare analytics API that leverages OpenAI's GPT models to provide personalized health advice based on Apple Health biometric data. The system analyzes sleep patterns, step metrics, and physical activity levels to formulate contextual health recommendations and wellness plans.
 
 ### Key Capabilities
+
 - **Biometric Health Analysis**: Ingests and processes granular Apple Health metrics including sleep stages, physical activity, and heart trends.
 - **AI Health Advisory**: Integrates OpenAI GPT-4 / GPT-3.5 models to produce personalized wellness recommendations and diagnostic interpretations.
 - **Scalable Django API**: Exposes clean RESTful endpoints for real-time wellness tracking, synthetic data evaluation, and client integration.

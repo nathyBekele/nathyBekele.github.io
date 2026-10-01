@@ -10,7 +10,7 @@ redirect: https://medium.com/@natnaelbekele142/llm-finetuning-enabling-quality-e
 external_source: medium.com
 ---
 
-*This article was originally published on [Medium](https://medium.com/@natnaelbekele142/llm-finetuning-enabling-quality-embedding-and-text-generation-for-amharic-language-db60b68dd345).*
+_This article was originally published on [Medium](https://medium.com/@natnaelbekele142/llm-finetuning-enabling-quality-embedding-and-text-generation-for-amharic-language-db60b68dd345)._
 
 Overcoming tokenization bottlenecks and dataset scarcity in low-resource African languages using parameter-efficient fine-tuning (LoRA) for Amharic text generation.
 

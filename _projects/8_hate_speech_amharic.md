@@ -13,6 +13,7 @@ notebook: https://github.com/nathyBekele/hate-speech-detection-in-amharic-langua
 **Amharic Hate Speech Detection** is a specialized Natural Language Processing (NLP) system developed as Natnael's B.Sc. Electrical & Computer Engineering final-year project at **Addis Ababa University**. It detects and mitigates online hate speech and abusive language in the Amharic language using transfer learning on fine-tuned multilingual BERT (mBERT).
 
 ### Key Capabilities
+
 - **mBERT Fine-Tuning**: Built on top of pre-trained multilingual BERT representations, adapted specifically for Amharic morphological and syntactical patterns.
 - **Hugging Face Model Hub**: Pre-trained and fine-tuned weights published and hosted on Hugging Face Hub (`NathyB/Hate-Speech-Detection-in-Amharic-Language-mBERT`).
 - **Content Moderation Pipeline**: Provides reproducible benchmarking for hate speech, offensive discourse, and neutral sentiment classification.

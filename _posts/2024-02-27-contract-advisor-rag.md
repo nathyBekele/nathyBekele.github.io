@@ -10,7 +10,7 @@ redirect: https://medium.com/@natnaelbekele142/contract-advisor-rag-towards-buil
 external_source: medium.com
 ---
 
-*This article was originally published on [Medium](https://medium.com/@natnaelbekele142/contract-advisor-rag-towards-building-a-high-precision-legal-expert-llm-app-3277e21e2278).*
+_This article was originally published on [Medium](https://medium.com/@natnaelbekele142/contract-advisor-rag-towards-building-a-high-precision-legal-expert-llm-app-3277e21e2278)._
 
 The project aims to develop a smart system that can understand legal contracts and provide answers to questions about them using an advanced RAG pipeline.
 

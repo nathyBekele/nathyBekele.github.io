@@ -48,6 +48,7 @@ pagination:
         {% endif %}
       {% endfor %}
     </div>
+
   </div>
 
   <!-- Blog Post List -->
@@ -122,11 +123,12 @@ pagination:
       </div>
     </li>
     {% endfor %}
+
   </ul>
 
-  {% if page.pagination.enabled %}
-    {% include pagination.liquid %}
-  {% endif %}
+{% if page.pagination.enabled %}
+{% include pagination.liquid %}
+{% endif %}
 
 <style>
 /* Post list item tight spacing */

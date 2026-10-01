@@ -14,6 +14,7 @@ github: nathyBekele/geometry-of-dormant-defection
 Using **Qwen2.5-Coder-1.5B-Instruct** across four distinct backdoored model organism archetypes spanning syntactic, temporal, semantic, and structural triggers, this project evaluates where and how dormant sleeper agents defect and how trigger-agnostic linear monitors can catch deceptive policies without inspecting model outputs.
 
 ### Key Discoveries & Architecture
+
 - **Layer-Wise Activation Dynamics**: Conducted 28-layer probing sweeps across residual streams to isolate the exact depth where backdoors emerge into linear separability.
 - **Mid-Layer Concentration**: Identified that peak linear separability consistently concentrates in mid-layer representations rather than early syntactic or late output layers.
 - **Defensive Monitor Design**: Designed and benchmarked trigger-agnostic contrastive monitors providing robust detection across diverse backdoor archetypes.

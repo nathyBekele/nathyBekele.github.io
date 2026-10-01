@@ -10,7 +10,7 @@ redirect: https://medium.com/@natnaelbekele142/end-to-end-web3-dapps-certificate
 external_source: medium.com
 ---
 
-*This article was originally published on [Medium](https://medium.com/@natnaelbekele142/end-to-end-web3-dapps-certificate-generation-distribution-and-value-transfer-with-algorand-nfts-68eb5c7cfee9).*
+_This article was originally published on [Medium](https://medium.com/@natnaelbekele142/end-to-end-web3-dapps-certificate-generation-distribution-and-value-transfer-with-algorand-nfts-68eb5c7cfee9)._
 
 Harnessing Algorand smart contracts and Algorand Standard Assets (ASAs) to implement tamper-proof automated educational credentialing and NFT verification.
 

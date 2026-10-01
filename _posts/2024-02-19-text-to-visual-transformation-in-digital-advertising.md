@@ -10,7 +10,7 @@ redirect: https://medium.com/@natnaelbekele142/text-to-visual-transformation-in-
 external_source: medium.com
 ---
 
-*This article was originally published on [Medium](https://medium.com/@natnaelbekele142/text-to-visual-transformation-in-digital-advertising-88d09fb283c4).*
+_This article was originally published on [Medium](https://medium.com/@natnaelbekele142/text-to-visual-transformation-in-digital-advertising-88d09fb283c4)._
 
 Exploring the automation of storyboard generation and visual concepts for brand marketing campaigns using state-of-the-art diffusion models.
 

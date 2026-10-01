@@ -11,6 +11,7 @@ live: https://rateeat.app/
 **RateEat** is a dynamic platform designed to provide a seamless food discovery experience through authentic user-driven restaurant reviews and foodie community interactions.
 
 ### Key Features & Architecture
+
 - **Community Reviews & Ratings**: Browse, rate, and share experiences about favorite eateries.
 - **Smart Recommendations**: Personalized dining suggestions tailored to individual tastes.
 - **Menus & Social Sharing**: Up-to-date digital menus and social discovery feeds.

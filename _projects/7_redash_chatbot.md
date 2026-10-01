@@ -11,6 +11,7 @@ github: nathyBekele/redash-chatbot-add-on
 **Redash Chatbot Add-on** is a conversational Business Intelligence (BI) extension for Redash. It combines NLP and Large Language Models to allow analysts and non-technical stakeholders to query data sources in natural language, automatically generate SQL, and render visualizations right inside the dashboard interface.
 
 ### Key Capabilities
+
 - **Conversational Queries**: Query connected SQL and NoSQL data sources using plain English without requiring manual query construction.
 - **Automated SQL Generation**: Converts natural language intent into valid, optimized SQL statements for the active Redash schemas.
 - **Inline Visualizations**: Renders charts, summaries, and tabular insights directly inside the interactive chat drawer.

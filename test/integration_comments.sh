@@ -5,10 +5,40 @@ tmp_dir="$(mktemp -d)"
 tmp_override="${tmp_dir}/comments-test-override.yml"
 tmp_site="${tmp_dir}/site"
 
+created_giscus_post=""
+created_disqus_post=""
 cleanup() {
   rm -rf "${tmp_dir}"
+  [ -n "${created_giscus_post}" ] && rm -f "${created_giscus_post}"
+  [ -n "${created_disqus_post}" ] && rm -f "${created_disqus_post}"
 }
 trap cleanup EXIT
+
+if [ ! -f "_posts/2022-02-01-giscus-comments.md" ]; then
+  created_giscus_post="_posts/2022-02-01-giscus-comments.md"
+  cat >"${created_giscus_post}" <<'YAML'
+---
+layout: post
+title: giscus comments
+date: 2022-02-01 00:00:00
+giscus_comments: true
+---
+Comments test post.
+YAML
+fi
+
+if [ ! -f "_posts/2015-10-20-disqus-comments.md" ]; then
+  created_disqus_post="_posts/2015-10-20-disqus-comments.md"
+  cat >"${created_disqus_post}" <<'YAML'
+---
+layout: post
+title: disqus comments
+date: 2015-10-20 00:00:00
+disqus_comments: true
+---
+Disqus test post.
+YAML
+fi
 
 cat >"${tmp_override}" <<'YAML'
 giscus:

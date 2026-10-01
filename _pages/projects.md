@@ -76,12 +76,14 @@ horizontal: false
         </div>
       </div>
     {% endfor %}
+
   </div>
   {% endfor %}
 
 {% else %}
 
-  {% assign sorted_projects = site.projects | sort: "importance" %}
+{% assign sorted_projects = site.projects | sort: "importance" %}
+
   <div class="row row-cols-1 row-cols-md-3 g-3">
     {% for project in sorted_projects %}
       {% if site.data.visibility.hidden_projects contains project.title or site.data.visibility.hidden_projects contains project.slug or site.data.visibility.hidden_projects contains project.relative_path %}
@@ -138,6 +140,7 @@ horizontal: false
         </div>
       </div>
     {% endfor %}
+
   </div>
 {% endif %}
 </div>

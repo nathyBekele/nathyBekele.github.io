@@ -10,7 +10,7 @@ redirect: https://medium.com/@natnaelbekele142/redash-chatbot-add-on-llm-based-c
 external_source: medium.com
 ---
 
-*This article was originally published on [Medium](https://medium.com/@natnaelbekele142/redash-chatbot-add-on-llm-based-chatbot-for-advanced-data-analytics-visualisation-and-automated-450422dd8a58).*
+_This article was originally published on [Medium](https://medium.com/@natnaelbekele142/redash-chatbot-add-on-llm-based-chatbot-for-advanced-data-analytics-visualisation-and-automated-450422dd8a58)._
 
 Empowering non-technical stakeholders to query internal databases, generate dynamic charts, and extract insights via conversational AI embedded in Redash.
 

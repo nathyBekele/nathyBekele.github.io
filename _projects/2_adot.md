@@ -11,6 +11,7 @@ live: https://adot.life/
 **Adot** is a comprehensive platform designed to support pregnant women by providing personalized health tracking, expert medical connections, and valuable educational content.
 
 ### Key Features & Architecture
+
 - **Pregnancy Journey Tracking**: Monitor vital milestones, symptoms, and health indicators.
 - **AI-Driven Insights**: Timely personalized medical recommendations and content.
 - **Expert Consultations**: Direct communication with verified healthcare professionals.

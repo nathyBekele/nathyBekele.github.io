@@ -12,6 +12,7 @@ live: https://cursor-spend-tracker.vercel.app/
 **Cursor Spend Tracker** is a specialized telemetry and analytics dashboard designed to monitor and breakdown token expenditure on Anthropic Claude models accessed through Cursor's BYOK (Bring Your Own Key) architecture.
 
 ### Key Capabilities
+
 - **Automated Usage Sync**: Vercel Cron orchestrates automated synchronization using session tokens against Cursor telemetry endpoints, persisting events to Neon Postgres via Prisma.
 - **Granular Cost Attribution**: Differentiates between raw Anthropic model API costs and Cursor platform token fees ($0.25/M tokens).
 - **Interactive Telemetry Dashboard**: Visualizes daily consumption, model-by-model distributions, and historical trends with Recharts.

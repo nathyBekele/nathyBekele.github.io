@@ -20,6 +20,7 @@ nav_order: 2
 </div>
 
 {% if site.data.visibility.hidden_preprints and site.data.visibility.hidden_preprints.size > 0 %}
+
 <style id="hidden-preprints-static">
 {% for key in site.data.visibility.hidden_preprints %}
   ol.bibliography li:has(#{{ key }}) {
@@ -27,6 +28,7 @@ nav_order: 2
   }
 {% endfor %}
 </style>
+
 {% endif %}
 
 <script>

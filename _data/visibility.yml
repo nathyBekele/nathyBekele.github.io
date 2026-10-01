@@ -7,6 +7,9 @@ hidden_preprints: []
 hidden_projects: []
 hidden_repos: []
 
+about:
+  hide_social_icons: false
+
 cv:
   hidden_sections: []
   hidden_experience: []

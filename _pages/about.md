@@ -30,6 +30,6 @@ I am a software engineer at [Vula](https://vula.vc), where I build systems for i
 
 My research interest is AI safety, specifically the problem of hidden behaviour in language models that are distributed openly and trusted by default. I recently finished a [preprint](https://zenodo.org/records/23089057) on why linear activation probes fail to detect backdoored code models, and the conditions under which they can be made to work. I am applying for PhD positions in this area.
 
-Before [Vula](https://vula.vc) I was a competitive programming coach at [A2SV](https://a2sv.org) and a teaching assistant at [AddisCoder](https://www.addiscoder.com). I did my undergraduate degree in Electrical and Computer Engineering at [Addis Ababa University](https://www.aau.edu.et), where my final-year work was on [hate speech detection in Amharic](https://huggingface.co/NathyB/Hate-Speech-Detection-in-Amharic-Language-mBERT).
+Before [Vula](https://vula.vc) I was Head of competitive programming education at [A2SV](https://a2sv.org). I did my undergraduate degree in Electrical and Computer Engineering at [Addis Ababa University](https://www.aau.edu.et), where my final-year work was on [hate speech detection in Amharic](https://huggingface.co/NathyB/Hate-Speech-Detection-in-Amharic-Language-mBERT).
 
 I came to this through competitive programming and a long-standing interest in mathematics and physics.

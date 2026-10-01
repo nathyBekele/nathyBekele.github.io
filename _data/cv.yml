@@ -5,7 +5,7 @@ cv:
   location: Addis Ababa, Ethiopia
   image: ""
   summary: >
-    Fullstack (backend-heavy) software engineer with extensive experience in building scalable investment management platforms, AI-driven analytics, and LLM fine-tuning/RLHF pipelines. Competitive programming coach with a proven record of mentoring 500+ engineers, with 80+ landing roles at Google, Amazon, Bloomberg, and top tech companies.
+    Fullstack (backend-heavy) software engineer with extensive experience in building scalable investment management platforms, AI-driven analytics, and LLM fine-tuning/RLHF pipelines. Head of competitive programming education with a proven record of mentoring 500+ engineers, with 80+ landing roles at Google, Amazon, Bloomberg, and top tech companies.
     <style>
       /* Clean and spacious full-width layout for Projects (without timeline column) */
       a#projects + .card .list-group-item {
@@ -143,7 +143,7 @@ cv:
           - Created robust unit testing frameworks to evaluate model-generated code against ideal solutions, ensuring high-fidelity output.
 
       - company: Africa to Silicon Valley (A2SV, Backed by Google)
-        position: Competitive Programming Coach
+        position: Head of competitive programming education
         location: Addis Ababa, Ethiopia
         start_date: 2021-10-01
         end_date: 2023-09-01

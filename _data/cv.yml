@@ -194,7 +194,7 @@ cv:
           <span class="cv-project-links">
             <a href="https://github.com/nathyBekele/geometry-of-dormant-defection" target="_blank" class="cv-action-btn"><i class="fa-brands fa-github"></i> GitHub Code</a>
             <a href="https://medium.com/@natnaelbekele142/your-open-source-ai-model-might-be-a-sleeper-agent-9ca693663091" target="_blank" class="cv-action-btn"><i class="fa-brands fa-medium"></i> Research Article</a>
-            <a href="https://github.com/nathyBekele/geometry-of-dormant-defection" target="_blank" class="cv-action-btn"><i class="fa-solid fa-graduation-cap"></i> arXiv Paper</a>
+            <a href="https://zenodo.org/records/23089057" target="_blank" class="cv-action-btn"><i class="fa-solid fa-graduation-cap"></i> Zenodo Preprint</a>
           </span>
         highlights:
           - "**Layer-Wise Activation Probing**: Designed and evaluated linear probes across all 28 transformer layers of Qwen2.5-Coder-1.5B-Instruct to trace where deceptive policies linearly separate from aligned representations."
@@ -316,12 +316,17 @@ cv:
             </div>
             <div class="col-xs-10 col-sm-10 col-md-10 mt-2 mt-md-0">
               <h6 class="title font-weight-bold ml-1 ml-md-4">
-                <a href="https://github.com/nathyBekele/geometry-of-dormant-defection">The Geometry of Dormant Defection: Layer-Wise Dynamics and Defensive Design of Linear Probes for Latent Sleeper Agents</a>
+                <a href="https://zenodo.org/records/23089057" target="_blank">The Geometry of Dormant Defection: Layer-Wise Dynamics and Defensive Design of Linear Probes for Latent Sleeper Agents</a>
               </h6>
               <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem">
-                <em>arXiv preprint</em>
+                <em>Zenodo publication (DOI: 10.5281/zenodo.23089057)</em>
               </h6>
               <p class="ml-1 ml-md-4">Empirical investigation into the layer-wise dynamics of linear probes across four distinct backdoor archetypes, demonstrating that peak linear separability concentrates in mid-layer representations.</p>
+              <div class="ml-1 ml-md-4 mt-2">
+                <a href="https://zenodo.org/records/23089057" target="_blank" class="cv-action-btn"><i class="fa-solid fa-graduation-cap"></i> Zenodo Preprint</a>
+                <a href="https://github.com/nathyBekele/geometry-of-dormant-defection" target="_blank" class="cv-action-btn"><i class="fa-brands fa-github"></i> GitHub Code</a>
+                <a href="https://medium.com/@natnaelbekele142/your-open-source-ai-model-might-be-a-sleeper-agent-9ca693663091" target="_blank" class="cv-action-btn"><i class="fa-brands fa-medium"></i> Research Article</a>
+              </div>
             </div>
           </div>
 

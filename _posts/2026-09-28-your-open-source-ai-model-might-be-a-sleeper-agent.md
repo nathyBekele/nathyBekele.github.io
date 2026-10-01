@@ -16,3 +16,4 @@ _This article was originally published on [Medium](https://medium.com/@natnaelbe
 I trained four backdoored coding models and tried to catch them by reading their minds. Two of my three defenses worked. Here's the one that didn't.
 
 [Read the full article on Medium →](https://medium.com/@natnaelbekele142/your-open-source-ai-model-might-be-a-sleeper-agent-9ca693663091){: .btn .btn-outline-primary .btn-sm .mt-3}
+[View Preprint on Zenodo →](https://zenodo.org/records/23089057){: .btn .btn-outline-secondary .btn-sm .mt-3}

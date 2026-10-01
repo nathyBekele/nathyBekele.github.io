@@ -2294,12 +2294,12 @@ robots: noindex, nofollow
     </div>
 
     <!-- Nav Tab 2: Preprints -->
-    <div class="switch-container admin-item" data-search="preprints academic research papers arxiv publications">
+    <div class="switch-container admin-item" data-search="preprints academic research papers zenodo publications">
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-graduation-cap"></i></div>
         <div class="switch-details">
           <h5>Preprints <span class="item-tag">_pages/publications.md</span></h5>
-          <p>Academic research papers, sleeper agents interpretability paper, and arXiv preprints</p>
+          <p>Academic research papers, sleeper agents interpretability paper, and Zenodo preprints</p>
         </div>
       </div>
       <div style="display: flex; align-items: center; gap: 12px;">
@@ -2855,7 +2855,7 @@ robots: noindex, nofollow
     </div>
 
     <!-- Preprint 1 -->
-    <div class="switch-container admin-item" data-search="the geometry of dormant defection layer-wise dynamics linear probes sleeper agents arxiv">
+    <div class="switch-container admin-item" data-search="the geometry of dormant defection layer-wise dynamics linear probes sleeper agents zenodo">
       <div class="switch-info">
         <div class="switch-icon"><i class="fa-solid fa-brain"></i></div>
         <div class="switch-details">
@@ -2863,7 +2863,7 @@ robots: noindex, nofollow
           <p>Layer-Wise Dynamics and Defensive Design of Linear Probes for Latent Sleeper Agents</p>
           <div class="switch-meta">
             <span><i class="fa-regular fa-calendar"></i> 2026</span>
-            <span class="badge badge-secondary" style="font-size: 0.68rem;">arXiv</span>
+            <span class="badge badge-secondary" style="font-size: 0.68rem;">Zenodo</span>
             <span class="badge badge-secondary" style="font-size: 0.68rem;">AI Safety</span>
           </div>
         </div>
@@ -3884,15 +3884,15 @@ robots: noindex, nofollow
   let socialsRawContent = '';
   let configRawContent = '';
 
-  const DEFAULT_ABOUT_SUBTITLE = "Addis Ababa, Ethiopia";
+  const DEFAULT_ABOUT_SUBTITLE = "";
   const DEFAULT_ABOUT_IMAGE = "natnael.jpg";
   const DEFAULT_ABOUT_MORE_INFO = `<p>4kilo, Addis Ababa, Ethiopia</p>\n<p><a href="mailto:natnaelbekele142[at]gmail[dot]com">natnaelbekele142@gmail.com</a></p>`;
-  const DEFAULT_CONTACT_NOTE = {{ site.contact_note | jsonify | default: '"Feel free to reach out directly via email at natnaelbekele142@gmail.com or connect via LinkedIn and GitHub."' }};
-  const DEFAULT_ABOUT_BIO = `I am a software engineer at Vula, where I build systems for investment management and due diligence.
+  const DEFAULT_CONTACT_NOTE = {{ site.contact_note | jsonify | default: '"Feel free to connect via LinkedIn and GitHub."' }};
+  const DEFAULT_ABOUT_BIO = `I am a software engineer at [Vula](https://vula.vc), where I build systems for investment management and due diligence.
 
-My research interest is AI safety, specifically the problem of hidden behaviour in language models that are distributed openly and trusted by default. I recently finished a preprint on why linear activation probes fail to detect backdoored code models, and the conditions under which they can be made to work. I am applying for PhD positions in this area.
+My research interest is AI safety, specifically the problem of hidden behaviour in language models that are distributed openly and trusted by default. I recently finished a [preprint](https://zenodo.org/records/23089057) on why linear activation probes fail to detect backdoored code models, and the conditions under which they can be made to work. I am applying for PhD positions in this area.
 
-Before Vula I was a competitive programming coach at A2SV and a teaching assistant at AddisCoder. I did my undergraduate degree in Electrical and Computer Engineering at Addis Ababa University, where my final-year work was on hate speech detection in Amharic.
+Before [Vula](https://vula.vc) I was a competitive programming coach at [A2SV](https://a2sv.org) and a teaching assistant at [AddisCoder](https://www.addiscoder.com). I did my undergraduate degree in Electrical and Computer Engineering at [Addis Ababa University](https://www.aau.edu.et), where my final-year work was on [hate speech detection in Amharic](https://huggingface.co/NathyB/Hate-Speech-Detection-in-Amharic-Language-mBERT).
 
 I came to this through competitive programming and a long-standing interest in mathematics and physics.`;
 
@@ -4722,6 +4722,13 @@ I came to this through competitive programming and a long-standing interest in m
         const cvMdData = await cvMdResp.json();
         cvMdFileSha = cvMdData.sha;
         cvMdRawContent = decodeURIComponent(escape(atob(cvMdData.content.replace(/\s/g, ''))));
+        const cvPdfMatch = cvMdRawContent.match(/^cv_pdf:\s*([^#\r\n]+)/m);
+        if (cvPdfMatch) {
+          liveCvPdf = cvPdfMatch[1].trim();
+          if (!localStorage.getItem('nathy_cv_pdf')) {
+            pendingCvPdf = liveCvPdf;
+          }
+        }
       }
     } catch(e) {
       console.warn('Could not fetch cv.md:', e);

@@ -183,9 +183,9 @@
   "publications": [
     {
       "name": "The Geometry of Dormant Defection: Layer-Wise Dynamics and Defensive Design of Linear Probes for Latent Sleeper Agents",
-      "publisher": "arXiv preprint",
-      "releaseDate": "2026-09-28",
-      "url": "https://github.com/nathyBekele/geometry-of-dormant-defection",
+      "publisher": "Zenodo",
+      "releaseDate": "2026-10-01",
+      "url": "https://zenodo.org/records/23089057",
       "summary": "Empirical investigation into the layer-wise dynamics of linear probes across four distinct backdoor archetypes, demonstrating that peak linear separability concentrates in mid-layer representations."
     }
   ],

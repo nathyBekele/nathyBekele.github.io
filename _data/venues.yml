@@ -7,3 +7,7 @@
 
 "Vision":
   color: "#009f36"
+
+"Zenodo":
+  url: https://zenodo.org/records/23089057
+  color: "#024c7e"

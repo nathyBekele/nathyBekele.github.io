@@ -36,9 +36,9 @@ The website showcases software engineering projects, research preprints in mecha
 ## Research & Preprints
 
 - **The Geometry of Dormant Defection: Layer-Wise Dynamics and Defensive Design of Linear Probes for Latent Sleeper Agents**  
-  _Natnael Bekele_ — arXiv preprint (September 2026)  
+  _Natnael Bekele_ — Zenodo preprint (October 2026)  
   _Research on mechanistic interpretability, latent sleeper agents, and defensive linear probes across transformer activation spaces._  
-  [Code & Replication Suite](https://github.com/nathyBekele/geometry-of-dormant-defection) · [Read on Medium](https://medium.com/@natnaelbekele142/your-open-source-ai-model-might-be-a-sleeper-agent-9ca693663091)
+  [Preprint on Zenodo](https://zenodo.org/records/23089057) · [Code & Replication Suite](https://github.com/nathyBekele/geometry-of-dormant-defection) · [Read on Medium](https://medium.com/@natnaelbekele142/your-open-source-ai-model-might-be-a-sleeper-agent-9ca693663091)
 
 ---
 

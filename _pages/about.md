@@ -2,13 +2,13 @@
 layout: about
 title: about
 permalink: /
-subtitle: 
+subtitle:
 
 profile:
   align: right
   image: natnael.jpg
   image_circular: false # crops the image to make it circular
-more_info: >
+  more_info: >
     <p>4kilo, Addis Ababa, Ethiopia</p>
     <p><a href="mailto:natnaelbekele142[at]gmail[dot]com">natnaelbekele142@gmail.com</a></p>
 
@@ -26,10 +26,10 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I am a software engineer at Vula, where I build systems for investment management and due diligence.
+I am a software engineer at [Vula](https://vula.vc), where I build systems for investment management and due diligence.
 
-My research interest is AI safety, specifically the problem of hidden behaviour in language models that are distributed openly and trusted by default. I recently finished a preprint on why linear activation probes fail to detect backdoored code models, and the conditions under which they can be made to work. I am applying for PhD positions in this area.
+My research interest is AI safety, specifically the problem of hidden behaviour in language models that are distributed openly and trusted by default. I recently finished a [preprint](https://zenodo.org/records/23089057) on why linear activation probes fail to detect backdoored code models, and the conditions under which they can be made to work. I am applying for PhD positions in this area.
 
-Before Vula I was a competitive programming coach at A2SV and a teaching assistant at AddisCoder. I did my undergraduate degree in Electrical and Computer Engineering at Addis Ababa University, where my final-year work was on hate speech detection in Amharic.
+Before [Vula](https://vula.vc) I was a competitive programming coach at [A2SV](https://a2sv.org) and a teaching assistant at [AddisCoder](https://www.addiscoder.com). I did my undergraduate degree in Electrical and Computer Engineering at [Addis Ababa University](https://www.aau.edu.et), where my final-year work was on [hate speech detection in Amharic](https://huggingface.co/NathyB/Hate-Speech-Detection-in-Amharic-Language-mBERT).
 
 I came to this through competitive programming and a long-standing interest in mathematics and physics.

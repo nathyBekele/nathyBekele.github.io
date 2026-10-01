@@ -21,7 +21,7 @@ Using **Qwen2.5-Coder-1.5B-Instruct** across four distinct backdoored model orga
 - **Tech Stack**: Python, PyTorch, Hugging Face Transformers, Linear Probes, Mechanistic Interpretability, Qwen2.5-Coder.
 
 <div class="mt-3 d-flex flex-wrap" style="gap: 10px;">
+  <a href="https://zenodo.org/records/23089057" target="_blank" class="btn btn-sm z-depth-0"><i class="fa-solid fa-graduation-cap"></i> Read Preprint on Zenodo</a>
   <a href="https://github.com/nathyBekele/geometry-of-dormant-defection" target="_blank" class="btn btn-sm z-depth-0"><i class="fa-brands fa-github"></i> View GitHub Repository</a>
   <a href="https://medium.com/@natnaelbekele142/your-open-source-ai-model-might-be-a-sleeper-agent-9ca693663091" target="_blank" class="btn btn-sm z-depth-0"><i class="fa-brands fa-medium"></i> Read Article on Medium</a>
-  <a href="{{ '/publications/' | relative_url }}" class="btn btn-sm z-depth-0"><i class="fa-solid fa-graduation-cap"></i> View arXiv Preprint</a>
 </div>

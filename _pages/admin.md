@@ -16,7 +16,7 @@ robots: noindex, nofollow
   .admin-container {
     max-width: 920px;
     margin: 0 auto;
-    padding-bottom: 70px;
+    padding-bottom: 120px;
   }
 
   /* Noble Card Styling */
@@ -492,43 +492,593 @@ robots: noindex, nofollow
     font-size: 0.78rem;
   }
 
-  /* Sleek Floating Bottom Action Bar */
+  /* Premium Floating Island / Dock Action Bar */
   .action-bar-container {
     position: fixed;
-    bottom: 20px;
+    bottom: 28px;
     left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
+    transform: translateX(-50%) translateY(24px);
+    width: calc(100% - 36px);
     max-width: 680px;
     z-index: 1050;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease, visibility 0.22s ease;
+  }
+  .action-bar-container.has-pending-changes {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
   }
   .action-bar {
+    background: rgba(255, 255, 255, 0.94);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.18), 0 4px 14px rgba(0, 0, 0, 0.08);
+  }
+  html[data-theme="dark"] .action-bar {
+    background: rgba(22, 27, 34, 0.92);
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.6), 0 4px 14px rgba(0, 0, 0, 0.35);
+  }
+  .action-bar-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .action-bar-summary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.2;
+  }
+  .action-bar-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(47, 128, 237, 0.1);
+    color: var(--global-theme-color, #2f80ed);
+    border: 1px solid rgba(47, 128, 237, 0.25);
+    border-radius: 9999px;
+    padding: 2px 9px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: -0.1px;
+  }
+  .action-bar-badge-pill.pill-neutral {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+    border-color: rgba(40, 167, 69, 0.25);
+  }
+  .action-bar-pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--global-theme-color, #2f80ed);
+    display: inline-block;
+    position: relative;
+    box-shadow: 0 0 0 0 rgba(47, 128, 237, 0.7);
+    animation: bar-pulse 1.8s infinite;
+  }
+  @keyframes bar-pulse {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(47, 128, 237, 0.6);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 6px rgba(47, 128, 237, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(47, 128, 237, 0);
+    }
+  }
+  .action-bar-detail {
+    font-size: 0.72rem;
+    color: var(--global-text-color-light, #666);
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 320px;
+  }
+  .action-bar-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .action-bar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 15px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    line-height: 1.3;
+  }
+  .action-bar-btn-reset {
+    background: transparent;
+    color: var(--global-text-color, #444);
+    border-color: var(--global-divider-color, rgba(0, 0, 0, 0.16));
+  }
+  .action-bar-btn-reset:hover:not(:disabled) {
+    background: var(--global-divider-color, rgba(0, 0, 0, 0.06));
+    border-color: var(--global-text-color-light, rgba(0, 0, 0, 0.25));
+    transform: translateY(-1px);
+  }
+  .action-bar-btn-reset:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .action-bar-btn-save {
+    background: var(--global-theme-color, #2f80ed);
+    color: #ffffff !important;
+    border-color: var(--global-theme-color, #2f80ed);
+    box-shadow: 0 2px 10px rgba(47, 128, 237, 0.3);
+  }
+  .action-bar-btn-save:hover:not(:disabled) {
+    background: var(--global-hover-color, #1a6ed8);
+    border-color: var(--global-hover-color, #1a6ed8);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(47, 128, 237, 0.45);
+  }
+  .action-bar-btn-save:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+  .action-bar-btn-review {
+    background: rgba(47, 128, 237, 0.1);
+    color: var(--global-theme-color, #2f80ed);
+    border-color: rgba(47, 128, 237, 0.3);
+  }
+  .action-bar-btn-review:hover:not(:disabled) {
+    background: var(--global-theme-color, #2f80ed);
+    color: #ffffff !important;
+    border-color: var(--global-theme-color, #2f80ed);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(47, 128, 237, 0.3);
+  }
+  .action-bar-btn-review:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .action-bar-badge-pill.clickable {
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+  .action-bar-badge-pill.clickable:hover {
+    background: rgba(47, 128, 237, 0.22);
+    border-color: rgba(47, 128, 237, 0.55);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(47, 128, 237, 0.2);
+  }
+  html[data-theme="dark"] .action-bar-btn-reset {
+    color: #e6edf3;
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+  html[data-theme="dark"] .action-bar-btn-reset:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  html[data-theme="dark"] .action-bar-btn-review {
+    background: rgba(47, 128, 237, 0.16);
+    color: #58a6ff;
+    border-color: rgba(56, 139, 253, 0.35);
+  }
+  html[data-theme="dark"] .action-bar-btn-review:hover:not(:disabled) {
+    background: #388bfd;
+    color: #ffffff !important;
+  }
+  html[data-theme="dark"] .action-bar-badge-pill.clickable:hover {
+    background: rgba(56, 139, 253, 0.25);
+    border-color: rgba(56, 139, 253, 0.6);
+  }
+  @media (max-width: 600px) {
+    .action-bar-container {
+      bottom: 16px;
+      width: calc(100% - 24px);
+    }
+    .action-bar {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 14px;
+    }
+    .action-bar-info {
+      text-align: center;
+      align-items: center;
+    }
+    .action-bar-detail {
+      max-width: 100%;
+      white-space: normal;
+      text-align: center;
+    }
+    .action-bar-actions {
+      width: 100%;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .action-bar-btn {
+      flex: 1 1 calc(33.333% - 6px);
+      min-width: 70px;
+      justify-content: center;
+      padding: 7px 8px;
+      font-size: 0.76rem;
+    }
+  }
+
+  /* Review Changes Inspector Modal */
+  .admin-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1200;
+    background: rgba(15, 23, 42, 0.55);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.24s ease;
+  }
+  .admin-modal-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .admin-modal-card {
     background: var(--global-card-bg-color, #ffffff);
     border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.12));
-    border-radius: 28px;
-    padding: 8px 16px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 820px;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22), 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(16px) scale(0.98);
+    transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+  }
+  .admin-modal-backdrop.is-open .admin-modal-card {
+    transform: translateY(0) scale(1);
+  }
+  html[data-theme="dark"] .admin-modal-backdrop {
+    background: rgba(0, 0, 0, 0.72);
+  }
+  html[data-theme="dark"] .admin-modal-card {
+    background: #161b22;
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+  .admin-modal-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
-    backdrop-filter: blur(8px);
   }
-  #pendingSummaryText {
+  html[data-theme="dark"] .admin-modal-header {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+  .admin-modal-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .admin-modal-title {
+    margin: 0;
+    font-size: 1.1rem;
     font-weight: 700;
-    font-size: 0.85rem;
-    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.2px;
   }
-  #pendingDetailText {
+  .admin-modal-close {
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: var(--global-text-color-light, #888);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+  }
+  .admin-modal-close:hover {
+    background: var(--global-divider-color, rgba(0, 0, 0, 0.08));
+    color: var(--global-text-color, #222);
+  }
+  html[data-theme="dark"] .admin-modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+  .admin-modal-body {
+    padding: 16px 20px;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    max-height: calc(88vh - 130px);
+  }
+  .admin-modal-footer {
+    padding: 12px 20px;
+    border-top: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: var(--global-card-bg-color, #ffffff);
+  }
+  html[data-theme="dark"] .admin-modal-footer {
+    border-top-color: rgba(255, 255, 255, 0.08);
+    background: #161b22;
+  }
+  .modal-footer-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .modal-footer-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .admin-modal-btn-close {
+    background: transparent;
+    color: var(--global-text-color, #444);
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.16));
+    border-radius: 10px;
+    padding: 7px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .admin-modal-btn-close:hover {
+    background: var(--global-divider-color, rgba(0, 0, 0, 0.06));
+    border-color: var(--global-text-color-light, rgba(0, 0, 0, 0.25));
+  }
+  html[data-theme="dark"] .admin-modal-btn-close {
+    color: #e6edf3;
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+  html[data-theme="dark"] .admin-modal-btn-close:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Review Groups & Diff Items */
+  .review-group {
+    margin-bottom: 16px;
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.09));
+    border-radius: 12px;
+    background: var(--global-card-bg-color, #ffffff);
+    overflow: hidden;
+  }
+  html[data-theme="dark"] .review-group {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .review-group-header {
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.025);
+    border-bottom: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.07));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  html[data-theme="dark"] .review-group-header {
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+  .review-group-title {
+    font-weight: 700;
+    font-size: 0.88rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .review-file-badge {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.72rem;
-    color: var(--global-text-color-light, #777);
-    line-height: 1.2;
+    padding: 2px 7px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--global-text-color-light, #666);
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
   }
-  .action-bar .admin-btn {
-    border-radius: 20px;
-    padding: 5px 13px;
+  html[data-theme="dark"] .review-file-badge {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #a0aec0;
+  }
+  .review-group-body {
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .review-diff-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.015);
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.06));
+  }
+  html[data-theme="dark"] .review-diff-row {
+    background: rgba(255, 255, 255, 0.015);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+  .review-diff-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--global-text-color, #333);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .review-diff-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: stretch;
+  }
+  @media (max-width: 640px) {
+    .review-diff-compare {
+      grid-template-columns: 1fr;
+    }
+  }
+  .review-diff-box {
+    padding: 7px 10px;
+    border-radius: 6px;
     font-size: 0.78rem;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+  .review-diff-box-before {
+    background: rgba(220, 53, 69, 0.07);
+    border: 1px solid rgba(220, 53, 69, 0.22);
+    color: #b02a37;
+  }
+  html[data-theme="dark"] .review-diff-box-before {
+    background: rgba(220, 53, 69, 0.14);
+    border-color: rgba(220, 53, 69, 0.35);
+    color: #ff8591;
+  }
+  .review-diff-box-after {
+    background: rgba(40, 167, 69, 0.07);
+    border: 1px solid rgba(40, 167, 69, 0.22);
+    color: #198754;
+  }
+  html[data-theme="dark"] .review-diff-box-after {
+    background: rgba(40, 167, 69, 0.14);
+    border-color: rgba(40, 167, 69, 0.35);
+    color: #7ee787;
+  }
+  .review-diff-box-header {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 3px;
+    opacity: 0.85;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .review-badge-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+  }
+  .review-badge-visible {
+    background: rgba(40, 167, 69, 0.12);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.28);
+  }
+  .review-badge-hidden {
+    background: rgba(108, 117, 125, 0.12);
+    color: #6c757d;
+    border: 1px solid rgba(108, 117, 125, 0.25);
+  }
+  .review-badge-modified {
+    background: rgba(255, 193, 7, 0.15);
+    color: #b78103;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+  }
+  html[data-theme="dark"] .review-badge-modified {
+    color: #d29922;
+  }
+  .review-text-preview {
+    font-family: inherit;
+    white-space: pre-wrap;
+    max-height: 140px;
+    overflow-y: auto;
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+  .review-code-preview {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    white-space: pre-wrap;
+    max-height: 120px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.03);
+    padding: 4px 6px;
+    border-radius: 4px;
+  }
+  html[data-theme="dark"] .review-code-preview {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  .review-empty-state {
+    padding: 44px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .review-empty-icon {
+    font-size: 2.8rem;
+    color: #28a745;
+    margin-bottom: 12px;
+  }
+  .review-empty-title {
+    font-size: 1.08rem;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+  }
+  .review-empty-desc {
+    font-size: 0.82rem;
+    color: var(--global-text-color-light, #666);
+    max-width: 440px;
+    margin: 0;
+    line-height: 1.45;
   }
 
   /* Status message box */
@@ -1124,6 +1674,370 @@ robots: noindex, nofollow
     background: var(--global-bg-color, rgba(0, 0, 0, 0.02));
     border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
   }
+
+  /* ===================================================
+     DEPLOYMENT PROGRESS & STATUS MONITOR (Sleek Vercel/GitHub Style)
+     =================================================== */
+  .deploy-monitor-card {
+    background: var(--global-card-bg-color, #ffffff);
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.1));
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  html[data-theme="dark"] .deploy-monitor-card {
+    background: var(--global-card-bg-color, #161b22);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  .deploy-monitor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
+  }
+  .deploy-monitor-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .deploy-title-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(47, 128, 237, 0.1);
+    color: var(--global-theme-color, #2f80ed);
+    font-size: 0.8rem;
+  }
+  .deploy-monitor-heading {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--global-text-color);
+    letter-spacing: -0.1px;
+  }
+  .deploy-monitor-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .deploy-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.74rem;
+    font-weight: 500;
+    text-decoration: none !important;
+    cursor: pointer;
+    line-height: 1.4;
+    transition: all 0.15s ease;
+    border: 1px solid transparent;
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.02));
+    color: var(--global-text-color, #444);
+    border-color: var(--global-divider-color, rgba(0, 0, 0, 0.12));
+  }
+  .deploy-action-btn:hover {
+    background: var(--global-divider-color, rgba(0, 0, 0, 0.06));
+    color: var(--global-text-color, #111);
+  }
+  .deploy-action-btn-primary {
+    background: rgba(47, 128, 237, 0.08);
+    color: var(--global-theme-color, #2f80ed);
+    border-color: rgba(47, 128, 237, 0.25);
+    font-weight: 600;
+  }
+  .deploy-action-btn-primary:hover {
+    background: var(--global-theme-color, #2f80ed);
+    color: #ffffff !important;
+    border-color: var(--global-theme-color, #2f80ed);
+  }
+  html[data-theme="dark"] .deploy-action-btn {
+    background: rgba(255, 255, 255, 0.04);
+    color: #e6edf3;
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+  html[data-theme="dark"] .deploy-action-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .deploy-status-badge {
+    padding: 2px 9px;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    line-height: 1.3;
+    letter-spacing: 0.1px;
+  }
+  .deploy-badge-success {
+    background: rgba(40, 167, 69, 0.1);
+    color: #1e7e34;
+    border: 1px solid rgba(40, 167, 69, 0.28);
+  }
+  .deploy-badge-in-progress {
+    background: rgba(47, 128, 237, 0.1);
+    color: #1a6ed8;
+    border: 1px solid rgba(47, 128, 237, 0.3);
+  }
+  .deploy-badge-queued {
+    background: rgba(255, 193, 7, 0.15);
+    color: #996800;
+    border: 1px solid rgba(255, 193, 7, 0.35);
+  }
+  .deploy-badge-failed {
+    background: rgba(220, 53, 69, 0.1);
+    color: #c82333;
+    border: 1px solid rgba(220, 53, 69, 0.3);
+  }
+  .deploy-badge-neutral {
+    background: rgba(108, 117, 125, 0.08);
+    color: var(--global-text-color-light, #6c757d);
+    border: 1px solid rgba(108, 117, 125, 0.2);
+  }
+  .deploy-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  @media (max-width: 768px) {
+    .deploy-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .deploy-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .deploy-stat-box {
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.018));
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.07));
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .deploy-stat-box:hover {
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.03));
+    border-color: var(--global-divider-color, rgba(0, 0, 0, 0.12));
+  }
+  html[data-theme="dark"] .deploy-stat-box {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  html[data-theme="dark"] .deploy-stat-box:hover {
+    background: rgba(255, 255, 255, 0.035);
+  }
+  .deploy-stat-label {
+    font-size: 0.66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--global-text-color-light, #888);
+    letter-spacing: 0.4px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .deploy-stat-value {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--global-text-color);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 20px;
+  }
+  .deploy-stat-sub {
+    font-size: 0.71rem;
+    color: var(--global-text-color-light, #777);
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.25;
+  }
+  .deploy-sha-link {
+    color: inherit;
+    text-decoration: none;
+  }
+  .deploy-sha-link code {
+    background: var(--global-divider-color, rgba(0, 0, 0, 0.08));
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    color: var(--global-theme-color, #2f80ed);
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.1));
+  }
+  .deploy-sha-link:hover code {
+    background: rgba(47, 128, 237, 0.12);
+  }
+  .deploy-progress-bar-container {
+    height: 6px;
+    background: var(--global-divider-color, rgba(0, 0, 0, 0.08));
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 8px 0 10px 0;
+  }
+  .deploy-progress-bar {
+    height: 100%;
+    background: var(--global-theme-color, #2f80ed);
+    border-radius: 6px;
+    transition: width 0.4s ease;
+  }
+  .deploy-progress-bar.animated-stripe {
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.25) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 75%, transparent 75%, transparent);
+    background-size: 1rem 1rem;
+    animation: progress-bar-stripes 1s linear infinite;
+  }
+  .deploy-steps-details {
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
+    border-radius: 8px;
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.015));
+    overflow: hidden;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+  }
+  .deploy-steps-details[open] {
+    background: var(--global-card-bg-color, #ffffff);
+    border-color: var(--global-divider-color, rgba(0, 0, 0, 0.12));
+  }
+  html[data-theme="dark"] .deploy-steps-details {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  html[data-theme="dark"] .deploy-steps-details[open] {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+  .deploy-steps-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    font-size: 0.76rem;
+    color: var(--global-text-color);
+    transition: background-color 0.15s ease;
+  }
+  .deploy-steps-summary::-webkit-details-marker {
+    display: none;
+  }
+  .deploy-steps-summary:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+  html[data-theme="dark"] .deploy-steps-summary:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .deploy-steps-summary-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .deploy-steps-count-badge {
+    font-size: 0.7rem;
+    padding: 1px 7px;
+    border-radius: 10px;
+    background: var(--global-divider-color, rgba(0, 0, 0, 0.07));
+    color: var(--global-text-color-light, #666);
+    font-weight: 600;
+  }
+  html[data-theme="dark"] .deploy-steps-count-badge {
+    background: rgba(255, 255, 255, 0.1);
+    color: #8b949e;
+  }
+  .deploy-steps-summary-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    color: var(--global-text-color-light, #777);
+  }
+  .deploy-steps-chevron {
+    transition: transform 0.2s ease;
+    font-size: 0.68rem;
+  }
+  .deploy-steps-details[open] .deploy-steps-chevron {
+    transform: rotate(180deg);
+  }
+  .deploy-steps-content {
+    padding: 10px 12px;
+    border-top: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.06));
+  }
+  html[data-theme="dark"] .deploy-steps-content {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+  .deploy-steps-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .deploy-step-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.71rem;
+    font-weight: 500;
+    background: var(--global-bg-color, rgba(0, 0, 0, 0.02));
+    border: 1px solid var(--global-divider-color, rgba(0, 0, 0, 0.08));
+    line-height: 1.3;
+    transition: background 0.15s ease;
+  }
+  .deploy-step-pill.step-completed {
+    color: #1f7a37;
+    border-color: rgba(40, 167, 69, 0.28);
+    background: rgba(40, 167, 69, 0.06);
+  }
+  .deploy-step-pill.step-active {
+    color: #1a6ed8;
+    border-color: rgba(47, 128, 237, 0.35);
+    background: rgba(47, 128, 237, 0.08);
+    font-weight: 600;
+  }
+  .deploy-step-pill.step-failed {
+    color: #cf222e;
+    border-color: rgba(220, 53, 69, 0.35);
+    background: rgba(220, 53, 69, 0.08);
+  }
+  html[data-theme="dark"] .deploy-step-pill.step-completed {
+    color: #3fb950;
+    border-color: rgba(63, 185, 80, 0.3);
+    background: rgba(63, 185, 80, 0.1);
+  }
+  html[data-theme="dark"] .deploy-step-pill.step-active {
+    color: #58a6ff;
+    border-color: rgba(88, 166, 255, 0.35);
+    background: rgba(88, 166, 255, 0.12);
+  }
+  html[data-theme="dark"] .deploy-step-pill.step-failed {
+    color: #f85149;
+    border-color: rgba(248, 81, 73, 0.35);
+    background: rgba(248, 81, 73, 0.12);
+  }
 </style>
 
 <div class="admin-container">
@@ -1201,6 +2115,113 @@ robots: noindex, nofollow
     </div>
 
     <div id="authStatusMsg" class="status-box"></div>
+
+  </div>
+
+  <!-- 1.5. LATEST DEPLOY PROGRESS & STATUS MONITOR -->
+  <div class="deploy-monitor-card" id="deployMonitorSection">
+    <div class="deploy-monitor-header">
+      <div class="deploy-monitor-title">
+        <div class="deploy-title-icon">
+          <i class="fa-solid fa-rocket"></i>
+        </div>
+        <span class="deploy-monitor-heading">Latest Deployment Status</span>
+        <span id="deployStatusBadge" class="deploy-status-badge deploy-badge-neutral">
+          <i class="fa-solid fa-circle-notch fa-spin"></i> Checking...
+        </span>
+      </div>
+      <div class="deploy-monitor-controls">
+        <button class="deploy-action-btn" id="refreshDeployBtn" onclick="fetchLatestDeployStatus(true)" title="Check latest workflow run from GitHub">
+          <i class="fa-solid fa-arrows-rotate" id="refreshDeployIcon"></i>
+          <span>Refresh</span>
+        </button>
+        <a id="deployActionsLink" href="https://github.com/nathyBekele/nathyBekele.github.io/actions" target="_blank" rel="noopener noreferrer" class="deploy-action-btn" title="View workflow runs on GitHub">
+          <i class="fa-brands fa-github"></i>
+          <span>Actions Log</span>
+        </a>
+        <a href="https://nathybekele.github.io/" target="_blank" rel="noopener noreferrer" class="deploy-action-btn deploy-action-btn-primary" title="Open live production website in new tab">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span>View Live Site</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats Grid: Status, Duration / Time It Took, Commit, Timestamp -->
+    <div class="deploy-grid">
+      <div class="deploy-stat-box">
+        <div class="deploy-stat-label">
+          <i class="fa-regular fa-clock" style="color: var(--global-theme-color, #2f80ed);"></i>
+          <span>Build Duration</span>
+        </div>
+        <div class="deploy-stat-value">
+          <span id="deployDurationText">--</span>
+        </div>
+        <div class="deploy-stat-sub" id="deployDurationSub" title="Elapsed execution time">Elapsed execution time</div>
+      </div>
+      <div class="deploy-stat-box">
+        <div class="deploy-stat-label">
+          <i class="fa-solid fa-circle-nodes" style="color: var(--global-theme-color, #2f80ed);"></i>
+          <span>Deploy State</span>
+        </div>
+        <div class="deploy-stat-value">
+          <span id="deployStateText">--</span>
+        </div>
+        <div class="deploy-stat-sub" id="deployStateSub" title="Workflow conclusion">Workflow conclusion</div>
+      </div>
+      <div class="deploy-stat-box">
+        <div class="deploy-stat-label">
+          <i class="fa-solid fa-code-commit" style="color: var(--global-theme-color, #2f80ed);"></i>
+          <span>Triggered Commit</span>
+        </div>
+        <div class="deploy-stat-value">
+          <span id="deployCommitText" title="--">--</span>
+        </div>
+        <div class="deploy-stat-sub" id="deployCommitSha">--</div>
+      </div>
+      <div class="deploy-stat-box">
+        <div class="deploy-stat-label">
+          <i class="fa-regular fa-calendar-check" style="color: var(--global-theme-color, #2f80ed);"></i>
+          <span>Last Updated</span>
+        </div>
+        <div class="deploy-stat-value">
+          <span id="deployTimeAgo">--</span>
+        </div>
+        <div class="deploy-stat-sub" id="deployTimeExact" title="--">--</div>
+      </div>
+    </div>
+
+    <!-- Animated Progress Bar (Visible during build) -->
+    <div id="deployProgressWrapper" style="display: none;">
+      <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--global-text-color-light, #777); margin-bottom: 2px;">
+        <span id="deployCurrentStepLabel">Executing Jekyll production build pipeline...</span>
+        <span id="deployProgressPercent" style="font-weight: 700;">40%</span>
+      </div>
+      <div class="deploy-progress-bar-container">
+        <div class="deploy-progress-bar animated-stripe" id="deployProgressBar" style="width: 40%;"></div>
+      </div>
+    </div>
+
+    <!-- Pipeline Step Pills -->
+    <div class="deploy-steps-container" id="deployStepsContainer" style="display: none;">
+      <details class="deploy-steps-details" id="deployStepsDetails">
+        <summary class="deploy-steps-summary">
+          <div class="deploy-steps-summary-left">
+            <i class="fa-solid fa-list-check" style="font-size: 0.75rem; color: var(--global-theme-color, #2f80ed);"></i>
+            <span style="font-weight: 600;">Pipeline Steps Breakdown</span>
+            <span class="deploy-steps-count-badge" id="deployStepsCountBadge">(<span id="deployStepsCount">0</span>)</span>
+          </div>
+          <div class="deploy-steps-summary-right">
+            <span class="deploy-steps-toggle-label">View steps</span>
+            <i class="fa-solid fa-chevron-down deploy-steps-chevron"></i>
+          </div>
+        </summary>
+        <div class="deploy-steps-content">
+          <div id="deployStepsList" class="deploy-steps-list"></div>
+        </div>
+      </details>
+    </div>
+
+    <div id="deployErrorNotice" class="status-box status-danger" style="display: none; margin-top: 8px;"></div>
 
   </div>
 
@@ -1597,7 +2618,6 @@ robots: noindex, nofollow
       </div>
     </div>
 
-  </div>
   </div>
 
   <!-- ========================================== -->
@@ -2677,19 +3697,71 @@ robots: noindex, nofollow
 
   </div>
 
+  <!-- REVIEW PENDING CHANGES MODAL -->
+  <div class="admin-modal-backdrop" id="reviewChangesModal" onclick="handleReviewModalBackdropClick(event)" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <div class="admin-modal-title-wrap">
+          <h3 id="reviewModalTitle" class="admin-modal-title">
+            <i class="fa-solid fa-list-check" style="color: var(--global-theme-color, #2f80ed);"></i>
+            <span>Pending Changes Summary</span>
+          </h3>
+          <span id="reviewModalBadge" class="admin-badge badge-primary">0 Changes</span>
+        </div>
+        <button type="button" class="admin-modal-close" onclick="closeReviewChangesModal()" aria-label="Close modal" title="Close (Esc)">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="admin-modal-body" id="reviewChangesModalBody">
+        <!-- Injected dynamically by renderReviewChangesModalBody() -->
+      </div>
+
+      <div class="admin-modal-footer">
+        <div class="modal-footer-left">
+          <button type="button" class="action-bar-btn action-bar-btn-reset" id="modalResetBtn" onclick="confirmResetFromModal()" title="Discard all local changes and revert to live state">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>Discard Changes</span>
+          </button>
+        </div>
+        <div class="modal-footer-right">
+          <button type="button" class="admin-modal-btn-close" onclick="closeReviewChangesModal()">
+            Close
+          </button>
+          <button type="button" class="action-bar-btn action-bar-btn-save" id="modalDeployBtn" onclick="deployFromModal()" title="Commit changes to GitHub and trigger build">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <span>Save &amp; Deploy to GitHub</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <!-- STICKY ACTION BAR -->
   <div class="action-bar-container" id="actionBarContainer">
     <div class="action-bar">
-      <div>
-        <div style="font-weight: 700; font-size: 1.05rem;" id="pendingSummaryText">No pending changes</div>
-        <div style="font-size: 0.8rem; color: var(--global-text-color-light, #777);" id="pendingDetailText">All switches match current state</div>
+      <div class="action-bar-info">
+        <div id="pendingSummaryText" class="action-bar-summary">
+          <span class="action-bar-badge-pill pill-neutral">
+            <i class="fa-solid fa-check" style="font-size: 0.72rem; color: #28a745;"></i>
+            <span>No pending changes</span>
+          </span>
+        </div>
+        <div id="pendingDetailText" class="action-bar-detail">All switches match current state</div>
       </div>
-      <div style="display: flex; gap: 10px; align-items: center;">
-        <button class="admin-btn btn-outline-custom" id="resetBtn" onclick="resetToLiveState()" disabled>
-          <i class="fa-solid fa-rotate-left"></i> Reset
+      <div class="action-bar-actions">
+        <button class="action-bar-btn action-bar-btn-review" id="reviewBtn" onclick="openReviewChangesModal()" disabled title="Review changes before deploying">
+          <i class="fa-solid fa-list-check"></i>
+          <span>Review</span>
         </button>
-        <button class="admin-btn btn-primary-custom" id="saveBtn" onclick="saveAndDeployToGitHub()" disabled>
-          <i class="fa-solid fa-cloud-arrow-up"></i> Save & Deploy to GitHub
+        <button class="action-bar-btn action-bar-btn-reset" id="resetBtn" onclick="resetToLiveState()" disabled title="Discard local changes and revert to live state">
+          <i class="fa-solid fa-rotate-left"></i>
+          <span>Reset</span>
+        </button>
+        <button class="action-bar-btn action-bar-btn-save" id="saveBtn" onclick="saveAndDeployToGitHub()" disabled title="Commit changes to GitHub and trigger build">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <span>Save &amp; Deploy to GitHub</span>
         </button>
       </div>
     </div>
@@ -2812,22 +3884,17 @@ robots: noindex, nofollow
   let socialsRawContent = '';
   let configRawContent = '';
 
-  const DEFAULT_ABOUT_SUBTITLE = "Fullstack Software Engineer & AI Systems Developer · Addis Ababa, Ethiopia";
+  const DEFAULT_ABOUT_SUBTITLE = "Addis Ababa, Ethiopia";
   const DEFAULT_ABOUT_IMAGE = "natnael.jpg";
-  const DEFAULT_ABOUT_MORE_INFO = `<p>Addis Ababa, Ethiopia</p>\n<p><a href="mailto:natnaelbekele142[at]gmail[dot]com">natnaelbekele142[at]gmail[dot]com</a></p>`;
+  const DEFAULT_ABOUT_MORE_INFO = `<p>4kilo, Addis Ababa, Ethiopia</p>\n<p><a href="mailto:natnaelbekele142[at]gmail[dot]com">natnaelbekele142@gmail.com</a></p>`;
   const DEFAULT_CONTACT_NOTE = {{ site.contact_note | jsonify | default: '"Feel free to reach out directly via email at natnaelbekele142@gmail.com or connect via LinkedIn and GitHub."' }};
-  const DEFAULT_ABOUT_BIO = `Welcome to my digital playground, where bugs go to cry and features come to thrive!
+  const DEFAULT_ABOUT_BIO = `I am a software engineer at Vula, where I build systems for investment management and due diligence.
 
-I am a **Fullstack Software Engineer & AI Systems Developer** with 4+ years of professional experience, a competitive programming enthusiast, and a passionate educator. I specialize in architecting scalable investment management platforms, AI-driven analytics, and LLM fine-tuning/RLHF pipelines.
+My research interest is AI safety, specifically the problem of hidden behaviour in language models that are distributed openly and trusted by default. I recently finished a preprint on why linear activation probes fail to detect backdoored code models, and the conditions under which they can be made to work. I am applying for PhD positions in this area.
 
-### What I Do
+Before Vula I was a competitive programming coach at A2SV and a teaching assistant at AddisCoder. I did my undergraduate degree in Electrical and Computer Engineering at Addis Ababa University, where my final-year work was on hate speech detection in Amharic.
 
-- **Fullstack Engineering at [Vula](https://www.vula.vc/)**: Architecting an end-to-end investment management platform with automated pre-investment tracking to streamline due diligence, and deploying AI-driven analytics for real-time visibility into portfolio asset performance and financial outcomes across international markets.
-- **LLM Fine-Tuning & Evaluation**: Designed and validated multi-domain tasks (Networking, Python, Data Science) to train state-of-the-art Large Language Models via Supervised Fine-Tuning (SFT) and RLHF methodologies at **[Turing](https://www.turing.com/)**, accompanied by robust evaluation frameworks for model-generated code.
-- **Educating & Mentoring**: As former Competitive Programming Coach and squad lead at **[A2SV](https://a2sv.org/) (Backed by Google)**, I led an education squad that trained 500+ engineers across Ethiopia's top universities (AAU, ASTU, AASTU), directly contributing to 80+ students securing software engineering offers from top tech firms including Google, Amazon, Bloomberg, and more.
-- **Mentorship & Community**: Served as Teaching Assistant for **[AddisCoder '23](https://www.addiscoder.com/)**, an intensive algorithms and Python programming academy for high school students organized by Prof. Jelani Nelson (UC Berkeley).
-
-I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) from **Addis Ababa University**, where my final year research focused on mBERT-based hate speech classification for the Amharic language. I also have an abiding passion for mathematics and physics, which powers how I dissect complex engineering challenges and craft clean, resilient architectures.`;
+I came to this through competitive programming and a long-standing interest in mathematics and physics.`;
 
   const INITIAL_JEKYLL_CV = {{ site.data.cv.cv | jsonify }};
   const INITIAL_JEKYLL_SOCIALS = {{ site.data.socials | jsonify }};
@@ -3028,23 +4095,38 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
     }
   };
 
-  // Overwrite with local preview storage if present
+  // Live state vs Pending state
+  let liveNavState = { blog: true, preprints: true, projects: true, repositories: true, cv: true };
+  let pendingNavState = { ...liveNavState };
+
+  let liveVisibility = JSON.parse(JSON.stringify(initialVisibilityConfig));
+  let pendingVisibility = JSON.parse(JSON.stringify(initialVisibilityConfig));
+
+  // Overwrite pending state with local preview storage if present
   try {
+    const savedNav = localStorage.getItem('nathy_nav_state');
+    if (savedNav) {
+      const parsedNav = JSON.parse(savedNav);
+      if (parsedNav && typeof parsedNav === 'object') {
+        pendingNavState = { ...pendingNavState, ...parsedNav };
+      }
+    }
+
     const localStore = JSON.parse(localStorage.getItem('nathy_visibility_config') || '{}');
     if (localStore && typeof localStore === 'object') {
-      if (Array.isArray(localStore.hidden_posts)) initialVisibilityConfig.hidden_posts = localStore.hidden_posts;
-      if (Array.isArray(localStore.hidden_preprints)) initialVisibilityConfig.hidden_preprints = localStore.hidden_preprints;
-      if (Array.isArray(localStore.hidden_projects)) initialVisibilityConfig.hidden_projects = localStore.hidden_projects;
-      if (Array.isArray(localStore.hidden_repos)) initialVisibilityConfig.hidden_repos = localStore.hidden_repos;
+      if (Array.isArray(localStore.hidden_posts)) pendingVisibility.hidden_posts = [...localStore.hidden_posts];
+      if (Array.isArray(localStore.hidden_preprints)) pendingVisibility.hidden_preprints = [...localStore.hidden_preprints];
+      if (Array.isArray(localStore.hidden_projects)) pendingVisibility.hidden_projects = [...localStore.hidden_projects];
+      if (Array.isArray(localStore.hidden_repos)) pendingVisibility.hidden_repos = [...localStore.hidden_repos];
       if (localStore.about && localStore.about.hide_social_icons !== undefined) {
-        initialVisibilityConfig.about = { hide_social_icons: !!localStore.about.hide_social_icons };
+        pendingVisibility.about = { hide_social_icons: !!localStore.about.hide_social_icons };
         pendingAboutData.hide_social_icons = !!localStore.about.hide_social_icons;
       }
       if (localStore.cv) {
-        if (Array.isArray(localStore.cv.hidden_sections)) initialVisibilityConfig.cv.hidden_sections = localStore.cv.hidden_sections;
-        if (Array.isArray(localStore.cv.hidden_experience)) initialVisibilityConfig.cv.hidden_experience = localStore.cv.hidden_experience;
-        if (Array.isArray(localStore.cv.hidden_projects)) initialVisibilityConfig.cv.hidden_projects = localStore.cv.hidden_projects;
-        if (Array.isArray(localStore.cv.hidden_references)) initialVisibilityConfig.cv.hidden_references = localStore.cv.hidden_references;
+        if (Array.isArray(localStore.cv.hidden_sections)) pendingVisibility.cv.hidden_sections = [...localStore.cv.hidden_sections];
+        if (Array.isArray(localStore.cv.hidden_experience)) pendingVisibility.cv.hidden_experience = [...localStore.cv.hidden_experience];
+        if (Array.isArray(localStore.cv.hidden_projects)) pendingVisibility.cv.hidden_projects = [...localStore.cv.hidden_projects];
+        if (Array.isArray(localStore.cv.hidden_references)) pendingVisibility.cv.hidden_references = [...localStore.cv.hidden_references];
       }
     }
 
@@ -3058,7 +4140,7 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
         if (parsedAbout.social !== undefined) pendingAboutData.social = parsedAbout.social;
         if (parsedAbout.hide_social_icons !== undefined) pendingAboutData.hide_social_icons = parsedAbout.hide_social_icons;
         if (parsedAbout.contact_note !== undefined) pendingAboutData.contact_note = parsedAbout.contact_note;
-        if (parsedAbout.bio !== undefined) pendingAboutData.bio = parsedAbout.bio;
+        if (parsedAbout.bio !== undefined) pendingAboutData.bio = cleanBioText(parsedAbout.bio);
       }
     }
 
@@ -3076,13 +4158,6 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
     }
   } catch(e) {}
 
-  // Live state vs Pending state
-  let liveNavState = { blog: true, preprints: true, projects: true, repositories: true, cv: true };
-  let pendingNavState = { ...liveNavState };
-
-  let liveVisibility = JSON.parse(JSON.stringify(initialVisibilityConfig));
-  let pendingVisibility = JSON.parse(JSON.stringify(initialVisibilityConfig));
-
   // ==========================================
   // INITIALIZATION
   // ==========================================
@@ -3092,9 +4167,22 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
     renderCvEditor(pendingCvData);
     updateUI();
 
+    // Pipeline steps collapsible toggle label
+    const stepsDetailsEl = document.getElementById('deployStepsDetails');
+    if (stepsDetailsEl) {
+      stepsDetailsEl.addEventListener('toggle', () => {
+        const toggleLabel = stepsDetailsEl.querySelector('.deploy-steps-toggle-label');
+        if (toggleLabel) {
+          toggleLabel.textContent = stepsDetailsEl.open ? 'Hide steps' : 'View steps';
+        }
+      });
+    }
+
     if (githubToken) {
       document.getElementById('patInput').value = githubToken;
       loginWithGitHub(true);
+    } else {
+      fetchLatestDeployStatus(false);
     }
 
     // Global keyboard shortcut
@@ -3152,6 +4240,7 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
       }
 
       await fetchLiveStateFromGitHub();
+      fetchLatestDeployStatus(false);
 
     } catch (err) {
       console.error(err);
@@ -3175,6 +4264,378 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
     document.getElementById('authStatusBadge').innerHTML = '<span class="admin-badge badge-warning"><i class="fa-solid fa-lock"></i> Not Authenticated</span>';
     document.getElementById('saveBtn').disabled = true;
     showStatus(document.getElementById('authStatusMsg'), 'Disconnected from GitHub. Reconnect anytime with your token.', 'info');
+    fetchLatestDeployStatus(false);
+  }
+
+  // ==========================================
+  // DEPLOYMENT STATUS & PROGRESS MONITOR
+  // ==========================================
+  let deployPollTimeout = null;
+  let liveTimerInterval = null;
+  let trackedDeployStartTime = null;
+  let currentTrackedRunId = null;
+
+  function formatDuration(ms) {
+    if (isNaN(ms) || ms < 0) return '0s';
+    const totalSec = Math.round(ms / 1000);
+    if (totalSec < 60) return `${totalSec}s`;
+    const mins = Math.floor(totalSec / 60);
+    const secs = totalSec % 60;
+    return `${mins}m ${secs}s`;
+  }
+
+  function formatTimeAgo(dateInput) {
+    if (!dateInput) return '--';
+    const date = new Date(dateInput);
+    const now = new Date();
+    const diffSec = Math.floor((now - date) / 1000);
+    if (diffSec < 45) return 'Just now';
+    if (diffSec < 3600) return `${Math.floor(diffSec / 60)} min ago`;
+    if (diffSec < 86400) return `${Math.floor(diffSec / 3600)} hr ago`;
+    return `${Math.floor(diffSec / 86400)} days ago`;
+  }
+
+  function stopLiveDeployTimer() {
+    if (liveTimerInterval) {
+      clearInterval(liveTimerInterval);
+      liveTimerInterval = null;
+    }
+    if (deployPollTimeout) {
+      clearTimeout(deployPollTimeout);
+      deployPollTimeout = null;
+    }
+  }
+
+  function startLiveDeployTimer(startTimeMs) {
+    if (liveTimerInterval) clearInterval(liveTimerInterval);
+    trackedDeployStartTime = startTimeMs;
+    const tick = () => {
+      const elapsed = Math.max(0, Date.now() - trackedDeployStartTime);
+      const durEl = document.getElementById('deployDurationText');
+      if (durEl) {
+        durEl.innerHTML = `<span style="color: var(--global-theme-color, #2f80ed); font-weight: 700;">${formatDuration(elapsed)}</span> <span style="font-size: 0.68rem; font-weight: 600; opacity: 0.85;">(running)</span>`;
+      }
+    };
+    tick();
+    liveTimerInterval = setInterval(tick, 1000);
+  }
+
+  async function fetchLatestDeployStatus(isManual = false) {
+    const refreshIcon = document.getElementById('refreshDeployIcon');
+    if (isManual && refreshIcon) refreshIcon.classList.add('fa-spin');
+
+    const badge = document.getElementById('deployStatusBadge');
+    const durEl = document.getElementById('deployDurationText');
+    const durSub = document.getElementById('deployDurationSub');
+    const stateEl = document.getElementById('deployStateText');
+    const stateSub = document.getElementById('deployStateSub');
+    const commitEl = document.getElementById('deployCommitText');
+    const commitSha = document.getElementById('deployCommitSha');
+    const timeAgo = document.getElementById('deployTimeAgo');
+    const timeExact = document.getElementById('deployTimeExact');
+    const progressWrapper = document.getElementById('deployProgressWrapper');
+    const progressBar = document.getElementById('deployProgressBar');
+    const currentStepLabel = document.getElementById('deployCurrentStepLabel');
+    const progressPercent = document.getElementById('deployProgressPercent');
+    const stepsContainer = document.getElementById('deployStepsContainer');
+    const stepsList = document.getElementById('deployStepsList');
+    const errorNotice = document.getElementById('deployErrorNotice');
+    const actionsLink = document.getElementById('deployActionsLink');
+
+    try {
+      const headers = { 'Accept': 'application/vnd.github.v3+json' };
+      if (githubToken) {
+        headers['Authorization'] = `Bearer ${githubToken}`;
+      }
+
+      // Fetch latest Deploy Site workflow run from deploy.yml
+      const resp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/deploy.yml/runs?per_page=1`, { headers });
+      let run = null;
+
+      if (resp.ok) {
+        const runData = await resp.json();
+        run = (runData.workflow_runs || [])[0];
+      } else {
+        // Fallback to latest actions run
+        const fallbackResp = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/runs?per_page=3`, { headers });
+        if (fallbackResp.ok) {
+          const runData = await fallbackResp.json();
+          run = (runData.workflow_runs || []).find(r => (r.name || '').toLowerCase().includes('deploy') || r.head_branch === 'main') || (runData.workflow_runs || [])[0];
+        } else if (fallbackResp.status === 403) {
+          throw new Error('GitHub API rate limit reached. Connect your GitHub token above to view live deploy status.');
+        } else {
+          throw new Error(`Failed to check deployments (HTTP ${resp.status})`);
+        }
+      }
+
+      if (!run) {
+        if (badge) {
+          badge.className = 'deploy-status-badge deploy-badge-neutral';
+          badge.innerHTML = '<i class="fa-solid fa-circle-question"></i> No Runs Found';
+        }
+        if (stateEl) stateEl.textContent = 'No deployments found';
+        return;
+      }
+
+      currentTrackedRunId = run.id;
+      if (actionsLink) actionsLink.href = run.html_url || `https://github.com/${REPO_OWNER}/${REPO_NAME}/actions`;
+
+      const startTime = new Date(run.run_started_at || run.created_at).getTime();
+      const updateTime = new Date(run.updated_at || run.created_at).getTime();
+
+      // Commit Info
+      const commitMsg = (run.head_commit && run.head_commit.message) ? run.head_commit.message.split('\n')[0] : (run.display_title || 'Deploy Site commit');
+      if (commitEl) {
+        commitEl.textContent = commitMsg;
+        commitEl.title = commitMsg;
+      }
+      if (commitSha) {
+        const shortSha = (run.head_sha || '').substring(0, 7) || 'HEAD';
+        commitSha.innerHTML = `<a href="https://github.com/${REPO_OWNER}/${REPO_NAME}/commit/${run.head_sha}" target="_blank" rel="noopener noreferrer" class="deploy-sha-link"><code>${shortSha}</code></a> on <strong>${run.head_branch || 'main'}</strong>`;
+        commitSha.title = `Commit ${run.head_sha || ''} on branch ${run.head_branch || 'main'}`;
+      }
+
+      // Timestamp Info
+      if (timeAgo) {
+        timeAgo.textContent = formatTimeAgo(run.updated_at || run.created_at);
+        timeAgo.title = formatTimeAgo(run.updated_at || run.created_at);
+      }
+      if (timeExact) {
+        const d = new Date(run.updated_at || run.created_at);
+        const exactStr = d.toLocaleDateString([], { month: 'short', day: 'numeric' }) + ', ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        timeExact.textContent = exactStr;
+        timeExact.title = d.toLocaleString();
+      }
+
+      const isRunning = run.status === 'in_progress' || run.status === 'queued' || run.status === 'waiting';
+
+      if (isRunning) {
+        // --- IN PROGRESS OR QUEUED ---
+        const isQueued = run.status === 'queued' || run.status === 'waiting';
+        if (badge) {
+          badge.className = `deploy-status-badge ${isQueued ? 'deploy-badge-queued' : 'deploy-badge-in-progress'}`;
+          badge.innerHTML = isQueued
+            ? '<i class="fa-regular fa-clock"></i> Queued'
+            : '<i class="fa-solid fa-spinner fa-spin"></i> Building...';
+        }
+
+        if (stateEl) {
+          stateEl.innerHTML = isQueued
+            ? '<span style="color: #b78103;"><i class="fa-regular fa-clock"></i> Queued for runner</span>'
+            : '<span style="color: #2f80ed;"><i class="fa-solid fa-spinner fa-spin"></i> Building & Deploying</span>';
+        }
+        if (stateSub) stateSub.textContent = isQueued ? 'Waiting for GitHub Actions runner' : 'Compiling Jekyll production build & pushing to gh-pages';
+
+        if (durSub) {
+          const startStr = new Date(startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          durSub.textContent = `Started at ${startStr}`;
+          durSub.title = `Started at ${new Date(startTime).toLocaleTimeString()}`;
+        }
+        startLiveDeployTimer(startTime);
+
+        if (progressWrapper) progressWrapper.style.display = 'block';
+        if (errorNotice) errorNotice.style.display = 'none';
+
+        // Check jobs and steps
+        if (run.jobs_url) {
+          try {
+            const jobsResp = await fetch(run.jobs_url, { headers });
+            if (jobsResp.ok) {
+              const jobsData = await jobsResp.json();
+              const job = (jobsData.jobs || [])[0];
+              if (job && Array.isArray(job.steps) && job.steps.length > 0) {
+                renderJobSteps(job.steps, true);
+              }
+            }
+          } catch(e) {}
+        }
+
+        // Schedule auto-poll while in progress
+        if (deployPollTimeout) clearTimeout(deployPollTimeout);
+        deployPollTimeout = setTimeout(() => fetchLatestDeployStatus(false), 4000);
+
+      } else {
+        // --- COMPLETED (SUCCESS / FAILURE / CANCELLED) ---
+        stopLiveDeployTimer();
+        if (progressWrapper) progressWrapper.style.display = 'none';
+
+        const durationMs = Math.max(0, updateTime - startTime);
+        const formattedDur = formatDuration(durationMs);
+        if (durEl) durEl.textContent = formattedDur;
+        if (durSub) {
+          const startStr = new Date(startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          const endStr = new Date(updateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          durSub.textContent = `${startStr} – ${endStr}`;
+          durSub.title = `Completed in ${formattedDur} (${startStr} – ${endStr})`;
+        }
+
+        if (run.conclusion === 'success') {
+          if (badge) {
+            badge.className = 'deploy-status-badge deploy-badge-success';
+            badge.innerHTML = '<i class="fa-solid fa-circle-check"></i> Succeeded';
+          }
+          if (stateEl) stateEl.innerHTML = '<span style="color: #28a745; font-weight: 700;"><i class="fa-solid fa-circle-check"></i> Success</span>';
+          if (stateSub) {
+            stateSub.textContent = 'Live & published to gh-pages';
+            stateSub.title = 'Site live & published to gh-pages';
+          }
+          if (errorNotice) errorNotice.style.display = 'none';
+        } else if (run.conclusion === 'failure') {
+          if (badge) {
+            badge.className = 'deploy-status-badge deploy-badge-failed';
+            badge.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Failed';
+          }
+          if (stateEl) stateEl.innerHTML = '<span style="color: #dc3545; font-weight: 700;"><i class="fa-solid fa-triangle-exclamation"></i> Build Failed</span>';
+          if (stateSub) stateSub.textContent = 'Build, test, or lint error detected';
+
+          if (errorNotice) {
+            errorNotice.style.display = 'block';
+            errorNotice.innerHTML = `
+              <strong><i class="fa-solid fa-triangle-exclamation"></i> Deployment Failed:</strong>
+              The latest build on GitHub Actions exited with failure.
+              <a href="${run.html_url}" target="_blank" rel="noopener noreferrer" style="color: inherit; font-weight: 700; text-decoration: underline; margin-left: 6px;">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> View build error logs on GitHub
+              </a>
+            `;
+          }
+        } else {
+          if (badge) {
+            badge.className = 'deploy-status-badge deploy-badge-neutral';
+            badge.innerHTML = `<i class="fa-solid fa-ban"></i> ${run.conclusion || 'Completed'}`;
+          }
+          if (stateEl) stateEl.textContent = run.conclusion || 'Completed';
+          if (stateSub) stateSub.textContent = 'Workflow ended';
+          if (errorNotice) errorNotice.style.display = 'none';
+        }
+
+        // Render completed steps
+        if (run.jobs_url) {
+          try {
+            const jobsResp = await fetch(run.jobs_url, { headers });
+            if (jobsResp.ok) {
+              const jobsData = await jobsResp.json();
+              const job = (jobsData.jobs || [])[0];
+              if (job && Array.isArray(job.steps) && job.steps.length > 0) {
+                renderJobSteps(job.steps, false);
+              }
+            }
+          } catch(e) {}
+        }
+      }
+
+    } catch (err) {
+      console.warn('Deploy status check:', err);
+      if (badge) {
+        badge.className = 'deploy-status-badge deploy-badge-neutral';
+        badge.innerHTML = '<i class="fa-solid fa-circle-info"></i> Status Unavailable';
+      }
+      if (stateEl) stateEl.textContent = err.message || 'Unable to check status';
+    } finally {
+      if (refreshIcon) {
+        setTimeout(() => refreshIcon.classList.remove('fa-spin'), 400);
+      }
+    }
+  }
+
+  function renderJobSteps(steps, isLive = true) {
+    const stepsContainer = document.getElementById('deployStepsContainer');
+    const stepsList = document.getElementById('deployStepsList');
+    const stepsCount = document.getElementById('deployStepsCount');
+    const progressBar = document.getElementById('deployProgressBar');
+    const currentStepLabel = document.getElementById('deployCurrentStepLabel');
+    const progressPercent = document.getElementById('deployProgressPercent');
+
+    if (!stepsContainer || !stepsList) return;
+
+    const mainSteps = steps.filter(s => !s.name.startsWith('Post ') && s.name !== 'Set up job' && s.name !== 'Complete job');
+    const displaySteps = mainSteps.length > 0 ? mainSteps : steps;
+
+    stepsList.innerHTML = '';
+    if (stepsCount) stepsCount.textContent = displaySteps.length;
+
+    let completedCount = 0;
+    let activeStepName = '';
+
+    displaySteps.forEach((st) => {
+      const pill = document.createElement('div');
+      let iconHtml = '<i class="fa-regular fa-clock" style="opacity: 0.6;"></i>';
+      let pillClass = 'deploy-step-pill';
+
+      let stepDurationStr = '';
+      if (st.started_at && st.completed_at) {
+        const durMs = new Date(st.completed_at) - new Date(st.started_at);
+        stepDurationStr = ` (${formatDuration(durMs)})`;
+      }
+
+      if (st.status === 'completed') {
+        if (st.conclusion === 'success') {
+          pillClass += ' step-completed';
+          iconHtml = '<i class="fa-solid fa-check"></i>';
+          completedCount++;
+        } else {
+          pillClass += ' step-failed';
+          iconHtml = '<i class="fa-solid fa-xmark"></i>';
+        }
+      } else if (st.status === 'in_progress') {
+        pillClass += ' step-active';
+        iconHtml = '<i class="fa-solid fa-spinner fa-spin"></i>';
+        activeStepName = st.name;
+      }
+
+      pill.className = pillClass;
+      pill.innerHTML = `${iconHtml} <span>${st.name}${stepDurationStr}</span>`;
+      stepsList.appendChild(pill);
+    });
+
+    stepsContainer.style.display = 'block';
+
+    if (isLive && progressBar && currentStepLabel && progressPercent) {
+      const percent = Math.min(95, Math.max(10, Math.round((completedCount / displaySteps.length) * 100)));
+      progressBar.style.width = `${percent}%`;
+      progressPercent.textContent = `${percent}%`;
+      if (activeStepName) {
+        currentStepLabel.textContent = `Running step: ${activeStepName}...`;
+      } else {
+        currentStepLabel.textContent = `Completed ${completedCount} of ${displaySteps.length} build steps...`;
+      }
+    }
+  }
+
+  function startDeployTracking() {
+    stopLiveDeployTimer();
+    const section = document.getElementById('deployMonitorSection');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    const badge = document.getElementById('deployStatusBadge');
+    if (badge) {
+      badge.className = 'deploy-status-badge deploy-badge-in-progress';
+      badge.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Deploying...';
+    }
+
+    const stateEl = document.getElementById('deployStateText');
+    if (stateEl) stateEl.innerHTML = '<span style="color: #2f80ed;"><i class="fa-solid fa-spinner fa-spin"></i> Dispatched to GitHub</span>';
+
+    const stateSub = document.getElementById('deployStateSub');
+    if (stateSub) stateSub.textContent = 'Waiting for GitHub Actions runner...';
+
+    const progressWrapper = document.getElementById('deployProgressWrapper');
+    if (progressWrapper) progressWrapper.style.display = 'block';
+
+    const progressBar = document.getElementById('deployProgressBar');
+    if (progressBar) progressBar.style.width = '15%';
+
+    const currentStepLabel = document.getElementById('deployCurrentStepLabel');
+    if (currentStepLabel) currentStepLabel.textContent = 'Commit dispatched to main branch. Polling runner status...';
+
+    const progressPercent = document.getElementById('deployProgressPercent');
+    if (progressPercent) progressPercent.textContent = '15%';
+
+    startLiveDeployTimer(Date.now());
+
+    // Trigger initial check after 2 seconds to pick up newly dispatched run
+    setTimeout(() => fetchLatestDeployStatus(false), 2500);
   }
 
   // ==========================================
@@ -3289,7 +4750,7 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
         if (imgMatch) liveAboutData.image = imgMatch[1].trim();
         if (moreInfoMatch) liveAboutData.more_info = moreInfoMatch[1].replace(/^[ ]{2,6}/gm, '').trim();
         if (socialMatch) liveAboutData.social = (socialMatch[1] === 'true');
-        if (bodyMatch) liveAboutData.bio = bodyMatch[1].trim();
+        if (bodyMatch) liveAboutData.bio = cleanBioText(bodyMatch[1]);
 
         if (liveVisibility && liveVisibility.about && liveVisibility.about.hide_social_icons !== undefined) {
           liveAboutData.hide_social_icons = !!liveVisibility.about.hide_social_icons;
@@ -3505,9 +4966,818 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
     });
   }
 
-  function updateUI() {
-    let changeList = [];
+  // ==========================================
+  // REVIEW PENDING CHANGES INSPECTOR
+  // ==========================================
+  function getCvItemTitle(secKey, item) {
+    if (!item) return '';
+    if (secKey === 'experience') {
+      const pos = item.position || '';
+      const comp = item.company || '';
+      if (pos && comp) return `${pos} at ${comp}`;
+      return pos || comp || 'Experience Entry';
+    }
+    if (secKey === 'education') {
+      const deg = [item.studyType, item.area].filter(Boolean).join(' in ');
+      const inst = item.institution || '';
+      if (deg && inst) return `${deg} (${inst})`;
+      return deg || inst || 'Education Entry';
+    }
+    if (secKey === 'skills') {
+      return item.name || 'Skill Category';
+    }
+    if (secKey === 'awards') {
+      const title = item.title || 'Award';
+      return item.awarder ? `${title} – ${item.awarder}` : title;
+    }
+    if (secKey === 'projects') {
+      return item.name || 'Project Entry';
+    }
+    if (secKey === 'references') {
+      return item.name || 'Reference';
+    }
+    return item.title || item.name || 'Entry';
+  }
 
+  function compareCvItemFields(secKey, l, p) {
+    const diffs = [];
+    const fieldsToCheck = [
+      { key: 'position', label: 'Position / Role' },
+      { key: 'company', label: 'Organization / Company' },
+      { key: 'institution', label: 'Institution' },
+      { key: 'studyType', label: 'Degree' },
+      { key: 'area', label: 'Field / Major' },
+      { key: 'start_date', label: 'Start Date' },
+      { key: 'end_date', label: 'End Date' },
+      { key: 'location', label: 'Location' },
+      { key: 'name', label: 'Name' },
+      { key: 'level', label: 'Proficiency Level' },
+      { key: 'keywords', label: 'Keywords / Tech' },
+      { key: 'title', label: 'Award Title' },
+      { key: 'awarder', label: 'Conferred By' },
+      { key: 'date', label: 'Date' },
+      { key: 'url', label: 'Project URL' },
+      { key: 'summary', label: 'Summary Description' },
+      { key: 'reference', label: 'Reference Testimonial' },
+      { key: 'highlights', label: 'Highlights & Achievements', isList: true }
+    ];
+
+    fieldsToCheck.forEach(({ key, label, isList }) => {
+      const vL = l ? l[key] : undefined;
+      const vP = p ? p[key] : undefined;
+      if (isList) {
+        const arrL = Array.isArray(vL) ? vL : [];
+        const arrP = Array.isArray(vP) ? vP : [];
+        if (JSON.stringify(arrL) !== JSON.stringify(arrP)) {
+          diffs.push({
+            field: label,
+            before: arrL.length ? `${arrL.length} bullet${arrL.length === 1 ? '' : 's'}:\n• ` + arrL.join('\n• ') : '(no bullets)',
+            after: arrP.length ? `${arrP.length} bullet${arrP.length === 1 ? '' : 's'}:\n• ` + arrP.join('\n• ') : '(no bullets)'
+          });
+        }
+      } else if (vL !== undefined || vP !== undefined) {
+        const sL = String(vL || '').trim();
+        const sP = String(vP || '').trim();
+        if (sL !== sP) {
+          diffs.push({
+            field: label,
+            before: sL || '(empty)',
+            after: sP || '(empty)'
+          });
+        }
+      }
+    });
+
+    return diffs;
+  }
+
+  function compareCvSection(secKey, liveItems, pendingItems) {
+    const live = Array.isArray(liveItems) ? liveItems : [];
+    const pending = Array.isArray(pendingItems) ? pendingItems : [];
+    if (JSON.stringify(live) === JSON.stringify(pending)) return null;
+
+    const changes = [];
+    const maxLen = Math.max(live.length, pending.length);
+
+    for (let i = 0; i < maxLen; i++) {
+      const l = live[i];
+      const p = pending[i];
+
+      if (!l && p) {
+        changes.push({
+          status: 'added',
+          title: getCvItemTitle(secKey, p),
+          description: 'New entry added to CV'
+        });
+      } else if (l && !p) {
+        changes.push({
+          status: 'removed',
+          title: getCvItemTitle(secKey, l),
+          description: 'Entry removed from CV'
+        });
+      } else if (JSON.stringify(l) !== JSON.stringify(p)) {
+        const diffFields = compareCvItemFields(secKey, l, p);
+        if (diffFields.length > 0) {
+          changes.push({
+            status: 'modified',
+            title: getCvItemTitle(secKey, p) || getCvItemTitle(secKey, l),
+            diffFields
+          });
+        }
+      }
+    }
+
+    return changes.length > 0 ? changes : null;
+  }
+
+  function computeDetailedPendingChanges() {
+    const result = {
+      totalChanges: 0,
+      categories: [],
+      summaryList: []
+    };
+
+    // 1. Navigation Pages (_pages/*.md)
+    const navChanges = [];
+    for (const [key, tab] of Object.entries(TABS)) {
+      if (pendingNavState[key] !== liveNavState[key]) {
+        const isNow = !!pendingNavState[key];
+        const was = !!liveNavState[key];
+        navChanges.push({
+          key,
+          title: tab.title ? (tab.title.charAt(0).toUpperCase() + tab.title.slice(1)) : key,
+          path: tab.path,
+          url: tab.url,
+          wasVisible: was,
+          isNowVisible: isNow
+        });
+        result.summaryList.push(`${isNow ? 'Show' : 'Hide'} navigation: ${tab.title || key}`);
+      }
+    }
+    if (navChanges.length > 0) {
+      result.categories.push({
+        id: 'nav',
+        title: 'Navigation Pages',
+        file: '_pages/*.md',
+        icon: 'fa-solid fa-compass',
+        iconColor: '#2f80ed',
+        badge: `${navChanges.length} page${navChanges.length === 1 ? '' : 's'}`,
+        items: navChanges
+      });
+      result.totalChanges += navChanges.length;
+    }
+
+    // 2. Item & CV Visibility (_data/visibility.yml)
+    const visChanges = [];
+
+    // Blog Posts
+    ALL_BLOG_POSTS.forEach(slug => {
+      const isNow = !pendingVisibility.hidden_posts.includes(slug);
+      const was = !liveVisibility.hidden_posts.includes(slug);
+      if (isNow !== was) {
+        visChanges.push({
+          type: 'Blog Article',
+          name: slug.replace(/-/g, ' '),
+          rawId: slug,
+          wasVisible: was,
+          isNowVisible: isNow
+        });
+        result.summaryList.push(`${isNow ? 'Show' : 'Hide'} blog: ${slug}`);
+      }
+    });
+
+    // Preprints
+    ALL_PREPRINTS.forEach(key => {
+      const isNow = !pendingVisibility.hidden_preprints.includes(key);
+      const was = !liveVisibility.hidden_preprints.includes(key);
+      if (isNow !== was) {
+        visChanges.push({
+          type: 'Preprint',
+          name: key,
+          rawId: key,
+          wasVisible: was,
+          isNowVisible: isNow
+        });
+        result.summaryList.push(`${isNow ? 'Show' : 'Hide'} preprint: ${key}`);
+      }
+    });
+
+    // Projects
+    ALL_PROJECTS.forEach(slug => {
+      const isNow = !pendingVisibility.hidden_projects.includes(slug);
+      const was = !liveVisibility.hidden_projects.includes(slug);
+      if (isNow !== was) {
+        visChanges.push({
+          type: 'Project',
+          name: slug.replace(/^\d+_/, '').replace(/_/g, ' '),
+          rawId: slug,
+          wasVisible: was,
+          isNowVisible: isNow
+        });
+        result.summaryList.push(`${isNow ? 'Show' : 'Hide'} project: ${slug}`);
+      }
+    });
+
+    // Repos
+    ALL_REPOS.forEach(repo => {
+      const isNow = !pendingVisibility.hidden_repos.includes(repo);
+      const was = !liveVisibility.hidden_repos.includes(repo);
+      if (isNow !== was) {
+        const shortName = repo.split('/')[1] || repo;
+        visChanges.push({
+          type: 'Repository',
+          name: shortName,
+          rawId: repo,
+          wasVisible: was,
+          isNowVisible: isNow
+        });
+        result.summaryList.push(`${isNow ? 'Show' : 'Hide'} repo: ${shortName}`);
+      }
+    });
+
+    // CV Sections
+    ALL_CV_SECTIONS.forEach(sec => {
+      const isNow = !pendingVisibility.cv.hidden_sections.includes(sec);
+      const was = !liveVisibility.cv.hidden_sections.includes(sec);
+      if (isNow !== was) {
+        visChanges.push({
+          type: 'CV Section',
+          name: sec,
+          rawId: sec,
+          wasVisible: was,
+          isNowVisible: isNow
+        });
+        result.summaryList.push(`${isNow ? 'Show' : 'Hide'} CV section: ${sec}`);
+      }
+    });
+
+    // CV Roles (Experience)
+    Object.keys(CV_EXP_MAP).forEach(k => {
+      const isNow = !pendingVisibility.cv.hidden_experience.includes(k);
+      const was = !liveVisibility.cv.hidden_experience.includes(k);
+      if (isNow !== was) {
+        visChanges.push({
+          type: 'CV Role',
+          name: k,
+          rawId: k,
+          wasVisible: was,
+          isNowVisible: isNow
+        });
+        result.summaryList.push(`${isNow ? 'Show' : 'Hide'} CV role: ${k}`);
+      }
+    });
+
+    // CV Projects
+    Object.keys(CV_PROJ_MAP).forEach(k => {
+      const isNow = !pendingVisibility.cv.hidden_projects.includes(k);
+      const was = !liveVisibility.cv.hidden_projects.includes(k);
+      if (isNow !== was) {
+        visChanges.push({
+          type: 'CV Project Item',
+          name: k,
+          rawId: k,
+          wasVisible: was,
+          isNowVisible: isNow
+        });
+        result.summaryList.push(`${isNow ? 'Show' : 'Hide'} CV project: ${k}`);
+      }
+    });
+
+    // CV References
+    Object.keys(CV_REF_MAP).forEach(k => {
+      const isNow = !pendingVisibility.cv.hidden_references.includes(k);
+      const was = !liveVisibility.cv.hidden_references.includes(k);
+      if (isNow !== was) {
+        visChanges.push({
+          type: 'CV Reference',
+          name: k,
+          rawId: k,
+          wasVisible: was,
+          isNowVisible: isNow
+        });
+        result.summaryList.push(`${isNow ? 'Show' : 'Hide'} CV ref: ${k}`);
+      }
+    });
+
+    if (visChanges.length > 0) {
+      result.categories.push({
+        id: 'visibility',
+        title: 'Item Visibility',
+        file: '_data/visibility.yml',
+        icon: 'fa-solid fa-eye-slash',
+        iconColor: '#e67e22',
+        badge: `${visChanges.length} item${visChanges.length === 1 ? '' : 's'}`,
+        items: visChanges
+      });
+      result.totalChanges += visChanges.length;
+    }
+
+    // 3. About Profile & Content (_pages/about.md & _config.yml)
+    const aboutChanges = [];
+
+    // Subtitle
+    if ((pendingAboutData.subtitle || '').trim() !== (liveAboutData.subtitle || '').trim()) {
+      aboutChanges.push({
+        label: 'Subtitle / Location',
+        file: '_pages/about.md',
+        type: 'text',
+        before: liveAboutData.subtitle || '(empty)',
+        after: pendingAboutData.subtitle || '(empty)'
+      });
+      result.summaryList.push('Update About subtitle');
+    }
+
+    // Profile Photo
+    if (pendingAboutImageUploadData) {
+      aboutChanges.push({
+        label: 'Profile Photo',
+        file: '_pages/about.md',
+        type: 'image-upload',
+        filename: pendingAboutImageUploadData.filename,
+        before: liveAboutData.image || 'natnael.jpg',
+        after: `Upload new image: ${pendingAboutImageUploadData.filename}`,
+        previewUrl: pendingAboutImageBlobUrl
+      });
+      result.summaryList.push(`Upload new profile photo (${pendingAboutImageUploadData.filename})`);
+    } else if ((pendingAboutData.image || '').trim() !== (liveAboutData.image || '').trim()) {
+      aboutChanges.push({
+        label: 'Profile Photo Path',
+        file: '_pages/about.md',
+        type: 'text',
+        before: liveAboutData.image || '(empty)',
+        after: pendingAboutData.image || '(empty)'
+      });
+      result.summaryList.push('Update profile photo');
+    }
+
+    // Text under photo (more_info)
+    if ((pendingAboutData.more_info || '').trim() !== (liveAboutData.more_info || '').trim()) {
+      aboutChanges.push({
+        label: 'Text Under Profile Photo (Address & Contact)',
+        file: '_pages/about.md',
+        type: 'code',
+        before: liveAboutData.more_info || '(empty)',
+        after: pendingAboutData.more_info || '(empty)'
+      });
+      result.summaryList.push('Update text under profile photo');
+    }
+
+    // Social links toggle
+    const oldHideSocial = !!liveAboutData.hide_social_icons;
+    const newHideSocial = !!pendingAboutData.hide_social_icons;
+    if (oldHideSocial !== newHideSocial) {
+      aboutChanges.push({
+        label: 'Social Icons Display',
+        file: '_pages/about.md',
+        type: 'badge',
+        before: oldHideSocial ? 'Hidden' : 'Visible',
+        after: newHideSocial ? 'Hidden' : 'Visible',
+        isNowVisible: !newHideSocial
+      });
+      result.summaryList.push(`${newHideSocial ? 'Hide' : 'Show'} About social icons`);
+    }
+
+    // Contact Note (_config.yml)
+    if ((pendingAboutData.contact_note || '').trim() !== (liveAboutData.contact_note || '').trim()) {
+      aboutChanges.push({
+        label: 'Outreach Contact Callout Note',
+        file: '_config.yml',
+        type: 'text',
+        before: liveAboutData.contact_note || '(empty)',
+        after: pendingAboutData.contact_note || '(empty)'
+      });
+      result.summaryList.push('Update outreach contact note');
+    }
+
+    // Bio / Main content
+    const cleanOldBio = cleanBioText(liveAboutData.bio || '').trim();
+    const cleanNewBio = cleanBioText(pendingAboutData.bio || '').trim();
+    if (cleanOldBio !== cleanNewBio) {
+      const oldLines = cleanOldBio.split('\n').filter(Boolean).length;
+      const newLines = cleanNewBio.split('\n').filter(Boolean).length;
+      aboutChanges.push({
+        label: 'Main Bio / Story Content',
+        file: '_pages/about.md',
+        type: 'diff-text',
+        summary: `${oldLines} paragraph${oldLines === 1 ? '' : 's'} (${cleanOldBio.length} chars) ➔ ${newLines} paragraph${newLines === 1 ? '' : 's'} (${cleanNewBio.length} chars)`,
+        before: cleanOldBio,
+        after: cleanNewBio
+      });
+      result.summaryList.push('Update About bio content');
+    }
+
+    if (aboutChanges.length > 0) {
+      result.categories.push({
+        id: 'about',
+        title: 'About Profile & Content',
+        file: '_pages/about.md & _config.yml',
+        icon: 'fa-solid fa-user-pen',
+        iconColor: '#9b51e0',
+        badge: `${aboutChanges.length} field${aboutChanges.length === 1 ? '' : 's'}`,
+        items: aboutChanges
+      });
+      result.totalChanges += aboutChanges.length;
+    }
+
+    // 4. Curriculum Vitae (_data/cv.yml, _pages/cv.md, _data/socials.yml)
+    const cvChanges = [];
+
+    // CV PDF
+    if (pendingCvPdfUploadData) {
+      cvChanges.push({
+        label: 'CV PDF Document',
+        file: '_data/socials.yml & assets/pdf/',
+        type: 'pdf-upload',
+        filename: pendingCvPdfUploadData.filename,
+        before: liveCvPdf || '(default)',
+        after: `Upload new PDF file: ${pendingCvPdfUploadData.filename}`,
+        previewUrl: pendingCvPdfBlobUrl
+      });
+      result.summaryList.push(`Upload new CV PDF (${pendingCvPdfUploadData.filename})`);
+    } else if (pendingCvPdf !== liveCvPdf) {
+      cvChanges.push({
+        label: 'CV PDF Download Link',
+        file: '_data/socials.yml & _pages/cv.md',
+        type: 'text',
+        before: liveCvPdf || '(empty)',
+        after: pendingCvPdf || '(empty)'
+      });
+      result.summaryList.push('Update CV PDF link');
+    }
+
+    // CV Title / Label
+    if ((pendingCvData.label || '').trim() !== (liveCvData.label || '').trim()) {
+      cvChanges.push({
+        label: 'Professional Headline / Label',
+        file: '_data/cv.yml',
+        type: 'text',
+        before: liveCvData.label || '(empty)',
+        after: pendingCvData.label || '(empty)'
+      });
+      result.summaryList.push('Update CV headline');
+    }
+
+    // CV Summary
+    if ((pendingCvData.summaryText || '').trim() !== (liveCvData.summaryText || '').trim()) {
+      cvChanges.push({
+        label: 'Executive Summary',
+        file: '_data/cv.yml',
+        type: 'text',
+        before: liveCvData.summaryText || '(empty)',
+        after: pendingCvData.summaryText || '(empty)'
+      });
+      result.summaryList.push('Update CV summary');
+    }
+
+    // CV Sections
+    const cvSectionKeys = [
+      { key: 'experience', label: 'Work Experience', icon: 'fa-solid fa-briefcase' },
+      { key: 'education', label: 'Education', icon: 'fa-solid fa-graduation-cap' },
+      { key: 'skills', label: 'Skills & Proficiencies', icon: 'fa-solid fa-code' },
+      { key: 'projects', label: 'Featured Projects', icon: 'fa-solid fa-diagram-project' },
+      { key: 'awards', label: 'Honors & Awards', icon: 'fa-solid fa-award' },
+      { key: 'references', label: 'Professional References', icon: 'fa-solid fa-user-group' }
+    ];
+
+    cvSectionKeys.forEach(sec => {
+      const secDiff = compareCvSection(sec.key, liveCvData[sec.key], pendingCvData[sec.key]);
+      if (secDiff && secDiff.length > 0) {
+        cvChanges.push({
+          label: sec.label,
+          file: '_data/cv.yml',
+          type: 'cv-section',
+          sectionKey: sec.key,
+          icon: sec.icon,
+          diffs: secDiff
+        });
+        result.summaryList.push(`Update CV ${sec.key}`);
+      }
+    });
+
+    if (cvChanges.length > 0) {
+      result.categories.push({
+        id: 'cv',
+        title: 'Curriculum Vitae',
+        file: '_data/cv.yml & _pages/cv.md',
+        icon: 'fa-solid fa-file-invoice',
+        iconColor: '#27ae60',
+        badge: `${cvChanges.length} section${cvChanges.length === 1 ? '' : 's'}`,
+        items: cvChanges
+      });
+      result.totalChanges += cvChanges.length;
+    }
+
+    return result;
+  }
+
+  function renderReviewChangesModalBody(diffData) {
+    const bodyEl = document.getElementById('reviewChangesModalBody');
+    const badgeEl = document.getElementById('reviewModalBadge');
+    const modalResetBtn = document.getElementById('modalResetBtn');
+    const modalDeployBtn = document.getElementById('modalDeployBtn');
+    if (!bodyEl) return;
+
+    const data = diffData || computeDetailedPendingChanges();
+    const count = data.totalChanges;
+
+    if (badgeEl) {
+      badgeEl.textContent = count === 1 ? '1 Change' : `${count} Changes`;
+      badgeEl.className = count > 0 ? 'admin-badge badge-primary' : 'admin-badge badge-muted';
+    }
+    if (modalResetBtn) {
+      modalResetBtn.disabled = count === 0;
+    }
+    if (modalDeployBtn) {
+      modalDeployBtn.disabled = (count === 0 || !githubToken);
+    }
+
+    if (count === 0) {
+      bodyEl.innerHTML = `
+        <div class="review-empty-state">
+          <div class="review-empty-icon">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <h4 class="review-empty-title">All Changes In Sync</h4>
+          <p class="review-empty-desc">There are no pending edits or configuration changes. All navigation switches, item visibility, about details, and CV sections match the live site.</p>
+        </div>
+      `;
+      return;
+    }
+
+    let html = '';
+    data.categories.forEach(cat => {
+      html += `
+        <div class="review-group">
+          <div class="review-group-header">
+            <h4 class="review-group-title">
+              <i class="${cat.icon}" style="color: ${cat.iconColor};"></i>
+              <span>${cat.title}</span>
+            </h4>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="admin-badge badge-primary">${cat.badge}</span>
+              <span class="review-file-badge">${cat.file}</span>
+            </div>
+          </div>
+          <div class="review-group-body">
+      `;
+
+      if (cat.id === 'nav') {
+        cat.items.forEach(item => {
+          html += `
+            <div class="review-diff-row">
+              <div class="review-diff-label">
+                <span><i class="fa-regular fa-compass" style="margin-right: 6px; opacity: 0.7;"></i><strong>${item.title}</strong> (${item.path})</span>
+                <span class="review-badge-inline ${item.isNowVisible ? 'review-badge-visible' : 'review-badge-hidden'}">
+                  ${item.isNowVisible ? '<i class="fa-solid fa-eye"></i> Show in Nav' : '<i class="fa-solid fa-eye-slash"></i> Hide from Nav'}
+                </span>
+              </div>
+              <div class="review-diff-compare">
+                <div class="review-diff-box review-diff-box-before">
+                  <div class="review-diff-box-header"><i class="fa-solid fa-minus"></i> Before (Live)</div>
+                  <div>nav: <strong>${item.wasVisible ? 'true (Visible)' : 'false (Hidden)'}</strong></div>
+                </div>
+                <div class="review-diff-box review-diff-box-after">
+                  <div class="review-diff-box-header"><i class="fa-solid fa-plus"></i> After (Deployment)</div>
+                  <div>nav: <strong>${item.isNowVisible ? 'true (Visible)' : 'false (Hidden)'}</strong></div>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      } else if (cat.id === 'visibility') {
+        cat.items.forEach(item => {
+          html += `
+            <div class="review-diff-row">
+              <div class="review-diff-label">
+                <span><span class="admin-badge badge-muted" style="margin-right: 6px;">${item.type}</span><strong>${escapeHtml(item.name)}</strong></span>
+                <span class="review-badge-inline ${item.isNowVisible ? 'review-badge-visible' : 'review-badge-hidden'}">
+                  ${item.isNowVisible ? '<i class="fa-solid fa-eye"></i> Visible' : '<i class="fa-solid fa-eye-slash"></i> Hidden'}
+                </span>
+              </div>
+              <div class="review-diff-compare">
+                <div class="review-diff-box review-diff-box-before">
+                  <div class="review-diff-box-header"><i class="fa-solid fa-minus"></i> Current Live State</div>
+                  <div>${item.wasVisible ? 'Visible on site' : 'Hidden from site'}</div>
+                </div>
+                <div class="review-diff-box review-diff-box-after">
+                  <div class="review-diff-box-header"><i class="fa-solid fa-plus"></i> Deployment State</div>
+                  <div>${item.isNowVisible ? 'Visible on site' : 'Hidden from site'}</div>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      } else if (cat.id === 'about') {
+        cat.items.forEach(item => {
+          if (item.type === 'image-upload') {
+            html += `
+              <div class="review-diff-row">
+                <div class="review-diff-label">
+                  <span><strong>${escapeHtml(item.label)}</strong></span>
+                  <span class="admin-badge badge-primary"><i class="fa-solid fa-cloud-arrow-up"></i> New Image Staged</span>
+                </div>
+                <div class="review-diff-compare">
+                  <div class="review-diff-box review-diff-box-before">
+                    <div class="review-diff-box-header"><i class="fa-solid fa-minus"></i> Current Photo</div>
+                    <div><code>${escapeHtml(item.before)}</code></div>
+                  </div>
+                  <div class="review-diff-box review-diff-box-after">
+                    <div class="review-diff-box-header"><i class="fa-solid fa-plus"></i> New Upload</div>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 4px;">
+                      ${item.previewUrl ? `<img src="${item.previewUrl}" alt="Preview" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #28a745;">` : ''}
+                      <div>
+                        <strong>${escapeHtml(item.filename)}</strong>
+                        <div style="font-size: 0.72rem; color: #198754;">Staged for assets/img/</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          } else if (item.type === 'diff-text') {
+            html += `
+              <div class="review-diff-row">
+                <div class="review-diff-label">
+                  <span><strong>${escapeHtml(item.label)}</strong></span>
+                  <span class="admin-badge badge-primary">${escapeHtml(item.summary)}</span>
+                </div>
+                <div class="review-diff-compare">
+                  <div class="review-diff-box review-diff-box-before">
+                    <div class="review-diff-box-header"><i class="fa-solid fa-minus"></i> Current Published Bio</div>
+                    <div class="review-text-preview">${escapeHtml(item.before)}</div>
+                  </div>
+                  <div class="review-diff-box review-diff-box-after">
+                    <div class="review-diff-box-header"><i class="fa-solid fa-plus"></i> Pending New Bio</div>
+                    <div class="review-text-preview">${escapeHtml(item.after)}</div>
+                  </div>
+                </div>
+              </div>
+            `;
+          } else {
+            html += `
+              <div class="review-diff-row">
+                <div class="review-diff-label">
+                  <span><strong>${escapeHtml(item.label)}</strong></span>
+                  ${item.file ? `<span class="review-file-badge">${item.file}</span>` : ''}
+                </div>
+                <div class="review-diff-compare">
+                  <div class="review-diff-box review-diff-box-before">
+                    <div class="review-diff-box-header"><i class="fa-solid fa-minus"></i> Current Live Value</div>
+                    <div class="${item.type === 'code' ? 'review-code-preview' : 'review-text-preview'}">${escapeHtml(item.before)}</div>
+                  </div>
+                  <div class="review-diff-box review-diff-box-after">
+                    <div class="review-diff-box-header"><i class="fa-solid fa-plus"></i> New Pending Value</div>
+                    <div class="${item.type === 'code' ? 'review-code-preview' : 'review-text-preview'}">${escapeHtml(item.after)}</div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }
+        });
+      } else if (cat.id === 'cv') {
+        cat.items.forEach(item => {
+          if (item.type === 'pdf-upload') {
+            html += `
+              <div class="review-diff-row">
+                <div class="review-diff-label">
+                  <span><strong>${escapeHtml(item.label)}</strong></span>
+                  <span class="admin-badge badge-primary"><i class="fa-solid fa-file-pdf"></i> New PDF Staged</span>
+                </div>
+                <div class="review-diff-compare">
+                  <div class="review-diff-box review-diff-box-before">
+                    <div class="review-diff-box-header"><i class="fa-solid fa-minus"></i> Current Live PDF</div>
+                    <div><code>${escapeHtml(item.before)}</code></div>
+                  </div>
+                  <div class="review-diff-box review-diff-box-after">
+                    <div class="review-diff-box-header"><i class="fa-solid fa-plus"></i> New Upload</div>
+                    <div style="margin-top: 4px;">
+                      <strong>${escapeHtml(item.filename)}</strong>
+                      <div style="font-size: 0.72rem; color: #198754;">Staged for assets/pdf/</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          } else if (item.type === 'cv-section') {
+            item.diffs.forEach(diff => {
+              const badgeClass = diff.status === 'added' ? 'review-badge-visible' : diff.status === 'removed' ? 'review-badge-hidden' : 'review-badge-modified';
+              const badgeIcon = diff.status === 'added' ? 'fa-plus' : diff.status === 'removed' ? 'fa-minus' : 'fa-pen';
+              const badgeText = diff.status === 'added' ? 'Added Entry' : diff.status === 'removed' ? 'Removed Entry' : 'Modified Entry';
+
+              html += `
+                <div class="review-diff-row" style="margin-bottom: 6px;">
+                  <div class="review-diff-label">
+                    <span><i class="${item.icon}" style="margin-right: 6px; opacity: 0.7;"></i><strong>${escapeHtml(item.label)}</strong>: ${escapeHtml(diff.title)}</span>
+                    <span class="review-badge-inline ${badgeClass}">
+                      <i class="fa-solid ${badgeIcon}"></i> ${badgeText}
+                    </span>
+                  </div>
+                  ${diff.description ? `
+                    <div style="font-size: 0.76rem; color: var(--global-text-color-light, #666); margin-top: 2px;">
+                      ${escapeHtml(diff.description)}
+                    </div>
+                  ` : ''}
+                  ${diff.status === 'modified' && diff.diffFields && diff.diffFields.length > 0 ? `
+                    <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 6px;">
+                      ${diff.diffFields.map(f => `
+                        <div class="review-diff-compare">
+                          <div class="review-diff-box review-diff-box-before">
+                            <div class="review-diff-box-header"><i class="fa-solid fa-minus"></i> ${escapeHtml(f.field)} (Before)</div>
+                            <div class="review-text-preview">${escapeHtml(f.before)}</div>
+                          </div>
+                          <div class="review-diff-box review-diff-box-after">
+                            <div class="review-diff-box-header"><i class="fa-solid fa-plus"></i> ${escapeHtml(f.field)} (After)</div>
+                            <div class="review-text-preview">${escapeHtml(f.after)}</div>
+                          </div>
+                        </div>
+                      `).join('')}
+                    </div>
+                  ` : ''}
+                </div>
+              `;
+            });
+          } else {
+            html += `
+              <div class="review-diff-row">
+                <div class="review-diff-label">
+                  <span><strong>${escapeHtml(item.label)}</strong></span>
+                  ${item.file ? `<span class="review-file-badge">${item.file}</span>` : ''}
+                </div>
+                <div class="review-diff-compare">
+                  <div class="review-diff-box review-diff-box-before">
+                    <div class="review-diff-box-header"><i class="fa-solid fa-minus"></i> Current Live Value</div>
+                    <div class="review-text-preview">${escapeHtml(item.before)}</div>
+                  </div>
+                  <div class="review-diff-box review-diff-box-after">
+                    <div class="review-diff-box-header"><i class="fa-solid fa-plus"></i> New Pending Value</div>
+                    <div class="review-text-preview">${escapeHtml(item.after)}</div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }
+        });
+      }
+
+      html += `
+          </div>
+        </div>
+      `;
+    });
+
+    bodyEl.innerHTML = html;
+  }
+
+  function openReviewChangesModal() {
+    const modal = document.getElementById('reviewChangesModal');
+    if (!modal) return;
+    renderReviewChangesModalBody();
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    const closeBtn = modal.querySelector('.admin-modal-close');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeReviewChangesModal() {
+    const modal = document.getElementById('reviewChangesModal');
+    if (!modal) return;
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  function handleReviewModalBackdropClick(event) {
+    if (event.target && event.target.id === 'reviewChangesModal') {
+      closeReviewChangesModal();
+    }
+  }
+
+  function confirmResetFromModal() {
+    if (confirm('Discard all pending changes and revert to live GitHub state?')) {
+      resetToLiveState();
+      closeReviewChangesModal();
+    }
+  }
+
+  function deployFromModal() {
+    if (!githubToken) {
+      alert('Please authenticate with GitHub first.');
+      return;
+    }
+    closeReviewChangesModal();
+    saveAndDeployToGitHub();
+  }
+
+  // Global Escape key listener for the review modal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('reviewChangesModal');
+      if (modal && modal.classList.contains('is-open')) {
+        closeReviewChangesModal();
+      }
+    }
+  });
+
+  function updateUI() {
     // Helper for badges and row muted state
     const setBadge = (elId, isVisible, inputId) => {
       const el = document.getElementById(elId);
@@ -3534,9 +5804,6 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
       const isVisible = pendingNavState[tab];
       setBadge(`badge_tab_${tab}`, isVisible, `toggle_tab_${tab}`);
       if (isVisible) visibleNavCount++;
-      if (pendingNavState[tab] !== liveNavState[tab]) {
-        changeList.push(`${isVisible ? 'Show' : 'Hide'} navigation: ${tab}`);
-      }
     });
     document.getElementById('stat_nav').textContent = `${visibleNavCount}/${Object.keys(TABS).length} Visible`;
 
@@ -3546,10 +5813,6 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
       const isVisible = !pendingVisibility.hidden_posts.includes(slug);
       setBadge(`badge_post_${slug}`, isVisible, `toggle_post_${slug}`);
       if (isVisible) visibleBlogCount++;
-      const wasVisible = !liveVisibility.hidden_posts.includes(slug);
-      if (isVisible !== wasVisible) {
-        changeList.push(`${isVisible ? 'Show' : 'Hide'} blog: ${slug}`);
-      }
     });
     document.getElementById('stat_blog').textContent = `${visibleBlogCount}/${ALL_BLOG_POSTS.length} Visible`;
 
@@ -3559,10 +5822,6 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
       const isVisible = !pendingVisibility.hidden_preprints.includes(key);
       setBadge(`badge_preprint_${key}`, isVisible, `toggle_preprint_${key}`);
       if (isVisible) visiblePreprintsCount++;
-      const wasVisible = !liveVisibility.hidden_preprints.includes(key);
-      if (isVisible !== wasVisible) {
-        changeList.push(`${isVisible ? 'Show' : 'Hide'} preprint: ${key}`);
-      }
     });
     document.getElementById('stat_preprints').textContent = `${visiblePreprintsCount}/${ALL_PREPRINTS.length} Visible`;
 
@@ -3572,10 +5831,6 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
       const isVisible = !pendingVisibility.hidden_projects.includes(slug);
       setBadge(`badge_project_${slug}`, isVisible, `toggle_project_${slug}`);
       if (isVisible) visibleProjectsCount++;
-      const wasVisible = !liveVisibility.hidden_projects.includes(slug);
-      if (isVisible !== wasVisible) {
-        changeList.push(`${isVisible ? 'Show' : 'Hide'} project: ${slug}`);
-      }
     });
     document.getElementById('stat_projects').textContent = `${visibleProjectsCount}/${ALL_PROJECTS.length} Visible`;
 
@@ -3586,10 +5841,6 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
       const shortName = repo.split('/')[1];
       setBadge(`badge_repo_${shortName}`, isVisible, `toggle_repo_${repo}`);
       if (isVisible) visibleReposCount++;
-      const wasVisible = !liveVisibility.hidden_repos.includes(repo);
-      if (isVisible !== wasVisible) {
-        changeList.push(`${isVisible ? 'Show' : 'Hide'} repo: ${shortName}`);
-      }
     });
     document.getElementById('stat_repos').textContent = `${visibleReposCount}/${ALL_REPOS.length} Visible`;
 
@@ -3599,10 +5850,6 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
       const isVisible = !pendingVisibility.cv.hidden_sections.includes(sec);
       setBadge(`badge_cv_section_${sec}`, isVisible, `toggle_cv_section_${sec}`);
       if (isVisible) visibleCvSectionsCount++;
-      const wasVisible = !liveVisibility.cv.hidden_sections.includes(sec);
-      if (isVisible !== wasVisible) {
-        changeList.push(`${isVisible ? 'Show' : 'Hide'} CV section: ${sec}`);
-      }
     });
     document.getElementById('stat_cv').textContent = `${visibleCvSectionsCount}/${ALL_CV_SECTIONS.length} Sections Visible`;
 
@@ -3610,90 +5857,70 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
     Object.keys(CV_EXP_MAP).forEach(k => {
       const isVisible = !pendingVisibility.cv.hidden_experience.includes(k);
       setBadge(`badge_cv_exp_${CV_EXP_MAP[k]}`, isVisible, `toggle_cv_exp_${CV_EXP_MAP[k]}`);
-      const wasVisible = !liveVisibility.cv.hidden_experience.includes(k);
-      if (isVisible !== wasVisible) {
-        changeList.push(`${isVisible ? 'Show' : 'Hide'} CV role: ${k}`);
-      }
     });
 
     // CV Sub-items: Projects
     Object.keys(CV_PROJ_MAP).forEach(k => {
       const isVisible = !pendingVisibility.cv.hidden_projects.includes(k);
       setBadge(`badge_cv_proj_${CV_PROJ_MAP[k]}`, isVisible, `toggle_cv_proj_${CV_PROJ_MAP[k]}`);
-      const wasVisible = !liveVisibility.cv.hidden_projects.includes(k);
-      if (isVisible !== wasVisible) {
-        changeList.push(`${isVisible ? 'Show' : 'Hide'} CV project: ${k}`);
-      }
     });
 
     // CV Sub-items: References
     Object.keys(CV_REF_MAP).forEach(k => {
       const isVisible = !pendingVisibility.cv.hidden_references.includes(k);
       setBadge(`badge_cv_ref_${k}`, isVisible, `toggle_cv_ref_${k}`);
-      const wasVisible = !liveVisibility.cv.hidden_references.includes(k);
-      if (isVisible !== wasVisible) {
-        changeList.push(`${isVisible ? 'Show' : 'Hide'} CV ref: ${k}`);
-      }
     });
 
-    // About Page changes
-    const aboutChanged = (
-      pendingAboutData.subtitle !== liveAboutData.subtitle ||
-      pendingAboutData.image !== liveAboutData.image ||
-      !!pendingAboutImageUploadData ||
-      (pendingAboutData.more_info || '').trim() !== (liveAboutData.more_info || '').trim() ||
-      pendingAboutData.social !== liveAboutData.social ||
-      pendingAboutData.hide_social_icons !== liveAboutData.hide_social_icons ||
-      (pendingAboutData.contact_note || '').trim() !== (liveAboutData.contact_note || '').trim() ||
-      (pendingAboutData.bio || '').trim() !== (liveAboutData.bio || '').trim()
-    );
-    if (aboutChanged) {
-      if (pendingAboutImageUploadData) {
-        changeList.push(`Upload new profile photo (${pendingAboutImageUploadData.filename})`);
-      } else if (pendingAboutData.hide_social_icons !== liveAboutData.hide_social_icons) {
-        changeList.push(`${pendingAboutData.hide_social_icons ? 'Hide' : 'Show'} About social icons`);
-      } else if ((pendingAboutData.contact_note || '').trim() !== (liveAboutData.contact_note || '').trim()) {
-        changeList.push('Update outreach contact note');
-      } else if ((pendingAboutData.more_info || '').trim() !== (liveAboutData.more_info || '').trim()) {
-        changeList.push('Update text under profile photo');
-      } else {
-        changeList.push('Update About page');
-      }
-    }
-
-    // CV PDF link changes
-    const cvPdfChanged = (pendingCvPdf !== liveCvPdf || !!pendingCvPdfUploadData);
-    if (cvPdfChanged) {
-      changeList.push(pendingCvPdfUploadData ? (`Upload new CV PDF (${pendingCvPdfUploadData.filename})`) : 'Update CV PDF link');
-    }
-
-    // CV Content changes
-    const cvContentChanged = (JSON.stringify(pendingCvData) !== JSON.stringify(liveCvData));
-    if (cvContentChanged) {
-      changeList.push('Update CV content');
-    }
+    // Compute detailed changes across the entire site
+    const diffData = computeDetailedPendingChanges();
+    const changeList = diffData.summaryList;
+    const totalChanges = diffData.totalChanges;
 
     // Action Bar UI
     const barContainer = document.getElementById('actionBarContainer');
     const saveBtn = document.getElementById('saveBtn');
     const resetBtn = document.getElementById('resetBtn');
+    const reviewBtn = document.getElementById('reviewBtn');
     const summaryText = document.getElementById('pendingSummaryText');
     const detailText = document.getElementById('pendingDetailText');
 
     if (barContainer) {
-      barContainer.style.display = changeList.length > 0 ? 'block' : 'none';
+      barContainer.classList.toggle('has-pending-changes', totalChanges > 0);
     }
 
-    if (changeList.length > 0) {
-      saveBtn.disabled = !githubToken;
-      resetBtn.disabled = false;
-      summaryText.innerHTML = `<span style="color: var(--global-theme-color);"><i class="fa-solid fa-pen-to-square"></i> ${changeList.length} Pending Change(s)</span>`;
-      detailText.textContent = changeList.slice(0, 3).join(' • ') + (changeList.length > 3 ? ` ...and ${changeList.length - 3} more` : '');
+    if (totalChanges > 0) {
+      if (saveBtn) saveBtn.disabled = !githubToken;
+      if (resetBtn) resetBtn.disabled = false;
+      if (reviewBtn) reviewBtn.disabled = false;
+      const countLabel = totalChanges === 1 ? '1 Pending Change' : `${totalChanges} Pending Changes`;
+      summaryText.innerHTML = `
+        <span class="action-bar-badge-pill clickable" onclick="openReviewChangesModal()" role="button" tabindex="0" title="Click to inspect and review all pending changes" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openReviewChangesModal();}">
+          <span class="action-bar-pulse-dot"></span>
+          <span>${countLabel}</span>
+          <i class="fa-solid fa-list-check" style="font-size: 0.68rem; opacity: 0.85; margin-left: 2px;"></i>
+        </span>
+      `;
+      const previewText = changeList.slice(0, 2).join(' • ') + (changeList.length > 2 ? ` (+${changeList.length - 2} more)` : '');
+      detailText.textContent = previewText;
+      detailText.title = changeList.join('\n');
     } else {
-      saveBtn.disabled = true;
-      resetBtn.disabled = true;
-      summaryText.innerHTML = '<i class="fa-solid fa-circle-check" style="color: #28a745;"></i> No pending changes';
+      if (saveBtn) saveBtn.disabled = true;
+      if (resetBtn) resetBtn.disabled = true;
+      if (reviewBtn) reviewBtn.disabled = true;
+      summaryText.innerHTML = `
+        <span class="action-bar-badge-pill pill-neutral">
+          <i class="fa-solid fa-check" style="font-size: 0.72rem; color: #28a745;"></i>
+          <span>No pending changes</span>
+        </span>
+      `;
       detailText.textContent = 'All switches and forms match live GitHub state';
+      detailText.title = '';
+    }
+
+    // Keep review modal in sync if open
+    const modal = document.getElementById('reviewChangesModal');
+    if (modal && modal.classList.contains('is-open')) {
+      renderReviewChangesModalBody(diffData);
     }
   }
 
@@ -3714,11 +5941,13 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
       pendingAboutImageBlobUrl = null;
     }
 
+    localStorage.removeItem('nathy_nav_state');
     localStorage.removeItem('nathy_visibility_config');
     localStorage.removeItem('nathy_about_config');
     localStorage.removeItem('nathy_cv_data');
     localStorage.removeItem('nathy_cv_pdf');
 
+    closeReviewChangesModal();
     syncAllCheckboxesFromPending();
     syncAboutFormInputs();
     renderCvEditor(pendingCvData);
@@ -4134,6 +6363,8 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
         updatedFiles.push(CV_FILE_PATH);
       }
 
+      localStorage.removeItem('nathy_nav_state');
+      closeReviewChangesModal();
       saveLocalPreview();
       updateUI();
 
@@ -4146,6 +6377,9 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
         </a>
       `;
       showStatus(statusMsg, successHtml, 'success', true);
+
+      // Immediately launch real-time deploy tracking on the monitor card
+      startDeployTracking();
 
     } catch (err) {
       console.error(err);
@@ -4161,6 +6395,7 @@ I graduated with a B.Sc. in Electrical & Computer Engineering (Computer Stream) 
   // ==========================================
   function saveLocalPreview() {
     try {
+      localStorage.setItem('nathy_nav_state', JSON.stringify(pendingNavState));
       localStorage.setItem('nathy_visibility_config', JSON.stringify(pendingVisibility));
       localStorage.setItem('nathy_about_config', JSON.stringify(pendingAboutData));
       localStorage.setItem('nathy_cv_data', JSON.stringify(pendingCvData));
@@ -6040,6 +8275,22 @@ let result = rawYaml;
 
 }
 
+function cleanBioText(bio) {
+if (!bio) return '';
+let res = bio
+.replace(/<script[\s\S]_?<\/script>/gi, '')
+.replace(/<style[\s\S]_?<\/style>/gi, '')
+.replace(new RegExp('\\{' + '%\\s*for[\\s\\S]*?endfor\\s*%' + '\\}', 'gi'), '')
+.replace(new RegExp('\\{' + '%\\s*if[\\s\\S]*?endif\\s*%' + '\\}', 'gi'), '')
+.replace(new RegExp('\\{' + '%[\\s\\S]_?%' + '\\}', 'g'), '')
+.replace(/\{\{[\s\S]_?\}\}/g, '');
+
+    res = res.replace(/document\.addEventListener\([^\)]*DOMContentLoaded[\s\S]*?\}\);?/gi, '');
+    res = res.replace(/ol\.bibliography[\s\S]*?display:\s*none[\s\S]*?\}/gi, '');
+    return res.trim();
+
+}
+
 function formatMoreInfoYaml(moreInfo) {
 if (!moreInfo) return ' more_info: >\n';
 const lines = moreInfo.trim().split('\n').map(l => l.trim()).filter(Boolean);
@@ -6054,7 +8305,7 @@ function updateAboutContent(rawAbout, aboutData) {
 const parts = rawAbout.split(/^---\s*[\r\n]+/m);
 if (parts.length < 3) return rawAbout;
 
-    let fm = parts[1];
+    let fm = parts[1].replace(/^\n+/, '');
 
     // 1. Subtitle
     if (aboutData.subtitle !== undefined) {
@@ -6073,8 +8324,8 @@ if (parts.length < 3) return rawAbout;
     // 3. Profile More Info (text under photo)
     if (aboutData.more_info !== undefined) {
       const formattedMoreInfo = formatMoreInfoYaml(aboutData.more_info);
-      if (/^[ ]{2}more_info:\s*(?:>|\|-?)?\s*[\r\n]+([\s\S]*?)(?=^[a-zA-Z0-9_-]+:\s*|\Z)/m.test(fm)) {
-        fm = fm.replace(/^[ ]{2}more_info:\s*(?:>|\|-?)?\s*[\r\n]+([\s\S]*?)(?=^[a-zA-Z0-9_-]+:\s*|\Z)/m, `${formattedMoreInfo.trim()}\n\n`);
+      if (/^[ ]{0,4}more_info:\s*(?:>|\|-?)?\s*[\r\n]+([\s\S]*?)(?=^[a-zA-Z0-9_-]+:\s*|\Z)/m.test(fm)) {
+        fm = fm.replace(/^[ ]{0,4}more_info:\s*(?:>|\|-?)?\s*[\r\n]+([\s\S]*?)(?=^[a-zA-Z0-9_-]+:\s*|\Z)/m, `${formattedMoreInfo.trim()}\n\n`);
       } else if (/profile:\s*[\r\n]+/m.test(fm)) {
         fm = fm.replace(/(profile:\s*[\r\n]+)/m, `$1${formattedMoreInfo}`);
       }
@@ -6090,8 +8341,8 @@ if (parts.length < 3) return rawAbout;
       }
     }
 
-    const bioContent = (aboutData.bio || '').trim();
-    return `---${fm.replace(/\n+$/, '')}\n---\n\n${bioContent}\n`;
+    const bioContent = cleanBioText(aboutData.bio || '');
+    return `---\n${fm.trim()}\n---\n\n${bioContent}\n`;
 
 }
 

@@ -10,7 +10,7 @@
 [![Email](https://img.shields.io/badge/Email-natnaelbekele142%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:natnaelbekele142@gmail.com)
 
 **Fullstack (Backend-Heavy) Software Engineer · Competitive Programming Educator · AI Safety Researcher**  
-*Addis Ababa, Ethiopia*
+_Addis Ababa, Ethiopia_
 
 </div>
 
@@ -36,19 +36,19 @@ The website showcases software engineering projects, research preprints in mecha
 ## Research & Preprints
 
 - **The Geometry of Dormant Defection: Layer-Wise Dynamics and Defensive Design of Linear Probes for Latent Sleeper Agents**  
-  *Natnael Bekele* — arXiv preprint (September 2026)  
-  *Research on mechanistic interpretability, latent sleeper agents, and defensive linear probes across transformer activation spaces.*  
+  _Natnael Bekele_ — arXiv preprint (September 2026)  
+  _Research on mechanistic interpretability, latent sleeper agents, and defensive linear probes across transformer activation spaces._  
   [Code & Replication Suite](https://github.com/nathyBekele/geometry-of-dormant-defection) · [Read on Medium](https://medium.com/@natnaelbekele142/your-open-source-ai-model-might-be-a-sleeper-agent-9ca693663091)
 
 ---
 
 ## Featured Engineering Projects
 
-| Project | Description | Stack |
-| :--- | :--- | :--- |
-| **AfroChat** | Multi-lingual LLM conversational platform tailored for African languages with low-resource fine-tuning. | Next.js, Node.js, Fastify, Python, PyTorch |
-| **Adot** | Healthcare consultation and patient management platform connecting clinics, doctors, and patients. | React, Flutter, Node.js, PostgreSQL |
-| **RateEat** | Food discovery and restaurant rating mobile app providing crowd-sourced reviews and menus. | Flutter, Firebase, Node.js |
+| Project                  | Description                                                                                                         | Stack                                                       |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------- |
+| **AfroChat**             | Multi-lingual LLM conversational platform tailored for African languages with low-resource fine-tuning.             | Next.js, Node.js, Fastify, Python, PyTorch                  |
+| **Adot**                 | Healthcare consultation and patient management platform connecting clinics, doctors, and patients.                  | React, Flutter, Node.js, PostgreSQL                         |
+| **RateEat**              | Food discovery and restaurant rating mobile app providing crowd-sourced reviews and menus.                          | Flutter, Firebase, Node.js                                  |
 | **Cursor Spend Tracker** | Telemetry and cost analytics platform tracking Claude token spend and BYOK charges with automated Vercel cron sync. | Next.js 16, TypeScript, Tailwind CSS, Prisma, Neon Postgres |
 
 ---
@@ -83,12 +83,14 @@ The site can be served locally using **Docker / OrbStack** or natively via **Rub
 ### Option A: Using Docker / OrbStack (Recommended)
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/nathyBekele/nathyBekele.github.io.git
    cd nathyBekele.github.io
    ```
 
 2. Start the development server:
+
    ```bash
    docker compose up -d
    ```
@@ -101,6 +103,7 @@ The site can be served locally using **Docker / OrbStack** or natively via **Rub
 LiveReload is active on port `35729`. Any file changes to `_pages/`, `_data/`, `_projects/`, or `_config.yml` trigger an automated build.
 
 To stop the container:
+
 ```bash
 docker compose down
 ```
@@ -108,6 +111,7 @@ docker compose down
 ### Option B: Native Ruby & Bundler
 
 1. Install dependencies:
+
    ```bash
    bundle install
    npm ci

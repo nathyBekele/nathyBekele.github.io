@@ -18,14 +18,14 @@ Technical reference and maintenance guides for **Natnael B. Haile's** personal p
 
 ## Where to Edit Site Content
 
-| Content Area | File / Directory | Description |
-| :--- | :--- | :--- |
-| **Biography & Profile** | `_pages/about.md` | Homepage bio, affiliations, research interests, and layout |
-| **Profile Photo** | `assets/img/natnael.jpg` | Main avatar photo (configured in `_pages/about.md`) |
-| **Social Links** | `_data/socials.yml` | GitHub, LinkedIn, LeetCode, Medium, Email, and CV links |
-| **Publications** | `_bibliography/papers.bib` | BibTeX entries for academic papers, preprints, and abstracts |
-| **Projects** | `_projects/*.md` | Individual project writeups and descriptions |
-| **Featured Repositories** | `_data/repositories.yml` | List of curated GitHub repositories and users |
-| **CV / Resume Data** | `_data/cv.yml` & `assets/json/resume.json` | Work experience, education, skills, and summary |
-| **Blog Ingestion** | `_config.yml` (`external_sources`) | Syndicates live posts from Medium RSS feed |
-| **Site Metadata & Global Config** | `_config.yml` | Site title, baseurl, footer text, theme options, and plugins |
+| Content Area                      | File / Directory                           | Description                                                  |
+| :-------------------------------- | :----------------------------------------- | :----------------------------------------------------------- |
+| **Biography & Profile**           | `_pages/about.md`                          | Homepage bio, affiliations, research interests, and layout   |
+| **Profile Photo**                 | `assets/img/natnael.jpg`                   | Main avatar photo (configured in `_pages/about.md`)          |
+| **Social Links**                  | `_data/socials.yml`                        | GitHub, LinkedIn, LeetCode, Medium, Email, and CV links      |
+| **Publications**                  | `_bibliography/papers.bib`                 | BibTeX entries for academic papers, preprints, and abstracts |
+| **Projects**                      | `_projects/*.md`                           | Individual project writeups and descriptions                 |
+| **Featured Repositories**         | `_data/repositories.yml`                   | List of curated GitHub repositories and users                |
+| **CV / Resume Data**              | `_data/cv.yml` & `assets/json/resume.json` | Work experience, education, skills, and summary              |
+| **Blog Ingestion**                | `_config.yml` (`external_sources`)         | Syndicates live posts from Medium RSS feed                   |
+| **Site Metadata & Global Config** | `_config.yml`                              | Site title, baseurl, footer text, theme options, and plugins |

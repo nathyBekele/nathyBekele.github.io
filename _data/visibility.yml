@@ -1,0 +1,24 @@
+# Control Center Visibility Configuration
+# Managed automatically via /admin/
+
+hidden_posts:
+  []
+
+hidden_preprints:
+  []
+
+hidden_projects:
+  []
+
+hidden_repos:
+  []
+
+cv:
+  hidden_sections:
+    []
+  hidden_experience:
+    []
+  hidden_projects:
+    []
+  hidden_references:
+    []

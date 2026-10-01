@@ -1,0 +1,49 @@
+<svg width="800" height="500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="vital-bg" x1="0" y1="0" x2="800" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#031B15"/>
+      <stop offset="50%" stop-color="#062A22"/>
+      <stop offset="100%" stop-color="#0A3D32"/>
+    </linearGradient>
+    <radialGradient id="vital-glow" cx="400" cy="210" r="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.24"/>
+      <stop offset="60%" stop-color="#059669" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="vital-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 0 20 H 40 M 20 0 V 40" fill="none" stroke="#10B981" stroke-width="1" stroke-opacity="0.04"/>
+      <circle cx="20" cy="20" r="1.2" fill="#10B981" fill-opacity="0.1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" rx="16" fill="url(#vital-bg)"/>
+  <rect width="800" height="500" rx="16" fill="url(#vital-pattern)"/>
+  <rect width="800" height="500" rx="16" fill="url(#vital-glow)"/>
+  <rect x="0.5" y="0.5" width="799" height="499" rx="15.5" stroke="#10B981" stroke-opacity="0.22"/>
+
+  <g transform="translate(400, 75)">
+    <rect x="-115" y="-14" width="230" height="28" rx="14" fill="#10B981" fill-opacity="0.12" stroke="#10B981" stroke-opacity="0.3"/>
+    <circle cx="-95" cy="0" r="4" fill="#10B981"/>
+    <text text-anchor="middle" x="10" y="4" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#A7F3D0" letter-spacing="1.5">AI HEALTH &amp; DIAGNOSTICS</text>
+  </g>
+
+  <!-- Center Artwork: ECG Heartbeat Pulse with AI Brain/Heart Crest -->
+  <g transform="translate(400, 205)">
+    <!-- Outer Shield / Circle Container -->
+    <rect x="-65" y="-65" width="130" height="130" rx="28" fill="#04261E" stroke="#10B981" stroke-opacity="0.4" stroke-width="1.5"/>
+    
+    <!-- Heartbeat Line -->
+    <path d="M -45 0 L -24 0 L -14 -28 L -2 32 L 8 -16 L 18 10 L 26 0 L 45 0" fill="none" stroke="#34D399" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Small glowing pulse dot -->
+    <circle cx="-14" cy="-28" r="3.5" fill="#6EE7B7"/>
+
+    <text text-anchor="middle" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="800" fill="#FFFFFF" letter-spacing="0.5">vitalAI</text>
+    <text text-anchor="middle" y="126" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#6EE7B7" letter-spacing="1">Biometric Insights &amp; OpenAI Health Advisory</text>
+  </g>
+
+  <g transform="translate(400, 395)">
+    <rect x="-160" y="-18" width="320" height="36" rx="18" fill="#072820" stroke="#10B981" stroke-opacity="0.3" stroke-width="1"/>
+    <text text-anchor="middle" y="5" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#D1FAE5" letter-spacing="1.2">APPLE HEALTH DATA • DJANGO • GPT-4</text>
+  </g>
+</svg>

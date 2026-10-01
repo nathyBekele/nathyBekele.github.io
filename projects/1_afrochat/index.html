@@ -1,0 +1,300 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> AfroChat | Natnael B. Haile </title> <meta name="author" content="Natnael B. Haile"> <meta name="description" content="AI-powered multi-model chat platform bringing LLMs together with enterprise customization."> <meta name="keywords" content="software-engineer, fullstack-developer, backend, competitive-programming, portfolio"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/al-folio/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/al-folio/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%9B%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/al-folio/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://alshedivat.github.io/al-folio/projects/1_afrochat/"> <script src="/al-folio/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/al-folio/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/al-folio/"> <span class="font-weight-bold">Natnael</span> B. Haile </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/al-folio/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/al-folio/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/al-folio/publications/">preprints </a> </li> <li class="nav-item active"> <a class="nav-link" href="/al-folio/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/al-folio/repositories/">repositories </a> </li> <li class="nav-item "> <a class="nav-link" href="/al-folio/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">AfroChat</h1> <p class="post-description">AI-powered multi-model chat platform bringing LLMs together with enterprise customization.</p> </header> <article> <p><strong>AfroChat</strong> is an AI-powered chat platform that brings the latest language models together in one place. It offers a public AI console for seamless interactions and an enterprise solution for businesses to customize AI models to their specific organizational needs.</p> <h3 id="key-features--architecture">Key Features &amp; Architecture</h3> <ul> <li> <strong>Multi-Model Orchestration</strong>: Seamless access and interaction across state-of-the-art language models.</li> <li> <strong>Enterprise Customization</strong>: Tailored AI model fine-tuning and deployment for businesses.</li> <li> <strong>High-Performance Backend</strong>: Built with Express, MongoDB, OpenAI API, AWS SES, AWS S3, Redis, WebSockets, Docker, Kubernetes, RabbitMQ, Kafka, ElasticSearch, GraphQL, Prisma, Mongoose, and Cloudflare.</li> <li> <strong>Role</strong>: Backend Developer.</li> </ul> <div class="mt-3"> <a href="https://afrochat.app/" target="_blank" class="btn btn-sm z-depth-0" rel="external nofollow noopener">Visit AfroChat</a> </div> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Natnael B. Haile. All rights reserved. <a href="/al-folio/admin/" style="opacity: 0.2; color: inherit; text-decoration: none; margin-left: 6px;" title="Control Center"><i class="fa-solid fa-lock" style="font-size: 0.68rem;"></i></a><script>window.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.key.toLowerCase()==="a"){e.preventDefault();window.location.href="/al-folio/admin/";}});</script> </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/al-folio/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/al-folio/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/al-folio/assets/al_math/js/mathjax-setup.js"></script> <script src="/al-folio/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/al-folio/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/al-folio/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/al-folio/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/al-folio/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/al-folio/assets/al_img_tools/js/zoom.js"></script> <script defer src="/al-folio/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/al-folio/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/al-folio/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/al-folio/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "Articles on AI security, large language models, RAG architectures, and Web3 engineering.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/al-folio/blog/";
+          },
+        },{id: "nav-preprints",
+          title: "preprints",
+          description: "Preprints and research papers.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/al-folio/publications/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "A showcase of selected engineering, AI systems, and fullstack projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/al-folio/projects/";
+          },
+        },{id: "nav-repositories",
+          title: "repositories",
+          description: "Open-source repositories, research artifacts, and developer tools.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/al-folio/repositories/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum Vitae of Natnael Bekele Haile.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/al-folio/cv/";
+          },
+        },{id: "post-your-open-source-ai-model-might-be-a-sleeper-agent",
+        
+          title: 'Your Open-Source AI Model Might Be a Sleeper Agent <svg width="1.2rem" height="1.2rem" top=".5rem" viewbox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "I trained four backdoored coding models and evaluated probe detectability across latent activations to catch sleeper agents. Two of three defenses worked—here is what happened.",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@natnaelbekele142/your-open-source-ai-model-might-be-a-sleeper-agent-9ca693663091", "_blank");
+          
+        },
+      },{id: "post-contract-advisor-rag-towards-building-a-high-precision-legal-expert-llm-app",
+        
+          title: 'Contract Advisor RAG: Towards Building A High-Precision Legal Expert LLM APP <svg width="1.2rem" height="1.2rem" top=".5rem" viewbox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "Building a high-precision legal contract Q&A expert app using hybrid retrieval, dense embeddings, and robust RAG evaluation pipelines.",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@natnaelbekele142/contract-advisor-rag-towards-building-a-high-precision-legal-expert-llm-app-3277e21e2278", "_blank");
+          
+        },
+      },{id: "post-text-to-visual-transformation-in-digital-advertising",
+        
+          title: 'Text-to-Visual Transformation in Digital Advertising <svg width="1.2rem" height="1.2rem" top=".5rem" viewbox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "Automating visual storyboard creation for digital advertising campaigns using diffusion models, prompt conditioning, and generative pipelines.",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@natnaelbekele142/text-to-visual-transformation-in-digital-advertising-88d09fb283c4", "_blank");
+          
+        },
+      },{id: "post-building-dapp-on-ethereum-blockchain-using-flutter-and-react",
+        
+          title: 'Building dApp on Ethereum Blockchain using Flutter and React <svg width="1.2rem" height="1.2rem" top=".5rem" viewbox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "Architecting decentralized applications using Solidity smart contracts, Flutter cross-platform mobile frontend, and React Web3 integration on Ethereum.",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@natnaelbekele142/building-dapp-on-ethereum-blochain-using-flutter-and-react-b4232dee75f7", "_blank");
+          
+        },
+      },{id: "post-llm-finetuning-enabling-quality-embedding-and-text-generation-for-amharic-language",
+        
+          title: 'LLM Finetuning: Enabling Quality Embedding and Text Generation for Amharic Language <svg width="1.2rem" height="1.2rem" top=".5rem" viewbox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "Parameter-efficient fine-tuning (PEFT/LoRA) and tokenization strategies to enable high-quality Amharic text generation and semantic embeddings.",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@natnaelbekele142/llm-finetuning-enabling-quality-embedding-and-text-generation-for-amharic-language-db60b68dd345", "_blank");
+          
+        },
+      },{id: "post-precision-rag-prompt-tuning-for-building-enterprise-grade-rag-systems",
+        
+          title: 'Precision RAG: Prompt Tuning For Building Enterprise Grade RAG Systems <svg width="1.2rem" height="1.2rem" top=".5rem" viewbox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "Engineering production-grade enterprise RAG systems with Weaviate vector database, prompt tuning, semantic reranking, and hallucination reduction.",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@natnaelbekele142/precision-rag-prompt-tuning-for-building-enterprise-grade-rag-systems-af00d92740d4", "_blank");
+          
+        },
+      },{id: "post-the-end-to-end-web3-dapps-certificate-generation-distribution-and-value-transfer-with-algorand",
+        
+          title: 'The End-to-End Web3 dApps: Certificate Generation, Distribution, and Value Transfer with Algorand <svg width="1.2rem" height="1.2rem" top=".5rem" viewbox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "End-to-end decentralized credentialing, NFT certificate minting, and verifiable value transfer built on the Algorand blockchain.",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@natnaelbekele142/end-to-end-web3-dapps-certificate-generation-distribution-and-value-transfer-with-algorand-nfts-68eb5c7cfee9", "_blank");
+          
+        },
+      },{id: "post-redash-chatbot-add-on-llm-based-chatbot-for-advanced-data-analytics-and-visualization",
+        
+          title: 'Redash Chatbot Add-on: LLM-based Chatbot for Advanced Data Analytics and Visualization <svg width="1.2rem" height="1.2rem" top=".5rem" viewbox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "An LLM-powered natural language interface for Redash BI, enabling automated SQL generation, query visualization, and conversational data analytics.",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@natnaelbekele142/redash-chatbot-add-on-llm-based-chatbot-for-advanced-data-analytics-visualisation-and-automated-450422dd8a58", "_blank");
+          
+        },
+      },{id: "post-data-warehousing-the-engine-of-business-intelligence",
+        
+          title: 'Data Warehousing: The Engine of Business Intelligence <svg width="1.2rem" height="1.2rem" top=".5rem" viewbox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "Designing scalable ELT data pipelines, star schema architectures, and automated Apache Airflow DAGs for business intelligence and traffic monitoring.",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@natnaelbekele142/data-warehousing-the-engine-of-business-intelligence-2dac8adeb921", "_blank");
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/al-folio/books/the_godfather/";
+            },},{id: "news-a-simple-inline-announcement",
+          title: 'A simple inline announcement.',
+          description: "",
+          section: "News",},{id: "news-a-long-announcement-with-details",
+          title: 'A long announcement with details',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/al-folio/news/announcement_2/";
+            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
+          title: 'A simple inline announcement with Markdown emoji! <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png" height="20" width="20"> <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20">',
+          description: "",
+          section: "News",},{id: "projects-latent-sleeper-agent-linear-probing",
+          title: 'Latent Sleeper Agent Linear Probing',
+          description: "Mechanistic interpretability suite investigating layer-wise linear probe dynamics to detect latent sleeper agents in LLMs.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/0_geometry_of_defection/";
+            },},{id: "projects-afrochat",
+          title: 'AfroChat',
+          description: "AI-powered multi-model chat platform bringing LLMs together with enterprise customization.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/1_afrochat/";
+            },},{id: "projects-adot",
+          title: 'Adot',
+          description: "Maternal health platform providing personalized tracking, expert doctor connections, and AI insights.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/2_adot/";
+            },},{id: "projects-rateeat",
+          title: 'RateEat',
+          description: "Community food discovery platform with user-driven restaurant reviews and smart recommendations.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/3_rateeat/";
+            },},{id: "projects-promptkit",
+          title: 'promptKit',
+          description: "Automated prompt generation, diverse test case synthesis, and LLM benchmarking tool.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/5_promptkit/";
+            },},{id: "projects-vitalai",
+          title: 'VitalAI',
+          description: "Django-based predictive healthcare API delivering personalized health insights from Apple Health data.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/6_vitalai/";
+            },},{id: "projects-redash-chatbot-add-on",
+          title: 'Redash Chatbot Add-on',
+          description: "Conversational BI extension enabling natural language queries, SQL generation, and live data visualization.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/7_redash_chatbot/";
+            },},{id: "projects-amharic-hate-speech-detection",
+          title: 'Amharic Hate Speech Detection',
+          description: "Deep learning NLP system using fine-tuned multilingual BERT (mBERT) to classify and detect hate speech in Amharic.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/8_hate_speech_amharic/";
+            },},{id: "projects-cursor-spend-tracker",
+          title: 'Cursor Spend Tracker',
+          description: "Telemetry and cost analytics platform tracking Claude token spend and BYOK charges with automated Vercel cron sync.",
+          section: "Projects",handler: () => {
+              window.location.href = "/al-folio/projects/9_cursor_spend_tracker/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/al-folio/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/al-folio/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%6E%61%74%6E%61%65%6C%62%65%6B%65%6C%65%31%34%32@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/nathyBekele", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/natnael-bekele-haile", "_blank");
+        },
+      },{
+        id: 'social-leetcode',
+        title: 'LeetCode',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://leetcode.com/u/natnael_b_haile/", "_blank");
+        },
+      },{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/al-folio/assets/pdf/Natnael_Bekele_Haile_CV.pdf", "_blank");
+        },
+      },{
+        id: 'social-medium',
+        title: 'Medium',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://medium.com/@natnaelbekele142", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/al-folio/assets/al_search/js/shortcut-key.js"></script> </body> </html>

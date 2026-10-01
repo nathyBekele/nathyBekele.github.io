@@ -2,13 +2,13 @@
 layout: about
 title: about
 permalink: /
-subtitle: Addis Ababa, Ethiopia
+subtitle: 
 
 profile:
   align: right
   image: natnael.jpg
   image_circular: false # crops the image to make it circular
-  more_info: >
+more_info: >
     <p>4kilo, Addis Ababa, Ethiopia</p>
     <p><a href="mailto:natnaelbekele142[at]gmail[dot]com">natnaelbekele142@gmail.com</a></p>
 

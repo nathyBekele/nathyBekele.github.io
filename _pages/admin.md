@@ -2592,7 +2592,7 @@ robots: noindex, nofollow
           id="about_contact_note_input"
           rows="2"
           oninput="onAboutContactNoteChange(this.value)"
-          placeholder="Feel free to reach out directly via email at natnaelbekele142@gmail.com or connect via LinkedIn and GitHub."
+          placeholder="Feel free to connect via LinkedIn or Email."
         ></textarea>
         <div style="font-size: 0.72rem; color: var(--global-text-color-light); margin-top: 3px;">
           This text appears immediately below the social media icons at the bottom of the page.
@@ -2613,7 +2613,7 @@ robots: noindex, nofollow
           <i class="fa-brands fa-medium" title="Medium"></i>
         </div>
         <div id="about_social_preview_note" style="font-size: 0.82rem; color: var(--global-text-color); line-height: 1.45;">
-          Feel free to reach out directly via email at natnaelbekele142@gmail.com or connect via LinkedIn and GitHub.
+          Feel free to connect via LinkedIn or Email.
         </div>
       </div>
     </div>
@@ -3887,10 +3887,10 @@ robots: noindex, nofollow
   const DEFAULT_ABOUT_SUBTITLE = "";
   const DEFAULT_ABOUT_IMAGE = "natnael.jpg";
   const DEFAULT_ABOUT_MORE_INFO = `<p>4kilo, Addis Ababa, Ethiopia</p>\n<p><a href="mailto:natnaelbekele142[at]gmail[dot]com">natnaelbekele142@gmail.com</a></p>`;
-  const DEFAULT_CONTACT_NOTE = {{ site.contact_note | jsonify | default: '"Feel free to connect via LinkedIn and GitHub."' }};
-  const DEFAULT_ABOUT_BIO = `I am a software engineer at [Vula](https://vula.vc), where I build systems for investment management and due diligence.
+  const DEFAULT_CONTACT_NOTE = {{ site.contact_note | jsonify | default: '"Feel free to connect via LinkedIn or Email."' }};
+  const DEFAULT_ABOUT_BIO = `I am a software engineer at [Vula](https://vula.vc), where we build agentic pre and post-investment management systems.
 
-My research interest is AI safety, specifically the problem of hidden behaviour in language models that are distributed openly and trusted by default. I recently finished a [preprint](https://zenodo.org/records/23089057) on why linear activation probes fail to detect backdoored code models, and the conditions under which they can be made to work. I am applying for PhD positions in this area.
+At the moment I am obsessed with a fairly simple question: can a language model carry a hidden intention? A model can be trained to behave perfectly under every ordinary condition and to act on something else entirely once the right circumstances appear. I recently finished a solo research on why linear activation probes fail to detect such models in code generation titled [geometry-of-dormant-defection]({{ '/assets/pdf/The_Geometry_of_Dormant_Defection.pdf' | relative_url }}){:target="_blank" rel="noopener noreferrer"}, and the conditions under which they can be made to work. I am applying for PhD positions in this and adjacent areas of AI safety.
 
 Before [Vula](https://vula.vc) I was Head of competitive programming education at [A2SV](https://a2sv.org). I did my undergraduate degree in Electrical and Computer Engineering at [Addis Ababa University](https://www.aau.edu.et), where my final-year work was on [hate speech detection in Amharic](https://huggingface.co/NathyB/Hate-Speech-Detection-in-Amharic-Language-mBERT).
 

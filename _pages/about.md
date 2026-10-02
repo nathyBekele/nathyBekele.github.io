@@ -26,9 +26,9 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I am a software engineer at [Vula](https://vula.vc), where I build systems for investment management and due diligence.
+I am a software engineer at [Vula](https://vula.vc), where we build agentic pre and post-investment management systems.
 
-My research interest is AI safety, specifically the problem of hidden behaviour in language models that are distributed openly and trusted by default. I recently finished a [preprint](https://zenodo.org/records/23089057) on why linear activation probes fail to detect backdoored code models, and the conditions under which they can be made to work. I am applying for PhD positions in this area.
+At the moment I am obsessed with a fairly simple question: can a language model carry a hidden intention? A model can be trained to behave perfectly under every ordinary condition and to act on something else entirely once the right circumstances appear. I recently finished a solo research on why linear activation probes fail to detect such models in code generation titled [geometry-of-dormant-defection]({{ '/assets/pdf/The_Geometry_of_Dormant_Defection.pdf' | relative_url }}){:target="_blank" rel="noopener noreferrer"}, and the conditions under which they can be made to work. I am applying for PhD positions in this and adjacent areas of AI safety.
 
 Before [Vula](https://vula.vc) I was Head of competitive programming education at [A2SV](https://a2sv.org). I did my undergraduate degree in Electrical and Computer Engineering at [Addis Ababa University](https://www.aau.edu.et), where my final-year work was on [hate speech detection in Amharic](https://huggingface.co/NathyB/Hate-Speech-Detection-in-Amharic-Language-mBERT).
 

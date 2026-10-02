@@ -16,6 +16,8 @@ output/playwright/
 test-results/
 vendor
 
-# Python bytecode from bin/ helper scripts
+# Standalone sub-projects
+github-traffic-archive/
+
 __pycache__/
 *.pyc

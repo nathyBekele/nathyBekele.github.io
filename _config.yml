@@ -7,7 +7,7 @@ first_name: Natnael
 middle_name: B.
 last_name: Haile
 contact_note: >
-  Feel free to connect via LinkedIn and GitHub.
+  Feel free to connect via LinkedIn or Email.
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Portfolio and personal website of Natnael Bekele Haile, Fullstack Software Engineer & AI Systems Developer.
 footer_text: 'All rights reserved. <a href="/admin/" style="opacity: 0.2; color: inherit; text-decoration: none; margin-left: 6px;" title="Control Center"><i class="fa-solid fa-lock" style="font-size: 0.68rem;"></i></a><script>window.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.key.toLowerCase()==="a"){e.preventDefault();window.location.href="/admin/";}});</script>'

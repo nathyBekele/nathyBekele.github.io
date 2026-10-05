@@ -54,3 +54,37 @@ html[data-theme="dark"] {
     {% endfor %}
   {% endif %}
 {% endif %}
+
+/* Interactive Publication Thumbnail Link */
+.publication-thumbnail-link {
+  display: block !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.03);
+  }
+
+  &:active {
+    transform: translateY(0) scale(1);
+  }
+
+  figure {
+    margin: 0 !important;
+    cursor: pointer !important;
+  }
+
+  img.preview {
+    display: block !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    height: auto !important;
+    pointer-events: auto !important;
+  }
+}
+

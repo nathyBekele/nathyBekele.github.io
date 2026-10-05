@@ -25,7 +25,7 @@ latest_posts:
 
 I am a software engineer at [Vula](https://vula.vc) building agentic pre-investment workflows and automations for investment firms based in UK and South Africa. I am also an aspiring researcher interested in how to agents can be used in critical systems like finance and healthcare, especially when they run on open-weight models, since those can carry hidden intentions that are hard to detect.
 
-Previously I was a competitive programmer myself, a regional finalist at ICPC 2021. I later led the competitive programming DSA camp at [A2SV](https://a2sv.org) for the 2022, 2023 and 2024 batches, training students in DSA problem solving (Codeforces and LeetCode style), which helped over 100 students land internships at Google, AWS, Palantir, Bloomberg and others.
+Previously I was a competitive programmer myself, a regional finalist at ICPC 2021. I later led the competitive programming DSA camp at [A2SV](https://a2sv.org) for the 2022, 2023 and 2024 batches, training students in DSA problem solving (Codeforces and LeetCode style), which helped over 100 students land internships at Google, AWS, Palantir, Bloomberg and others ([check placements here](https://www.a2sv.org/placements)).
 
 <style>
   html, body {
@@ -41,6 +41,39 @@ Previously I was a competitive programmer myself, a regional finalist at ICPC 20
   .post article > h2 {
     margin-top: 3.5rem !important;
     margin-bottom: 1.25rem !important;
+  }
+
+  /* Interactive Publication Thumbnail Link */
+  .publication-thumbnail-link {
+    display: block !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.2s ease;
+  }
+
+  .publication-thumbnail-link:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.03);
+  }
+
+  .publication-thumbnail-link:active {
+    transform: translateY(0) scale(1);
+  }
+
+  .publication-thumbnail-link figure {
+    margin: 0 !important;
+    cursor: pointer !important;
+  }
+
+  .publication-thumbnail-link img.preview {
+    display: block !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    height: auto !important;
+    pointer-events: auto !important;
   }
 
   /* Profile headshot in main text flow */
@@ -716,17 +749,17 @@ Previously I was a competitive programmer myself, a regional finalist at ICPC 20
   /* Isolated Section Cards (Experience & Education) */
   .li-isolated-card {
     flex-shrink: 0 !important;
-    background: var(--global-card-bg-color, #1e1e1e);
+    background: transparent !important;
     border: 1px solid var(--global-divider-color, rgba(255, 255, 255, 0.12));
     border-radius: 8px;
     padding: 11px 12px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: none !important;
   }
 
   html[data-theme='light'] .li-isolated-card {
-    background: #ffffff !important;
-    border: 1px solid #e4e2e2 !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    background: transparent !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
   }
 
   .li-card-head {
@@ -875,6 +908,32 @@ Previously I was a competitive programmer myself, a regional finalist at ICPC 20
 
   html[data-theme='light'] .li-card-divider {
     background: #e2e8f0 !important;
+  }
+
+  html[data-theme='light'] .li-card-head-title {
+    color: #2f80ed !important;
+  }
+
+  html[data-theme='light'] .li-entry-role,
+  html[data-theme='light'] .li-entry-role a {
+    color: #2f80ed !important;
+  }
+
+  html[data-theme='light'] .li-entry-role a:hover {
+    color: #1a60be !important;
+  }
+
+  html[data-theme='light'] .li-entry-company,
+  html[data-theme='light'] .li-entry-company a {
+    color: #1f2328 !important;
+  }
+
+  html[data-theme='light'] .li-entry-company a:hover {
+    color: #2f80ed !important;
+  }
+
+  html[data-theme='light'] .li-entry-meta {
+    color: #57606a !important;
   }
 
   .social-card-actions {
@@ -1740,7 +1799,7 @@ Previously I was a competitive programmer myself, a regional finalist at ICPC 20
                     <a href="https://a2sv.org" target="_blank" rel="noopener noreferrer" class="li-hover-link" title="Visit A2SV">A2SV | Africa to Silicon Valley</a> · Full-time
                   </div>
                   <div class="li-entry-meta">
-                    <span>Nov 2021 – Present · 3 yrs</span>
+                    <span>Nov 2021 – Sep 2024 · 2 yrs 11 mos</span>
                   </div>
                   <div class="li-entry-meta">
                     <span>Addis Ababa, Ethiopia</span>
@@ -1819,11 +1878,111 @@ Previously I was a competitive programmer myself, a regional finalist at ICPC 20
     document.body.removeChild(textarea);
   }
 
+  function linkPublicationThumbnails() {
+    const pubContainers = document.querySelectorAll('.publications');
+    if (!pubContainers.length) return;
+
+    pubContainers.forEach((container) => {
+      const items = container.querySelectorAll('ol.bibliography > li, .bibliography > li');
+      items.forEach((item) => {
+        const abbr = item.querySelector('.col.abbr, .abbr');
+        if (!abbr) return;
+
+        // Skip if already enclosed in link
+        if (abbr.querySelector('a.publication-thumbnail-link')) return;
+
+        const previewImg = abbr.querySelector('img.preview') || abbr.querySelector('img');
+        if (!previewImg) return;
+
+        // Determine research link
+        let researchUrl = '';
+        let paperTitle = 'Read research paper';
+
+        const titleEl = item.querySelector('.title');
+        if (titleEl && titleEl.textContent) {
+          paperTitle = titleEl.textContent.trim();
+        }
+
+        // 1. Check for PDF button
+        const links = item.querySelectorAll('.links a');
+        for (const a of links) {
+          const text = (a.textContent || '').trim().toUpperCase();
+          const href = a.getAttribute('href') || '';
+          if (text === 'PDF' || href.toLowerCase().endsWith('.pdf')) {
+            researchUrl = href;
+            a.setAttribute('target', '_blank');
+            a.setAttribute('rel', 'noopener noreferrer');
+            break;
+          }
+        }
+
+        // 2. Fallback to DOI button
+        if (!researchUrl) {
+          for (const a of links) {
+            const text = (a.textContent || '').trim().toUpperCase();
+            const href = a.getAttribute('href') || '';
+            if (text === 'DOI' || href.includes('doi.org')) {
+              researchUrl = href;
+              break;
+            }
+          }
+        }
+
+        // 3. Fallback to HTML or other publication link
+        if (!researchUrl && links.length > 0) {
+          researchUrl = links[0].getAttribute('href') || '';
+        }
+
+        // Default fallback
+        if (!researchUrl) {
+          researchUrl = '{{ "/assets/pdf/The_Geometry_of_Dormant_Defection.pdf" | relative_url }}';
+        }
+
+        // Remove data-zoomable attribute so medium-zoom doesn't zoom preview image
+        previewImg.removeAttribute('data-zoomable');
+        previewImg.classList.remove('zoomable');
+
+        // Create clean clone to detach medium-zoom click listener
+        const cleanImg = previewImg.cloneNode(true);
+        cleanImg.removeAttribute('data-zoomable');
+        cleanImg.style.cursor = 'pointer';
+
+        if (previewImg.parentNode) {
+          previewImg.parentNode.replaceChild(cleanImg, previewImg);
+        }
+
+        // Create enclosing link
+        const link = document.createElement('a');
+        link.href = researchUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.className = 'publication-thumbnail-link';
+        link.title = `Open "${paperTitle}" in a new tab`;
+        link.setAttribute('aria-label', `Open "${paperTitle}" in a new tab`);
+
+        // Wrap figure or picture or cleanImg
+        const figure = abbr.querySelector('figure');
+        const targetNode = figure || abbr.querySelector('picture') || cleanImg;
+        if (targetNode && targetNode.parentNode) {
+          targetNode.parentNode.insertBefore(link, targetNode);
+          link.appendChild(targetNode);
+        }
+      });
+    });
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener("DOMContentLoaded", relocateSocialIcons);
+    document.addEventListener("DOMContentLoaded", () => {
+      relocateSocialIcons();
+      linkPublicationThumbnails();
+    });
   } else {
     relocateSocialIcons();
+    linkPublicationThumbnails();
   }
+  window.addEventListener("load", linkPublicationThumbnails);
+  setTimeout(linkPublicationThumbnails, 150);
+  setTimeout(linkPublicationThumbnails, 600);
 
   document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);

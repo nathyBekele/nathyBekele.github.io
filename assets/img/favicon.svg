@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="nGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="60%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dark obsidian rounded tile background -->
+  <rect width="64" height="64" rx="16" fill="#090d16"/>
+  <rect x="1" y="1" width="62" height="62" rx="15" fill="none" stroke="rgba(56, 189, 248, 0.28)" stroke-width="1.8"/>
+
+  <!-- Crisp Geometric Monogram "N" -->
+  <path
+    d="M 14 50 L 14 14 L 23.5 14 L 40.5 37.5 L 40.5 14 L 50 14 L 50 50 L 40.5 50 L 23.5 26.5 L 23.5 50 Z"
+    fill="url(#nGrad)"
+  />
+</svg>

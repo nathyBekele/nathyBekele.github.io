@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <span class="subtitle-role">Software Engineer</span> <span class="subtitle-sep">•</span> <span class="subtitle-loc"><i class="fa-solid fa-location-dot"></i> Addis Ababa, Ethiopia</span> <span class="subtitle-sep">•</span> <a href="mailto:natnaelbekele142@gmail.com" class="subtitle-email-link"><i class="fa-regular fa-envelope"></i> natnaelbekele142@gmail.com</a>
+subtitle: <span class="subtitle-role">Software Engineer</span> <span class="subtitle-sep">•</span> <a href="https://maps.google.com/?q=Addis+Ababa,+Ethiopia" target="_blank" rel="noopener noreferrer" class="subtitle-loc-link"><i class="fa-solid fa-location-dot"></i> Addis Ababa, Ethiopia</a> <span class="subtitle-sep">•</span> <a href="mailto:natnaelbekele142@gmail.com" class="subtitle-email-link"><i class="fa-regular fa-envelope"></i> natnaelbekele142@gmail.com</a>
 
 profile:
   align: right
@@ -81,29 +81,28 @@ Previously I was a competitive programmer myself, a regional finalist at ICPC 20
     color: var(--global-text-color, #e6edf3);
   }
 
-  .subtitle-loc {
-    color: var(--global-text-color-light, #8b949e);
-  }
-
   .subtitle-sep {
     margin: 0 5px;
     opacity: 0.4;
   }
 
+  .subtitle-loc-link,
   .subtitle-email-link {
-    color: var(--global-theme-color, #22c55e) !important;
+    color: var(--global-text-color-light, #8b949e) !important;
     text-decoration: none !important;
     display: inline-flex;
     align-items: center;
     gap: 5px;
     font-weight: 500;
     font-size: 0.92rem;
-    transition: opacity 0.2s ease;
+    transition: color 0.2s ease, opacity 0.2s ease;
   }
 
+  .subtitle-loc-link:hover,
   .subtitle-email-link:hover {
+    color: var(--global-text-color, #e6edf3) !important;
     text-decoration: underline !important;
-    opacity: 0.85;
+    opacity: 1;
   }
 
   /* =========================================================================
@@ -139,20 +138,117 @@ Previously I was a competitive programmer myself, a regional finalist at ICPC 20
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
+    position: relative !important;
     color: var(--global-text-color) !important;
     opacity: 0.9;
     transition: all 0.2s ease;
     text-decoration: none !important;
   }
 
-  .profile-social-item:hover .social-icon-btn {
+  .profile-social-item:hover .social-icon-btn,
+  .profile-social-item:focus-within .social-icon-btn {
     color: var(--global-theme-color) !important;
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.08);
+  }
+
+  /* Circling Border Beam Light */
+  .border-beam-svg {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 36px !important;
+    height: 36px !important;
+    pointer-events: none !important;
+    overflow: visible !important;
+    border-radius: 8px !important;
+    z-index: 2 !important;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .border-beam-glow {
+    fill: none;
+    stroke: #38bdf8;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-dasharray: 28 95;
+    stroke-dashoffset: 0;
+    opacity: 0;
+    filter: drop-shadow(0 0 3px rgba(56, 189, 248, 0.85));
+  }
+
+  html[data-theme='light'] .border-beam-glow {
+    stroke: #0284c7;
+    filter: drop-shadow(0 0 2.5px rgba(2, 132, 199, 0.65));
+  }
+
+  .github-item .border-beam-glow {
+    animation: border-beam-github 5.5s linear infinite;
+  }
+
+  .linkedin-item .border-beam-glow {
+    animation: border-beam-linkedin 5.5s linear infinite;
+  }
+
+  .profile-social-item:hover .border-beam-svg,
+  .profile-social-item:focus-within .border-beam-svg {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  @keyframes border-beam-github {
+    0% {
+      opacity: 0;
+      stroke-dashoffset: 0;
+    }
+    1.5% {
+      opacity: 1;
+      stroke-dashoffset: -10;
+    }
+    17% {
+      opacity: 1;
+      stroke-dashoffset: -110;
+    }
+    19.1% {
+      opacity: 0;
+      stroke-dashoffset: -123;
+    }
+    100% {
+      opacity: 0;
+      stroke-dashoffset: -123;
+    }
+  }
+
+  @keyframes border-beam-linkedin {
+    0%,
+    15% {
+      opacity: 0;
+      stroke-dashoffset: 0;
+    }
+    16.5% {
+      opacity: 1;
+      stroke-dashoffset: -10;
+    }
+    32.5% {
+      opacity: 1;
+      stroke-dashoffset: -110;
+    }
+    34.5% {
+      opacity: 0;
+      stroke-dashoffset: -123;
+    }
+    100% {
+      opacity: 0;
+      stroke-dashoffset: -123;
+    }
   }
 
   /* 1. Large Desktops (>= 1380px): Plenty of space on the right -> Permanently Expanded */
   @media (min-width: 1380px) {
+    .border-beam-svg {
+      display: none !important;
+    }
+
     .container {
       margin-left: max(24px, calc(100vw - 1380px + 35px)) !important;
       margin-right: auto !important;
@@ -1552,28 +1648,34 @@ Previously I was a competitive programmer myself, a regional finalist at ICPC 20
     // Build the interactive social items (GitHub and LinkedIn) with rich cards in the right gutter
     wrapper.innerHTML = `
       <div class="profile-social-item github-item">
-        <a href="https://github.com/nathyBekele" aria-label="GitHub" rel="external nofollow noopener" target="_blank" class="social-icon-btn">
+        <a href="https://github.com/nathyBekele" aria-label="GitHub" title="GitHub stats & activity (hover to preview)" rel="external nofollow noopener" target="_blank" class="social-icon-btn">
           <i class="fa-brands fa-github"></i>
+          <svg class="border-beam-svg" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect class="border-beam-glow" x="1" y="1" width="34" height="34" rx="7.5" />
+          </svg>
         </a>
         <div class="social-popout-card github-card">
           <a href="https://github.com/nathyBekele" target="_blank" rel="noopener noreferrer" class="gh-svg-link">
             <img
               class="only-light gh-stats-svg"
               alt="nathyBekele GitHub Stats"
-              src="https://github-stats-extended.vercel.app/api/?username=nathyBekele&theme={{ site.repo_theme_light }}&show_icons=true&include_all_commits=true&hide=issues,contribs&show=contributions,prs_merged&custom_title=GitHub+Activity&card_width=390&hide_border=true"
+              src="{{ 'assets/img/github_activity_light.svg' | relative_url }}"
             >
             <img
               class="only-dark gh-stats-svg"
               alt="nathyBekele GitHub Stats"
-              src="https://github-stats-extended.vercel.app/api/?username=nathyBekele&theme={{ site.repo_theme_dark }}&show_icons=true&include_all_commits=true&hide=issues,contribs&show=contributions,prs_merged&custom_title=GitHub+Activity&card_width=390&hide_border=true"
+              src="{{ 'assets/img/github_activity_dark.svg' | relative_url }}"
             >
           </a>
         </div>
       </div>
 
       <div class="profile-social-item linkedin-item">
-        <a href="https://www.linkedin.com/in/natnael-bekele-haile" aria-label="LinkedIn" rel="external nofollow noopener" target="_blank" class="social-icon-btn">
+        <a href="https://www.linkedin.com/in/natnael-bekele-haile" aria-label="LinkedIn" title="Experience & Education (hover to preview)" rel="external nofollow noopener" target="_blank" class="social-icon-btn">
           <i class="fa-brands fa-linkedin"></i>
+          <svg class="border-beam-svg" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect class="border-beam-glow" x="1" y="1" width="34" height="34" rx="7.5" />
+          </svg>
         </a>
         <div class="social-popout-card linkedin-card">
           <!-- Scrollable Area with Isolated Experience & Education Cards (Matching LinkedIn UI) -->

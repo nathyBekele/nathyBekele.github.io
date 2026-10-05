@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } catch(e) {}
 });
-</script> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Natnael B. Haile. All rights reserved. <a href="/admin/" style="opacity: 0.2; color: inherit; text-decoration: none; margin-left: 6px;" title="Control Center"><i class="fa-solid fa-lock" style="font-size: 0.68rem;"></i></a><script>window.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.key.toLowerCase()==="a"){e.preventDefault();window.location.href="/admin/";}});</script> </div> </footer> <script>
+</script> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Natnael B. Haile. All rights reserved. <a href="/admin/" style="opacity: 0.2; color: inherit; text-decoration: none; margin-left: 6px;" title="Control Center"><i class="fa-solid fa-lock" style="font-size: 0.68rem;"></i></a> <span style="opacity: 0.4; margin: 0 4px;">•</span><script>window.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.key.toLowerCase()==="a"){e.preventDefault();window.location.href="/admin/";}});</script> Last updated: October 05, 2026. </div> </footer> <script>
   window.alFolio = {
     compatBootstrap: false
   };
@@ -263,6 +263,13 @@ ninja.data = [{
           section: "Teachings",handler: () => {
               window.location.href = "/teachings/introduction-to-machine-learning/";
             },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%6E%61%74%6E%61%65%6C%62%65%6B%65%6C%65%31%34%32@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
         id: 'social-github',
         title: 'GitHub',
         section: 'Socials',

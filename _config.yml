@@ -6,11 +6,10 @@ title: blank # the website title (if blank, full name will be used instead)
 first_name: Natnael
 middle_name: B.
 last_name: Haile
-contact_note: >
-  Feel free to connect via LinkedIn or Email.
+contact_note: ""
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Portfolio and personal website of Natnael Bekele Haile, Fullstack Software Engineer & AI Systems Developer.
-footer_text: 'All rights reserved. <a href="/admin/" style="opacity: 0.2; color: inherit; text-decoration: none; margin-left: 6px;" title="Control Center"><i class="fa-solid fa-lock" style="font-size: 0.68rem;"></i></a><script>window.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.key.toLowerCase()==="a"){e.preventDefault();window.location.href="/admin/";}});</script>'
+footer_text: 'All rights reserved. <a href="/admin/" style="opacity: 0.2; color: inherit; text-decoration: none; margin-left: 6px;" title="Control Center"><i class="fa-solid fa-lock" style="font-size: 0.68rem;"></i></a> <span style="opacity: 0.4; margin: 0 4px;">•</span><script>window.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.key.toLowerCase()==="a"){e.preventDefault();window.location.href="/admin/";}});</script>'
 keywords: software-engineer, fullstack-developer, backend, competitive-programming, portfolio # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: ⚛️ # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
@@ -18,7 +17,7 @@ apple_touch_icon: # image name in /assets/img/ (or a rooted path / absolute URL)
 
 url: https://nathybekele.github.io # the base hostname & protocol for your site
 baseurl: "" # the subpath of your site, e.g. /blog/. Leave blank for root
-last_updated: false # set to true if you want to display last updated in the footer
+last_updated: true # set to true if you want to display last updated in the footer
 impressum_path: # set to path to include impressum link in the footer, use the same path as permalink in a page, helps to conform with EU GDPR
 back_to_top: true # set to false to disable the back to top button
 

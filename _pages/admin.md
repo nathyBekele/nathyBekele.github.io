@@ -3886,15 +3886,11 @@ robots: noindex, nofollow
 
   const DEFAULT_ABOUT_SUBTITLE = "";
   const DEFAULT_ABOUT_IMAGE = "natnael.jpg";
-  const DEFAULT_ABOUT_MORE_INFO = `<p>4kilo, Addis Ababa, Ethiopia</p>\n<p><a href="mailto:natnaelbekele142[at]gmail[dot]com">natnaelbekele142@gmail.com</a></p>`;
+  const DEFAULT_ABOUT_MORE_INFO = "";
   const DEFAULT_CONTACT_NOTE = {{ site.contact_note | jsonify | default: '"Feel free to connect via LinkedIn or Email."' }};
-  const DEFAULT_ABOUT_BIO = `I am a software engineer at [Vula](https://vula.vc), where we build agentic pre and post-investment management systems.
+  const DEFAULT_ABOUT_BIO = `I am a software engineer at [Vula](https://vula.vc) building agentic investment systems, and an aspiring AI safety researcher exploring how hidden intentions in language models work. I am looking for PhD supervision in AI safety, interpretability, and broader research themes around agentic and native AI systems.
 
-At the moment I am obsessed with a fairly simple question: can a language model carry a hidden intention? A model can be trained to behave perfectly under every ordinary condition and to act on something else entirely once the right circumstances appear. I recently finished a solo research on why linear activation probes fail to detect such models in code generation titled [geometry-of-dormant-defection]({{ '/assets/pdf/The_Geometry_of_Dormant_Defection.pdf' | relative_url }}){:target="_blank" rel="noopener noreferrer"}, and the conditions under which they can be made to work. I am applying for PhD positions in this and adjacent areas of AI safety.
-
-Before [Vula](https://vula.vc) I was Head of competitive programming education at [A2SV](https://a2sv.org). I did my undergraduate degree in Electrical and Computer Engineering at [Addis Ababa University](https://www.aau.edu.et), where my final-year work was on [hate speech detection in Amharic](https://huggingface.co/NathyB/Hate-Speech-Detection-in-Amharic-Language-mBERT).
-
-I came to this through competitive programming and a long-standing interest in mathematics and physics.`;
+Previously I was a competitive programming coach at [A2SV](https://a2sv.org), training students in DSA problem solving (Codeforces and LeetCode style), which helped over 100 students land internships at Google, AWS, Palantir, Bloomberg and others.`;
 
   const INITIAL_JEKYLL_CV = {{ site.data.cv.cv | jsonify }};
   const INITIAL_JEKYLL_SOCIALS = {{ site.data.socials | jsonify }};

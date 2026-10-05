@@ -1,0 +1,129 @@
+{
+  "joyce_chai": {
+    "visitor": {
+      "id": "joyce_chai",
+      "name": "Prof. Joyce Y. Chai",
+      "role": "Director, SLED Lab @ UMich",
+      "image": "/assets/img/connections/joyce_chai.jpg",
+      "bio": "Professor of CSE at University of Michigan; directs the SLED Lab advancing situated dialogue, multimodal grounding, and human-robot collaboration.",
+      "links": [
+        { "name": "Faculty Page", "url": "https://web.eecs.umich.edu/~chaijy/" },
+        { "name": "SLED Lab", "url": "https://sled.eecs.umich.edu/" },
+        { "name": "Google Scholar", "url": "https://scholar.google.com/citations?user=515a4c0AAAAJ" },
+        { "name": "LinkedIn", "url": "https://www.linkedin.com/in/joyce-chai-42165246/" }
+      ]
+    },
+    "target": {
+      "id": "natnael",
+      "name": "Natnael Bekele",
+      "role": "Software Engineer @ Vula",
+      "image": "/assets/img/natnael.jpg",
+      "bio": "Software engineer building agentic investment systems; aspiring AI safety researcher studying latent intentions, interpretability, and agent reliability; ex-A2SV Head of Education.",
+      "links": [
+        { "name": "GitHub", "url": "https://github.com/nathyBekele" },
+        { "name": "LinkedIn", "url": "https://www.linkedin.com/in/natnael-bekele-haile" },
+        { "name": "Email", "url": "mailto:natnaelbekele142@gmail.com" }
+      ]
+    },
+    "nodes": [
+      {
+        "id": "martin_ma",
+        "layer": 1,
+        "name": "Dr. Martin Ma",
+        "role": "PhD '26 @ SLED",
+        "image": "/assets/img/connections/martin_ma.jpg",
+        "bio": "PhD candidate at UMich advised by Prof. Joyce Chai. Researches multimodal agents and co-organized the 1st Workshop on Bidirectional Human-AI Alignment (ICLR 2025).",
+        "links": [
+          { "name": "Personal Site", "url": "https://mars-tin.github.io/" },
+          { "name": "SLED Profile", "url": "https://sled.eecs.umich.edu/author/ziqiao-martin-ma/" },
+          { "name": "Google Scholar", "url": "https://scholar.google.com/citations?user=JvC_hBMAAAAJ" },
+          { "name": "GitHub", "url": "https://github.com/Mars-tin" }
+        ]
+      },
+      {
+        "id": "jed_yang",
+        "layer": 1,
+        "name": "Dr. Jed Yang",
+        "role": "PhD '25 @ SLED",
+        "image": "/assets/img/connections/jed_yang.jpg",
+        "bio": "PhD from UMich advised by Prof. Joyce Chai. Created LLM-Grounder for 3D language grounding; ex-Meta AI software engineer.",
+        "links": [
+          { "name": "Personal Site", "url": "https://jedyang.com/" },
+          { "name": "SLED Profile", "url": "https://sled.eecs.umich.edu/author/jianing-jed-yang/" },
+          { "name": "Google Scholar", "url": "https://scholar.google.com/citations?user=d96zRjMAAAAJ" },
+          { "name": "LinkedIn", "url": "https://www.linkedin.com/in/jianing-yang-79b940149/" }
+        ]
+      },
+      {
+        "id": "dan_hendrycks",
+        "layer": 2,
+        "name": "Dan Hendrycks",
+        "role": "Director @ CAIS",
+        "image": "/assets/img/connections/dan_hendrycks.jpg",
+        "bio": "Executive Director of the Center for AI Safety (CAIS); advisor to xAI and Scale AI. Created the MMLU benchmark and GELU activations.",
+        "links": [
+          { "name": "Personal Site", "url": "https://danhendrycks.com/" },
+          { "name": "CAIS", "url": "https://www.safe.ai/" },
+          { "name": "Google Scholar", "url": "https://scholar.google.com/citations?user=czyretsAAAAJ" },
+          { "name": "X / Twitter", "url": "https://twitter.com/DanHendrycks" }
+        ]
+      },
+      {
+        "id": "emre_varol",
+        "layer": 2,
+        "name": "Emre Varol",
+        "role": "Founder @ A2SV",
+        "image": "/assets/img/connections/emre_varol.webp",
+        "bio": "Founder of Africa to Silicon Valley (A2SV); ex-Google SWE. Mentored and helped place 100+ African engineers into top tech companies.",
+        "links": [
+          { "name": "Personal Site", "url": "https://emrevarol.com/" },
+          { "name": "A2SV", "url": "https://a2sv.org/" },
+          { "name": "LinkedIn", "url": "https://www.linkedin.com/in/emre-varol/" }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "source": "joyce_chai",
+        "target": "martin_ma",
+        "context": "You advised Dr. Ma's PhD on Bidirectional Human-AI Alignment",
+        "strength": 10
+      },
+      {
+        "source": "joyce_chai",
+        "target": "jed_yang",
+        "context": "You advised Dr. Yang's PhD on LLM-Grounder",
+        "strength": 10
+      },
+      {
+        "source": "martin_ma",
+        "target": "dan_hendrycks",
+        "context": "Both actively advance AI Alignment and Safety research",
+        "strength": 7
+      },
+      {
+        "source": "jed_yang",
+        "target": "emre_varol",
+        "context": "Both are ex-Big Tech SWEs (Meta, Google) building AI startups",
+        "strength": 4
+      },
+      {
+        "source": "dan_hendrycks",
+        "target": "natnael",
+        "context": "Natnael's Dormant Defection research builds on CAIS frameworks",
+        "strength": 8
+      },
+      {
+        "source": "emre_varol",
+        "target": "natnael",
+        "context": "Emre founded A2SV where Natnael was Head of Education",
+        "strength": 9
+      }
+    ],
+    "shared_bullets": [
+      "Your lab's recent work on evaluating safety-conscious planning of MLLMs (ACL 2026) strongly resonates with my focus on hidden intentions in agentic systems.",
+      "We share an interest in Human-AI Alignment; your co-organization of the 1st Workshop on Bidirectional Human-AI Alignment (ICLR 2025) aligns perfectly with my PhD goals.",
+      "We are both passionate about evaluating and building reliable, embodied AI agents that safely act on physical and situational contexts."
+    ]
+  }
+}

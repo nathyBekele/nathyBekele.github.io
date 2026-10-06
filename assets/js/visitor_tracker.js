@@ -438,10 +438,6 @@
       "Recorded At": new Date().toLocaleString(),
     };
 
-    if (window.location.search.includes("test_alert=1")) {
-      console.log("[VisitorTracker] 🚀 Dispatching instant visit alert payload:", payload);
-    }
-
     try {
       fetch(RECIPIENT_ENDPOINT, {
         method: "POST",
@@ -451,18 +447,7 @@
         },
         body: JSON.stringify(payload),
         keepalive: true,
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (window.location.search.includes("test_alert=1")) {
-            console.log("[VisitorTracker] ✅ FormSubmit response:", data);
-          }
-        })
-        .catch((err) => {
-          if (window.location.search.includes("test_alert=1")) {
-            console.error("[VisitorTracker] ❌ Error:", err);
-          }
-        });
+      }).catch(() => {});
     } catch (e) {}
   }
 
@@ -490,10 +475,6 @@
       "Interaction Time": new Date().toLocaleString(),
     };
 
-    if (window.location.search.includes("test_alert=1")) {
-      console.log("[VisitorTracker] 🚀 Dispatching interaction alert payload:", payload);
-    }
-
     try {
       fetch(RECIPIENT_ENDPOINT, {
         method: "POST",
@@ -503,18 +484,7 @@
         },
         body: JSON.stringify(payload),
         keepalive: true,
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (window.location.search.includes("test_alert=1")) {
-            console.log("[VisitorTracker] ✅ Interaction FormSubmit response:", data);
-          }
-        })
-        .catch((err) => {
-          if (window.location.search.includes("test_alert=1")) {
-            console.error("[VisitorTracker] ❌ Interaction Error:", err);
-          }
-        });
+      }).catch(() => {});
     } catch (e) {}
   }
 

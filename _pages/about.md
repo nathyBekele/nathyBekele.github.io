@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <span class="subtitle-role">Software Engineer</span> <span class="subtitle-sep">•</span> <a href="https://maps.google.com/?q=Addis+Ababa,+Ethiopia" target="_blank" rel="noopener noreferrer" class="subtitle-loc-link"><i class="fa-solid fa-location-dot"></i> Addis Ababa, Ethiopia</a> <span class="subtitle-sep">•</span> <a href="mailto:natnaelbekele142@gmail.com" class="subtitle-email-link"><i class="fa-regular fa-envelope"></i> natnaelbekele142@gmail.com</a>
+subtitle: <span class="subtitle-role">Software Engineer</span> <span class="subtitle-sep">•</span> <a href="https://maps.google.com/?q=Addis+Ababa,+Ethiopia" target="_blank" rel="noopener noreferrer" class="subtitle-loc-link"><i class="fa-solid fa-location-dot"></i> Addis Ababa, Ethiopia</a> <span class="subtitle-sep">•</span> <a href="mailto:natnaelbekele142@gmail.com" class="subtitle-email-link"><i class="fa-regular fa-envelope"></i> natnaelbekele142@gmail.com</a> <span class="subtitle-sep mobile-hide">•</span> <a href="https://github.com/nathyBekele" target="_blank" rel="noopener noreferrer" class="subtitle-github-link mobile-only-link"><i class="fa-brands fa-github"></i> @nathyBekele</a> <span class="subtitle-sep mobile-hide">•</span> <a href="https://www.linkedin.com/in/natnael-bekele-haile" target="_blank" rel="noopener noreferrer" class="subtitle-linkedin-link mobile-only-link"><i class="fa-brands fa-linkedin"></i> in/natnael-bekele-haile</a>
 
 profile:
   align: right
@@ -40,7 +40,11 @@ Previously I was a competitive programmer, a regional finalist at [ICPC](https:/
   /* Spacing between Bio and Selected Publications */
   .post article > h2 {
     margin-top: 3.5rem !important;
-    margin-bottom: 1.25rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .publications {
+    margin-top: 0 !important;
   }
 
   /* Interactive Publication Thumbnail Link */
@@ -120,7 +124,9 @@ Previously I was a competitive programmer, a regional finalist at [ICPC](https:/
   }
 
   .subtitle-loc-link,
-  .subtitle-email-link {
+  .subtitle-email-link,
+  .subtitle-github-link,
+  .subtitle-linkedin-link {
     color: var(--global-text-color-light, #8b949e) !important;
     text-decoration: none !important;
     display: inline-flex;
@@ -132,10 +138,27 @@ Previously I was a competitive programmer, a regional finalist at [ICPC](https:/
   }
 
   .subtitle-loc-link:hover,
-  .subtitle-email-link:hover {
+  .subtitle-email-link:hover,
+  .subtitle-github-link:hover,
+  .subtitle-linkedin-link:hover {
     color: var(--global-text-color, #e6edf3) !important;
     text-decoration: underline !important;
     opacity: 1;
+  }
+
+  /* Textual GitHub & LinkedIn links are only displayed in mobile view */
+  .mobile-only-link,
+  .mobile-hide {
+    display: none !important;
+  }
+
+  /* Footer elements desktop defaults */
+  .footer-mobile-break {
+    display: none !important;
+  }
+
+  .footer-admin-lock {
+    margin-left: 6px !important;
   }
 
   /* =========================================================================
@@ -477,99 +500,407 @@ Previously I was a competitive programmer, a regional finalist at [ICPC](https:/
     }
   }
 
-  /* 3. Mobile & Tablets (< 992px): Stacked Profile, Collapsed Icons */
+  /* Mobile Modal Backdrop */
+  .mobile-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    pointer-events: none;
+  }
+
+  .mobile-modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Desktop defaults for mobile sheet elements */
+  .mobile-sheet-handle,
+  .mobile-sheet-close-btn,
+  .mobile-sheet-title {
+    display: none !important;
+  }
+
+  /* 3. Mobile & Tablets (< 992px): 2-Column Hero (Photo on Left, Name/Details on Right) */
   @media (max-width: 991px) {
+    .post {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      align-items: stretch !important;
+      gap: 14px !important;
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+    }
+
+    .post article {
+      display: contents !important;
+    }
+
     .profile {
-      float: none !important;
-      max-width: 100% !important;
-      width: 100% !important;
-      margin-left: 0 !important;
+      order: 1 !important;
+      flex: 0 0 140px !important;
+      width: 140px !important;
+      max-width: 140px !important;
+      margin: 0 !important;
+      padding: 0 !important;
       display: flex !important;
       flex-direction: column !important;
-      align-items: center !important;
+      align-self: start !important;
+      justify-content: flex-start !important;
+      line-height: 0 !important;
     }
 
+    .profile figure {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 140px !important;
+      max-width: 140px !important;
+      height: 140px !important;
+      aspect-ratio: 1 / 1 !important;
+      border-radius: 14px !important;
+      overflow: hidden !important;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18) !important;
+      border: 1px solid var(--global-divider-color, rgba(255, 255, 255, 0.12)) !important;
+      line-height: 0 !important;
+    }
+
+    .profile figure img {
+      width: 140px !important;
+      height: 140px !important;
+      aspect-ratio: 1 / 1 !important;
+      object-fit: cover !important;
+      display: block !important;
+      border-radius: 14px !important;
+    }
+
+    /* On mobile view: hide the floating social icons below the photo */
     .profile-social-icons {
-      position: static !important;
-      width: 100% !important;
-      max-width: 160px !important;
-      margin-top: 0.85rem !important;
-      display: flex !important;
-      flex-direction: row !important;
-      justify-content: center !important;
-      gap: 12px !important;
-      font-size: 1.15rem;
-      flex-shrink: 0;
+      display: none !important;
     }
 
-    .profile-social-item {
-      position: relative !important;
+    .post-header {
+      order: 2 !important;
+      flex: 1 1 0 !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      align-self: start !important;
+    }
+
+    .post-title {
+      font-size: 1.45rem !important;
+      font-weight: 700 !important;
+      line-height: 1.15 !important;
+      margin: 0 0 6px 0 !important;
+      padding: 0 !important;
+      letter-spacing: -0.02em;
+      white-space: nowrap !important;
+    }
+
+    .desc {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 6px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      font-size: 0.82rem !important;
+      line-height: 1.3 !important;
+    }
+
+    .desc .subtitle-sep {
+      display: none !important;
+    }
+
+    .desc .subtitle-role {
+      font-size: 0.88rem !important;
+      font-weight: 600 !important;
+      color: var(--global-text-color) !important;
+      margin-bottom: 2px !important;
+    }
+
+    .desc .mobile-only-link {
       display: inline-flex !important;
     }
 
-    .profile-social-item .social-icon-btn {
-      width: 36px !important;
-      height: 36px !important;
-      margin-top: 0 !important;
-      background: var(--global-card-bg-color, #1e1e1e) !important;
-      border: 1px solid var(--global-divider-color, rgba(255, 255, 255, 0.15)) !important;
-      border-radius: 8px !important;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+    .desc a {
+      font-size: 0.76rem !important;
+      color: var(--global-text-color-light) !important;
+      text-decoration: none !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      max-width: 100% !important;
+      line-height: 1.3 !important;
+      transition: color 0.18s ease !important;
     }
 
+    .desc a:hover {
+      color: var(--global-text-color) !important;
+      text-decoration: underline !important;
+    }
+
+    .desc a i {
+      width: 14px !important;
+      text-align: center !important;
+      flex-shrink: 0 !important;
+      font-size: 0.82rem !important;
+    }
+
+    .clearfix {
+      order: 3 !important;
+      flex: 0 0 100% !important;
+      width: 100% !important;
+      margin-top: 1.25rem !important;
+    }
+
+    .post article > h2,
+    .publications,
+    #shared-context-wrapper {
+      order: 4 !important;
+      flex: 0 0 100% !important;
+      width: 100% !important;
+    }
+
+    .post article > h2 {
+      margin-top: 2.25rem !important;
+      margin-bottom: 0.35rem !important;
+      font-size: 1.35rem !important;
+    }
+
+    .publications {
+      margin-top: 0 !important;
+    }
+
+    /* Mobile footer alignment & line break */
+    footer .container {
+      text-align: center !important;
+    }
+
+    .footer-mobile-break {
+      display: block !important;
+      margin-bottom: 2px;
+    }
+
+    .footer-admin-lock {
+      margin-left: 0 !important;
+      margin-right: 5px !important;
+    }
+
+    .footer-sep {
+      display: none !important;
+    }
+
+    #back-to-top {
+      bottom: 58px !important;
+      right: 16px !important;
+    }
+
+    /* Bottom Sheet Modal on Mobile/Tablets */
     .social-popout-card {
-      position: absolute !important;
-      top: calc(100% + 10px) !important;
-      left: 50% !important;
-      right: auto !important;
-      width: 320px !important;
-      max-width: calc(100vw - 32px) !important;
+      position: fixed !important;
+      top: auto !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      max-height: 85vh !important;
+      border-radius: 20px 20px 0 0 !important;
+      border-bottom: none !important;
+      border-left: none !important;
+      border-right: none !important;
+      border-top: 1px solid var(--global-divider-color, rgba(255, 255, 255, 0.15)) !important;
+      background: var(--global-card-bg-color, #1e1e1e) !important;
+      padding: 14px 18px 26px 18px !important;
+      box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.5) !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
-      transform: translateX(-50%) translateY(6px) !important;
-      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease !important;
+      transform: translateY(100%) !important;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s ease !important;
       z-index: 9999 !important;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
     }
 
-    .profile-social-item:hover .social-popout-card,
-    .profile-social-item:focus-within .social-popout-card {
+    html[data-theme='light'] .social-popout-card {
+      background: #ffffff !important;
+      border-top: 1px solid #e2e8f0 !important;
+      box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.18) !important;
+    }
+
+    .profile-social-item.mobile-active .social-popout-card {
       opacity: 1 !important;
       visibility: visible !important;
       pointer-events: auto !important;
-      transform: translateX(-50%) translateY(0) !important;
+      transform: translateY(0) !important;
+    }
+
+    .mobile-sheet-handle {
+      display: block !important;
+      width: 36px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--global-divider-color, rgba(255, 255, 255, 0.3));
+      margin: 0 auto 12px auto;
+    }
+
+    .mobile-sheet-close-btn {
+      display: flex !important;
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--global-divider-color, rgba(255, 255, 255, 0.08));
+      border: none;
+      color: var(--global-text-color-light);
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .mobile-sheet-title {
+      display: block !important;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--global-text-color);
+      margin-bottom: 12px;
+      padding-left: 2px;
     }
 
     .social-popout-card::before {
-      content: '';
-      position: absolute;
-      top: -6px !important;
-      left: 50% !important;
-      margin-left: -6px !important;
-      width: 12px;
-      height: 12px;
-      background: var(--global-card-bg-color, #1e1e1e);
-      border-left: 1px solid var(--global-divider-color, rgba(255, 255, 255, 0.12));
-      border-top: 1px solid var(--global-divider-color, rgba(255, 255, 255, 0.12));
-      border-bottom: none !important;
-      border-right: none !important;
-      transform: rotate(45deg);
-      z-index: 2;
-    }
-
-    .github-item .social-popout-card::before {
-      background: #151515 !important;
-      border-color: var(--global-divider-color, rgba(255, 255, 255, 0.12)) !important;
-    }
-
-    html[data-theme='light'] .github-item .social-popout-card::before {
-      background: #fffefe !important;
-      border-color: #e4e2e2 !important;
-    }
-
-    .linkedin-item .social-popout-card::before {
       display: none !important;
+    }
+  }
+
+  /* 4. Fine-tuned Small Screens (< 768px): Typography & Publications */
+  @media (max-width: 768px) {
+    .post {
+      gap: 12px !important;
+    }
+
+    .profile {
+      flex: 0 0 138px !important;
+      width: 138px !important;
+      max-width: 138px !important;
+    }
+
+    .profile figure,
+    .profile figure img {
+      width: 138px !important;
+      max-width: 138px !important;
+      height: 138px !important;
+    }
+
+    .post-title {
+      font-size: 1.42rem !important;
+      line-height: 1.15 !important;
+      margin-bottom: 5px !important;
+    }
+
+    .desc {
+      gap: 5px !important;
+      font-size: 0.8rem !important;
+      line-height: 1.3 !important;
+    }
+
+    .desc .subtitle-role {
+      font-size: 0.86rem !important;
+    }
+
+    .desc a {
+      font-size: 0.75rem !important;
+    }
+
+    .clearfix p {
+      font-size: 0.96rem !important;
+      line-height: 1.65 !important;
+      margin-bottom: 1.15rem !important;
+    }
+
+    .post article > h2 {
+      margin-top: 2.25rem !important;
+      margin-bottom: 0.35rem !important;
+      font-size: 1.35rem !important;
+    }
+
+    .publications ol.bibliography li .row {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      gap: 14px !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .publications ol.bibliography li .abbr {
+      flex: 0 0 90px !important;
+      max-width: 90px !important;
+      padding: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    .publications ol.bibliography li .abbr .publication-thumbnail-link {
+      border-radius: 8px !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16) !important;
+      border: 1px solid var(--global-divider-color, rgba(255, 255, 255, 0.08)) !important;
+    }
+
+    .publications ol.bibliography li .col-sm-8 {
+      flex: 1 1 auto !important;
+      max-width: calc(100% - 104px) !important;
+      padding: 0 !important;
+    }
+
+    .publications ol.bibliography li .title {
+      font-size: 0.94rem !important;
+      line-height: 1.38 !important;
+      font-weight: 600 !important;
+      color: var(--global-text-color) !important;
+    }
+
+    .publications ol.bibliography li .author {
+      font-size: 0.85rem !important;
+      margin-top: 3px !important;
+      color: var(--global-text-color-light) !important;
+    }
+
+    .publications ol.bibliography li .periodical {
+      font-size: 0.82rem !important;
+      margin-top: 2px !important;
+      color: var(--global-text-color-light) !important;
+    }
+
+    .publications ol.bibliography li .links {
+      margin-top: 8px !important;
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 6px !important;
+    }
+
+    .publications ol.bibliography li .links a.btn {
+      padding: 3px 9px !important;
+      font-size: 0.74rem !important;
+      margin: 0 !important;
+      border-radius: 6px !important;
     }
   }
 
@@ -985,19 +1316,7 @@ Previously I was a competitive programmer, a regional finalist at [ICPC](https:/
     gap: 5px;
   }
 
-  @media (max-width: 860px) {
-    .profile {
-      float: none !important;
-      max-width: 100% !important;
-      width: 100% !important;
-      margin-left: 0 !important;
-      margin-top: 1.5rem !important;
-      margin-bottom: 2rem !important;
-    }
-    .profile figure {
-      align-self: center !important;
-    }
-  }
+  /* End Social Card Styling */
 
   .social,
   .contact-note {
@@ -1714,6 +2033,9 @@ Previously I was a competitive programmer, a regional finalist at [ICPC](https:/
           </svg>
         </a>
         <div class="social-popout-card github-card">
+          <div class="mobile-sheet-handle"></div>
+          <button type="button" class="mobile-sheet-close-btn" aria-label="Close modal" onclick="event.stopPropagation(); window.closeMobileSocialModal();">&times;</button>
+          <div class="mobile-sheet-title"><i class="fa-brands fa-github" style="margin-right: 6px;"></i> GitHub Stats &amp; Activity</div>
           <a href="https://github.com/nathyBekele" target="_blank" rel="noopener noreferrer" class="gh-svg-link">
             <img
               class="only-light gh-stats-svg"
@@ -1737,6 +2059,9 @@ Previously I was a competitive programmer, a regional finalist at [ICPC](https:/
           </svg>
         </a>
         <div class="social-popout-card linkedin-card">
+          <div class="mobile-sheet-handle"></div>
+          <button type="button" class="mobile-sheet-close-btn" aria-label="Close modal" onclick="event.stopPropagation(); window.closeMobileSocialModal();">&times;</button>
+          <div class="mobile-sheet-title"><i class="fa-brands fa-linkedin" style="color: #0a66c2; margin-right: 6px;"></i> Experience &amp; Education</div>
           <!-- Scrollable Area with Isolated Experience & Education Cards (Matching LinkedIn UI) -->
           <div class="li-card-scroll">
             
@@ -1844,6 +2169,57 @@ Previously I was a competitive programmer, a regional finalist at [ICPC](https:/
 
     const social = document.querySelector('.social');
     if (social) social.style.display = 'none';
+
+    // Backdrop element for mobile sheet modals
+    let backdrop = document.querySelector('.mobile-modal-backdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.className = 'mobile-modal-backdrop';
+      backdrop.addEventListener('click', () => window.closeMobileSocialModal());
+      document.body.appendChild(backdrop);
+    }
+
+    const socialItems = wrapper.querySelectorAll('.profile-social-item');
+
+    window.closeMobileSocialModal = function() {
+      socialItems.forEach((item) => item.classList.remove('mobile-active'));
+      const b = document.querySelector('.mobile-modal-backdrop');
+      if (b) b.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    socialItems.forEach((item) => {
+      const btn = item.querySelector('.social-icon-btn');
+      if (!btn) return;
+
+      btn.addEventListener('click', (e) => {
+        if (window.innerWidth < 992) {
+          e.preventDefault();
+          e.stopPropagation();
+          const isAlreadyActive = item.classList.contains('mobile-active');
+          window.closeMobileSocialModal();
+
+          if (!isAlreadyActive) {
+            item.classList.add('mobile-active');
+            const b = document.querySelector('.mobile-modal-backdrop');
+            if (b) b.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        }
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && window.innerWidth < 992) {
+        window.closeMobileSocialModal();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 992) {
+        window.closeMobileSocialModal();
+      }
+    });
   }
 
   window.copyEmailToClipboard = function(btn) {

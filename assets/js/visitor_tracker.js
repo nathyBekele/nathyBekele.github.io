@@ -19,6 +19,68 @@
   let interactionEmailSent = false;
   let cachedGeo = null;
 
+  function handleExclusionParams() {
+    try {
+      const search = window.location.search;
+      if (!search) return;
+      const params = new URLSearchParams(search);
+      if (params.has("exclude_me") || params.has("optout") || params.has("ignore_me") || params.has("admin_device")) {
+        localStorage.setItem("nb_exclude_device", "true");
+        document.cookie = "nb_exclude_device=true; max-age=315360000; path=/; SameSite=Lax";
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.delete("exclude_me");
+          url.searchParams.delete("optout");
+          url.searchParams.delete("ignore_me");
+          url.searchParams.delete("admin_device");
+          window.history.replaceState({}, document.title, url.pathname + (url.search ? url.search : "") + url.hash);
+        } catch (e) {}
+        alert("✅ This device is now permanently excluded from visitor notification emails.");
+      } else if (params.has("include_me") || params.has("optin") || params.has("track_me")) {
+        localStorage.removeItem("nb_exclude_device");
+        document.cookie = "nb_exclude_device=; max-age=0; path=/; SameSite=Lax";
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.delete("include_me");
+          url.searchParams.delete("optin");
+          url.searchParams.delete("track_me");
+          window.history.replaceState({}, document.title, url.pathname + (url.search ? url.search : "") + url.hash);
+        } catch (e) {}
+        alert("ℹ️ Tracking re-enabled: This device will now trigger visitor notifications.");
+      }
+    } catch (e) {}
+  }
+
+  handleExclusionParams();
+
+  function isDeviceExcluded() {
+    try {
+      if (localStorage.getItem("nb_exclude_device") === "true") return true;
+      if (localStorage.getItem("nathy_admin_pat")) return true;
+      if (localStorage.getItem("nathy_admin_session")) return true;
+      if (document.cookie.split(";").some((item) => item.trim() === "nb_exclude_device=true")) return true;
+    } catch (e) {}
+    return false;
+  }
+
+  window.excludeMyDevice = function () {
+    try {
+      localStorage.setItem("nb_exclude_device", "true");
+      document.cookie = "nb_exclude_device=true; max-age=315360000; path=/; SameSite=Lax";
+      alert("✅ This device is now permanently excluded from visitor notifications.");
+    } catch (e) {}
+  };
+
+  window.includeMyDevice = function () {
+    try {
+      localStorage.removeItem("nb_exclude_device");
+      document.cookie = "nb_exclude_device=; max-age=0; path=/; SameSite=Lax";
+      alert("ℹ️ Visitor notifications re-enabled for this device.");
+    } catch (e) {}
+  };
+
+  window.isDeviceExcludedFromTracking = isDeviceExcluded;
+
   function formatEATTime(date = new Date()) {
     try {
       const formatted = date.toLocaleString("en-US", {
@@ -47,15 +109,13 @@
     const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
     if (isLocal && !isTest) return false;
 
+    // Filter excluded owner/admin devices
+    if (isDeviceExcluded() && !isTest) return false;
+
     // Filter repeated visits in the same session unless test/force
     if (sessionStorage.getItem("nb_visitor_alert_sent") && !isTest && !window.location.search.includes("force_alert=1")) {
       return false;
     }
-
-    // Filter owner/admin sessions
-    try {
-      if (localStorage.getItem("nathy_admin_session") && !isTest) return false;
-    } catch (e) {}
 
     return true;
   }

@@ -2118,6 +2118,30 @@ robots: noindex, nofollow
 
   </div>
 
+  <!-- 1.1 VISITOR NOTIFICATIONS & DEVICE EXCLUSION CARD -->
+  <div class="admin-card" id="trackerExclusionCard">
+    <div class="admin-header-row">
+      <div class="admin-title">
+        <i class="fa-solid fa-bell-slash" style="color: var(--global-theme-color, #2f80ed);"></i>
+        <span>Visitor Notifications & Device Exclusion</span>
+      </div>
+      <div id="deviceExclusionBadge">
+        <span class="admin-badge badge-neutral"><i class="fa-solid fa-spinner fa-spin"></i> Checking...</span>
+      </div>
+    </div>
+    <p style="font-size: 0.8rem; color: var(--global-text-color-light, #666); margin-bottom: 10px;">
+      Exclude your personal devices so viewing your website never sends notification emails.
+    </p>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+      <button class="admin-btn btn-primary-custom" id="toggleExclusionBtn" onclick="toggleCurrentDeviceExclusion()">
+        <i class="fa-solid fa-shield-halved"></i> Exclude This Device
+      </button>
+      <span style="font-size: 0.74rem; color: var(--global-text-color-light, #777);">
+        📱 Tip: To exclude your phone, simply visit <a href="{{ '/?exclude_me=1' | relative_url }}"><code>/?exclude_me=1</code></a> once on your mobile browser.
+      </span>
+    </div>
+  </div>
+
   <!-- 1.5. LATEST DEPLOY PROGRESS & STATUS MONITOR -->
   <div class="deploy-monitor-card" id="deployMonitorSection">
     <div class="deploy-monitor-header">
@@ -4174,6 +4198,8 @@ Previously I was a competitive programming coach at [A2SV](https://a2sv.org), tr
       });
     }
 
+    updateDeviceExclusionUI();
+
     if (githubToken) {
       document.getElementById('patInput').value = githubToken;
       loginWithGitHub(true);
@@ -4223,6 +4249,9 @@ Previously I was a competitive programming coach at [A2SV](https://a2sv.org), tr
 
       githubToken = inputToken;
       localStorage.setItem('nathy_admin_pat', githubToken);
+      localStorage.setItem('nb_exclude_device', 'true');
+      document.cookie = 'nb_exclude_device=true; max-age=315360000; path=/; SameSite=Lax';
+      updateDeviceExclusionUI();
 
       document.getElementById('loggedOutView').style.display = 'none';
       document.getElementById('loggedInView').style.display = 'block';
@@ -4261,6 +4290,48 @@ Previously I was a competitive programming coach at [A2SV](https://a2sv.org), tr
     document.getElementById('saveBtn').disabled = true;
     showStatus(document.getElementById('authStatusMsg'), 'Disconnected from GitHub. Reconnect anytime with your token.', 'info');
     fetchLatestDeployStatus(false);
+    updateDeviceExclusionUI();
+  }
+
+  // ==========================================
+  // VISITOR TRACKER & DEVICE EXCLUSION
+  // ==========================================
+  function updateDeviceExclusionUI() {
+    const badge = document.getElementById('deviceExclusionBadge');
+    const btn = document.getElementById('toggleExclusionBtn');
+    if (!badge || !btn) return;
+
+    const isExcluded =
+      localStorage.getItem('nb_exclude_device') === 'true' ||
+      document.cookie.split(';').some((c) => c.trim() === 'nb_exclude_device=true') ||
+      Boolean(localStorage.getItem('nathy_admin_pat'));
+
+    if (isExcluded) {
+      badge.innerHTML = '<span class="admin-badge badge-success"><i class="fa-solid fa-circle-check"></i> Excluded (No emails)</span>';
+      btn.innerHTML = '<i class="fa-solid fa-bell"></i> Re-enable Emails on This Device';
+      btn.className = 'admin-btn btn-secondary-custom';
+    } else {
+      badge.innerHTML = '<span class="admin-badge badge-warning"><i class="fa-solid fa-bell"></i> Active (Emails Enabled)</span>';
+      btn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Exclude This Device';
+      btn.className = 'admin-btn btn-primary-custom';
+    }
+  }
+
+  function toggleCurrentDeviceExclusion() {
+    const isExcluded =
+      localStorage.getItem('nb_exclude_device') === 'true' ||
+      document.cookie.split(';').some((c) => c.trim() === 'nb_exclude_device=true') ||
+      Boolean(localStorage.getItem('nathy_admin_pat'));
+
+    if (isExcluded) {
+      localStorage.removeItem('nb_exclude_device');
+      localStorage.removeItem('nathy_admin_pat');
+      document.cookie = 'nb_exclude_device=; max-age=0; path=/; SameSite=Lax';
+    } else {
+      localStorage.setItem('nb_exclude_device', 'true');
+      document.cookie = 'nb_exclude_device=true; max-age=315360000; path=/; SameSite=Lax';
+    }
+    updateDeviceExclusionUI();
   }
 
   // ==========================================

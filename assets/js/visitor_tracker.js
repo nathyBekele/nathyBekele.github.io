@@ -9,7 +9,8 @@
   if (window.__nbVisitorTrackerLoaded) return;
   window.__nbVisitorTrackerLoaded = true;
 
-  const RECIPIENT_ENDPOINT = "https://formsubmit.co/ajax/natnaelbekele142@gmail.com";
+  // FormSubmit endpoint (using your encrypted token to keep your personal email private)
+  const RECIPIENT_ENDPOINT = "https://formsubmit.co/ajax/c32b324251b6f1c1cf8c2732cbb14169";
   const SEND_DELAY_MS = 5000; // Wait 5s to capture initial interaction before sending
 
   let hasInteractedWithPopups = false;

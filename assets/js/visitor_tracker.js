@@ -19,6 +19,24 @@
   let interactionEmailSent = false;
   let cachedGeo = null;
 
+  function formatEATTime(date = new Date()) {
+    try {
+      const formatted = date.toLocaleString("en-US", {
+        timeZone: "Africa/Addis_Ababa",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      });
+      return `${formatted} EAT (UTC+3)`;
+    } catch (e) {
+      return `${date.toLocaleString()} (Local)`;
+    }
+  }
+
   function shouldTrack() {
     const isTest = window.location.search.includes("test_alert=1");
 
@@ -435,7 +453,7 @@
       "Pop-up Interacted": popupInteracted,
       "Landing Page": window.location.pathname || "/",
       "Visitor Timezone": geo.timezone,
-      "Recorded At": new Date().toLocaleString(),
+      "Recorded At (EAT)": formatEATTime(new Date()),
     };
 
     try {
@@ -472,7 +490,7 @@
       "Pop-up Viewed": Array.from(interactedItems).join(", "),
       "Device & OS": `${dev.os} (${dev.browser})`,
       "Viewport Window": `${scr.viewport} (${scr.viewportCategory})`,
-      "Interaction Time": new Date().toLocaleString(),
+      "Interaction Time (EAT)": formatEATTime(new Date()),
     };
 
     try {

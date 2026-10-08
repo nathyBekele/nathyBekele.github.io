@@ -23,9 +23,11 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I am a software engineer at [Vula](https://vula.vc) building agentic pre-investment workflows and automations for investment firms based in UK and South Africa. I am also an aspiring researcher interested in how agents can be used in critical systems like finance and healthcare, especially when they run on open-weight models, since those can carry hidden intentions that are hard to detect.
+I am a software engineer at [Vula](https://vula.vc), building agentic pre-investment workflows and automations for investment firms in the UK and South Africa.
 
-Previously I was a competitive programmer, a regional finalist at [ICPC](https://icpc.global) 2021. I later led the competitive programming camp at [A2SV](https://a2sv.org) for the 2022, 2023 and 2024 batches, training students in DSA problem solving (Codeforces and LeetCode style), which helped over 100 students land internships at Google, AWS, Palantir, Bloomberg and others ([check placements here](https://www.a2sv.org/placements)).
+I am also an aspiring researcher, interested in leveraging AI to accelerate access to high-quality practical education, financing, and healthcare in developing nations.
+
+Before Vula, competitive programming was where I spent my time, first competing, then teaching. I was a regional finalist at [ICPC](https://icpc.global) 2021, and later led the competitive programming camp at [A2SV](https://a2sv.org) for the 2022, 2023 and 2024 batches, training students in DSA problem solving (Codeforces and LeetCode style). Over 100 of them went on to internships at Google, AWS, Palantir, Bloomberg and others ([placements](https://www.a2sv.org/placements)).
 
 <style>
   html, body {

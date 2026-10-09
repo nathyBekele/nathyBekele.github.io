@@ -2136,6 +2136,9 @@ robots: noindex, nofollow
       <button class="admin-btn btn-primary-custom" id="toggleExclusionBtn" onclick="toggleCurrentDeviceExclusion()">
         <i class="fa-solid fa-shield-halved"></i> Exclude This Device
       </button>
+      <a href="https://clarity.microsoft.com/projects/view/yv1xmlsnwg/recordings" target="_blank" rel="noopener noreferrer" class="admin-btn btn-secondary-custom" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+        <i class="fa-solid fa-video"></i> View Clarity Recordings
+      </a>
       <span style="font-size: 0.74rem; color: var(--global-text-color-light, #777);">
         📱 Tip: To exclude your phone, simply visit <a href="{{ '/?exclude_me=1' | relative_url }}"><code>/?exclude_me=1</code></a> once on your mobile browser.
       </span>
@@ -3912,9 +3915,9 @@ robots: noindex, nofollow
   const DEFAULT_ABOUT_IMAGE = "natnael.jpg";
   const DEFAULT_ABOUT_MORE_INFO = "";
   const DEFAULT_CONTACT_NOTE = {{ site.contact_note | jsonify | default: '"Feel free to connect via LinkedIn or Email."' }};
-  const DEFAULT_ABOUT_BIO = `I am a software engineer at [Vula](https://vula.vc) building agentic investment systems, and an aspiring AI safety researcher exploring how hidden intentions in language models work. I am looking for PhD supervision in AI safety, interpretability, and broader research themes around agentic and native AI systems.
+  const DEFAULT_ABOUT_BIO = `I am a software engineer at [Vula](https://vula.vc), building agentic workflows and automated platforms for investment teams in the UK and South Africa.
 
-Previously I was a competitive programming coach at [A2SV](https://a2sv.org), training students in DSA problem solving (Codeforces and LeetCode style), which helped over 100 students land internships at Google, AWS, Palantir, Bloomberg and others.`;
+Before Vula, I was a competitive programmer, a regional finalist at [ICPC](https://icpc.global) 2021. I spent three years leading the competitive programming academy at [A2SV](https://a2sv.org). During that time, I coached over 500 students in algorithms and problem-solving, with more than 100 going on to join teams at Google, Amazon, Bloomberg, and Palantir ([placements](https://www.a2sv.org/placements)).`;
 
   const INITIAL_JEKYLL_CV = {{ site.data.cv.cv | jsonify }};
   const INITIAL_JEKYLL_SOCIALS = {{ site.data.socials | jsonify }};

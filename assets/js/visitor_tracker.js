@@ -514,7 +514,26 @@
       "Landing Page": window.location.pathname || "/",
       "Visitor Timezone": geo.timezone,
       "Recorded At (EAT)": formatEATTime(new Date()),
+      "Watch Session Recording": "https://clarity.microsoft.com/projects/view/yv1xmlsnwg/recordings",
     };
+
+    // Forward enriched tags to Microsoft Clarity for easy filtering
+    try {
+      if (typeof window.clarity === "function") {
+        if (academic && academic.isAcademic) {
+          window.clarity("set", "institution", academic.institution || "Academic");
+        }
+        if (geo && geo.city && geo.city !== "Unknown City") {
+          window.clarity("set", "location", `${geo.city}, ${geo.country}`);
+        }
+        if (refInfo && refInfo.sourceCategory) {
+          window.clarity("set", "referrer_source", refInfo.sourceCategory);
+        }
+        if (isDeviceExcluded()) {
+          window.clarity("set", "admin_device", "true");
+        }
+      }
+    } catch (e) {}
 
     try {
       fetch(RECIPIENT_ENDPOINT, {
@@ -551,7 +570,14 @@
       "Device & OS": `${dev.os} (${dev.browser})`,
       "Viewport Window": `${scr.viewport} (${scr.viewportCategory})`,
       "Interaction Time (EAT)": formatEATTime(new Date()),
+      "Watch Session Recording": "https://clarity.microsoft.com/projects/view/yv1xmlsnwg/recordings",
     };
+
+    try {
+      if (typeof window.clarity === "function") {
+        window.clarity("event", `popup_interact_${Array.from(interactedItems).join("_")}`);
+      }
+    } catch (e) {}
 
     try {
       fetch(RECIPIENT_ENDPOINT, {

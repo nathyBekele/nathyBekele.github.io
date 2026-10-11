@@ -1,8 +1,8 @@
 /**
  * Visitor Alert Tracker for nathybekele.github.io
- * Dispatches an instant visitor notification with academic network detection,
- * referring source, geolocation, device info, screen dimensions,
- * and popup visibility/interaction status via FormSubmit.co.
+ * Dispatches an intelligent end-of-session notification with Microsoft Clarity recording,
+ * academic network detection, link click tracking, scroll depth, session duration,
+ * referring source, geolocation, device info, and exit reason via FormSubmit.co.
  */
 (function () {
   "use strict";
@@ -12,12 +12,49 @@
 
   // FormSubmit endpoint (using your encrypted token to keep your personal email private)
   const RECIPIENT_ENDPOINT = "https://formsubmit.co/ajax/c32b324251b6f1c1cf8c2732cbb14169";
+  const CLARITY_PROJECT_ID = "yv1xmlsnwg";
+  const IDLE_TIMEOUT_MS = 150000; // 2.5 minutes of inactivity triggers idle notification
 
-  let hasInteractedWithPopups = false;
-  const interactedItems = new Set();
-  let visitEmailSent = false;
-  let interactionEmailSent = false;
+  let sessionEmailSent = false;
   let cachedGeo = null;
+  let clarityMeta = null;
+  let maxScrollPercent = 0;
+  const scrollMilestones = {};
+  const interactedPopups = new Set();
+  const clickedActions = [];
+  const clickedUrls = new Set();
+
+  // Session duration tracking
+  let sessionStartTime = Date.now();
+  let lastActiveTime = Date.now();
+  let totalActiveMs = 0;
+  let lastTickTime = Date.now();
+
+  // Restore existing session state if user navigated between internal pages
+  try {
+    const savedStart = sessionStorage.getItem("nb_session_start_time");
+    if (savedStart && !sessionStorage.getItem("nb_visitor_alert_sent")) {
+      const parsedStart = parseInt(savedStart, 10);
+      if (!isNaN(parsedStart) && Date.now() - parsedStart < 3600000) {
+        sessionStartTime = parsedStart;
+      }
+    } else {
+      sessionStorage.setItem("nb_session_start_time", String(sessionStartTime));
+    }
+
+    const savedActions = sessionStorage.getItem("nb_session_actions");
+    if (savedActions) {
+      const parsed = JSON.parse(savedActions);
+      if (Array.isArray(parsed)) {
+        parsed.forEach((a) => clickedActions.push(a));
+      }
+    }
+  } catch (e) {}
+
+  // Remove internal navigation flag upon arrival on this page
+  try {
+    sessionStorage.removeItem("nb_internal_nav");
+  } catch (e) {}
 
   function handleExclusionParams() {
     try {
@@ -97,6 +134,16 @@
     } catch (e) {
       return `${date.toLocaleString()} (Local)`;
     }
+  }
+
+  function formatDuration(ms) {
+    const totalSec = Math.max(1, Math.round(ms / 1000));
+    if (totalSec < 60) {
+      return `${totalSec}s`;
+    }
+    const mins = Math.floor(totalSec / 60);
+    const secs = totalSec % 60;
+    return `${mins}m ${secs}s`;
   }
 
   function shouldTrack() {
@@ -186,6 +233,7 @@
             asn: data.connection && data.connection.asn ? String(data.connection.asn) : "",
             timezone: data.timezone && data.timezone.id ? data.timezone.id : "N/A",
           };
+          syncGeoToClarity(cachedGeo);
           return cachedGeo;
         }
       }
@@ -205,6 +253,7 @@
           asn: data2.asn || "",
           timezone: data2.timezone || "N/A",
         };
+        syncGeoToClarity(cachedGeo);
         return cachedGeo;
       }
     } catch (e) {}
@@ -223,6 +272,7 @@
   }
 
   function detectAcademicNetwork(geo) {
+    if (!geo) return { isAcademic: false, badge: "No", institution: "N/A" };
     const textToScan = [geo.org || "", geo.isp || "", geo.domain || "", geo.asn || ""].join(" ").toLowerCase();
     const domain = (geo.domain || "").toLowerCase();
 
@@ -444,84 +494,15 @@
     };
   }
 
-  function markInteraction(name) {
-    hasInteractedWithPopups = true;
-    interactedItems.add(name);
-
-    // If the visit alert was already sent, notify about the interaction
-    if (visitEmailSent && !interactionEmailSent && !sessionStorage.getItem("nb_interaction_alert_sent")) {
-      sendInteractionAlert();
-    }
-  }
-
-  function attachPopupListeners() {
-    const gh = document.querySelector(".github-item");
-    const li = document.querySelector(".linkedin-item");
-
-    if (gh && !gh.dataset.trackerBound) {
-      gh.dataset.trackerBound = "true";
-      ["mouseenter", "focusin", "touchstart", "click"].forEach((evt) => {
-        gh.addEventListener(evt, () => markInteraction("GitHub"), { passive: true });
-      });
-    }
-
-    if (li && !li.dataset.trackerBound) {
-      li.dataset.trackerBound = "true";
-      ["mouseenter", "focusin", "touchstart", "click"].forEach((evt) => {
-        li.addEventListener(evt, () => markInteraction("LinkedIn"), { passive: true });
-      });
-    }
-  }
-
-  async function sendVisitAlert() {
-    if (visitEmailSent) return;
-    visitEmailSent = true;
-    sessionStorage.setItem("nb_visitor_alert_sent", "true");
-
-    const geo = await fetchGeolocation();
-    const dev = getDeviceInfo();
-    const scr = getScreenInfo();
-    const academic = detectAcademicNetwork(geo);
-    const refInfo = analyzeReferrer();
-
-    const popupOpenedInitial = scr.isExpandedOnOpen
-      ? "true (Wide screen >= 1380px, auto-expanded side-by-side)"
-      : "false (Screen < 1380px, collapsed into circular icon)";
-
-    const popupInteracted = hasInteractedWithPopups ? `true (${Array.from(interactedItems).join(", ")})` : "false (Not hovered yet)";
-
-    // Prominent subject line: highlights academic visitors immediately
-    const subjectPrefix = academic.isAcademic ? `🎓 [ACADEMIC VISITOR: ${academic.institution}]` : `New Visitor: ${geo.city}, ${geo.country}`;
-
-    const payload = {
-      _subject: `${subjectPrefix} (${dev.os} ${dev.deviceType})`,
-      _template: "table",
-      _captcha: "false",
-      "Academic / University Network": academic.isAcademic ? `🎓 YES (${academic.institution})` : `No (${geo.isp || "Commercial ISP"})`,
-      "Referring Source": refInfo.sourceCategory,
-      "Referrer URL": refInfo.referrerUrl,
-      "URL Tracking Tags": refInfo.trackingTags,
-      City: geo.city,
-      Country: geo.country,
-      Region: geo.region || "N/A",
-      "Network / ISP": geo.isp,
-      "Device & OS": `${dev.os} (${dev.browser})`,
-      "Device Type": dev.deviceType,
-      "Screen Resolution": scr.resolution,
-      "Viewport Window": `${scr.viewport} (${scr.viewportCategory})`,
-      "Pop-up Expanded on Open": popupOpenedInitial,
-      "Pop-up Interacted": popupInteracted,
-      "Landing Page": window.location.pathname || "/",
-      "Visitor Timezone": geo.timezone,
-      "Recorded At (EAT)": formatEATTime(new Date()),
-      "Watch Session Recording": "https://clarity.microsoft.com/projects/view/yv1xmlsnwg/recordings",
-    };
-
-    // Forward enriched tags to Microsoft Clarity for easy filtering
+  // Sync geolocation and referrer details into Microsoft Clarity tags
+  function syncGeoToClarity(geo) {
     try {
       if (typeof window.clarity === "function") {
-        if (academic && academic.isAcademic) {
+        const academic = detectAcademicNetwork(geo);
+        const refInfo = analyzeReferrer();
+        if (academic.isAcademic) {
           window.clarity("set", "institution", academic.institution || "Academic");
+          window.clarity("upgrade", "academic_network_visitor");
         }
         if (geo && geo.city && geo.city !== "Unknown City") {
           window.clarity("set", "location", `${geo.city}, ${geo.country}`);
@@ -534,7 +515,367 @@
         }
       }
     } catch (e) {}
+  }
 
+  // Listen to Clarity metadata callback
+  function initClarityListener() {
+    try {
+      if (typeof window.clarity === "function") {
+        window.clarity(
+          "metadata",
+          function (meta) {
+            if (meta && (meta.sessionId || meta.userId)) {
+              clarityMeta = meta;
+            }
+          },
+          false
+        );
+      }
+    } catch (e) {}
+  }
+
+  // Extract Clarity session ID and direct playback URL
+  function getClaritySessionInfo() {
+    let userId = null;
+    let sessionId = null;
+    let playbackUrl = null;
+
+    if (clarityMeta && clarityMeta.sessionId) {
+      sessionId = clarityMeta.sessionId;
+      userId = clarityMeta.userId || null;
+      if (userId && sessionId) {
+        playbackUrl = `https://clarity.microsoft.com/player/${clarityMeta.projectId || CLARITY_PROJECT_ID}/${userId}/${sessionId}`;
+      }
+    }
+
+    if (!playbackUrl) {
+      try {
+        const cookies = document.cookie ? document.cookie.split(";") : [];
+        let clck = null;
+        let clsk = null;
+        for (let i = 0; i < cookies.length; i++) {
+          const c = cookies[i].trim();
+          if (c.indexOf("_clck=") === 0) clck = decodeURIComponent(c.substring(6));
+          if (c.indexOf("_clsk=") === 0) clsk = decodeURIComponent(c.substring(6));
+        }
+        if (clck && clsk) {
+          const uId = clck.split(/[\^|]/)[0];
+          const sId = clsk.split(/[\^|]/)[0];
+          if (uId && sId) {
+            userId = uId;
+            sessionId = sId;
+            playbackUrl = `https://clarity.microsoft.com/player/${CLARITY_PROJECT_ID}/${uId}/${sId}`;
+          }
+        }
+      } catch (e) {}
+    }
+
+    const dashboardUrl = `https://clarity.microsoft.com/projects/view/${CLARITY_PROJECT_ID}/recordings`;
+    return {
+      userId,
+      sessionId,
+      playbackUrl: playbackUrl || dashboardUrl,
+      dashboardUrl,
+      hasDirectPlayback: !!playbackUrl,
+    };
+  }
+
+  // Classify and label clicked links
+  function identifyLink(target, anchor) {
+    const href = (anchor.getAttribute("href") || "").trim();
+    const lowerHref = href.toLowerCase();
+    const text = (anchor.innerText || anchor.textContent || "").trim().replace(/\s+/g, " ");
+
+    // 1. Research Paper & Publications
+    if (lowerHref.includes("doi.org") || text.toLowerCase() === "doi") {
+      return { name: "📄 Research Paper DOI (Zenodo)", category: "paper", url: href };
+    }
+    if (lowerHref.endsWith(".pdf") || text.toLowerCase() === "pdf") {
+      return { name: "📄 Research Paper PDF (The Geometry of Dormant Defection)", category: "paper", url: href };
+    }
+    if (lowerHref.includes("geometry-of-dormant-defection") || (text.toLowerCase() === "code" && anchor.closest(".publications"))) {
+      return { name: "💻 Research Paper Code (geometry-of-dormant-defection)", category: "code", url: href };
+    }
+    if (
+      (lowerHref.includes("medium.com") && lowerHref.includes("sleeper-agent")) ||
+      (text.toLowerCase() === "blog" && anchor.closest(".publications"))
+    ) {
+      return { name: "📝 Research Blog: Dormant Defection (Medium)", category: "blog", url: href };
+    }
+    if (anchor.classList.contains("publication-thumbnail-link") || target.closest(".publication-thumbnail-link")) {
+      return { name: "🖼️ Paper Preview Thumbnail Diagram", category: "paper", url: href };
+    }
+
+    // 2. Bio Links
+    if (lowerHref.includes("vula.vc")) {
+      return { name: "💼 Vula (https://vula.vc)", category: "bio", url: href };
+    }
+    if (lowerHref.includes("icpc.global")) {
+      return { name: "🏆 ICPC (https://icpc.global)", category: "bio", url: href };
+    }
+    if (lowerHref.includes("a2sv.org/placements")) {
+      return { name: "🌟 A2SV Placements (Google, Amazon, Palantir)", category: "bio", url: href };
+    }
+    if (lowerHref.includes("a2sv.org")) {
+      return { name: "🎓 A2SV Academy (https://a2sv.org)", category: "bio", url: href };
+    }
+
+    // 3. Profiles & Contact
+    if (lowerHref.includes("github.com/nathybekele")) {
+      return { name: "🐙 GitHub Profile (@nathyBekele)", category: "social", url: href };
+    }
+    if (lowerHref.includes("linkedin.com/in/natnael-bekele-haile") || lowerHref.includes("linkedin.com")) {
+      return { name: "💼 LinkedIn Profile (Natnael Bekele)", category: "social", url: href };
+    }
+    if (lowerHref.startsWith("mailto:") || lowerHref.includes("natnaelbekele142@gmail.com")) {
+      return { name: "📧 Email Link (natnaelbekele142@gmail.com)", category: "contact", url: href };
+    }
+    if (lowerHref.includes("maps.google.com") || text.includes("Addis Ababa")) {
+      return { name: "📍 Location Map Link (Addis Ababa, Ethiopia)", category: "contact", url: href };
+    }
+
+    // 4. Experience & Education items inside popouts
+    if (lowerHref.includes("turing.com")) {
+      return { name: "💼 Turing Experience Link", category: "work", url: href };
+    }
+    if (lowerHref.includes("aau.edu.et")) {
+      return { name: "🏛️ Addis Ababa University Link", category: "education", url: href };
+    }
+
+    // 5. Navigation Bar
+    if (lowerHref.includes("/blog") || text.toLowerCase() === "blog") {
+      return { name: "🧭 Navigation: Blog", category: "nav", url: href };
+    }
+    if (lowerHref.includes("/projects") || text.toLowerCase() === "projects") {
+      return { name: "🧭 Navigation: Projects", category: "nav", url: href };
+    }
+    if (lowerHref.includes("/repositories") || text.toLowerCase() === "repositories") {
+      return { name: "🧭 Navigation: Repositories", category: "nav", url: href };
+    }
+    if (lowerHref.includes("/cv") || text.toLowerCase() === "cv") {
+      return { name: "🧭 Navigation: CV / Resume", category: "nav", url: href };
+    }
+    if (lowerHref === "/" || text.toLowerCase() === "about") {
+      return { name: "🧭 Navigation: About", category: "nav", url: href };
+    }
+
+    // General fallback
+    const cleanText = text.slice(0, 40) || href.slice(0, 40);
+    return { name: `🔗 Link: "${cleanText}" (${href})`, category: "other", url: href };
+  }
+
+  function recordUserAction(name, category, url) {
+    const elapsedMs = Date.now() - sessionStartTime;
+    const elapsedStr = formatDuration(elapsedMs);
+    const actionEntry = `[+${elapsedStr}] ${name}`;
+
+    clickedActions.push(actionEntry);
+    if (url) clickedUrls.add(url);
+
+    // Save in sessionStorage so actions persist across internal page navigation
+    try {
+      sessionStorage.setItem("nb_session_actions", JSON.stringify(clickedActions));
+    } catch (e) {}
+
+    // Send custom event and upgrade to Microsoft Clarity
+    try {
+      if (typeof window.clarity === "function") {
+        const eventTag = name
+          .replace(/[^\w\s-]/g, "")
+          .trim()
+          .replace(/\s+/g, "_")
+          .slice(0, 32);
+        window.clarity("event", `click_${eventTag}`);
+        window.clarity("set", "last_clicked", name);
+        window.clarity("upgrade", "user_clicked_link");
+      }
+    } catch (e) {}
+  }
+
+  function handleDocumentClick(e) {
+    markUserActive();
+
+    // Check for email copy button
+    const copyBtn = e.target.closest('.email-copy-btn, [onclick*="copyEmail"]');
+    if (copyBtn) {
+      recordUserAction("📋 Copied Email to Clipboard", "contact", "mailto:natnaelbekele142@gmail.com");
+      return;
+    }
+
+    // Check for anchor clicks
+    const anchor = e.target.closest("a");
+    if (!anchor) return;
+
+    const info = identifyLink(e.target, anchor);
+    recordUserAction(info.name, info.category, info.url);
+
+    // Check if this is an internal link within nathybekele.github.io
+    try {
+      const targetUrl = new URL(anchor.href, window.location.href);
+      if (
+        targetUrl.origin === window.location.origin &&
+        anchor.target !== "_blank" &&
+        !anchor.getAttribute("download") &&
+        targetUrl.pathname !== window.location.pathname
+      ) {
+        sessionStorage.setItem("nb_internal_nav", "true");
+      }
+    } catch (err) {}
+  }
+
+  function markUserActive() {
+    lastActiveTime = Date.now();
+  }
+
+  function trackScroll() {
+    markUserActive();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (scrollHeight > 0) {
+      const pct = Math.min(100, Math.round((scrollTop / scrollHeight) * 100));
+      if (pct > maxScrollPercent) {
+        maxScrollPercent = pct;
+
+        // Fire Clarity milestone events at 25%, 50%, 75%, 90%
+        [25, 50, 75, 90].forEach((m) => {
+          if (maxScrollPercent >= m && !scrollMilestones[m]) {
+            scrollMilestones[m] = true;
+            try {
+              if (typeof window.clarity === "function") {
+                window.clarity("event", `scroll_${m}%`);
+                if (m >= 50) window.clarity("upgrade", "deep_scroll");
+              }
+            } catch (e) {}
+          }
+        });
+      }
+    }
+  }
+
+  function markPopupInteraction(name) {
+    markUserActive();
+    if (interactedPopups.has(name)) return;
+    interactedPopups.add(name);
+
+    const elapsedStr = formatDuration(Date.now() - sessionStartTime);
+    const label = name === "LinkedIn" ? "💼 Viewed LinkedIn Experience Card" : "🐙 Viewed GitHub Stats Card";
+    clickedActions.push(`[+${elapsedStr}] ${label}`);
+
+    try {
+      if (typeof window.clarity === "function") {
+        window.clarity("event", `view_popup_${name.toLowerCase()}`);
+        window.clarity("upgrade", "popup_interaction");
+      }
+    } catch (e) {}
+  }
+
+  function attachPopupListeners() {
+    const gh = document.querySelector(".github-item");
+    const li = document.querySelector(".linkedin-item");
+
+    if (gh && !gh.dataset.trackerBound) {
+      gh.dataset.trackerBound = "true";
+      ["mouseenter", "focusin", "touchstart", "click"].forEach((evt) => {
+        gh.addEventListener(evt, () => markPopupInteraction("GitHub"), { passive: true });
+      });
+    }
+
+    if (li && !li.dataset.trackerBound) {
+      li.dataset.trackerBound = "true";
+      ["mouseenter", "focusin", "touchstart", "click"].forEach((evt) => {
+        li.addEventListener(evt, () => markPopupInteraction("LinkedIn"), { passive: true });
+      });
+    }
+  }
+
+  // Sends the complete session notification email
+  async function dispatchFinalSessionAlert(triggerReason) {
+    if (sessionEmailSent) return;
+
+    // Filter repeated alerts in the same session unless forced
+    const isTest = window.location.search.includes("test_alert=1");
+    if (sessionStorage.getItem("nb_visitor_alert_sent") && !isTest && !window.location.search.includes("force_alert=1")) {
+      return;
+    }
+
+    sessionEmailSent = true;
+    sessionStorage.setItem("nb_visitor_alert_sent", "true");
+
+    const totalDurationMs = Date.now() - sessionStartTime;
+    const durationStr = formatDuration(totalDurationMs);
+    const activeStr = formatDuration(totalActiveMs || totalDurationMs);
+
+    const geo = cachedGeo || (await fetchGeolocation());
+    const dev = getDeviceInfo();
+    const scr = getScreenInfo();
+    const academic = detectAcademicNetwork(geo);
+    const refInfo = analyzeReferrer();
+    const clarityInfo = getClaritySessionInfo();
+
+    // Summary of clicks
+    let clicksSummary = "None (Browsed page content only)";
+    let subjectClicksTag = "";
+    if (clickedActions.length > 0) {
+      clicksSummary = `${clickedActions.length} item(s):\n` + clickedActions.map((a) => `• ${a}`).join("\n");
+      const hasPaper = clickedActions.some((a) => a.includes("Paper") || a.includes("DOI"));
+      if (hasPaper) {
+        subjectClicksTag = " [Read Paper]";
+      } else {
+        subjectClicksTag = ` [${clickedActions.length} action(s)]`;
+      }
+    }
+
+    // Scroll depth description
+    let scrollDesc = `${maxScrollPercent}% of page`;
+    if (maxScrollPercent >= 80) scrollDesc += " (Full page scrolled)";
+    else if (maxScrollPercent >= 50) scrollDesc += " (Halfway scrolled)";
+
+    // Popups viewed
+    const popupsViewed = interactedPopups.size > 0 ? Array.from(interactedPopups).join(", ") : "None";
+
+    // Informative subject line highlighting academic status, device, duration and actions
+    const subjectPrefix = academic.isAcademic ? `🎓 [ACADEMIC VISITOR: ${academic.institution}]` : `Visitor: ${geo.city}, ${geo.country}`;
+    const subjectLine = `${subjectPrefix} (${dev.os} ${dev.deviceType}) - ${durationStr} session${subjectClicksTag}`;
+
+    // Payload formatted as an HTML table for FormSubmit email
+    const payload = {
+      _subject: subjectLine,
+      _template: "table",
+      _captcha: "false",
+      "🎥 Watch Clarity Recording": clarityInfo.playbackUrl,
+      "Session Exit Trigger": triggerReason,
+      "Session Duration": `${durationStr} (Active: ${activeStr})`,
+      "Links & Actions Clicked": clicksSummary,
+      "Max Scroll Depth": scrollDesc,
+      "Pop-up Viewed": popupsViewed,
+      "Academic / University Network": academic.isAcademic ? `🎓 YES (${academic.institution})` : `No (${geo.isp || "Commercial ISP"})`,
+      "Referring Source": refInfo.sourceCategory,
+      "Referrer URL": refInfo.referrerUrl,
+      "URL Tracking Tags": refInfo.trackingTags,
+      "Landing Page": window.location.pathname || "/",
+      "Visitor Location": `${geo.city}, ${geo.region ? geo.region + ", " : ""}${geo.country}`,
+      "Network / ISP": geo.isp,
+      "Device & OS": `${dev.os} (${dev.browser})`,
+      "Device Type": dev.deviceType,
+      "Screen Resolution": scr.resolution,
+      "Viewport Window": `${scr.viewport} (${scr.viewportCategory})`,
+      "Visitor Timezone": geo.timezone,
+      "Clarity Session ID": clarityInfo.sessionId || "Synced in dashboard",
+      "Clarity Project Dashboard": clarityInfo.dashboardUrl,
+      "Session Started (EAT)": formatEATTime(new Date(sessionStartTime)),
+      "Recorded At (EAT)": formatEATTime(new Date()),
+    };
+
+    // Update Clarity final session metadata
+    try {
+      if (typeof window.clarity === "function") {
+        window.clarity("set", "session_duration", durationStr);
+        window.clarity("set", "scroll_depth", `${maxScrollPercent}%`);
+        window.clarity("set", "total_clicks", String(clickedActions.length));
+      }
+    } catch (e) {}
+
+    // Dispatch via fetch with keepalive: true to guarantee delivery on tab close / unload
     try {
       fetch(RECIPIENT_ENDPOINT, {
         method: "POST",
@@ -548,64 +889,80 @@
     } catch (e) {}
   }
 
-  async function sendInteractionAlert() {
-    if (interactionEmailSent) return;
-    interactionEmailSent = true;
-    sessionStorage.setItem("nb_interaction_alert_sent", "true");
+  function handlePageExit() {
+    if (sessionEmailSent) return;
 
-    const geo = await fetchGeolocation();
-    const dev = getDeviceInfo();
-    const scr = getScreenInfo();
-    const academic = detectAcademicNetwork(geo);
+    // If the visitor simply navigated to another page on the same website, don't send exit alert yet
+    if (sessionStorage.getItem("nb_internal_nav") === "true") return;
 
-    const subjectTag = academic.isAcademic ? `🎓 [Academic: ${academic.institution}]` : geo.city;
+    const totalTime = Date.now() - sessionStartTime;
+    const isTest = window.location.search.includes("test_alert=1") || window.location.search.includes("force_alert=1");
 
-    const payload = {
-      _subject: `Visitor Interaction: ${subjectTag} opened ${Array.from(interactedItems).join(" & ")} popup`,
-      _template: "table",
-      _captcha: "false",
-      "Visitor Location": `${geo.city}, ${geo.country}`,
-      "Academic Network": academic.isAcademic ? `🎓 YES (${academic.institution})` : "No",
-      "Pop-up Viewed": Array.from(interactedItems).join(", "),
-      "Device & OS": `${dev.os} (${dev.browser})`,
-      "Viewport Window": `${scr.viewport} (${scr.viewportCategory})`,
-      "Interaction Time (EAT)": formatEATTime(new Date()),
-      "Watch Session Recording": "https://clarity.microsoft.com/projects/view/yv1xmlsnwg/recordings",
-    };
+    // Filter instant bounces (<3s with no interactions) unless testing
+    if (totalTime < 3000 && clickedActions.length === 0 && !isTest) return;
 
-    try {
-      if (typeof window.clarity === "function") {
-        window.clarity("event", `popup_interact_${Array.from(interactedItems).join("_")}`);
-      }
-    } catch (e) {}
-
-    try {
-      fetch(RECIPIENT_ENDPOINT, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(payload),
-        keepalive: true,
-      }).catch(() => {});
-    } catch (e) {}
+    dispatchFinalSessionAlert("Visitor Closed Page / Navigated Away");
   }
 
   function init() {
     if (!shouldTrack()) return;
 
-    // Attach listeners to GitHub & LinkedIn items
+    // Prefetch geolocation early so it's synchronously available upon exit
+    fetchGeolocation();
+
+    // Listen to Clarity metadata
+    initClarityListener();
+
+    // Attach listeners for clicks and popup hovers
+    document.addEventListener("click", handleDocumentClick, { capture: true });
     attachPopupListeners();
 
-    // Re-check for elements in case they are injected dynamically
+    // Re-check for popup elements in case of dynamic DOM changes
     const observer = new MutationObserver(() => {
       attachPopupListeners();
     });
     observer.observe(document.body, { childList: true, subtree: true });
 
-    // Send visit alert immediately as soon as data is ready - no delay!
-    sendVisitAlert();
+    // Track scroll depth
+    window.addEventListener("scroll", trackScroll, { passive: true });
+
+    // Track active user events
+    ["mousemove", "mousedown", "keydown", "touchstart"].forEach((evt) => {
+      window.addEventListener(evt, markUserActive, { passive: true });
+    });
+
+    // Accumulate active duration every 1 second
+    setInterval(() => {
+      const now = Date.now();
+      const delta = now - lastTickTime;
+      lastTickTime = now;
+      if (now - lastActiveTime < 5000) {
+        totalActiveMs += delta;
+      }
+    }, 1000);
+
+    // Idle detector: Trigger alert if visitor is inactive for 2.5 minutes
+    setInterval(() => {
+      if (sessionEmailSent) return;
+      const now = Date.now();
+      const idleTime = now - lastActiveTime;
+      const totalTime = now - sessionStartTime;
+
+      if (idleTime >= IDLE_TIMEOUT_MS && totalTime >= 10000) {
+        dispatchFinalSessionAlert("Idle Inactivity (2.5+ mins without interaction)");
+      }
+    }, 5000);
+
+    // Exit detectors: Trigger alert when visitor closes tab, minimizes, or leaves
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "hidden") {
+        handlePageExit();
+      }
+    });
+
+    window.addEventListener("pagehide", function () {
+      handlePageExit();
+    });
   }
 
   if (document.readyState === "loading") {

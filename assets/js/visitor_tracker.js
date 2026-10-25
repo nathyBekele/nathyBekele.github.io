@@ -30,6 +30,10 @@
   let totalActiveMs = 0;
   let lastTickTime = Date.now();
 
+  // Real human input evidence (bots rarely produce these)
+  const inputEvents = { pointer: 0, touch: 0, key: 0, scroll: 0, click: 0 };
+  let earlyBotDispatchScheduled = false;
+
   // Restore existing session state if user navigated between internal pages
   try {
     const savedStart = sessionStorage.getItem("nb_session_start_time");
@@ -149,8 +153,8 @@
   function shouldTrack() {
     const isTest = window.location.search.includes("test_alert=1");
 
-    // Filter automated crawlers and headless environments
-    if (navigator.webdriver && !isTest) return false;
+    // Automated crawlers and headless browsers are no longer filtered here;
+    // classifyVisitor() labels them as bots in the alert subject instead.
 
     // Filter local development unless testing
     const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
@@ -357,6 +361,216 @@
       badge: "No (Commercial / Consumer ISP)",
       institution: geo.isp || geo.org || "N/A",
     };
+  }
+
+  // ---------------------------------------------------------------------------
+  // Visitor classification: HUMAN vs BOT (and which kind of bot)
+  // ---------------------------------------------------------------------------
+
+  // Named crawlers, link previewers and AI scrapers identifiable from the user agent
+  const KNOWN_BOT_AGENTS = [
+    [/Googlebot|Google-InspectionTool|Storebot-Google|Google-Read-Aloud|Mediapartners-Google|AdsBot-Google/i, "Search Crawler · Googlebot"],
+    [/bingbot|BingPreview|msnbot/i, "Search Crawler · Bingbot"],
+    [/DuckDuckBot|DuckDuckGo-Favicons/i, "Search Crawler · DuckDuckGo"],
+    [/Baiduspider/i, "Search Crawler · Baidu"],
+    [/YandexBot|YandexImages/i, "Search Crawler · Yandex"],
+    [/Applebot/i, "Search Crawler · Applebot"],
+    [/Slackbot|Slack-ImgProxy/i, "Link Previewer · Slack"],
+    [/Discordbot/i, "Link Previewer · Discord"],
+    [/TelegramBot/i, "Link Previewer · Telegram"],
+    [/WhatsApp/i, "Link Previewer · WhatsApp"],
+    [/facebookexternalhit|facebookcatalog|meta-externalagent/i, "Link Previewer · Facebook / Meta"],
+    [/Twitterbot/i, "Link Previewer · X (Twitter)"],
+    [/LinkedInBot/i, "Link Previewer · LinkedIn"],
+    [/SkypeUriPreview|MicrosoftPreview|Microsoft Office|OutlookLinkPreview/i, "Link Previewer · Outlook / Microsoft Office"],
+    [/Iframely|Embedly|redditbot|Pinterestbot/i, "Link Previewer · Social Embed"],
+    [/GPTBot|ChatGPT-User|OAI-SearchBot/i, "AI Crawler · OpenAI"],
+    [/ClaudeBot|Claude-Web|anthropic-ai/i, "AI Crawler · Anthropic"],
+    [/PerplexityBot|Perplexity-User/i, "AI Crawler · Perplexity"],
+    [/Google-Extended|Bytespider|CCBot|Amazonbot|cohere-ai|Diffbot|YouBot/i, "AI Crawler · Dataset Scraper"],
+    [/AhrefsBot|SemrushBot|MJ12bot|DotBot|BLEXBot|DataForSeoBot|PetalBot/i, "SEO Crawler"],
+    [/Lighthouse|Chrome-Lighthouse|PageSpeed|GTmetrix|Pingdom|UptimeRobot|StatusCake|Site24x7/i, "Monitoring / Audit Tool"],
+    [/HeadlessChrome|PhantomJS|Puppeteer|Playwright|Selenium|SlimerJS|Nightmare/i, "Headless Automation Browser"],
+    [
+      /python-requests|python-urllib|aiohttp|httpx|Go-http-client|okhttp|curl\/|Wget|libwww|Java\/|Apache-HttpClient|node-fetch|axios|Scrapy/i,
+      "HTTP Script / Library",
+    ],
+    [/\b(bot|crawler|spider|scraper|fetcher|validator|archiver|preview)\b/i, "Generic Crawler"],
+  ];
+
+  // Email security vendors that open every link in an email as soon as it is delivered
+  const EMAIL_SCANNER_VENDORS = [
+    [/proofpoint|urldefense/i, "Proofpoint URL Defense"],
+    [/mimecast/i, "Mimecast"],
+    [/barracuda/i, "Barracuda"],
+    [/ironport|cisco|talos/i, "Cisco IronPort / Secure Email"],
+    [/symantec|broadcom|messagelabs/i, "Symantec / Broadcom"],
+    [/zscaler/i, "Zscaler"],
+    [/palo alto|paloalto/i, "Palo Alto Networks"],
+    [/forcepoint|websense/i, "Forcepoint"],
+    [/trend ?micro/i, "Trend Micro"],
+    [/sophos/i, "Sophos"],
+    [/fortinet|fortiguard/i, "Fortinet"],
+    [/check ?point|avanan/i, "Check Point / Avanan"],
+    [/trustwave/i, "Trustwave"],
+    [/fireeye|mandiant/i, "FireEye / Mandiant"],
+    [/vade ?secure|vadesecure/i, "Vade Secure"],
+    [/ironscales/i, "Ironscales"],
+    [/hornetsecurity/i, "Hornetsecurity"],
+    [/abnormal security/i, "Abnormal Security"],
+    [/perception point/i, "Perception Point"],
+    [/darktrace/i, "Darktrace"],
+    [/\binky\b/i, "INKY"],
+    [/greathorn/i, "GreatHorn"],
+    [/area 1|area1/i, "Cloudflare Area 1"],
+    [/mcafee|skyhigh/i, "McAfee / Skyhigh"],
+    [/sonicwall/i, "SonicWall"],
+    [/spamtitan|titanhq/i, "TitanHQ"],
+    [/\begress\b/i, "Egress"],
+    [/tessian/i, "Tessian"],
+    [/mailguard/i, "MailGuard"],
+    [/retarus/i, "Retarus"],
+    [/opendns|umbrella/i, "Cisco Umbrella"],
+    [/microsoft/i, "Microsoft Defender Safe Links"],
+  ];
+
+  // Cloud and hosting providers: scripts run here, people usually do not browse from here
+  const DATACENTER_PATTERNS = [
+    [/amazon|aws|ec2/i, "Amazon AWS"],
+    [/google (llc|cloud)|googleusercontent|gcp/i, "Google Cloud"],
+    [/azure/i, "Microsoft Azure"],
+    [/digitalocean/i, "DigitalOcean"],
+    [/linode|akamai/i, "Linode / Akamai"],
+    [/hetzner/i, "Hetzner"],
+    [/ovh/i, "OVH"],
+    [/vultr|choopa|constant company/i, "Vultr"],
+    [/oracle/i, "Oracle Cloud"],
+    [/alibaba|aliyun/i, "Alibaba Cloud"],
+    [/tencent/i, "Tencent Cloud"],
+    [/leaseweb/i, "Leaseweb"],
+    [/contabo/i, "Contabo"],
+    [/scaleway|online s\.a\.s/i, "Scaleway"],
+    [/fastly/i, "Fastly"],
+    [/cloudflare/i, "Cloudflare"],
+    [/m247|datacamp|packethub/i, "M247 / DataCamp (VPN exit)"],
+    [/hosting|server|data ?center|colocation|dedicated/i, "Generic Hosting Provider"],
+  ];
+
+  function matchFirst(list, text) {
+    for (let i = 0; i < list.length; i++) {
+      if (list[i][0].test(text)) return list[i][1];
+    }
+    return null;
+  }
+
+  function totalRealInputEvents() {
+    return inputEvents.pointer + inputEvents.touch + inputEvents.key + inputEvents.scroll + inputEvents.click;
+  }
+
+  // Returns { label, kind, score, signals, confidence, inputSummary }
+  // label is one of: HUMAN, LIKELY BOT, BOT
+  // includeBehavior=false is used for the early check right after page load, before a
+  // human has had time to move the mouse.
+  function classifyVisitor(geo, includeBehavior) {
+    const ua = navigator.userAgent || "";
+    const signals = [];
+    let score = 0;
+    let kind = null;
+
+    // --- Static browser fingerprint signals ---
+    if (navigator.webdriver) {
+      score += 5;
+      signals.push("navigator.webdriver flag set (automation framework)");
+      kind = kind || "Headless Automation Browser";
+    }
+
+    const uaBot = matchFirst(KNOWN_BOT_AGENTS, ua);
+    if (uaBot) {
+      score += 5;
+      signals.push(`User agent identifies as bot: ${uaBot}`);
+      kind = kind || uaBot;
+    }
+
+    if (!window.screen || window.screen.width === 0 || window.screen.height === 0 || window.outerWidth === 0) {
+      score += 4;
+      signals.push("Zero-size screen / window (no real display)");
+    }
+
+    if (!navigator.languages || navigator.languages.length === 0) {
+      score += 3;
+      signals.push("No browser languages reported");
+    }
+
+    const isMobileUa = /Mobile|Android|iP(hone|ad|od)/i.test(ua);
+    if (!isMobileUa && navigator.plugins && navigator.plugins.length === 0 && /Chrome\//.test(ua)) {
+      score += 1;
+      signals.push("Desktop Chrome with zero plugins (common in headless builds)");
+    }
+
+    // --- Network signals ---
+    const netText = geo ? [geo.org || "", geo.isp || "", geo.domain || ""].join(" ") : "";
+    const scannerVendor = netText ? matchFirst(EMAIL_SCANNER_VENDORS, netText) : null;
+    const datacenter = netText ? matchFirst(DATACENTER_PATTERNS, netText) : null;
+
+    if (scannerVendor) {
+      // Microsoft also hosts Azure and real corporate users, so it is weaker evidence
+      const weight = /microsoft/i.test(scannerVendor) ? 2 : 4;
+      score += weight;
+      signals.push(`Network belongs to email security vendor: ${scannerVendor} (${geo.isp || geo.org})`);
+      kind = kind || `Email Link Scanner · ${scannerVendor}`;
+    } else if (datacenter) {
+      score += 2;
+      signals.push(`Network is a cloud / hosting provider: ${datacenter} (${geo.isp || geo.org})`);
+    }
+
+    // --- Behavioral signals (only meaningful once the visit has lasted a while) ---
+    const elapsed = Date.now() - sessionStartTime;
+    const realInputs = totalRealInputEvents();
+    if (includeBehavior) {
+      if (realInputs === 0) {
+        score += elapsed >= 3000 ? 3 : 2;
+        signals.push(`No mouse, touch, keyboard or scroll input during ${formatDuration(elapsed)} on page`);
+      } else {
+        if (inputEvents.pointer >= 5) score -= 4;
+        if (inputEvents.touch > 0) score -= 3;
+        if (inputEvents.click > 0) score -= 3;
+        if (inputEvents.key > 0) score -= 2;
+        if (inputEvents.scroll > 0) score -= 2;
+      }
+      const clarityInfo = getClaritySessionInfo();
+      if (!clarityInfo.sessionId) {
+        score += 1;
+        signals.push("Clarity never registered a session (recording script may have been blocked or not executed)");
+      }
+    }
+
+    let label = "HUMAN";
+    if (score >= 5) label = "BOT";
+    else if (score >= 3) label = "LIKELY BOT";
+
+    if (label !== "HUMAN" && !kind) {
+      if (datacenter) kind = `Cloud / Datacenter Script · ${datacenter}`;
+      else if (realInputs === 0) kind = "Unknown Script (no human input)";
+      else kind = "Unknown Automation";
+    }
+
+    let confidence = "High";
+    if (label === "LIKELY BOT") confidence = "Medium";
+    else if (label === "HUMAN" && (datacenter || scannerVendor)) confidence = "Medium (human input seen, but on a cloud / vendor network)";
+    else if (label === "HUMAN" && realInputs === 0) confidence = "Low (no input captured yet)";
+
+    const inputSummary =
+      `${inputEvents.pointer} mouse moves, ${inputEvents.scroll} scrolls, ${inputEvents.click} clicks, ` +
+      `${inputEvents.touch} touches, ${inputEvents.key} key presses`;
+
+    return { label, kind: kind || "Real Person", score, signals, confidence, inputSummary, datacenter, scannerVendor };
+  }
+
+  function formatClassTag(cls) {
+    if (cls.label === "HUMAN") {
+      return cls.datacenter ? `[HUMAN via ${cls.datacenter}]` : "[HUMAN]";
+    }
+    return `[${cls.label}: ${cls.kind}]`;
   }
 
   function analyzeReferrer() {
@@ -693,7 +907,7 @@
   }
 
   function handleDocumentClick(e) {
-    markUserActive();
+    markUserActive(e);
 
     // Check for email copy button
     const copyBtn = e.target.closest('.email-copy-btn, [onclick*="copyEmail"]');
@@ -723,12 +937,37 @@
     } catch (err) {}
   }
 
-  function markUserActive() {
+  function markUserActive(evt) {
     lastActiveTime = Date.now();
+    if (!evt || !evt.type) return;
+    // Only trust events the browser flags as user-generated
+    if (evt.isTrusted === false) return;
+    switch (evt.type) {
+      case "mousemove":
+      case "pointermove":
+        inputEvents.pointer++;
+        break;
+      case "mousedown":
+      case "click":
+        inputEvents.click++;
+        break;
+      case "touchstart":
+        inputEvents.touch++;
+        break;
+      case "keydown":
+        inputEvents.key++;
+        break;
+      case "scroll":
+      case "wheel":
+        inputEvents.scroll++;
+        break;
+      default:
+        break;
+    }
   }
 
-  function trackScroll() {
-    markUserActive();
+  function trackScroll(e) {
+    markUserActive(e);
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     if (scrollHeight > 0) {
@@ -811,6 +1050,8 @@
     const academic = detectAcademicNetwork(geo);
     const refInfo = analyzeReferrer();
     const clarityInfo = getClaritySessionInfo();
+    const cls = classifyVisitor(geo, true);
+    const classTag = formatClassTag(cls);
 
     // Summary of clicks
     let clicksSummary = "None (Browsed page content only)";
@@ -835,13 +1076,18 @@
 
     // Informative subject line highlighting academic status, device, duration and actions
     const subjectPrefix = academic.isAcademic ? `🎓 [ACADEMIC VISITOR: ${academic.institution}]` : `Visitor: ${geo.city}, ${geo.country}`;
-    const subjectLine = `${subjectPrefix} (${dev.os} ${dev.deviceType}) - ${durationStr} session${subjectClicksTag}`;
+    const subjectLine = `${classTag} ${subjectPrefix} (${dev.os} ${dev.deviceType}) - ${durationStr} session${subjectClicksTag}`;
 
     // Payload formatted as an HTML table for FormSubmit email
     const payload = {
       _subject: subjectLine,
       _template: "table",
       _captcha: "false",
+      "🤖 Visitor Classification": `${cls.label} — ${cls.kind} (confidence: ${cls.confidence}, bot score: ${cls.score})`,
+      "Classification Signals":
+        cls.signals.length > 0 ? cls.signals.map((sig) => `• ${sig}`).join("\n") : "None (looks like a normal browser with real input)",
+      "Human Input Captured": cls.inputSummary,
+      "User Agent": navigator.userAgent || "N/A",
       "🎥 Watch Clarity Recording": clarityInfo.playbackUrl,
       "Session Exit Trigger": triggerReason,
       "Session Duration": `${durationStr} (Active: ${activeStr})`,
@@ -872,6 +1118,8 @@
         window.clarity("set", "session_duration", durationStr);
         window.clarity("set", "scroll_depth", `${maxScrollPercent}%`);
         window.clarity("set", "total_clicks", String(clickedActions.length));
+        window.clarity("set", "visitor_class", cls.label);
+        if (cls.label !== "HUMAN") window.clarity("set", "bot_kind", cls.kind);
       }
     } catch (e) {}
 
@@ -889,6 +1137,23 @@
     } catch (e) {}
   }
 
+  function scheduleEarlyBotDispatch(geo) {
+    if (earlyBotDispatchScheduled || sessionEmailSent) return;
+    const staticCls = classifyVisitor(geo, false);
+    // Fire early for anything that already looks automated, or that arrives from an
+    // email-security vendor network (those scanners open links seconds after delivery).
+    if (staticCls.label === "HUMAN" && !staticCls.scannerVendor) return;
+    earlyBotDispatchScheduled = true;
+    // Grace period: a real person on a vendor / corporate network will have moved the mouse by then
+    setTimeout(() => {
+      if (sessionEmailSent) return;
+      if (totalRealInputEvents() >= 3) return; // a human showed up after all; wait for the normal exit alert
+      const finalCls = classifyVisitor(cachedGeo || geo, true);
+      if (finalCls.label === "HUMAN") return;
+      dispatchFinalSessionAlert(`Bot Detected on Page Load (${finalCls.kind})`);
+    }, 4000);
+  }
+
   function handlePageExit() {
     if (sessionEmailSent) return;
 
@@ -898,8 +1163,12 @@
     const totalTime = Date.now() - sessionStartTime;
     const isTest = window.location.search.includes("test_alert=1") || window.location.search.includes("force_alert=1");
 
-    // Filter instant bounces (<3s with no interactions) unless testing
-    if (totalTime < 3000 && clickedActions.length === 0 && !isTest) return;
+    // Filter instant human bounces (<3s with no interactions) unless testing.
+    // Bots are always reported so they can be recognised in the inbox.
+    if (totalTime < 3000 && clickedActions.length === 0 && !isTest) {
+      const quickCls = classifyVisitor(cachedGeo, true);
+      if (quickCls.label === "HUMAN") return;
+    }
 
     dispatchFinalSessionAlert("Visitor Closed Page / Navigated Away");
   }
@@ -907,8 +1176,11 @@
   function init() {
     if (!shouldTrack()) return;
 
-    // Prefetch geolocation early so it's synchronously available upon exit
-    fetchGeolocation();
+    // Prefetch geolocation early so it's synchronously available upon exit,
+    // then run the early bot check: crawlers and link scanners usually tear the
+    // page down without firing visibilitychange / pagehide, so wait for them to
+    // leave means the alert is never sent.
+    fetchGeolocation().then((geo) => scheduleEarlyBotDispatch(geo));
 
     // Listen to Clarity metadata
     initClarityListener();
@@ -927,7 +1199,7 @@
     window.addEventListener("scroll", trackScroll, { passive: true });
 
     // Track active user events
-    ["mousemove", "mousedown", "keydown", "touchstart"].forEach((evt) => {
+    ["mousemove", "mousedown", "keydown", "touchstart", "wheel"].forEach((evt) => {
       window.addEventListener(evt, markUserActive, { passive: true });
     });
 
